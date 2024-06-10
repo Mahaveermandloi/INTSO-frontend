@@ -1,0 +1,23 @@
+
+
+
+.carousel-image {
+  max-width: 100%;
+  /* border-radius: 50%;  */
+}
+
+.carousel-image1 {
+  max-width: 150px;
+  border-radius: 50%; 
+}
+
+
+
+.grid-container {
+  max-width: 100%; 
+}
+@media screen and (max-width: 768px) {
+  .grid-container {
+    padding: 10px; 
+  }
+}
