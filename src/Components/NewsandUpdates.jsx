@@ -348,10 +348,11 @@ const NewsandUpdates = () => {
         {isFetching ? (
           <Loader message={"Loading"} /> // Fetching Loader
         ) : (
-          <div className="flex flex-col lg:flex-row lg:space-x-4 p-4">
+          <div className="lg:flex flex-col  lg:flex-row lg:space-x-4 p-4">
             {/* News Section */}
-            <div className=" lg:w-1/3  p-4 rounded-lg shadow-lg mb-4 max-h-[78vh]  lg:mb-0">
-              <h2 className="text-xl font-bold mb-2 text-red-600">News</h2>
+
+            <div className=" lg:w-1/3   p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar ">
+              <h2 className=" text-xl font-bold mb-2 text-red-600">News</h2>
 
               <div className="overflow-y-auto h-[90%] custom-scrollbar">
                 {/* Adjust the height as needed */}
@@ -360,7 +361,11 @@ const NewsandUpdates = () => {
                     key={item.id}
                     className="mb-4 border-2 border-gray-200 rounded-lg p-1"
                   >
-                    <img src={`${URLPath}${item.image}`} alt="NEWS" className="w-full"  />
+                    <img
+                      src={`${URLPath}${item.image}`}
+                      alt="NEWS"
+                      className="w-full"
+                    />
                     <h3 className="text-md font-semibold">{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="flex gap-3">
@@ -383,7 +388,7 @@ const NewsandUpdates = () => {
             </div>
 
             {/* EVENT AND EXAM */}
-            <div className=" lg:w-1/3  p-4 rounded-lg shadow-lg mb-4 max-h-[78vh]  lg:mb-0">
+            <div className=" lg:w-1/3   p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
               <h2 className="text-xl font-bold mb-2 text-red-600">
                 Events and Exam
               </h2>
@@ -395,7 +400,11 @@ const NewsandUpdates = () => {
                     key={item.id}
                     className="mb-4 border-2 border-gray-200 rounded-lg p-1"
                   >
-                    <img src={`${URLPath}${item.image}`} alt="NEWS" className="w-full"  />
+                    <img
+                      src={`${URLPath}${item.image}`}
+                      alt="NEWS"
+                      className="w-full"
+                    />
                     <h3 className="text-md font-semibold">{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="flex gap-3">
@@ -418,7 +427,7 @@ const NewsandUpdates = () => {
             </div>
 
             {/* UPDATES */}
-            <div className=" lg:w-1/3  p-4 rounded-lg shadow-lg mb-4 max-h-[78vh]  lg:mb-0">
+            <div className="  lg:w-1/3   p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
               <h2 className="text-xl font-bold mb-2 text-red-600">Update</h2>
 
               <div className="overflow-y-auto h-[95%] custom-scrollbar">
@@ -428,7 +437,11 @@ const NewsandUpdates = () => {
                     key={item.id}
                     className="mb-4 border-2 border-gray-200 rounded-lg p-1"
                   >
-                    <img src={`${URLPath}${item.image}`} className="w-full" alt="NEWS" />
+                    <img
+                      src={`${URLPath}${item.image}`}
+                      className="w-full"
+                      alt="NEWS"
+                    />
                     <h3 className="text-md font-semibold">{item.title}</h3>
                     <p>{item.description}</p>
                     <div className="flex gap-3">
@@ -452,6 +465,7 @@ const NewsandUpdates = () => {
           </div>
         )}
       </div>
+
       {isUploading ? (
         <Loader message={"Uploading"} />
       ) : (

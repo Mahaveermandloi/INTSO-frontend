@@ -103,7 +103,7 @@ const CreateBlog = () => {
           setPostedBy("");
 
           setTimeout(() => {
-            navigate("/blog");
+            navigate("/admin/blog");
           }, 1000);
         }
       } catch (error) {

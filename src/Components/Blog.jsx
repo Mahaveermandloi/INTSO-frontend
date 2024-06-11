@@ -5,8 +5,7 @@ import { URLPath } from "../URLPath";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { MdModeEdit } from "react-icons/md";
-import Loader from "./Loader";  // Import Loader component
- 
+import Loader from "./Loader"; // Import Loader component
 
 const Blog = () => {
   const [gallery, setGallery] = useState([]);
@@ -18,9 +17,11 @@ const Blog = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
-        const response = await axios.get(`${URLPath}/api/v1/home/homeData`);
-        console.log(response.data.homedata.blogData);
-        setGallery(response.data.homedata.blogData);
+        const response = await axios.get(
+          `${URLPath}/api/v1/blogs/get-all-blog-details`
+        );
+        console.log(response.data.data.blogData);
+        setGallery(response.data.data.blogData);
       } else {
         console.error("No access token found");
       }
@@ -60,7 +61,7 @@ const Blog = () => {
         theme="light"
         transition={Bounce}
       />
-      {isLoading && <Loader message="Loading blogs..." />}   
+      {isLoading && <Loader message="Loading blogs..." />}
       <div className="lg:w-10/12 lg:ml-auto">
         <div className="flex justify-between items-center">
           <div className="flex justify-between w-full items-center">
@@ -71,7 +72,7 @@ const Blog = () => {
             <div>
               <button
                 onClick={() => {
-                  navigate("/createblog");
+                  navigate("/admin/createblog");
                 }}
                 className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
@@ -83,17 +84,19 @@ const Blog = () => {
 
         <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 mt-5">
           {gallery &&
-            gallery.map(({ id, image, description, createdAt, posted_By, title }) => (
-              <BlogBox
-                key={id}
-                id={id}
-                image={image}
-                description={description}
-                createdAt={createdAt}
-                title={title}
-                posted_By={posted_By}
-              />
-            ))}
+            gallery.map(
+              ({ id, image, description, createdAt, posted_By, title }) => (
+                <BlogBox
+                  key={id}
+                  id={id}
+                  image={image}
+                  description={description}
+                  createdAt={createdAt}
+                  title={title}
+                  posted_By={posted_By}
+                />
+              )
+            )}
         </div>
       </div>
     </>
@@ -102,10 +105,8 @@ const Blog = () => {
 
 export default Blog;
 
-
 const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
   const navigate = useNavigate();
-  
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this image?")) {
@@ -154,7 +155,7 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
   };
 
   const handleEdit = () => {
-    navigate(`/updateblog/${id}`);
+    navigate(`/admin/updateblog/${id}`);
   };
 
   return (
