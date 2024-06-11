@@ -39,7 +39,7 @@ const Success = ({ notShow }) => {
   });
 
   return (
-    <div className="shadow-2xl">
+    <div className="">
       <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
         <div className="grid md:grid-cols-2 gap-y-4 grid-cols-1 ">
           <div className="bg-white hidden md:block sm:px-10 px-2 py-10 rounded-l-2xl">
@@ -65,8 +65,7 @@ const Success = ({ notShow }) => {
                     type="submit"
                     className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white"
                     onClick={handleOpenModal}
-                    disabled={formik.isSubmitting}
-                  >
+                    disabled={formik.isSubmitting}>
                     Back to Login
                     {/* {formik.isSubmitting ? "Forgoting..." : "Forgot"} */}
                   </button>

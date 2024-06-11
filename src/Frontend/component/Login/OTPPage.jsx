@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import img from "../../../assets/Frontend_images/OTP.png";
-import logo from "../../../assets/Frontend_images/logo.png"
+import logo from "../../../assets/Frontend_images/logo.png";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const OTPPage = ({ notShow }) => {
   const [showModal, setShowModal] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(120); // Initial countdown time for 2 minutes
+  const [resendEnabled, setResendEnabled] = useState(false);
+
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -37,9 +40,49 @@ const OTPPage = ({ notShow }) => {
     },
   });
 
+  // Refs for the input fields
+  const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+
+  const handleInputChange = (e, index) => {
+    const value = e.target.value;
+
+    // Ensure only a single number is entered
+    if (/^[0-9]$/.test(value)) {
+      if (index < inputRefs.length - 1) {
+        inputRefs[index + 1].current.focus();
+      }
+    } else {
+      e.target.value = "";
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !e.target.value && index > 0) {
+      inputRefs[index - 1].current.focus();
+    }
+  };
+
+  const handleResendOTP = () => {
+    // Logic to resend OTP
+    console.log("OTP resent");
+    setTimeLeft(120);
+    setResendEnabled(false);
+  };
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timerId = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+      return () => clearInterval(timerId);
+    } else {
+      setResendEnabled(true);
+    }
+  }, [timeLeft]);
+
   return (
-    <div className="shadow-2xl ">
-      <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
+    <div className="">
+      <div className="max-w-screen-xl mx-auto lg:px-28 px-6 ">
         <div className="grid md:grid-cols-2 gap-y-4 grid-cols-1 ">
           <div className="bg-white hidden md:block sm:px-10 px-2 py-10 rounded-l-2xl">
             <div className="flex justify-center items-center mt-24">
@@ -63,26 +106,18 @@ const OTPPage = ({ notShow }) => {
                   <div className="flex flex-col">
                     <label className="text-[#313866]">Enter Code</label>
                     <div className="flex gap-2 mt-2">
-                      <input
-                        type="text"
-                        className="border border-gray-300  w-16 p-3 rounded-lg "
-                      />
-                      <input
-                        type="text"
-                        className="border border-gray-300  w-16 p-3 rounded-lg "
-                      />
-                      <input
-                        type="text"
-                        className="border border-gray-300  w-16 p-3 rounded-lg "
-                      />
-                      <input
-                        type="text"
-                        className="border border-gray-300 w-16 p-3 rounded-lg "
-                      />
+                      {inputRefs.map((ref, index) => (
+                        <input
+                          key={index}
+                          type="text"
+                          maxLength="1"
+                          className="border border-gray-300 w-16 p-3 rounded-lg text-center"
+                          ref={ref}
+                          onChange={(e) => handleInputChange(e, index)}
+                          onKeyDown={(e) => handleKeyDown(e, index)}
+                        />
+                      ))}
                     </div>
-                    {formik.touched.email && formik.errors.email ? (
-                      <div className="text-red-500">{formik.errors.email}</div>
-                    ) : null}
                   </div>
                   <div className="mt-5 flex justify-center">
                     <Link to="/changepassword">
@@ -92,12 +127,26 @@ const OTPPage = ({ notShow }) => {
                         onClick={handleOpenModal}
                         disabled={formik.isSubmitting}>
                         Next
-                        {/* {formik.isSubmitting ? "Verifying..." : "Verify"} */}
                       </button>
                     </Link>
                   </div>
+                  <div className="mt-5 flex justify-between ">
+                    {resendEnabled ? (
+                      <button
+                        type="button"
+                        className="bg-gray-300 px-6 p-2 rounded-full font-bold text-lg text-black"
+                        onClick={handleResendOTP}>
+                        Resend OTP
+                      </button>
+                    ) : (
+                      <p className="text-lg text-[#ED1450]">
+                        Resend {Math.floor(timeLeft / 60)}:
+                        {("0" + (timeLeft % 60)).slice(-2)} sec
+                      </p>
+                    )}
+                  </div>
                   <Link to="/forgotpassword">
-                    <div className="hidden md:block">
+                    <div className="hidden md:block mt-8">
                       <p className="rounded-full text-lg text-[#ED1450]">
                         <ArrowBackIcon />
                         Back

@@ -7,14 +7,14 @@ import Spinner1 from "../common files/Spinner1";
 export const Blog = () => {
   const { data4: blogData, loading } = useFetchData();
 
-  // const formatDate = (dateString) => {
-  //   const date = new Date(dateString);
-  //   return date.toLocaleDateString("en-US", {
-  //     year: "numeric",
-  //     month: "long",
-  //     day: "numeric",
-  //   });
-  // };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   return (
     <>
@@ -62,7 +62,7 @@ export const Blog = () => {
                       </p>
                       <hr className="h-0 bg-gray-400" />
                       <h1 className="text-[#ED1450] font-semibold">
-                        {/* {formatDate(item.createdAt)} */}2 days ago
+                        {formatDate(item.createdAt)}
                       </h1>
                     </div>
                   </div>

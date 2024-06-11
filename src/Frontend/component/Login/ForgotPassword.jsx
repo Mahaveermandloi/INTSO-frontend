@@ -45,8 +45,8 @@ const ForgotPassword = ({ notShow }) => {
   });
 
   return (
-    <div className="shadow-2xl  ">
-      <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
+    <div className="">
+      <div className="max-w-screen-xl mx-auto lg:px-28 px-6 ">
         <div className="grid md:grid-cols-2 gap-y-4 grid-cols-1 ">
           <div className="bg-white hidden md:block sm:px-10 px-2 py-10 rounded-l-2xl">
             <div className="flex justify-center items-center mt-24">
@@ -65,7 +65,7 @@ const ForgotPassword = ({ notShow }) => {
                   OTP
                 </p>
               </div>
-              <div className="sm:w-1/2 mt-6 w-full">
+              <div className="sm:w-2/3 mt-6 w-full">
                 <form onSubmit={formik.handleSubmit} className="space-y-4">
                   <div className="flex flex-col">
                     <label className="text-[#313866]">Email ID</label>
@@ -88,15 +88,14 @@ const ForgotPassword = ({ notShow }) => {
                         type="submit"
                         className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white"
                         onClick={handleOpenModal}
-                        disabled={formik.isSubmitting}
-                      >
+                        disabled={formik.isSubmitting}>
                         Get OTP
                         {/* {formik.isSubmitting ? "Forgoting..." : "Forgot"} */}
                       </button>
                     </Link>
                   </div>
                   <Link to="/login">
-                    <div className="hidden md:block">
+                    <div className="hidden md:block mt-8">
                       <p className="rounded-full text-lg text-[#ED1450]">
                         <ArrowBackIcon />
                         Back

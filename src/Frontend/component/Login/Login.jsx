@@ -1,36 +1,63 @@
 import React, { useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import img from "../../../assets/Frontend_images/LoginPage2.png";
 import logo from "../../../assets/Frontend_images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = ({ notShow }) => {
-  const [showModal, setShowModal] = useState(false);
+const Login = () => {
+  const navigate = useNavigate();
+  const [statusMessage, setStatusMessage] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
+  const toggleIcon = () => {
+    setShowPassword(!showPassword);
   };
 
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters long")
-      .required("Required"),
-  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://192.168.1.2:8000/api/v1/user/login", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        const token = data.token;
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {},
-  });
+        localStorage.setItem("token", token);
+
+        setStatusMessage("Your message has been sent successfully!");
+        setFormData({
+          email: "",
+          password: "",
+        });
+        navigate("/userdashboard");
+        window.location.reload();
+      } else {
+        setStatusMessage("Failed to send your message. Please try again.");
+      }
+    } catch (err) {
+      console.error("Sending message failed:", err);
+      setStatusMessage("An error occurred. Please try again later.");
+    }
+  };
 
   return (
-    <div className="shadow-2xl">
-      <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
+    <div className="">
+      <div className="max-w-screen-xl mx-auto lg:px-28 px-6">
         <div className="grid md:grid-cols-2 gap-y-4 grid-cols-1">
           <div className="bg-white hidden md:block sm:px-10 px-2 py-10 rounded-l-2xl">
             <div className="flex justify-center items-center mt-24">
@@ -47,58 +74,61 @@ const Login = ({ notShow }) => {
                   typesetting.
                 </p>
               </div>
-              <div className="w-1/2 mt-6">
-                <form onSubmit={formik.handleSubmit} className="space-y-4">
+              <div className="w-2/3 mt-6">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="flex flex-col">
                     <label className="text-[#313866]">Email ID</label>
                     <input
+                      required
                       type="text"
                       name="email"
                       placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="border border-[#C5CAD9] p-2 rounded-lg"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.email}
                     />
-                    {formik.touched.email && formik.errors.email ? (
-                      <div className="text-red-500">{formik.errors.email}</div>
-                    ) : null}
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col relative">
                     <label className="text-[#313866]">Password</label>
                     <input
-                      type="password"
+                      required
+                      type={showPassword ? "text" : "password"}
                       name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       placeholder="Enter your password"
                       className="border border-[#C5CAD9] p-2 rounded-lg"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.password}
                     />
-                    {formik.touched.password && formik.errors.password ? (
-                      <div className="text-red-500">
-                        {formik.errors.password}
-                      </div>
-                    ) : null}
+                    {showPassword ? (
+                      <VisibilityIcon
+                        onClick={toggleIcon}
+                        className="absolute right-3 top-8"
+                      />
+                    ) : (
+                      <VisibilityOffIcon
+                        onClick={toggleIcon}
+                        className="absolute right-3 top-8"
+                      />
+                    )}
                   </div>
                   <div>
                     <button
                       type="submit"
-                      className="bg-[#ED1450] text-white p-2 w-full rounded-full"
-                      disabled={formik.isSubmitting}
-                    >
-                      {formik.isSubmitting ? "Logging in..." : "Login"}
+                      className="bg-[#ED1450] text-white p-2 w-full rounded-full">
+                      Login
                     </button>
                   </div>
                   <Link to="/forgotpassword">
-                    <p
-                      onClick={handleOpenModal}
-                      className="underline text-center text-[#ED1450] mt-4"
-                    >
+                    <p className="underline text-center text-[#ED1450] mt-4">
                       Forgot Your Password?
                     </p>
                   </Link>
                 </form>
+                {statusMessage && (
+                  <p className="text-center mt-4 text-red-500">
+                    {statusMessage}
+                  </p>
+                )}
               </div>
             </div>
           </div>
