@@ -6,7 +6,6 @@ import AboutUsPage from "../AboutUs/AboutUsPage";
 import Knowledge from "../Knowledge/Knowledge";
 import { Main } from "../Home/Main";
 import MainBlog from "../Blog/MainBlog";
-
 import ContactUs from "../Contact/ContactUs";
 import Login from "../Login/Login";
 import { Button, Modal, Menu, MenuItem } from "@mui/material";
@@ -93,6 +92,7 @@ const SubHeader = () => {
               <img
                 src="https://intso.co.in/wp-content/uploads/2023/06/logo-2.png"
                 className="lg:w-64 w-28"
+                alt="logo"
               />
             </div>
             <div className="lg:hidden">
@@ -171,7 +171,10 @@ const SubHeader = () => {
                       transformOrigin={{ vertical: "top", horizontal: "left" }}>
                       <Link to="/mtso_about">
                         <MenuItem
-                          onClick={handleSubMenuClose(setScheduleAnchorEl)}>
+                          onClick={() => {
+                            handleSubMenuClose(setScheduleAnchorEl)();
+                            handleDropdownClose();
+                          }}>
                           (MTSO)About
                         </MenuItem>
                       </Link>
@@ -289,13 +292,11 @@ const SubHeader = () => {
                 </ul>
               </div>
 
-              {/* <Link to="/login"> */}
               <button
                 className="bg-[#ED1450] px-8 p-2 rounded-full font-bold text-lg text-white"
                 onClick={() => navigate("/login")}>
                 Login
               </button>
-              {/* </Link> */}
             </div>
           </div>
         </div>
