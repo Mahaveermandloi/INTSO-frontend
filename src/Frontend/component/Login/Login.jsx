@@ -4,6 +4,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import img from "../../../assets/Frontend_images/LoginPage2.png";
 import logo from "../../../assets/Frontend_images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import { IP_ADDRESS } from "../utils/constants";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://192.168.1.2:8000/api/v1/user/login", {
+      const res = await fetch(`http://${IP_ADDRESS}:${PORT}/api/v1/user/login`, {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {

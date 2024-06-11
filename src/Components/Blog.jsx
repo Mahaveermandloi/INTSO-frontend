@@ -155,7 +155,7 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
   };
 
   const handleEdit = () => {
-    navigate(`/updateblog/${id}`);
+    navigate(`/admin/updateblog/${id}`);
   };
 
   return (
