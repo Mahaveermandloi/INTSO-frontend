@@ -216,7 +216,7 @@ const Testimonials = () => {
         <div className="flex justify-around   lg:gap-4 ">
           {/* Form for desktop view */}
 
-          <div className=" hidden lg:w-3/4 gap-10 lg:grid grid-cols-2 lg:items-end lg:mt-5  lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
+          <div className=" hidden lg:w-3/4 gap-3  lg:grid grid-cols-2 lg:items-start lg:mt-5  lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             {isLoading
               ? <Loader message={"Loading..."}/>
               : testimonial &&
@@ -226,10 +226,11 @@ const Testimonials = () => {
                     className="relative flex h-28 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
                   >
                     <img
-                      className="object-cover w-full rounded-t-lg h-28 md:w-48 md:rounded-none md:rounded-s-lg bg-yellow-400"
+                      className="object-cover w-full rounded-t-lg h-28 md:w-48 md:rounded-none md:rounded-s-lg "
                       src={`${URLPath}${image}`}
                       alt=""
                     />
+
                     <div className="flex flex-col justify-between p-4 leading-normal">
                       <h5 className="text-lg pt-3 font-bold tracking-tight text-gray-900 dark:text-white">
                         {name}
@@ -447,6 +448,7 @@ const Testimonials = () => {
             )}
           </div>
         </div>
+
       </div>
     </>
   );
