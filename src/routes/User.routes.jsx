@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Main } from "../Frontend/component/Home/Main";
@@ -30,9 +30,17 @@ import ForgotPassword from "../../src/Frontend/component/Login/ForgotPassword";
 import OTPPage from "../../src/Frontend/component/Login/OTPPage";
 import Success from "../../src/Frontend/component/Login/Success";
 import ChangePassword from "../../src/Frontend/component/Login/ChangePassword";
+import UserDashboard from "../../src/Frontend/component/User/UserDashboard";
+import UserKnowledgeDesk from "../Frontend/component/User/UserKnowledgeDesk";
 
 const UserRoutes = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
     window.scrollTo(0, 0);
     AOS.init({
       duration: 3000,
@@ -203,46 +211,78 @@ const UserRoutes = () => {
           }
         />
 
-        <Route
-          path="/login"
-          element={
-            <Layout>
-              <Login />
-            </Layout>
-          }
-        />
-        <Route
-          path="/forgotpassword"
-          element={
-            <Layout>
-              <ForgotPassword />
-            </Layout>
-          }
-        />
-        <Route
-          path="/otp"
-          element={
-            <Layout>
-              <OTPPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/changepassword"
-          element={
-            <Layout>
-              <ChangePassword />
-            </Layout>
-          }
-        />
-        <Route
-          path="/success"
-          element={
-            <Layout>
-              <Success />
-            </Layout>
-          }
-        />
+        {!isAuthenticated && (
+          <>
+            <Route
+              path="/login"
+              element={
+                <Layout>
+                  <Login />
+                </Layout>
+              }
+            />
+            <Route
+              path="/forgotpassword"
+              element={
+                <Layout>
+                  <ForgotPassword />
+                </Layout>
+              }
+            />
+            <Route
+              path="/otp"
+              element={
+                <Layout>
+                  <OTPPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/changepassword"
+              element={
+                <Layout>
+                  <ChangePassword />
+                </Layout>
+              }
+            />
+            <Route
+              path="/success"
+              element={
+                <Layout>
+                  <Success />
+                </Layout>
+              }
+            />
+          </>
+        )}
+
+        {isAuthenticated && (
+          <>
+            <Route
+              path="/userdashboard"
+              element={
+                <Layout>
+                  <UserDashboard />
+                </Layout>
+              }
+            />
+            <Route
+              path="/userknowledge"
+              element={
+                <Layout>
+                  <UserKnowledgeDesk />
+                </Layout>
+              }
+            />
+            <Route path="/login" element={<Navigate to="/" />} />
+            <Route path="/forgotpassword" element={<Navigate to="/" />} />
+            <Route path="/otp" element={<Navigate to="/" />} />
+            <Route path="/changepassword" element={<Navigate to="/" />} />
+            <Route path="/success" element={<Navigate to="/" />} />
+          </>
+        )}
+
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
 
       <GoToTop />

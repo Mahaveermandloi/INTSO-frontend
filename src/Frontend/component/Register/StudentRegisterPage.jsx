@@ -114,8 +114,7 @@ const StudentRegisterPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:px-10 p-6"
-            >
+              className="flex flex-col md:px-10 p-6">
               <div className="grid gap-x-4 gap-y-2  ">
                 <div className="flex flex-col ">
                   <label className="text-left p-2">
@@ -164,8 +163,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="student_class"
                     value={formData.student_class}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option disabled selected>
                       Select Your class
                     </option>
@@ -213,8 +211,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option disabled selected>
                       Select Your State
                     </option>
@@ -262,8 +259,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option disabled selected>
                       Select Syllabus
                     </option>

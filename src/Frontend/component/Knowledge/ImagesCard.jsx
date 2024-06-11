@@ -1,6 +1,7 @@
 import React from "react";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
+import img from "../../../../src/assets/Frontend_images/Download_SVG.png";
 
 const ImagesCard = ({ resources }) => {
   const handleDownload = async (pdfUrl) => {
@@ -29,6 +30,11 @@ const ImagesCard = ({ resources }) => {
     } catch (error) {
       console.error("Download error:", error);
     }
+  };
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
   return (
     <div className="space-y-10 p-3">
@@ -72,7 +78,9 @@ const ImagesCard = ({ resources }) => {
                           <span className="text-[#ED1450]">Uploaded By </span>
                           {item.uploaded_by}
                         </p>
-                        <p className="text-xs text-start">{item.createdAt}</p>
+                        <p className="text-xs text-start">
+                          {formatDate(item.createdAt)}
+                        </p>
                       </div>
                       <div className="flex justify-center p-1 rounded-full bg-[#ED1450] w-28 sm:min-w-20 space-x-1">
                         <button
@@ -83,11 +91,7 @@ const ImagesCard = ({ resources }) => {
                             )
                           }>
                           Download
-                          <img
-                            src="../Download_SVG.png"
-                            className="size-5"
-                            alt="Download"
-                          />
+                          <img src={img} className="size-5" alt="Download" />
                         </button>
                       </div>
                     </div>

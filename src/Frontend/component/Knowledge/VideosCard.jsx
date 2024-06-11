@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 import VideoPlayer from "./VideoPlayer";
+import img from "../../../../src/assets/Frontend_images/Play_SVG.png";
 
 const VideosCard = ({ resources }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
-
-
 
   const handlePlayClick = (video) => {
     setSelectedVideo(video);
@@ -41,6 +40,10 @@ const VideosCard = ({ resources }) => {
       console.error("Download error:", error);
     }
   };
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
     <>
@@ -73,7 +76,7 @@ const VideosCard = ({ resources }) => {
                         style={{ display: "block" }}
                       />
                       <img
-                        src="../Play_SVG.png"
+                        src={img}
                         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16"
                         alt="Play Button"
                       />
@@ -94,24 +97,7 @@ const VideosCard = ({ resources }) => {
                             <span className="text-[#ED1450]">Uploaded By </span>
                             {item.uploaded_by}
                           </p>
-                          <p className="text-xs text-start">{item.createdAt}</p>
-                        </div>
-                        <div className="flex justify-center p-1 rounded-full bg-[#ED1450] w-28 sm:min-w-20 space-x-1">
-                          <button
-                            className="text-white text-sm flex items-center"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDownload(
-                                `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
-                              );
-                            }}>
-                            Download
-                            <img
-                              src="../Download_SVG.png"
-                              className="ml-2 size-5"
-                              alt="Download Icon"
-                            />
-                          </button>
+                          <p className="text-xs text-start">{formatDate(item.createdAt)}</p>
                         </div>
                       </div>
                     </div>
