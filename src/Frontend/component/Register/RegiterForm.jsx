@@ -27,9 +27,11 @@ const RegisterForm = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Submitting form data:", formData);
       const res = await fetch(
         `http://${IP_ADDRESS}:${PORT}/api/v1/school/registerSchool`,
         {
@@ -42,6 +44,7 @@ const RegisterForm = () => {
       );
       if (res.ok) {
         const data = await res.json();
+        console.log("Response data:", data);
         setStatusMessage("Your message has been sent successfully!");
         setFormData({
           school_name: "",
@@ -59,6 +62,8 @@ const RegisterForm = () => {
           syllabus: "",
         });
       } else {
+        const errorData = await res.json();
+        console.error("Failed to send message:", errorData);
         setStatusMessage("Failed to send your message. Please try again.");
       }
     } catch (err) {
@@ -138,7 +143,8 @@ const RegisterForm = () => {
                     Email<span className="text-red-500 text-lg">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="email"
+                    required
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -187,7 +193,7 @@ const RegisterForm = () => {
                     value={formData.state}
                     onChange={handleChange}
                   >
-                    <option disabled selected>
+                    <option value="" disabled>
                       Select Your State
                     </option>
                     {states.map((state) => (
@@ -286,7 +292,7 @@ const RegisterForm = () => {
                       onChange={handleChange}
                       className="p-2 border border-gray-300 rounded-l-lg"
                     >
-                      <option disabled selected>
+                      <option value="" disabled>
                         Prefix
                       </option>
                       <option>Mr.</option>
@@ -314,7 +320,7 @@ const RegisterForm = () => {
                     value={formData.syllabus}
                     onChange={handleChange}
                   >
-                    <option disabled selected>
+                    <option value="" disabled>
                       Select Syllabus
                     </option>
                     <option value="CBSE">CBSE</option>
