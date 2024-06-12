@@ -3,6 +3,7 @@ import "./register.module.css";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import img from "../../../../src/assets/Frontend_images/Regitration_Graphics.png";
+import useFormValidation from "../utils/hooks/useFormValidation";
 
 const StudentRegisterPage = () => {
   const location = useLocation();
@@ -20,46 +21,55 @@ const StudentRegisterPage = () => {
     student_class: "",
   });
 
+  const { errors, validate, setIsSubmitting } = useFormValidation(formData);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch(
-        `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
-        {
-          method: "POST",
-          body: JSON.stringify(formData),
-          headers: {
-            "Content-Type": "application/json",
-          },
+    setIsSubmitting(true);
+    validate(formData);
+    if (Object.keys(errors).length === 0) {
+      try {
+        const res = await fetch(
+          `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
+          {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setStatusMessage("Your message has been sent successfully!");
+          setFormData({
+            name: "",
+            email: "",
+            address: "",
+            city: "",
+            state: "",
+            pincode: "",
+            mobile_number: "",
+            syllabus: "",
+            school_name: "",
+            student_class: "",
+          });
+        } else {
+          const errorData = await res.json();
+          console.error("Failed to send message:", errorData);
+          setStatusMessage("Failed to send your message. Please try again.");
         }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        setStatusMessage("Your message has been sent successfully!");
-        setFormData({
-          name: "",
-          email: "",
-          address: "",
-          city: "",
-          state: "",
-          pincode: "",
-          mobile_number: "",
-          syllabus: "",
-          school_name: "",
-          student_class: "",
-        });
-      } else {
-        setStatusMessage("Failed to send your message. Please try again.");
+      } catch (err) {
+        console.error("Sending message failed:", err);
+        setStatusMessage("An error occurred. Please try again later.");
       }
-    } catch (err) {
-      console.error("Sending message failed:", err);
-      setStatusMessage("An error occurred. Please try again later.");
+    } else {
+      setStatusMessage("Please correct the errors and try again.");
     }
   };
 
@@ -128,6 +138,11 @@ const StudentRegisterPage = () => {
                     placeholder="Enter student name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {/* {errors.student_name && (
+                    <p className="text-red-500 text-sm">
+                      {errors.student_name}
+                    </p>
+                  )} */}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -141,6 +156,9 @@ const StudentRegisterPage = () => {
                     placeholder="Enter Your Email.ID"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">{errors.email}</p>
+                  )}
                 </div>
                 <div className="flex flex-col ">
                   <label className="text-left p-2">
@@ -154,6 +172,9 @@ const StudentRegisterPage = () => {
                     placeholder="Enter student name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.school_name && (
+                    <p className="text-red-500 text-sm">{errors.school_name}</p>
+                  )}
                 </div>
                 <div class="relative flex flex-col">
                   <label className="text-left p-2">
@@ -187,6 +208,9 @@ const StudentRegisterPage = () => {
                     placeholder="Enter student Address"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.address && (
+                    <p className="text-red-500 text-sm">{errors.address}</p>
+                  )}
                 </div>
               </div>
               <div className="grid lg:grid-cols-3 md:grid-cols-1 gap-x-4 gap-y-2">
@@ -202,6 +226,9 @@ const StudentRegisterPage = () => {
                     placeholder="Enter Your City"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.city && (
+                    <p className="text-red-500 text-sm">{errors.city}</p>
+                  )}
                 </div>
                 <div class="relative flex flex-col">
                   <label className="text-left p-2">
@@ -221,6 +248,9 @@ const StudentRegisterPage = () => {
                       </option>
                     ))}
                   </select>
+                  {errors.state && (
+                    <p className="text-red-500 text-sm">{errors.state}</p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -234,6 +264,9 @@ const StudentRegisterPage = () => {
                     placeholder="Enter Your Pin code"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.pincode && (
+                    <p className="text-red-500 text-sm">{errors.pincode}</p>
+                  )}
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-x-4 ">
@@ -249,6 +282,11 @@ const StudentRegisterPage = () => {
                     placeholder="Enter Your Mobile Number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.mobile_number && (
+                    <p className="text-red-500 text-sm">
+                      {errors.mobile_number}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex flex-col">

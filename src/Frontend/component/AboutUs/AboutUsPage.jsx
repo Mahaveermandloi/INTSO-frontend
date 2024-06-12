@@ -16,7 +16,7 @@ const AboutUsPage = () => {
   return (
     <div className="shadow-inner shadow-gray-300">
       {/* <Emerging /> */}
-      <AboutIntso />
+      <AboutIntso showButton={false} />
       <Achivement />
       <AtAGlance />
       <OurVision />

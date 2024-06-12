@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ForgotPassword from "./ForgotPassword";
 import { Button, Modal } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Login from "./Login";
 import img from "../../../assets/Frontend_images/success (2).png";
 import logo from "../../../assets/Frontend_images/logo.png";
 
 const Success = ({ notShow }) => {
   const [showModal, setShowModal] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   const handleOpenModal = () => {
     setShowModal(true);
   };

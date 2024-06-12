@@ -60,7 +60,7 @@ export const OurExams = () => {
             >
               <img src={logo} />
               <h1>STSO</h1>
-              <p className="text-center">Mathematics Talent Search Olympiad</p>
+              <p className="text-center">Science Talent Search Olympiad</p>
             </div>
             <div
               className="bg-gray-700 p-4 space-y-2 flex flex-col items-center justify-center text-white rounded-lg"
@@ -69,8 +69,8 @@ export const OurExams = () => {
               }}
             >
               <img src={logo} />
-              <h1>STSO</h1>
-              <p className="text-center">Mathematics Talent Search Olympiad</p>
+              <h1>GTSO</h1>
+              <p className="text-center">General Knowledge Talent Search Olympiad</p>
             </div>
           </div>
         </div>

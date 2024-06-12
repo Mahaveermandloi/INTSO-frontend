@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
+import useFormValidation from "../utils/hooks/useFormValidation"; // Adjust the import path as needed
 
 import img from "../../../../src/assets/Frontend_images/Regitration_Graphics.png";
 
@@ -23,6 +24,8 @@ const RegisterForm = () => {
     syllabus: "",
   });
 
+  const { errors, validate, setIsSubmitting } = useFormValidation(formData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -30,45 +33,51 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      console.log("Submitting form data:", formData);
-      const res = await fetch(
-        `http://${IP_ADDRESS}:${PORT}/api/v1/school/registerSchool`,
-        {
-          method: "POST",
-          body: JSON.stringify(formData),
-          headers: {
-            "Content-Type": "application/json",
-          },
+    setIsSubmitting(true);
+    validate(formData);
+    if (Object.keys(errors).length === 0) {
+      try {
+        // console.log("Submitting form data:", formData);
+        const res = await fetch(
+          `http://${IP_ADDRESS}:${PORT}/api/v1/school/registerSchool`,
+          {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          // console.log("Response data:", data);
+          setStatusMessage("Your message has been sent successfully!");
+          setFormData({
+            school_name: "",
+            email: "",
+            address: "",
+            city: "",
+            state: "",
+            district: "",
+            STD_code: "",
+            landline: "",
+            pincode: "",
+            mobile_number: "",
+            principal_name_prefix: "",
+            principal_name: "",
+            syllabus: "",
+          });
+        } else {
+          const errorData = await res.json();
+          console.error("Failed to send message:", errorData);
+          setStatusMessage("Failed to send your message. Please try again.");
         }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        console.log("Response data:", data);
-        setStatusMessage("Your message has been sent successfully!");
-        setFormData({
-          school_name: "",
-          email: "",
-          address: "",
-          city: "",
-          state: "",
-          district: "",
-          STD_code: "",
-          landline: "",
-          pincode: "",
-          mobile_number: "",
-          principal_name_prefix: "",
-          principal_name: "",
-          syllabus: "",
-        });
-      } else {
-        const errorData = await res.json();
-        console.error("Failed to send message:", errorData);
-        setStatusMessage("Failed to send your message. Please try again.");
+      } catch (err) {
+        console.error("Sending message failed:", err);
+        setStatusMessage("An error occurred. Please try again later.");
       }
-    } catch (err) {
-      console.error("Sending message failed:", err);
-      setStatusMessage("An error occurred. Please try again later.");
+    } else {
+      setStatusMessage("Please correct the errors and try again.");
     }
   };
 
@@ -121,8 +130,7 @@ const RegisterForm = () => {
             </div>
             <form
               className="flex flex-col md:px-10 p-6"
-              onSubmit={handleSubmit}
-            >
+              onSubmit={handleSubmit}>
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -130,13 +138,15 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     name="school_name"
                     value={formData.school_name}
                     onChange={handleChange}
                     placeholder="Enter Your school name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.school_name && (
+                    <p className="text-red-500 text-sm">{errors.school_name}</p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -144,13 +154,15 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="email"
-                    required
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter Your Email.ID"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">{errors.email}</p>
+                  )}
                 </div>
                 <div className="flex flex-col lg:col-span-2">
                   <label className="text-left p-2">
@@ -159,13 +171,15 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
                     placeholder="Enter Your school Address"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.address && (
+                    <p className="text-red-500 text-sm">{errors.address}</p>
+                  )}
                 </div>
               </div>
               <div className="grid lg:grid-cols-3 md:grid-cols-1 gap-x-4 gap-y-2">
@@ -175,13 +189,15 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
                     placeholder="Enter Your City"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.city && (
+                    <p className="text-red-500 text-sm">{errors.city}</p>
+                  )}
                 </div>
                 <div className="relative flex flex-col">
                   <label className="text-left p-2">
@@ -191,8 +207,7 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="" disabled>
                       Select Your State
                     </option>
@@ -202,6 +217,9 @@ const RegisterForm = () => {
                       </option>
                     ))}
                   </select>
+                  {errors.state && (
+                    <p className="text-red-500 text-sm">{errors.state}</p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -209,13 +227,15 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     name="district"
                     value={formData.district}
                     onChange={handleChange}
                     placeholder="Enter Your District"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.district && (
+                    <p className="text-red-500 text-sm">{errors.district}</p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -223,13 +243,15 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleChange}
                     placeholder="Enter Your Pin code"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.pincode && (
+                    <p className="text-red-500 text-sm">{errors.pincode}</p>
+                  )}
                 </div>
                 <div className="text-start">
                   <div className="flex gap-3">
@@ -244,16 +266,15 @@ const RegisterForm = () => {
                   <div className="flex">
                     <input
                       type="text"
-                      required
                       name="STD_code"
                       value={formData.STD_code}
                       onChange={handleChange}
                       placeholder="STD Code"
                       className="p-2 border border-gray-300 rounded-l-lg max-w-24"
                     />
+
                     <input
                       type="text"
-                      required
                       name="landline"
                       value={formData.landline}
                       onChange={handleChange}
@@ -261,6 +282,9 @@ const RegisterForm = () => {
                       className="p-2 border border-gray-300 rounded-r-lg w-full"
                     />
                   </div>
+                  {errors.landline && (
+                    <p className="text-red-500 text-sm">{errors.landline}</p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -268,13 +292,17 @@ const RegisterForm = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     name="mobile_number"
                     value={formData.mobile_number}
                     onChange={handleChange}
                     placeholder="Enter Your Mobile Number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.mobile_number && (
+                    <p className="text-red-500 text-sm">
+                      {errors.mobile_number}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -290,8 +318,7 @@ const RegisterForm = () => {
                       name="principal_name_prefix"
                       value={formData.principal_name_prefix}
                       onChange={handleChange}
-                      className="p-2 border border-gray-300 rounded-l-lg"
-                    >
+                      className="p-2 border border-gray-300 rounded-l-lg">
                       <option value="" disabled>
                         Prefix
                       </option>
@@ -299,9 +326,9 @@ const RegisterForm = () => {
                       <option>Ms.</option>
                       <option>Mrs.</option>
                     </select>
+
                     <input
                       type="text"
-                      required
                       name="principal_name"
                       value={formData.principal_name}
                       onChange={handleChange}
@@ -309,6 +336,11 @@ const RegisterForm = () => {
                       className="p-2 border border-gray-300 rounded-r-lg w-full"
                     />
                   </div>
+                  {errors.principal_name && (
+                    <p className="text-red-500 text-sm">
+                      {errors.principal_name}
+                    </p>
+                  )}
                 </div>
                 <div className="relative flex flex-col">
                   <label className="text-left p-2">
@@ -318,8 +350,7 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="" disabled>
                       Select Syllabus
                     </option>
@@ -327,12 +358,14 @@ const RegisterForm = () => {
                     <option value="ICSE">ICSE</option>
                     <option value="State">State</option>
                   </select>
+                  {errors.syllabus && (
+                    <p className="text-red-500 text-sm">{errors.syllabus}</p>
+                  )}
                 </div>
               </div>
               <button
                 type="submit"
-                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full"
-              >
+                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full">
                 Submit
               </button>
             </form>

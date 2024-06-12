@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const SubHeader = () => {
   const navigate = useNavigate();
-
+  const menuRef = useRef(null);
   const [showNav, setShowNav] = useState(false);
   const [activeButton, setActiveButton] = useState("Home");
   const [showModal, setShowModal] = useState(false);
@@ -25,14 +25,23 @@ const SubHeader = () => {
   const [syllabusAnchorEl, setSyllabusAnchorEl] = useState(null);
   const [resultsAnchorEl, setResultsAnchorEl] = useState(null);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-    hide();
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      handleClose();
+    }
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  useEffect(() => {
+    if (showNav) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showNav]);
 
   const handleOpen = () => {
     setShowNav(!showNav);
@@ -108,7 +117,9 @@ const SubHeader = () => {
                 showNav ? "" : "hidden"
               } flex-col lg:flex-row p-3`}>
               <div className="lg:flex lg:flex-row flex items-center lg:space-y-3 lg:space-x-5">
-                <ul className="flex lg:flex-row flex-col justify-center items-start gap-2 lg:h-auto lg:gap-4 text-base font-semibold h-56">
+                <ul
+                  ref={menuRef}
+                  className="flex lg:flex-row flex-col justify-center items-start gap-2 lg:h-auto lg:gap-4 text-base font-semibold h-56">
                   <Link to="/">
                     <li
                       className={`text-nowrap ${

@@ -15,11 +15,11 @@ const useFetchBlogDetails = () => {
       try {
         const data = await fetch(`${url}/${id}`);
         const jsonData = await data.json();
+
         const sanitizedHtml = DOMPurify.sanitize(
           jsonData.data.blog.description
         );
         setData({ ...jsonData.data.blog, description: sanitizedHtml });
-    
       } catch (e) {
         console.log(e);
       } finally {

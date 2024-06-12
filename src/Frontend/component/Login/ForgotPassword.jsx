@@ -4,13 +4,18 @@ import * as Yup from "yup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import img1 from "../../../assets/Frontend_images/forgotPassword.png";
 import logo from "../../../assets/Frontend_images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const ForgotPassword = ({ notShow }) => {
   const [showModal, setShowModal] = useState(false);
 
   const [closeLogin, setCloseLogin] = useState(!notShow);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const handleOpenModal = () => {
     setShowModal(true);

@@ -7,7 +7,6 @@ const BlogPage = () => {
   const location = useLocation();
   const { data: blogs, loading } = useFetchBlogData();
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -44,9 +43,9 @@ const BlogPage = () => {
               </div>
             ))}
           </div>
-          <div className=" flex justify-center ">
+          <div className=" flex justify-center m-5 ">
             <button className=" text-nowrap bg-[#ED1450] lg:w-[10%] w-[32%] text-white text-lg sm:p-3 p-1 rounded-full ">
-              Show More
+              Load More
             </button>
           </div>
         </div>

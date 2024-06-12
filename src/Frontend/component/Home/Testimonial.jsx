@@ -5,14 +5,14 @@ import useFetchData from "../utils/hooks/useFetchData";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 
-import img from "../../../Frontend/image/TestiMonial.png"
+import img from "../../../Frontend/image/TestiMonial.png";
 
 export const Testimonial = () => {
   const { data3: testiMonialData, loading } = useFetchData();
 
   return (
     <>
-      <div style={{backgroundImage:`url(${img})`}}>
+      <div style={{ backgroundImage: `url(${img})` }}>
         {loading ? (
           <div className="flex justify-center">
             <Spinner1 />

@@ -36,32 +36,32 @@ export const News = () => {
           <p className="w-16 border-b-2 border-[#ED1450] "></p>
         </div>
         <div
-          className="flex justify-center   sm:space-x-9 space-x-2 sm:p-5 p-2"
+          className="flex justify-center sm:space-x-9 space-x-2 sm:p-5 p-2"
           data-aos="fade-up">
           <button
             className={`text-black bg-${
               activeButton === "latestNews"
                 ? "[#ED1450] text-white"
-                : "gray-200"
-            } p-3 rounded-full w-36 `}
+                : "gray-200 text-nowrap"
+            } sm:p-3 p-1 rounded-full sm:w-36 w-auto  `}
             onClick={() => handleButtonClick("latestNews")}>
             Latest News
           </button>
           <button
             className={`text-black bg-${
               activeButton === "eventsExam"
-                ? "[#ED1450] text-white"
+                ? "[#ED1450] text-nowrap text-white"
                 : "gray-200"
-            }  p-3 rounded-full w-36`}
+            }  sm:p-3 p-1  sm:w-36 w-auto  rounded-full`}
             onClick={() => handleButtonClick("eventsExam")}>
             Events & Exam
           </button>
           <button
             className={`text-black bg-${
               activeButton === "latestUpdates"
-                ? "[#ED1450] text-white"
+                ? "[#ED1450] text-nowrap text-white"
                 : "gray-200"
-            }  p-3 rounded-full w-36`}
+            }   rounded-full sm:p-3 p-1  sm:w-36 w-auto`}
             onClick={() => handleButtonClick("latestUpdates")}>
             Latest Updates
           </button>
