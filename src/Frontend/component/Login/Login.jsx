@@ -31,16 +31,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      // const res = await fetch(`http://${IP_ADDRESS}:${PORT}/api/v1/user/login`, {
-      const res = await fetch(`http://localhost:8000/api/v1/user/login`, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-=======
       const res = await fetch(
         `http://${IP_ADDRESS}:${PORT}/api/v1/user/login`,
         {
@@ -51,7 +41,7 @@ const Login = () => {
           },
         }
       );
->>>>>>> 18c53a2bc22cd46a50900498fe680a33cbf77f5a
+
       if (res.ok) {
         const data = await res.json();
         console.log(data);
@@ -134,7 +124,8 @@ const Login = () => {
                   <div>
                     <button
                       type="submit"
-                      className="bg-[#ED1450] text-white p-2 w-full rounded-full">
+                      className="bg-[#ED1450] text-white p-2 w-full rounded-full"
+                    >
                       Login
                     </button>
                   </div>
