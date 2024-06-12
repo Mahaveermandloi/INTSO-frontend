@@ -31,7 +31,7 @@ export const Footer = () => {
               </p>
             </div>
 
-            <div className="flex items-center flex-col text-left lg:border-r-2 border-gray-20 p-5">
+            <div className="flex sm:items-center items-start flex-col text-left lg:border-r-2 border-gray-20 p-5">
               <div>
                 <h1 className="text-[#ED1450] py-3  font-bold text-2xl">
                   Registration
@@ -43,12 +43,14 @@ export const Footer = () => {
                   <Link to="/studentregister">
                     <li className="hover:underline ">Student Registration </li>
                   </Link>
-                  <li>Login</li>
+                  <Link to="/login">
+                    <li className="hover:underline ">Login</li>
+                  </Link>
                 </ul>
               </div>
             </div>
 
-            <div className="flex items-center flex-col text-left  lg:border-r-2 border-gray-20 p-5">
+            <div className="flex sm:items-center items-start flex-col text-left  lg:border-r-2 border-gray-20 p-5">
               <div>
                 <h1 className="text-[#ED1450] py-3 font-bold text-2xl ">
                   Quick Links
@@ -82,7 +84,7 @@ export const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div className="flex items-center flex-col text-left p-5">
+            <div className="flex sm:items-center items-start flex-col text-left p-5">
               <div>
                 <h1 className="text-[#ED1450] py-3 font-bold text-2xl">
                   Contact Us

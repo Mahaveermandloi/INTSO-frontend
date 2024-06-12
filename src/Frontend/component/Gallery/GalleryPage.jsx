@@ -3,17 +3,25 @@ import ImageModal from "../Home/ImageModal";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import useFetchGalleryData from "../utils/hooks/useFetchGalleryData";
+
 export const GalleryPage = () => {
   const { data } = useFetchGalleryData();
- 
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayedData, setDisplayedData] = useState([]);
+  const [visibleItemCount, setVisibleItemCount] = useState(9); // Initially display 6 items
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  useEffect(() => {
+    // Slice the first `visibleItemCount` items from `data` for initial display
+    setDisplayedData(data.slice(0, visibleItemCount));
+  }, [data, visibleItemCount]);
 
   const openModal = (index) => {
     setCurrentImage(`http://${IP_ADDRESS}:${PORT}${data[index].gallery_img}`);
@@ -40,6 +48,12 @@ export const GalleryPage = () => {
       `http://${IP_ADDRESS}:${PORT}${data[newIndex].gallery_img}`
     );
   };
+
+  const handleLoadMore = () => {
+    // Increase visibleItemCount by 6 to display next 6 items
+    setVisibleItemCount((prev) => prev + 6);
+  };
+
   return (
     <>
       <div className="">
@@ -50,9 +64,13 @@ export const GalleryPage = () => {
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
         </div>
         <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 sm:grid-cols-1">
-          {data.map((item, index) => {
+          {displayedData.map((item, index) => {
             let colSpanClass = "col-span-1";
-            if (index === 0 || index === 4 || index === data.length - 1) {
+            if (
+              index === 0 ||
+              index === 4 ||
+              index === displayedData.length - 1
+            ) {
               colSpanClass = "col-span-2";
             }
             return (
@@ -69,8 +87,10 @@ export const GalleryPage = () => {
           })}
         </div>
         <div className="flex justify-center p-5">
-          <button className="bg-[#ED1450] text-white p-3 rounded-full w-40">
-            View More
+          <button
+            className="bg-[#ED1450] text-white p-3 rounded-full w-40"
+            onClick={handleLoadMore}>
+            Load More
           </button>
         </div>
       </div>

@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import img from "../../../assets/Frontend_images/LoginPage2.png";
 import logo from "../../../assets/Frontend_images/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IP_ADDRESS } from "../utils/constants";
 
 const Login = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   const navigate = useNavigate();
   const [statusMessage, setStatusMessage] = useState("");
   const [formData, setFormData] = useState({
@@ -26,13 +31,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://${IP_ADDRESS}:${PORT}/api/v1/user/login`, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `http://${IP_ADDRESS}:${PORT}/api/v1/user/login`,
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (res.ok) {
         const data = await res.json();
         console.log(data);

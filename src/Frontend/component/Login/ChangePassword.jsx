@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img from "../../../assets/Frontend_images/LoginPage2.png";
 import logo from "../../../assets/Frontend_images/logo.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const ChangePassword = ({ notShow }) => {
-  const [showModal, setShowModal] = useState(false);
+
   const [showPassword1, setShowPassword1] = useState("");
   const [showPassword2, setShowPassword2] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const toggleIcon1 = () => {
     setShowPassword1(!showPassword1);
@@ -20,9 +25,6 @@ const ChangePassword = ({ notShow }) => {
     setShowPassword2(!showPassword2);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
   // Define the validation schema
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),

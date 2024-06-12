@@ -3,13 +3,18 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import img from "../../../assets/Frontend_images/OTP.png";
 import logo from "../../../assets/Frontend_images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const OTPPage = ({ notShow }) => {
   const [showModal, setShowModal] = useState(false);
   const [timeLeft, setTimeLeft] = useState(120); // Initial countdown time for 2 minutes
   const [resendEnabled, setResendEnabled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const handleOpenModal = () => {
     setShowModal(true);

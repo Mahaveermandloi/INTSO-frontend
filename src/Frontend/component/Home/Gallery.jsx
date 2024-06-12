@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ImageModal from "./ImageModal";
 import useFetchData from "../utils/hooks/useFetchData";
 import { IP_ADDRESS, PORT } from "../utils/constants";
+
 export const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
@@ -9,7 +10,9 @@ export const Gallery = () => {
   const { data7: galleryData, loading } = useFetchData();
 
   const openModal = (index) => {
-    setCurrentImage(`http://${IP_ADDRESS}:${galleryData[index].gallery_img}`);
+    setCurrentImage(
+      `http://${IP_ADDRESS}:${PORT}${galleryData[index].gallery_img}`
+    );
     setCurrentIndex(index);
     setIsModalOpen(true);
   };
@@ -35,16 +38,17 @@ export const Gallery = () => {
       `http://${IP_ADDRESS}:${PORT}${galleryData[newIndex].gallery_img}`
     );
   };
+
   return (
     <>
-      <div className="">
+      <div>
         <div
           className="flex flex-col py-6 justify-center items-center"
           data-aos="fade-up">
           <h1 className="text-[#ED1450] font-bold text-2xl">Our Gallery</h1>
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
         </div>
-        <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 sm:grid-cols-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
           {galleryData.map((item, index) => {
             let colSpanClass = "col-span-1";
             if (
@@ -52,7 +56,7 @@ export const Gallery = () => {
               index === 4 ||
               index === galleryData.length - 1
             ) {
-              colSpanClass = "col-span-2";
+              colSpanClass = "lg:col-span-2 col-span-1";
             }
             return (
               <div key={index} className={`${colSpanClass} relative w-full`}>
