@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
-import { URLPath } from "../URLPath";
+import { URLPath, baseURL } from "../URLPath";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { MdModeEdit } from "react-icons/md";
 import Loader from "./Loader"; // Import Loader component
+
 
 const Blog = () => {
   const [gallery, setGallery] = useState([]);
@@ -26,8 +27,7 @@ const Blog = () => {
         console.error("No access token found");
       }
     } catch (error) {
-      console.error("Error fetching gallery:", error);
-      toast.error("Error fetching gallery data.", {
+      toast.error("No Blogs to show", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -72,7 +72,7 @@ const Blog = () => {
             <div>
               <button
                 onClick={() => {
-                  navigate("/admin/createblog");
+                  navigate(`${baseURL}/createblog`);
                 }}
                 className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
@@ -109,7 +109,38 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
   const navigate = useNavigate();
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
+    let isConfirmed = false;
+
+    const confirmDeletion = () => {
+      isConfirmed = true;
+      toast.dismiss(confirmationToastId);
+    };
+
+    const confirmationToastId = toast.info(
+      "Are you sure you want to delete the blog?",
+      {
+        autoClose: 5000,
+        closeOnClick: false,
+        draggable: false,
+        onClose: () => {
+          toast.dismiss(confirmationToastId);
+        },
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
+      }
+    );
+
+    while (!isConfirmed) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    if (isConfirmed) {
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
@@ -120,8 +151,9 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
             },
           }
         );
+
         if (response.status === 200) {
-          toast.success("BLOG successfully deleted", {
+          toast.success("BLOG deleted successfully", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -131,15 +163,11 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
             progress: undefined,
             theme: "light",
           });
-
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          window.location.reload();
         }
       } catch (error) {
-        console.error("Error deleting image:", error);
-
-        toast.error("Error deleting image", {
+        console.log(error);
+        toast.error("Error deleting blog", error, {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -148,14 +176,14 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
         });
+      } finally {
       }
     }
   };
 
   const handleEdit = () => {
-    navigate(`/admin/updateblog/${id}`);
+    navigate(`${baseURL}/updateblog/${id}`);
   };
 
   return (

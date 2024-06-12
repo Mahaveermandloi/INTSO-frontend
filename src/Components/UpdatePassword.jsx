@@ -4,14 +4,14 @@ import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
-import {URLPath} from "../URLPath";
+import { URLPath, baseURL } from "../URLPath";
 
 const UpdatePassword = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
 
     if (!accessToken) {
-      navigate("/admin/login");
+      navigate(`${baseURL}/login`);
     }
   }, []);
 
@@ -24,7 +24,7 @@ const UpdatePassword = () => {
     const accessToken = localStorage.getItem("accessToken");
 
     if (!accessToken) {
-      navigate("/admin/login");
+      navigate(`${baseURL}/login`);
     }
 
     const alphanumericRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -74,7 +74,7 @@ const UpdatePassword = () => {
         });
 
         setTimeout(() => {
-          navigate("/admin/profile");
+          navigate(`${baseURL}/profile`);
         }, 2000);
       } else {
         toast.error("Failed to change password", {
@@ -171,7 +171,7 @@ const UpdatePassword = () => {
                 <div>
                   <button
                     className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    onClick={() => navigate("/admin/login")}
+                    onClick={() => navigate(`${baseURL}/login`)}
                   >
                     Go back to Login
                   </button>

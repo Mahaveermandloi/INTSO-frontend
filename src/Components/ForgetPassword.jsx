@@ -3,7 +3,7 @@ import axios from "axios";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
-import {URLPath} from "../URLPath";
+import {URLPath, baseURL} from "../URLPath";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,7 +36,7 @@ const ForgetPassword = () => {
 
         setTimeout(() => {
           
-          navigate(`/admin/otppage/${email}`);
+          navigate(`${baseURL}/otppage/${email}`);
         }, 2000);
       } else {
         console.error("Error:", response.statusText);

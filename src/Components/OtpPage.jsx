@@ -30,7 +30,7 @@ const OtpPage = () => {
         });
 
         setTimeout(() => {
-          navigate("/admin/changepassword", {
+          navigate(`${baseURL}/changepassword`, {
             state: { token: response.data.data.token, email: email },
           });
         }, 2000);

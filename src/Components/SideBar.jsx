@@ -13,6 +13,8 @@ import {
   FaSignOutAlt,
   FaChevronDown,
 } from "react-icons/fa";
+import {baseURL } from "../URLPath";
+
 
 const SideBar = ({ isOpen, toggleSidebar }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -50,19 +52,19 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
       >
         <nav className="overflow-y-auto h-full custom-scrollbar">
           <ul>
-            <Link to="/admin/dashboard">
+            <Link to={`${baseURL}/dashboard`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaHome className="mr-2" />
                 Dashboard
               </li>
             </Link>
-            <Link to="/admin/gallery">
+            <Link to={`${baseURL}/gallery`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaImages className="mr-2" />
                 Gallery
               </li>
             </Link>
-            <Link to="/admin/banner">
+            <Link to={`${baseURL}/banner`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <PiFlagBannerFold className="mr-2" />
                 Banner
@@ -85,17 +87,17 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 isDropdownOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <Link to="/admin/image">
+              <Link to={`${baseURL}/image`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Image
                 </li>
               </Link>
-              <Link to="/admin/video">
+              <Link to={`${baseURL}/video`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Video
                 </li>
               </Link>
-              <Link to="/admin/pdf">
+              <Link to={`${baseURL}/pdf`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   PDF
                 </li>
@@ -118,17 +120,17 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 isDropdownOpen2 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <Link to="/admin/studentrequest">
+              <Link to={`${baseURL}/studentrequest`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Student Request
                 </li>
               </Link>
-              <Link to="/admin/studentlist">
+              <Link to={`${baseURL}/studentlist`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Student List
                 </li>
               </Link>
-              <Link to="/admin/uploadstudent">
+              <Link to={`${baseURL}/uploadstudent`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Upload Students
                 </li>
@@ -151,32 +153,38 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 isDropdownOpen3 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <Link to="/admin/schoolrequests">
+              <Link to={`${baseURL}/schoolrequests`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   School Requests
                 </li>
               </Link>
-              <Link to="/admin/schoollist">
+              <Link to={`${baseURL}/schoollist`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   School List
                 </li>
               </Link>
             </ul>
 
-            <Link to="/admin/blog">
+            <Link to={`${baseURL}/newsletter`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <RiArticleLine className="mr-2" />
+                News Letter
+              </li>
+            </Link>
+            <Link to={`${baseURL}/blog`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <RiArticleLine className="mr-2" />
                 Blogs
               </li>
             </Link>
 
-            <Link to="/admin/newsandupdates">
+            <Link to={`${baseURL}/newsandupdates`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaNewspaper className="mr-2" />
                 News & Updates
               </li>
             </Link>
-            <Link to="/admin/testimonials">
+            <Link to={`${baseURL}/testimonials`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaQuoteLeft className="mr-2" />
                 Testimonials
@@ -184,7 +192,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             </Link>
 
             <Link
-              to="/admin/login"
+              to={`${baseURL}/login`}
               onClick={() => {
                 localStorage.removeItem("accessToken");
                 window.location.reload(); //

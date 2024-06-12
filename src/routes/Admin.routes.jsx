@@ -134,6 +134,9 @@ import StudentRequests from "../Components/Student/StudentRequests";
 import UpdateBlog from "../Components/UpdateBlog";
 import SchoolList from "../Components/School/SchoolList";
 import SchoolRequests from "../Components/School/SchoolRequests";
+import NewsLetter from "../Components/NewsLetter";
+import {baseURL} from "../URLPath";
+
 
 const AdminRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -184,9 +187,12 @@ const AuthenticatedApp = () => (
         <Route path="/schoolrequests" element={<SchoolRequests />} />
         <Route path="/uploadschool" element={<UploadSchool />} />
         <Route path="/schoollist" element={<SchoolList />} />
+        <Route path="/newsletter" element={<NewsLetter />} />
+
         <Route path="/blog" element={<Blog />} />
         <Route path="/createblog" element={<CreateBlog />} />
         <Route path="/updateblog/:id" element={<UpdateBlog />} />
+
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/image" element={<Image />} />
         <Route path="/video" element={<Video />} />
@@ -195,7 +201,7 @@ const AuthenticatedApp = () => (
         <Route path="/updateprofile" element={<UpdateProfile />} />
         <Route path="/updatepassword" element={<UpdatePassword />} />
         {/* Redirect all other routes to dashboard */}
-        <Route path="*" element={<Navigate to="/admin/dashboard" />} />
+        <Route path="*" element={<Navigate to={`${baseURL}/dashboard`} />} />
       </Routes>
     </main>
   </div>

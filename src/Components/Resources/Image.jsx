@@ -3,7 +3,7 @@ import axios from "axios";
 import { RiFilter3Fill } from "react-icons/ri";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import Loader from "../Loader"; // Assuming Loader component is in the same directory
-import { URLPath } from "../../URLPath";
+import { URLPath , baseURL } from "../../URLPath";
 import { RxCross1 } from "react-icons/rx";
 
 const Image = () => {
@@ -101,7 +101,7 @@ const Image = () => {
   const handleUpload = async (event) => {
     event.preventDefault();
     setLoading(true); // Set loading state to true during upload
-  
+
     if (selectedFile && title && description) {
       const formData = new FormData();
       formData.append("image", selectedFile);
@@ -111,7 +111,7 @@ const Image = () => {
       formData.append("resource_url", resourceURL);
       formData.append("resource_type", "image");
       formData.append("is_paid", selectedOption === "paid");
-  
+
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.post(
@@ -121,16 +121,16 @@ const Image = () => {
             headers: {
               Authorization: `Bearer ${accessToken}`,
               "Content-Type": "multipart/form-data",
-            }
+            },
           }
         );
-  
+
         if (response.status === 200) {
           toast.success("Image uploaded successfully!");
-  
+
           // Assuming setData is the state updater function for your resources list
-          setData(prevData => [...prevData, response.data]);
-  
+          setData((prevData) => [...prevData, response.data]);
+
           // Clear the form fields
           setSelectedFile(null);
           setTitle("");
@@ -148,7 +148,6 @@ const Image = () => {
       setLoading(false); // Set loading state to false if fields are not filled
     }
   };
-  
 
   const handleDelete = async (id) => {
     let isConfirmed = false;
@@ -167,7 +166,14 @@ const Image = () => {
         onClose: () => {
           toast.dismiss(confirmationToastId);
         },
-        closeButton: <button onClick={confirmDeletion}>Confirm</button>,
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
       }
     );
 
@@ -201,9 +207,8 @@ const Image = () => {
     }
   };
 
-
   // const handleDelete = async (id) => {
-    
+
   //     try {
   //       const accessToken = localStorage.getItem("accessToken");
   //       const response = await axios.delete(

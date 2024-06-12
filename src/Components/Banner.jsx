@@ -113,7 +113,7 @@ const Banner = () => {
         onClose: () => {
           toast.dismiss(confirmationToastId);
         },
-        closeButton: <button onClick={confirmDeletion}>Confirm</button>,
+        closeButton: <button onClick={confirmDeletion} className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3">Confirm</button>,
       }
     );
 

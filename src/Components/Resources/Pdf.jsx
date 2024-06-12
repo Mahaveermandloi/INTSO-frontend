@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, Bounce, toast } from "react-toastify";
-import thumbnail from "../../../public/pdf.png"
+import thumbnail from "../../../public/pdf.png";
 import Loader from "../Loader"; // Import the Loader component
 import { RxCross1 } from "react-icons/rx";
-import { URLPath } from "../../URLPath";
+import { URLPath , baseURL} from "../../URLPath";
 
 const Pdf = () => {
   const [data, setData] = useState([]);
@@ -59,7 +59,6 @@ const Pdf = () => {
 
         setData(filteredData);
         setLoading(false); // Set loading state to false after fetching data
-        console.log(filteredData);
       } else {
         console.error("No access token found");
       }
@@ -186,9 +185,87 @@ const Pdf = () => {
     }
   };
 
+  // const handleDelete = async (id) => {
+  //   if (window.confirm("Are you sure you want to delete this PDF?")) {
+  //     setLoading(true); // Set loading state to true before deleting
+  //     try {
+  //       const accessToken = localStorage.getItem("accessToken");
+  //       const response = await axios.delete(
+  //         `${URLPath}/api/v1/resource/delete-resource/${id}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
+  //       if (response.status === 200) {
+  //         toast.success("PDF successfully deleted", {
+  //           position: "top-center",
+  //           autoClose: 1000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+
+  //         setData((prevdata) => prevdata.filter((item) => item.id !== id));
+  //       }
+  //     } catch (error) {
+  //       console.error("Error deleting PDF:", error);
+  //       toast.error("Error deleting PDF", {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //         transition: Bounce,
+  //       });
+  //     } finally {
+  //       setLoading(false); // Set loading state to false after deleting
+  //     }
+  //   }
+  // };
+
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this PDF?")) {
-      setLoading(true); // Set loading state to true before deleting
+    let isConfirmed = false;
+
+    const confirmDeletion = () => {
+      isConfirmed = true;
+      toast.dismiss(confirmationToastId);
+    };
+
+    const confirmationToastId = toast.info(
+      "Are you sure you want to delete the pdf?",
+      {
+        autoClose: 5000,
+        closeOnClick: false,
+        draggable: false,
+        onClose: () => {
+          toast.dismiss(confirmationToastId);
+        },
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
+      }
+    );
+
+    while (!isConfirmed) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    if (isConfirmed) {
+      setLoading(true);
+
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
@@ -199,10 +276,11 @@ const Pdf = () => {
             },
           }
         );
+
         if (response.status === 200) {
           toast.success("PDF successfully deleted", {
             position: "top-center",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -212,10 +290,12 @@ const Pdf = () => {
           });
 
           setData((prevdata) => prevdata.filter((item) => item.id !== id));
+          setLoading(false);
+
         }
       } catch (error) {
-        console.error("Error deleting PDF:", error);
-        toast.error("Error deleting PDF", {
+        console.log(error);
+        toast.error("Error deleting PDF. Please try again.", error, {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -224,10 +304,9 @@ const Pdf = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
         });
       } finally {
-        setLoading(false); // Set loading state to false after deleting
+        setLoading(false);
       }
     }
   };
@@ -380,7 +459,6 @@ const Pdf = () => {
                     </div>
                   ) : (
                     <>
-                      
                       <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                         <span className="font-semibold">Click to upload</span>{" "}
                         or drag and drop
@@ -587,20 +665,19 @@ const Pdf = () => {
                     className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100 "
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    {selectedFile ? (
-                    <div className="flex flex-col justify-center mb-4">
-                      <img
-                        className="rounded-lg w-20 h-20"
-                        src={thumbnail}
-                        alt="Preview"
-                      />
-                      <p className="mt-2 text-sm text-gray-500">
-                        {selectedFile.name}
-                      </p>
-                    </div>
-                  ): (
+                      {selectedFile ? (
+                        <div className="flex flex-col justify-center mb-4">
+                          <img
+                            className="rounded-lg w-20 h-20"
+                            src={thumbnail}
+                            alt="Preview"
+                          />
+                          <p className="mt-2 text-sm text-gray-500">
+                            {selectedFile.name}
+                          </p>
+                        </div>
+                      ) : (
                         <>
-                       
                           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">
                               Click to upload

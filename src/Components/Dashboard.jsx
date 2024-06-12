@@ -1,8 +1,23 @@
 import React from "react";
 
 const Dashboard = () => {
-  return (
 
+
+  // useEffect(()=>{
+
+  // // })
+
+  // http://localhost:8000/api/v1/school/getSchoolData
+
+  // {{intso}}/api/v1/school/get-approved-schools
+
+  // http://localhost:8000/api/v1/studentList/getAllStudents
+
+  http://localhost:8000/api/v1/resource/get-all-resources?searchTerm=&resource_class=
+
+
+  
+  return (
     <div className="  lg:w-10/12  lg:ml-auto">
       <h1 className="text-2xl lg:text-4xl my-5 font-bold">Dashboard</h1>
 
@@ -104,7 +119,6 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 

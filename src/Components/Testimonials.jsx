@@ -38,10 +38,8 @@ const Testimonials = () => {
         }
       } catch (error) {
         console.error("Error fetching gallery:", error);
-      }finally{
-        
-          setIsLoading(false);
-      
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -141,12 +139,91 @@ const Testimonials = () => {
     }
   };
 
+  // const handleDelete = async (id) => {
+  //   if (window.confirm("Are you sure you want to delete this image?")) {
+  //     try {
+  //       const accessToken = localStorage.getItem("accessToken");
+  //       setIsLoading(true);
+
+  //       const response = await axios.delete(
+  //         `${URLPath}/api/v1/testimonial/delete-testimonial/${id}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
+
+  //       if (response.status === 200) {
+  //         toast.success("Image successfully deleted", {
+  //           position: "top-center",
+  //           autoClose: 3000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+  //         setTestimonial((prevTestimonial) =>
+  //           prevTestimonial.filter((item) => item.id !== id)
+  //         ); // Update the testimonial state without reloading
+  //       }
+  //     } catch (error) {
+  //       console.error("Error deleting image:", error);
+  //       toast.error("Error deleting image. Please try again.", {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //       });
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  // };
+
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
+    let isConfirmed = false;
+
+    const confirmDeletion = () => {
+      isConfirmed = true;
+      toast.dismiss(confirmationToastId);
+    };
+
+    const confirmationToastId = toast.info(
+      "Are you sure you want to delete the image?",
+      {
+        autoClose: 5000, // Disable auto close for confirmation toast
+        closeOnClick: false,
+        draggable: false,
+        onClose: () => {
+          toast.dismiss(confirmationToastId);
+        },
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
+      }
+    );
+
+    // Wait for the user to confirm
+    while (!isConfirmed) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    // If confirmed, proceed with the deletion
+    if (isConfirmed) {
       try {
         const accessToken = localStorage.getItem("accessToken");
-        setIsLoading(true);
-
         const response = await axios.delete(
           `${URLPath}/api/v1/testimonial/delete-testimonial/${id}`,
           {
@@ -157,7 +234,7 @@ const Testimonials = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Image successfully deleted", {
+          toast.success("Testimonial deleted successfully", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -167,13 +244,12 @@ const Testimonials = () => {
             progress: undefined,
             theme: "light",
           });
-          setTestimonial((prevTestimonial) =>
-            prevTestimonial.filter((item) => item.id !== id)
-          ); // Update the testimonial state without reloading
+          setTestimonial((prevGallery) =>
+            prevGallery.filter((item) => item.id !== id)
+          );
         }
       } catch (error) {
-        console.error("Error deleting image:", error);
-        toast.error("Error deleting image. Please try again.", {
+        toast.error("Error deleting testimonial. Please try again.", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -184,11 +260,9 @@ const Testimonials = () => {
           theme: "light",
         });
       } finally {
-        setIsLoading(false);
       }
     }
   };
-
   const toggleMobileForm = () => {
     setIsMobileFormVisible(!isMobileFormVisible);
   };
@@ -217,36 +291,38 @@ const Testimonials = () => {
           {/* Form for desktop view */}
 
           <div className=" hidden lg:w-3/4 gap-3  lg:grid grid-cols-2 lg:items-start lg:mt-5  lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
-            {isLoading
-              ? <Loader message={"Loading..."}/>
-              : testimonial &&
-                testimonial.map(({ id, image, name, description }) => (
-                  <div
-                    key={id}
-                    className="relative flex h-28 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
-                  >
-                    <img
-                      className="object-cover w-full rounded-t-lg h-28 md:w-48 md:rounded-none md:rounded-s-lg "
-                      src={`${URLPath}${image}`}
-                      alt=""
-                    />
+            {isLoading ? (
+              <Loader message={"Loading..."} />
+            ) : (
+              testimonial &&
+              testimonial.map(({ id, image, name, description }) => (
+                <div
+                  key={id}
+                  className="relative flex h-28 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  <img
+                    className="object-cover w-full rounded-t-lg h-28 md:w-48 md:rounded-none md:rounded-s-lg "
+                    src={`${URLPath}${image}`}
+                    alt=""
+                  />
 
-                    <div className="flex flex-col justify-between p-4 leading-normal">
-                      <h5 className="text-lg pt-3 font-bold tracking-tight text-gray-900 dark:text-white">
-                        {name}
-                      </h5>
-                      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 overflow-hidden overflow-ellipsis line-clamp-3">
-                        {description}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleDelete(id)}
-                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                    >
-                      <RxCross1 size={30} className="p-1" />
-                    </button>
+                  <div className="flex flex-col justify-between p-4 leading-normal">
+                    <h5 className="text-lg pt-3 font-bold tracking-tight text-gray-900 dark:text-white">
+                      {name}
+                    </h5>
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 overflow-hidden overflow-ellipsis line-clamp-3">
+                      {description}
+                    </p>
                   </div>
-                ))}
+                  <button
+                    onClick={() => handleDelete(id)}
+                    className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
+                  >
+                    <RxCross1 size={30} className="p-1" />
+                  </button>
+                </div>
+              ))
+            )}
 
             {/* images should be displayed here  in desktop view  */}
           </div>
@@ -448,7 +524,6 @@ const Testimonials = () => {
             )}
           </div>
         </div>
-
       </div>
     </>
   );

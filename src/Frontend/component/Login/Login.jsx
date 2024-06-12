@@ -26,7 +26,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://${IP_ADDRESS}:${PORT}/api/v1/user/login`, {
+      // const res = await fetch(`http://${IP_ADDRESS}:${PORT}/api/v1/user/login`, {
+      const res = await fetch(`http://localhost:8000/api/v1/user/login`, {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {

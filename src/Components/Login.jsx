@@ -196,8 +196,9 @@ import axios from "axios";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { URLPath } from "../URLPath";
+import { URLPath , baseURL} from "../URLPath";
 import Loader from "./Loader";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -253,7 +254,7 @@ const Login = () => {
         });
 
         setTimeout(() => {
-          navigate("/admin/dashboard");
+          navigate(`${baseURL}/dashboard`);
           window.location.reload();
         }, 2000);
       }
@@ -378,7 +379,9 @@ const Login = () => {
                   Log In
                 </button>
                 <p className="text-md text-gray-900 font-semibold">
-                  <Link to="/admin/forgetpassword">Forget Password?</Link>
+                  <Link to={`{${baseURL}/forgetpassword}`}>
+                    Forget Password?
+                  </Link>
                 </p>
               </form>
             </div>

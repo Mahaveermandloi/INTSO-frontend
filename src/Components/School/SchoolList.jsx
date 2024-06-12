@@ -143,6 +143,7 @@ const SchoolList = () => {
               </tr>
             </thead>
             <tbody>
+            
               {currentData.length === 0 ? (
                 <tr>
                   <td

@@ -4,6 +4,7 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaInfoCircle } from "react-icons/fa";
 import { URLPath } from "../../URLPath";
+import { ShopOutlined } from "@mui/icons-material";
 const SchoolRequests = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState(null);
@@ -24,11 +25,12 @@ const SchoolRequests = () => {
 
         if (response.status === 200) {
           const filteredData = response.data.data.getData.filter(
-            (school) => school.status === "pending"
+            (school) =>
+              school.status === "pending" || school.status === "rejected"
           );
+          console.log(filteredData);
           setSchoolData(filteredData);
         }
-        console.log(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -81,8 +83,9 @@ const SchoolRequests = () => {
   const handleReject = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.delete(
-        `${URLPath}/api/v1/school/deleteSchoolRequest/${selectedSchool.school_id}`,
+      const response = await axios.put(
+        `${URLPath}/api/v1/school/rejectSchool/${selectedSchool.school_id}`,
+        {}, // empty object for the data payload
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
