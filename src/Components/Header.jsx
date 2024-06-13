@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
 import SideBar from "./SideBar";
 import { Outlet } from "react-router-dom";
-
+import { baseURL } from "../URLPath";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -44,7 +44,7 @@ const Header = () => {
           <img src={logo} alt="Logo" className="h-10" />
         </div>
         <div>
-          <Link to="/admin/profile">
+          <Link to={`${baseURL}/profile`}>
             <FaUserTie size={40} className="" />
           </Link>
         </div>

@@ -145,10 +145,10 @@ const Gallery = () => {
     const confirmDeletion = () => {
       isConfirmed = true;
       toast.dismiss(confirmationToastId);
-    
     };
 
-    const confirmationToastId = toast.info(
+    const confirmationToastId = 
+    toast.info(
       "Are you sure you want to delete the image?",
       {
         autoClose: 5000, // Disable auto close for confirmation toast
@@ -157,7 +157,7 @@ const Gallery = () => {
         onClose: () => {
           toast.dismiss(confirmationToastId);
         },
-        closeButton: <button onClick={confirmDeletion}>Confirm</button>,
+        closeButton: <button onClick={confirmDeletion} className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3">Confirm</button>,
       }
     );
 
@@ -195,7 +195,7 @@ const Gallery = () => {
           });
           setGallery((prevGallery) =>
             prevGallery.filter((item) => item.id !== id)
-          ); // Update the gallery state without reloading
+          ); 
         }
       } catch (error) {
         toast.error("Error deleting image. Please try again.", {

@@ -5,7 +5,7 @@ import Editor from "./Editor";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
-import { URLPath } from "../URLPath";
+import { URLPath  , baseURL} from "../URLPath";
 
 const CreateBlog = () => {
   const [gallery, setGallery] = useState([]);
@@ -103,7 +103,7 @@ const CreateBlog = () => {
           setPostedBy("");
 
           setTimeout(() => {
-            navigate("/admin/blog");
+            navigate(`${baseURL}/blog`);
           }, 1000);
         }
       } catch (error) {

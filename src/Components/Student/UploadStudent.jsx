@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { URLPath } from "../../URLPath";
+
+import { FaFileDownload } from "react-icons/fa";
+
 const UploadStudent = () => {
   const [selectedSchoolName, setSelectedSchoolName] = useState("");
   const [schoolNameList, setSchoolNameList] = useState([]);
@@ -21,6 +24,7 @@ const UploadStudent = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
 
+      // download a excel file including 
       const schoolResponse = await axios.get(
         `${URLPath}/api/v1/school/get-approved-schools`,
         {
@@ -42,6 +46,33 @@ const UploadStudent = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const makeDownload = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.get(
+        `${URLPath}/api/v1/studentList/downloadFormat`,
+        {
+          responseType: "blob", // Important
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      // Create blob link to download
+      toast.success("Excel downloaded successfully");
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "format.xlsx");
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      toast.error("Error downloading Excel");
+    }
+  };
 
   const uploadStudentData = async () => {
     if (!selectedSchoolName || !selectedFile) {
@@ -118,10 +149,23 @@ const UploadStudent = () => {
       />
       <div className="lg:w-10/12 lg:ml-auto">
         <div>
-          <h1 className="text-2xl lg:text-4xl my-5 font-bold">
-            Upload Students
-          </h1>
+          <div className="flex justify-between w-full items-center">
+            <h1 className="text-2xl lg:text-4xl my-5 font-bold">
+              Upload Students
+            </h1>
+
+            <div>
+              <button
+                onClick={makeDownload}
+                className="flex gap-1 w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
+                Download
+                <FaFileDownload className="mt-[2px]" />
+              </button>
+            </div>
+          </div>
         </div>
+
         <div className="flex justify-center flex-col space-y-5">
           <select
             id="countries"

@@ -14,7 +14,7 @@ const StudentRequests = () => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const entriesPerPage = 10;
+  const entriesPerPage = 8;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -212,7 +212,7 @@ const StudentRequests = () => {
         {/* Pagination */}
 
         {totalPages > 1 && (
-          <div className="mt-2 fixed-bottom flex justify-center">
+          <div className=" mt-10 flex   justify-center">
             {/* Previous button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}

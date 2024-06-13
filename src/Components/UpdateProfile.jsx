@@ -155,7 +155,7 @@ const UpdateProfile = () => {
       });
 
       setTimeout(() => {
-        navigate("/admin/profile");
+        navigate(`${baseURL}/profile`);
       }, 2000);
 
       console.log("Profile updated successfully:", response.data);

@@ -29,7 +29,7 @@ const Video = () => {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
-          `${URLPath}/api/v1/resource/get-all-resources`,
+          `${URLPath}/api/v1/resource/get-all-resources-by-admin`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -251,7 +251,6 @@ const Video = () => {
     }
   };
 
-
   const toggleMobileForm = () => {
     setIsMobileFormVisible(!isMobileFormVisible);
   };
@@ -404,7 +403,6 @@ const Video = () => {
                     </div>
                   ) : (
                     <>
-                     
                       <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                         <span className="font-semibold">Click to upload</span>{" "}
                         or drag and drop
@@ -617,7 +615,6 @@ const Video = () => {
                         </div>
                       ) : (
                         <>
-                     
                           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">
                               Click to upload

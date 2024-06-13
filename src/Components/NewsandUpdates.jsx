@@ -3,7 +3,7 @@ import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Ensure you have this line to import styles
-import { URLPath } from "../URLPath";
+import { URLPath  , baseURL} from "../URLPath";
 import { MdModeEdit } from "react-icons/md";
 import Loader from "./Loader"; // Import Loader component
 
@@ -157,9 +157,93 @@ const NewsandUpdates = () => {
     }
   };
 
+  // const handleDelete = async (id) => {
+  //   if (window.confirm("Are you sure you want to delete this image?")) {
+  //     setIsDeleting(true);
+  //     try {
+  //       const accessToken = localStorage.getItem("accessToken");
+  //       const response = await axios.delete(
+  //         `${URLPath}/api/v1/newsandupdates/delete-news-and-updates/${id}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
+  //       if (response.status === 200) {
+  //         toast.success("Blog successfully deleted", {
+  //           position: "top-center",
+  //           autoClose: 1000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+
+  //         setNews((prevNews) => prevNews.filter((item) => item.id !== id));
+  //         setEvents((prevEvents) =>
+  //           prevEvents.filter((item) => item.id !== id)
+  //         );
+  //         setUpdates((prevUpdates) =>
+  //           prevUpdates.filter((item) => item.id !== id)
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.error("Error deleting image:", error);
+  //       toast.error("Error deleting image. Please try again.", {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //         transition: Bounce,
+  //       });
+  //     } finally {
+  //       setIsDeleting(false); // Reset deleting state
+  //     }
+  //   }
+  // };
+
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
-      setIsDeleting(true);
+    let isConfirmed = false;
+
+    const confirmDeletion = () => {
+      isConfirmed = true;
+      toast.dismiss(confirmationToastId);
+    };
+
+    const confirmationToastId = toast.info(
+      "Are you sure you want to delete the image?",
+      {
+        autoClose: 5000, // Disable auto close for confirmation toast
+        closeOnClick: false,
+        draggable: false,
+        onClose: () => {
+          toast.dismiss(confirmationToastId);
+        },
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
+      }
+    );
+
+    // Wait for the user to confirm
+    while (!isConfirmed) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    // If confirmed, proceed with the deletion
+    if (isConfirmed) {
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
@@ -170,10 +254,11 @@ const NewsandUpdates = () => {
             },
           }
         );
+
         if (response.status === 200) {
-          toast.success("Blog successfully deleted", {
+          toast.success("News deleted successfully!!!", {
             position: "top-center",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -181,18 +266,22 @@ const NewsandUpdates = () => {
             progress: undefined,
             theme: "light",
           });
+          setNews((prevGallery) =>
+            prevGallery.filter((item) => item.id !== id)
+          );
+          setUpdates((prevGallery) =>
+            prevGallery.filter((item) => item.id !== id)
+          );
+          setEvents((prevGallery) =>
+            prevGallery.filter((item) => item.id !== id)
+          );
 
-          setNews((prevNews) => prevNews.filter((item) => item.id !== id));
-          setEvents((prevEvents) =>
-            prevEvents.filter((item) => item.id !== id)
-          );
-          setUpdates((prevUpdates) =>
-            prevUpdates.filter((item) => item.id !== id)
-          );
+          // setNews(news);
+          // setUpdates(update);
+          // setEvents(event);
         }
       } catch (error) {
-        console.error("Error deleting image:", error);
-        toast.error("Error deleting image. Please try again.", {
+        toast.error("Error deleting blogs. Please try again.", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -201,10 +290,8 @@ const NewsandUpdates = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
         });
       } finally {
-        setIsDeleting(false); // Reset deleting state
       }
     }
   };

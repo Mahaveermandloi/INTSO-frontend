@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
-import { URLPath } from "../URLPath";
+import { URLPath , baseURL } from "../URLPath";
 const ChangePassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,7 +20,7 @@ const ChangePassword = () => {
       if (timeRemaining > 0) {
         setTimeRemaining((prevTime) => prevTime - 1);
       } else {
-        navigate("/admin/login");
+        navigate(`${baseURL}/login`);
       }
     }, 1000); // Update time every second
 
@@ -30,7 +30,7 @@ const ChangePassword = () => {
   useEffect(() => {
     const verifyToken = async () => {
       if (!token || !email) {
-        navigate("/admin/login");
+        navigate(`${baseURL}/login`);
         return;
       }
 
@@ -41,10 +41,10 @@ const ChangePassword = () => {
         });
 
         if (response.status !== 200) {
-          navigate("/admin/login");
+          navigate(`${baseURL}/login`);
         }
       } catch (error) {
-        navigate("/admin/login");
+        navigate(`${baseURL}/login`);
       }
     };
 
@@ -103,7 +103,7 @@ const ChangePassword = () => {
           theme: "light",
         });
         setTimeout(() => {
-          navigate("/admin/login");
+          navigate(`${baseURL}/login`);
         }, 2000);
       } else {
         toast.error("Failed to change password", {
@@ -212,7 +212,7 @@ const ChangePassword = () => {
                 <div>
                   <button
                     className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    onClick={() => navigate("/admin/login")}
+                    onClick={() => navigate(`${baseURL}/login`)}
                   >
                     Go back to Login
                   </button>

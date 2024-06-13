@@ -1,26 +1,43 @@
 import { BiBookContent } from "react-icons/bi";
 import { RiArticleLine } from "react-icons/ri";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { PiFlagBannerFold, PiStudentFill } from "react-icons/pi";
+import { PiFlagBannerFold } from "react-icons/pi";
 import {
   FaHome,
   FaImages,
-  FaSchool,
   FaNewspaper,
   FaQuoteLeft,
-  FaUserGraduate,
   FaSignOutAlt,
   FaChevronDown,
 } from "react-icons/fa";
+import { baseURL } from "../URLPath";
 
 const SideBar = ({ isOpen, toggleSidebar }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
 
+  // Detect screen width on component mount
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth < 768);
+    };
+
+    handleResize(); // Check initial screen size
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleItemClick = () => {
-    toggleSidebar();
+    if (isMobileScreen) {
+      toggleSidebar(); // Close sidebar on mobile after item click
+    }
   };
 
   const toggleDropdown = () => {
@@ -30,15 +47,16 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
   const toggleDropdown2 = () => {
     setIsDropdownOpen2(!isDropdownOpen2);
   };
+
   const toggleDropdown3 = () => {
     setIsDropdownOpen3(!isDropdownOpen3);
   };
 
   return (
     <>
-      {isOpen && (
+      {isOpen && isMobileScreen && (
         <div
-          className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 z-40"
           onClick={toggleSidebar}
         />
       )}
@@ -50,19 +68,19 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
       >
         <nav className="overflow-y-auto h-full custom-scrollbar">
           <ul>
-            <Link to="/admin/dashboard">
+            <Link onClick={handleItemClick} to={`${baseURL}/dashboard`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaHome className="mr-2" />
                 Dashboard
               </li>
             </Link>
-            <Link to="/admin/gallery">
+            <Link onClick={handleItemClick} to={`${baseURL}/gallery`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaImages className="mr-2" />
                 Gallery
               </li>
             </Link>
-            <Link to="/admin/banner">
+            <Link onClick={handleItemClick} to={`${baseURL}/banner`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <PiFlagBannerFold className="mr-2" />
                 Banner
@@ -85,17 +103,17 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 isDropdownOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <Link to="/admin/image">
+              <Link onClick={handleItemClick} to={`${baseURL}/image`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Image
                 </li>
               </Link>
-              <Link to="/admin/video">
+              <Link onClick={handleItemClick} to={`${baseURL}/video`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Video
                 </li>
               </Link>
-              <Link to="/admin/pdf">
+              <Link onClick={handleItemClick} to={`${baseURL}/pdf`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   PDF
                 </li>
@@ -118,17 +136,17 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 isDropdownOpen2 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <Link to="/admin/studentrequest">
+              <Link onClick={handleItemClick} to={`${baseURL}/studentrequest`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Student Request
                 </li>
               </Link>
-              <Link to="/admin/studentlist">
+              <Link onClick={handleItemClick} to={`${baseURL}/studentlist`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Student List
                 </li>
               </Link>
-              <Link to="/admin/uploadstudent">
+              <Link onClick={handleItemClick} to={`${baseURL}/uploadstudent`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Upload Students
                 </li>
@@ -151,50 +169,59 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 isDropdownOpen3 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <Link to="/admin/schoolrequests">
+              <Link onClick={handleItemClick} to={`${baseURL}/schoolrequests`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   School Requests
                 </li>
               </Link>
-              <Link to="/admin/schoollist">
+              <Link onClick={handleItemClick} to={`${baseURL}/schoollist`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   School List
                 </li>
               </Link>
             </ul>
 
-            <Link to="/admin/blog">
+            <Link onClick={handleItemClick} to={`${baseURL}/newsletter`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <RiArticleLine className="mr-2" />
+                News Letter
+              </li>
+            </Link>
+            <Link onClick={handleItemClick} to={`${baseURL}/blog`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <RiArticleLine className="mr-2" />
                 Blogs
               </li>
             </Link>
 
-            <Link to="/admin/newsandupdates">
+            <Link onClick={handleItemClick} to={`${baseURL}/newsandupdates`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaNewspaper className="mr-2" />
                 News & Updates
               </li>
             </Link>
-            <Link to="/admin/testimonials">
+            <Link onClick={handleItemClick} to={`${baseURL}/testimonials`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaQuoteLeft className="mr-2" />
                 Testimonials
               </li>
             </Link>
 
-            <Link
-              to="/admin/login"
-              onClick={() => {
-                localStorage.removeItem("accessToken");
-                window.location.reload(); //
-              }}
-            >
-              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
-                <FaSignOutAlt className="mr-2" />
-                Logout
-              </li>
-            </Link>
+            {!isMobileScreen && ( // Only show Logout on desktop screens
+              <Link
+                to={`${baseURL}/login`}
+                onClick={() => {
+                  handleItemClick();
+                  localStorage.removeItem("accessToken");
+                  window.location.reload(); //
+                }}
+              >
+                <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                  <FaSignOutAlt className="mr-2" />
+                  Logout
+                </li>
+              </Link>
+            )}
           </ul>
         </nav>
       </div>
@@ -213,3 +240,4 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
 };
 
 export default SideBar;
+

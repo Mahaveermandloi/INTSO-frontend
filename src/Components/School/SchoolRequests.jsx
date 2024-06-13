@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaChevronRight, FaInfoCircle, FaChevronLeft } from "react-icons/fa";
 import { URLPath } from "../../URLPath";
+
 const SchoolRequests = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState(null);
   const [schoolData, setSchoolData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,11 +27,12 @@ const SchoolRequests = () => {
 
         if (response.status === 200) {
           const filteredData = response.data.data.getData.filter(
-            (school) => school.status === "pending"
+            (school) =>
+              school.status === "pending" || school.status === "rejected"
           );
+          console.log(filteredData);
           setSchoolData(filteredData);
         }
-        console.log(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -81,8 +85,9 @@ const SchoolRequests = () => {
   const handleReject = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.delete(
-        `${URLPath}/api/v1/school/deleteSchoolRequest/${selectedSchool.school_id}`,
+      const response = await axios.put(
+        `${URLPath}/api/v1/school/rejectSchool/${selectedSchool.school_id}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -108,12 +113,22 @@ const SchoolRequests = () => {
     }
   };
 
+  const totalPages = Math.ceil(schoolData.length / itemsPerPage);
+  const currentData = schoolData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <>
       <div className="lg:w-10/12 lg:ml-auto">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl lg:text-4xl my-5 font-bold">
+            <h1 className="text-2xl lg:text-4xl my-2 font-bold">
               School Requests
             </h1>
           </div>
@@ -173,7 +188,7 @@ const SchoolRequests = () => {
               </tr>
             </thead>
             <tbody>
-              {schoolData.length === 0 ? (
+              {currentData.length === 0 ? (
                 <tr>
                   <td
                     colSpan="8"
@@ -183,7 +198,7 @@ const SchoolRequests = () => {
                   </td>
                 </tr>
               ) : (
-                schoolData.map(
+                currentData.map(
                   ({
                     school_id,
                     school_name,
@@ -233,142 +248,229 @@ const SchoolRequests = () => {
             </tbody>
           </table>
         </div>
-      </div>
 
-      {isModalOpen && selectedSchool && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
-          <div className="mt-16 mx-auto max-w-lg w-full bg-white  p-8 rounded-lg shadow-lg">
-            <h2 className="text-2xl mb-4">{selectedSchool.school_name} Info</h2>
+        {totalPages > 1 && (
+          <div className="mt-2 fixed-bottom flex justify-center">
+            {/* Previous button */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`mx-1 px-3 py-1 rounded ${
+                currentPage === 1
+                  ? "bg-gray-300 text-gray-500"
+                  : "bg-blue-500 text-white"
+              }`}
+            >
+              <FaChevronLeft />
+            </button>
 
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead className="bg-gray-100 border-b">
-                  <tr>
-                    <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Field
-                    </th>
-                    <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Data
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Email
-                    </td>
-                    <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.email}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      City
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.city}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      State
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.state}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Mobile Number
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.mobile_number}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Status
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.status}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Landline
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.landline}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      District
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.district}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      STD Code
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.STD_code}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Pincode
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.pincode}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Principal
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.principal_name_prefix} <span> </span>
-                      {selectedSchool.principal_name}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      Syllabus
-                    </td>
-                    <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
-                      {selectedSchool.syllabus}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            {/* Page numbers */}
+            {[...Array(Math.min(totalPages, 3)).keys()].map((number) => (
+              <button
+                key={number + 1}
+                onClick={() => handlePageChange(number + 1)}
+                className={`mx-1 px-3 py-1 rounded ${
+                  currentPage === number + 1
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-300 text-gray-500"
+                }`}
+              >
+                {number + 1}
+              </button>
+            ))}
 
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={handleApprove}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-              >
-                Approve
-              </button>
-              <button
-                onClick={handleReject}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Reject
-              </button>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Close
-              </button>
+            {/* Show number 4 after 3 pages */}
+            {currentPage >= 4 && (
+              <>
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className="mx-1 px-3 py-1 rounded bg-gray-300 text-gray-500"
+                >
+                  ...
+                </button>
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className={`mx-1 px-3 py-1 rounded bg-blue-500 text-white`}
+                >
+                  {currentPage}
+                </button>
+              </>
+            )}
+
+            {/* Show the last number */}
+            {currentPage + 2 < totalPages && (
+              <>
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className="mx-1 px-3 py-1 rounded bg-gray-300 text-gray-500"
+                >
+                  ...
+                </button>
+                <button
+                  onClick={() => handlePageChange(totalPages)}
+                  className={`mx-1 px-3 py-1 rounded ${
+                    currentPage === totalPages
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-300 text-gray-500"
+                  }`}
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+
+            {/* Next button */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`mx-1 px-3 py-1 rounded ${
+                currentPage === totalPages
+                  ? "bg-gray-300 text-gray-500"
+                  : "bg-blue-500 text-white"
+              }`}
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
+
+        {isModalOpen && selectedSchool && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+            <div className="mt-16 mx-auto max-w-lg w-full bg-white  p-8 rounded-lg shadow-lg">
+              <h2 className="text-2xl mb-4">
+                {selectedSchool.school_name} Info
+              </h2>
+
+              <div className="overflow-x-auto">
+                <table className="min-w-full">
+                  <thead className="bg-gray-100 border-b">
+                    <tr>
+                      <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Field
+                      </th>
+                      <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Data
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Email
+                      </td>
+                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.email}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        City
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.city}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        State
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.state}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Mobile Number
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.mobile_number}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Status
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.status}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Landline
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.landline}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        District
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.district}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        STD Code
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.STD_code}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Pincode
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.pincode}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Principal
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.principal_name_prefix} <span> </span>
+                        {selectedSchool.principal_name}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        Syllabus
+                      </td>
+                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                        {selectedSchool.syllabus}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={handleApprove}
+                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={handleReject}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Reject
+                </button>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

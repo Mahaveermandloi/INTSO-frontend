@@ -41,6 +41,7 @@ const Login = () => {
           },
         }
       );
+
       if (res.ok) {
         const data = await res.json();
         console.log(data);
@@ -123,7 +124,8 @@ const Login = () => {
                   <div>
                     <button
                       type="submit"
-                      className="bg-[#ED1450] text-white p-2 w-full rounded-full">
+                      className="bg-[#ED1450] text-white p-2 w-full rounded-full"
+                    >
                       Login
                     </button>
                   </div>
