@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { IP_ADDRESS, PORT } from "../constants";
 
-const url = `http://${IP_ADDRESS}:${PORT}/api/v1/knowledge/getKnowledgeData`;
+// const url = `http://${IP_ADDRESS}:${PORT}/api/v1/knowledge/getKnowledgeData`;
+const url1 =
+  "http://192.168.1.5:8000/api/v1/resource/get-all-resources?searchTerm=&resource_class=";
 
 const useFetchKnowledgeData = () => {
   const [data1, setData1] = useState([]);
@@ -10,11 +12,11 @@ const useFetchKnowledgeData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(url);
+        const data = await fetch(url1);
         const jsonData = await data.json();
-        
-        setData1(jsonData.knowledgeData.GetImageData);
-        setData2(jsonData.knowledgeData.GetPdfData);
+        console.log(jsonData.resourceData.imageArray);
+        setData1(jsonData.resourceData.imageArray);
+        // setData2(jsonData.knowledgeData.GetPdfData);
       } catch (e) {
         console.log(e);
       } finally {
@@ -23,7 +25,7 @@ const useFetchKnowledgeData = () => {
     };
 
     fetchData();
-  }, [url]);
+  }, [url1]);
 
   return { data1, data2, loading };
 };

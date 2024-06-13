@@ -155,6 +155,19 @@
   width: 100px;
 }
 
+@media (max-width: 600px) {
+  .video-player-modal {
+    padding: 10px;
+  }
+
+  .video-player-modal h2 {
+    font-size: 1.5rem;
+  }
+
+  .video-player-modal button {
+    font-size: 14px;
+  }
+}
 
 
 

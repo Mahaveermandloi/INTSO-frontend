@@ -38,7 +38,7 @@ const PdfCard = ({ resources }) => {
   };
   return (
     <div className="space-y-10">
-      <div className="max-w-screen-xl mx-auto lg:px-36 px-6">
+      <div className="max-w-screen-xl mx-auto lg:px-24 px-6">
         <div className="flex flex-col py-7 justify-center items-center mt-10">
           <h1 className="text-[#ED1450] font-bold text-2xl">
             All PDF File related to work

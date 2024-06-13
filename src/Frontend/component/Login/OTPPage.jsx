@@ -1,49 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import img from "../../../assets/Frontend_images/OTP.png";
 import logo from "../../../assets/Frontend_images/logo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const OTPPage = ({ notShow }) => {
+const OTPPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(120); // Initial countdown time for 2 minutes
+  const [timeLeft, setTimeLeft] = useState(10); // Initial countdown time for 2 minutes
   const [resendEnabled, setResendEnabled] = useState(false);
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [error, setError] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  // Define the validation schema
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters long")
-      .required("Required"),
-  });
-
-  // Initialize Formik
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission
-      console.log(values);
-    },
-  });
 
   // Refs for the input fields
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -51,8 +23,11 @@ const OTPPage = ({ notShow }) => {
   const handleInputChange = (e, index) => {
     const value = e.target.value;
 
-    // Ensure only a single number is entered
     if (/^[0-9]$/.test(value)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+
       if (index < inputRefs.length - 1) {
         inputRefs[index + 1].current.focus();
       }
@@ -67,11 +42,35 @@ const OTPPage = ({ notShow }) => {
     }
   };
 
-  const handleResendOTP = () => {
-    // Logic to resend OTP
-    console.log("OTP resent");
-    setTimeLeft(120);
-    setResendEnabled(false);
+  const handleResendOTP = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "http://192.168.1.4:8000/api/v1/user/resend",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setError("OTP resend successfully");
+        setTimeLeft(10);
+        setResendEnabled(false);
+      } else {
+        const errorData = await response.json();
+        setError(
+          errorData.message || "Failed to resend OTP. Please try again."
+        );
+      }
+    } catch (err) {
+      console.error("Resend failed:", err);
+      setError("An error occurred. Please try again later.");
+    }
   };
 
   useEffect(() => {
@@ -84,6 +83,42 @@ const OTPPage = ({ notShow }) => {
       setResendEnabled(true);
     }
   }, [timeLeft]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const otpCode = otp.join("");
+    if (otpCode.length !== 4) {
+      setError("Please enter a valid 4-digit OTP.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://192.168.1.4:8000/api/v1/user/verifyuser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ getOtp: otpCode }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        navigate("/changepassword");
+      } else {
+        const errorData = await response.json();
+        setError(
+          errorData.message || "Failed to verify OTP. Please try again."
+        );
+      }
+    } catch (err) {
+      console.error("Verification failed:", err);
+      setError("An error occurred. Please try again later.");
+    }
+  };
 
   return (
     <div className="">
@@ -107,7 +142,7 @@ const OTPPage = ({ notShow }) => {
                 </p>
               </div>
               <div className="sm:w-1/2 mt-6 w-full">
-                <form onSubmit={formik.handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="flex flex-col">
                     <label className="text-[#313866]">Enter Code</label>
                     <div className="flex gap-2 mt-2">
@@ -120,20 +155,18 @@ const OTPPage = ({ notShow }) => {
                           ref={ref}
                           onChange={(e) => handleInputChange(e, index)}
                           onKeyDown={(e) => handleKeyDown(e, index)}
+                          value={otp[index]}
                         />
                       ))}
                     </div>
                   </div>
+                  {error && <div className="text-red-500">{error}</div>}
                   <div className="mt-5 flex justify-center">
-                    <Link to="/changepassword">
-                      <button
-                        type="submit"
-                        className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white"
-                        onClick={handleOpenModal}
-                        disabled={formik.isSubmitting}>
-                        Next
-                      </button>
-                    </Link>
+                    <button
+                      type="submit"
+                      className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white">
+                      Next
+                    </button>
                   </div>
                   <div className="mt-5 flex justify-between ">
                     {resendEnabled ? (

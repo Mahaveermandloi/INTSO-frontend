@@ -35,7 +35,7 @@ const StudentRegisterPage = () => {
     if (Object.keys(errors).length === 0) {
       try {
         const res = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
+          "http://192.168.1.4:8000/api/v1/student/createStudent",
           {
             method: "POST",
             body: JSON.stringify(formData),

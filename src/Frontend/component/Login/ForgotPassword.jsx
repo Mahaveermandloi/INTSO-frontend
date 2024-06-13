@@ -1,53 +1,73 @@
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React, { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import img1 from "../../../assets/Frontend_images/forgotPassword.png";
 import logo from "../../../assets/Frontend_images/logo.png";
-import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const ForgotPassword = ({ notShow }) => {
-  const [showModal, setShowModal] = useState(false);
-
-  const [closeLogin, setCloseLogin] = useState(!notShow);
+const ForgotPassword = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.email) {
+      newErrors.email = "Required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email address";
+    }
+    return newErrors;
   };
 
-  useEffect(() => {
-    setCloseLogin(false);
-    notShow = closeLogin;
-  });
-
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
-  // Define the validation schema
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters long")
-      .required("Required"),
-  });
 
-  // Initialize Formik
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission
-    },
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        const res = await fetch(
+          "http://192.168.1.4:8000/api/v1/user/forgetpassword",
+          {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          setStatusMessage("OTP has been sent successfully!");
+          navigate("/otp"); // Redirect to the OTP page
+        } else {
+          setStatusMessage("Failed to send OTP. Please try again.");
+        }
+      } catch (err) {
+        console.error("Sending OTP failed:", err);
+        setStatusMessage("An error occurred. Please try again later.");
+      }
+    } else {
+      setErrors(validationErrors);
+    }
+  };
 
   return (
     <div className="">
@@ -66,38 +86,33 @@ const ForgotPassword = ({ notShow }) => {
                   Forgot Password?
                 </h1>
                 <p className="text-[#313866] text-center">
-                  Please enter your registered email address to Receive a get
+                  Please enter your registered email address to receive a get
                   OTP
                 </p>
               </div>
               <div className="sm:w-2/3 mt-6 w-full">
-                <form onSubmit={formik.handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="flex flex-col">
                     <label className="text-[#313866]">Email ID</label>
                     <input
                       type="text"
                       name="email"
                       placeholder="Enter your email"
+                      required
                       className="border border-[#C5CAD9] p-2 rounded-lg"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.email}
+                      onChange={handleChange}
+                      value={formData.email}
                     />
-                    {formik.touched.email && formik.errors.email ? (
-                      <div className="text-red-500">{formik.errors.email}</div>
-                    ) : null}
+                    {errors.email && (
+                      <div className="text-red-500">{errors.email}</div>
+                    )}
                   </div>
                   <div className="mt-5 flex justify-center">
-                    <Link to="/otp">
-                      <button
-                        type="submit"
-                        className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white"
-                        onClick={handleOpenModal}
-                        disabled={formik.isSubmitting}>
-                        Get OTP
-                        {/* {formik.isSubmitting ? "Forgoting..." : "Forgot"} */}
-                      </button>
-                    </Link>
+                    <button
+                      type="submit"
+                      className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white">
+                      Get OTP
+                    </button>
                   </div>
                   <Link to="/login">
                     <div className="hidden md:block mt-8">
@@ -108,6 +123,11 @@ const ForgotPassword = ({ notShow }) => {
                     </div>
                   </Link>
                 </form>
+                {statusMessage && (
+                  <div className="mt-4 text-center text-red-500">
+                    {statusMessage}
+                  </div>
+                )}
               </div>
             </div>
           </div>
