@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details`;
-const url1 = "http://192.168.1.4:8000/api/v1/blogs/get-blog-details";
+const url1 = "http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details";
 const useFetchBlogDetails = () => {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);

@@ -47,7 +47,7 @@ const OTPPage = () => {
 
     try {
       const response = await fetch(
-        "http://192.168.1.4:8000/api/v1/user/resend",
+        `http://${IP_ADDRESS}:${PORT}/api/v1/user/resend`,
         {
           method: "POST",
           headers: {
@@ -94,7 +94,7 @@ const OTPPage = () => {
 
     try {
       const response = await fetch(
-        "http://192.168.1.4:8000/api/v1/user/verifyuser",
+        `http://${IP_ADDRESS}:${PORT}/api/v1/user/verifyuser`,
         {
           method: "POST",
           headers: {

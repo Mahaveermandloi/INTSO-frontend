@@ -3,10 +3,11 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 import VideoPlayer from "./VideoPlayer";
 import img from "../../../../src/assets/Frontend_images/Play_SVG.png";
+import useFetchKnowledgeData from "../utils/hooks/useFetchKnowledgeData";
 
 const VideosCard = ({ resources }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
-
+  console.log("kjfkadjfkajf", resources);
   const handlePlayClick = (video) => {
     setSelectedVideo(video);
   };
@@ -97,7 +98,9 @@ const VideosCard = ({ resources }) => {
                             <span className="text-[#ED1450]">Uploaded By </span>
                             {item.uploaded_by}
                           </p>
-                          <p className="text-xs text-start">{formatDate(item.createdAt)}</p>
+                          <p className="text-xs text-start">
+                            {formatDate(item.createdAt)}
+                          </p>
                         </div>
                       </div>
                     </div>

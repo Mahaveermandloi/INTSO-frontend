@@ -43,7 +43,7 @@ const ForgotPassword = () => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         const res = await fetch(
-          "http://192.168.1.4:8000/api/v1/user/forgetpassword",
+          `http://${IP_ADDRESS}:${PORT}/api/v1/user/forgetpassword`,
           {
             method: "POST",
             body: JSON.stringify(formData),

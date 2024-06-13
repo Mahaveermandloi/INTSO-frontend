@@ -46,7 +46,7 @@ const ChangePassword = ({ notShow }) => {
     onSubmit: async (values) => {
       try {
         const response = await fetch(
-          "http://192.168.1.4:8000/api/v1/user/updatenewpassword",
+          `http://${IP_ADDRESS}:${PORT}/api/v1/user/updatenewpassword`,
           {
             method: "POST",
             headers: {

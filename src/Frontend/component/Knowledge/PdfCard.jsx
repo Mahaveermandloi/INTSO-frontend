@@ -4,6 +4,7 @@ import Spinner1 from "../common files/Spinner1";
 
 import img1 from "../../../../src/assets/Frontend_images/PDF_BG_1.png";
 import img2 from "../../../../src/assets/Frontend_images/Download_SVG.png";
+import useFetchKnowledgeData from "../utils/hooks/useFetchKnowledgeData";
 
 const PdfCard = ({ resources }) => {
   const handleDownload = async (pdfUrl) => {
@@ -38,7 +39,7 @@ const PdfCard = ({ resources }) => {
   };
   return (
     <div className="space-y-10">
-      <div className="max-w-screen-xl mx-auto lg:px-24 px-6">
+      <div className="max-w-screen-xl mx-auto lg:px-36 px-6">
         <div className="flex flex-col py-7 justify-center items-center mt-10">
           <h1 className="text-[#ED1450] font-bold text-2xl">
             All PDF File related to work

@@ -5,10 +5,11 @@ import PdfCard from "./PdfCard";
 import VideosCard from "./VideosCard";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
+import useFetchKnowledgeData from "../utils/hooks/useFetchKnowledgeData";
 
-const fetchResources = async () => {
+const fetchResources = async (searchInput) => {
   const response = await fetch(
-    `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources`
+    ` http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=`
   );
   const data = await response.json();
   // console.log(data.data.resourcesData);
@@ -30,33 +31,42 @@ const separateByResourceType = (resources) => {
   }, {});
 };
 
-const ResourceList = () => {
+const ResourceList = ({ searchInput, selectedOption }) => {
+  const {
+    data1: imageArray,
+    data2: pdfArray,
+    data3: videoArray,
+    loading,
+  } = useFetchKnowledgeData({ searchInput, selectedOption });
+
   const [resources, setResources] = useState({});
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchResources();
-        const unpaidResources = filterUnpaidResources(data);
-        const separatedResources = separateByResourceType(unpaidResources);
-        setResources(separatedResources);
-      } catch (error) {
-        console.error("Error fetching resources:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await fetchResources(searchInput);
+  //       const unpaidResources = filterUnpaidResources(data);
+  //       const separatedResources = separateByResourceType(unpaidResources);
+  //       setResources(separatedResources);
+  //     } catch (error) {
+  //       console.error("Error fetching resources:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, [searchInput]);
 
   return (
-    <div>
-      <ImagesCard resources={resources.image || []} />
-      <PdfCard resources={resources.pdf || []} />
-      <VideosCard resources={resources.video || []} />
-    </div>
+    <>
+      <div>
+        <ImagesCard resources={imageArray} />
+        <PdfCard resources={pdfArray} />
+        <VideosCard resources={videoArray} />
+      </div>
+    </>
   );
 };
 
