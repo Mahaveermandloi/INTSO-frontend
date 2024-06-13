@@ -135,7 +135,7 @@ import UpdateBlog from "../Components/UpdateBlog";
 import SchoolList from "../Components/School/SchoolList";
 import SchoolRequests from "../Components/School/SchoolRequests";
 import NewsLetter from "../Components/NewsLetter";
-import {baseURL} from "../URLPath";
+import { baseURL } from "../URLPath";
 
 
 const AdminRoutes = () => {
@@ -194,6 +194,7 @@ const AuthenticatedApp = () => (
         <Route path="/updateblog/:id" element={<UpdateBlog />} />
 
         <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/addschool" element={<UploadSchool />} />
         <Route path="/image" element={<Image />} />
         <Route path="/video" element={<Video />} />
         <Route path="/pdf" element={<Pdf />} />

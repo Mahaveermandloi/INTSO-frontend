@@ -212,7 +212,7 @@ const StudentRequests = () => {
         {/* Pagination */}
 
         {totalPages > 1 && (
-          <div className=" fixed-bottom flex  justify-center">
+          <div className=" mt-10 flex   justify-center">
             {/* Previous button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}

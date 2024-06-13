@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaChevronLeft, FaChevronRight, FaFileDownload } from "react-icons/fa";
-import { toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 import { URLPath } from "../URLPath";
-
+import { ToastContainer, toast, Bounce } from "react-toastify";
 const NewsLetter = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,15 +27,41 @@ const NewsLetter = () => {
         }
       );
       setData(response.data.data.newsLetterData);
-      console.log(response.data.data.newsLetterData);
     } catch (error) {
-      toast.error("Error fetching data:");
+      toast.error("Error fetching newsletter data");
     }
   };
 
   useEffect(() => {
     fetchData();
   }, []); // Only run once on component mount
+
+  const makeDownload = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.get(
+        `${URLPath}/api/v1/newsLetter/downloadExcel`,
+        {
+          responseType: "blob", // Important
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      // Create blob link to download
+      toast.success("Excel downloaded successfully");
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "newsletter.xlsx");
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      toast.error("Error downloading Excel");
+    }
+  };
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const currentData = data.slice(
@@ -49,6 +75,19 @@ const NewsLetter = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <div className="lg:w-10/12 lg:ml-auto">
         <div className="flex justify-between items-center">
           <div className="flex justify-between w-full items-center">
@@ -56,7 +95,10 @@ const NewsLetter = () => {
               <h1 className="text-2xl lg:text-4xl font-bold">Newsletter</h1>
             </div>
             <div>
-              <button className="flex gap-1 w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              <button
+                onClick={makeDownload}
+                className="flex gap-1 w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
                 Download
                 <FaFileDownload className="mt-[2px]" />
               </button>

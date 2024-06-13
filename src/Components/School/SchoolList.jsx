@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaChevronRight, FaInfoCircle } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa";
 import { URLPath } from "../../URLPath";
+import { useNavigate } from "react-router-dom";
 
 const SchoolList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +16,8 @@ const SchoolList = () => {
   const [selectedSchoolName, setSelectedSchoolName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -47,7 +50,8 @@ const SchoolList = () => {
   const toggleModal = (schoolId) => {
     setIsModalOpen(!isModalOpen);
 
-    const school = schoolData.find((school) => school.id === schoolId);
+    const school = schoolData.find((school) => school.school_id === schoolId);
+
     if (school) {
       setSelectedSchool(school);
     } else {
@@ -96,10 +100,19 @@ const SchoolList = () => {
     <>
       <div className="lg:w-10/12 lg:ml-auto">
         <div className=" lg:flex justify-between  items-center">
-          <div>
-            <h1 className="text-2xl lg:text-4xl  lg:my-5 font-bold">
-              School List
-            </h1>
+          <div className="flex justify-between w-full items-center">
+            <div>
+              <h1 className="text-2xl lg:text-4xl font-bold">School List</h1>
+            </div>
+
+            <div>
+              <button
+                onClick={() => navigate("/admin/addschool")}
+                className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
+                Add School
+              </button>
+            </div>
           </div>
         </div>
 
@@ -143,7 +156,6 @@ const SchoolList = () => {
               </tr>
             </thead>
             <tbody>
-            
               {currentData.length === 0 ? (
                 <tr>
                   <td
@@ -157,7 +169,7 @@ const SchoolList = () => {
                 currentData.map((school) => (
                   <tr
                     className="bg-white border-b dark:bg-gray-100 dark:border-gray-300"
-                    key={school.id}
+                    key={school.school_id}
                   >
                     <td className="px-4 py-2 text-base font-bold text-black">
                       {school.school_name}
@@ -170,7 +182,7 @@ const SchoolList = () => {
                     <td className="px-4 py-2 ">{school.city}</td>
 
                     <td className="px-4 py-2  ">
-                      <button onClick={() => toggleModal(school.id)}>
+                      <button onClick={() => toggleModal(school.school_id)}>
                         <FaInfoCircle size={20} className="text-green-400" />
                       </button>
                     </td>
