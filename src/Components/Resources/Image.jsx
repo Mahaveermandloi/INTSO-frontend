@@ -39,11 +39,9 @@ const Image = () => {
           }
         );
 
-<<<<<<< HEAD
-        // console.log(response.data.data);
-=======
+
         console.log("this is admin data", response.data.data);
->>>>>>> 4c8f6669ba5206811ff8a837b512a8f8ec6e253b
+
         const imageResources = response.data.data.resourcesData.filter(
           (resource) => resource.resource_type === "image"
         );
