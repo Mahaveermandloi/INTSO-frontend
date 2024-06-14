@@ -136,9 +136,11 @@ import SchoolList from "../Components/School/SchoolList";
 import SchoolRequests from "../Components/School/SchoolRequests";
 import NewsLetter from "../Components/NewsLetter";
 import { baseURL } from "../URLPath";
-
+import useTokenExpirationCheck from "../Components/useTokenExpirationCheck";
 
 const AdminRoutes = () => {
+  useTokenExpirationCheck();
+
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const token = localStorage.getItem("accessToken");
     return !!token;

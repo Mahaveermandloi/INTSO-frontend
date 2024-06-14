@@ -3,7 +3,7 @@ import axios from "axios";
 import { RiFilter3Fill } from "react-icons/ri";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import Loader from "../Loader"; // Assuming Loader component is in the same directory
-import { URLPath , baseURL } from "../../URLPath";
+import { URLPath, baseURL } from "../../URLPath";
 import { RxCross1 } from "react-icons/rx";
 
 const Image = () => {

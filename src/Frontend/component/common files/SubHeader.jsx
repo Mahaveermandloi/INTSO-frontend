@@ -1,37 +1,33 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link } from "react-router-dom";
-import AboutUsPage from "../AboutUs/AboutUsPage";
-import Knowledge from "../Knowledge/Knowledge";
-import { Main } from "../Home/Main";
-import MainBlog from "../Blog/MainBlog";
-import ContactUs from "../Contact/ContactUs";
-import Login from "../Login/Login";
-import { Button, Modal, Menu, MenuItem } from "@mui/material";
-import { GalleryPage } from "../Gallery/GalleryPage";
+import { Menu, MenuItem } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import MTSOAbout from "../ExamDetails/MTSOAbout";
-import { useNavigate } from "react-router-dom";
+import img from "../../image/user (1).png";
 
 const SubHeader = () => {
   const navigate = useNavigate();
   const menuRef = useRef(null);
   const [showNav, setShowNav] = useState(false);
   const [activeButton, setActiveButton] = useState("Home");
-  const [showModal, setShowModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [scheduleAnchorEl, setScheduleAnchorEl] = useState(null);
   const [syllabusAnchorEl, setSyllabusAnchorEl] = useState(null);
   const [resultsAnchorEl, setResultsAnchorEl] = useState(null);
-
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      handleClose();
-    }
-  };
+  const [isLogined, setIsLogined] = useState(""); // Initially empty
+  const [showProfileMenu, setShowProfileMenu] = useState(false); // New state for profile menu
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
+    if (!(token || email)) {
+      setIsLogined("Logout"); // Set to "Logout" when no token or email
+    } else {
+      setIsLogined("Login"); // Set to "Login" when token and email exist
+    }
+
     if (showNav) {
       document.addEventListener("click", handleClickOutside);
     } else {
@@ -43,9 +39,16 @@ const SubHeader = () => {
     };
   }, [showNav]);
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      handleClose();
+    }
+  };
+
   const handleOpen = () => {
     setShowNav(!showNav);
   };
+
   const hide = () => {
     setShowNav(false);
   };
@@ -59,6 +62,9 @@ const SubHeader = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleProfileMenuOpen = (event) => {
+    setShowProfileMenu(true);
+  };
   const handleDropdownClose = () => {
     setAnchorEl(null);
   };
@@ -71,25 +77,16 @@ const SubHeader = () => {
     setter(null);
   };
 
-  const renderComponent = () => {
-    switch (activeButton) {
-      case "Home":
-        return <Main />;
-      case "Aboutus":
-        return <AboutUsPage />;
-      case "Knowledge":
-        return <Knowledge />;
-      case "Blog":
-        return <MainBlog />;
-      case "Examdetails":
-        return <MTSOAbout />;
-      case "Gallery":
-        return <GalleryPage />;
-      case "ContactUs":
-        return <ContactUs />;
-      default:
-        return null;
-    }
+  const handleProfileMenuClose = () => {
+    setShowProfileMenu(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    setIsLogined("Logout"); // Set to "Logout" when logging out
+
+    navigate("/");
   };
 
   return (
@@ -115,11 +112,13 @@ const SubHeader = () => {
             <div
               className={`lg:flex lg:space-x-8 ${
                 showNav ? "" : "hidden"
-              } flex-col lg:flex-row p-3`}>
+              } flex-col lg:flex-row p-3`}
+            >
               <div className="lg:flex lg:flex-row flex items-center lg:space-y-3 lg:space-x-5">
                 <ul
                   ref={menuRef}
-                  className="flex lg:flex-row flex-col justify-center items-start gap-2 lg:h-auto lg:gap-4 text-base font-semibold h-56">
+                  className="flex lg:flex-row flex-col justify-center items-start gap-2 lg:h-auto lg:gap-4 text-base font-semibold h-56"
+                >
                   <Link to="/">
                     <li
                       className={`text-nowrap ${
@@ -127,7 +126,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Home")}>
+                      onClick={() => handleButtonClick("Home")}
+                    >
                       Home
                     </li>
                   </Link>
@@ -138,7 +138,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Aboutus")}>
+                      onClick={() => handleButtonClick("Aboutus")}
+                    >
                       About Us
                     </li>
                   </Link>
@@ -149,7 +150,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Knowledge")}>
+                      onClick={() => handleButtonClick("Knowledge")}
+                    >
                       Knowledge Desk
                     </li>
                   </Link>
@@ -161,7 +163,8 @@ const SubHeader = () => {
                     }`}
                     onClick={handleDropdownOpen}
                     aria-controls="exam-details-menu"
-                    aria-haspopup="true">
+                    aria-haspopup="true"
+                  >
                     Exam Details <ArrowDropDownIcon />
                   </li>
                   <Menu
@@ -169,28 +172,33 @@ const SubHeader = () => {
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={handleDropdownClose}
-                    keepMounted>
+                    keepMounted
+                  >
                     <MenuItem onClick={handleSubMenuOpen(setScheduleAnchorEl)}>
                       (MTSO) Mathematics Talent Search Olympiad
                       <ArrowRightIcon />
                     </MenuItem>
+
                     <Menu
                       anchorEl={scheduleAnchorEl}
                       open={Boolean(scheduleAnchorEl)}
                       onClose={handleSubMenuClose(setScheduleAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <Link to="/mtso_about">
                         <MenuItem
                           onClick={() => {
                             handleSubMenuClose(setScheduleAnchorEl)();
                             handleDropdownClose();
-                          }}>
+                          }}
+                        >
                           (MTSO)About
                         </MenuItem>
                       </Link>
                       <MenuItem
-                        onClick={handleSubMenuClose(setScheduleAnchorEl)}>
+                        onClick={handleSubMenuClose(setScheduleAnchorEl)}
+                      >
                         (MTSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -202,13 +210,16 @@ const SubHeader = () => {
                       open={Boolean(syllabusAnchorEl)}
                       onClose={handleSubMenuClose(setSyllabusAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (ATSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (MATSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -220,13 +231,16 @@ const SubHeader = () => {
                       open={Boolean(resultsAnchorEl)}
                       onClose={handleSubMenuClose(setResultsAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setResultsAnchorEl)}>
+                        onClick={handleSubMenuClose(setResultsAnchorEl)}
+                      >
                         (ETSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setResultsAnchorEl)}>
+                        onClick={handleSubMenuClose(setResultsAnchorEl)}
+                      >
                         (ETSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -238,13 +252,16 @@ const SubHeader = () => {
                       open={Boolean(syllabusAnchorEl)}
                       onClose={handleSubMenuClose(setSyllabusAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (STSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (STSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -256,17 +273,21 @@ const SubHeader = () => {
                       open={Boolean(syllabusAnchorEl)}
                       onClose={handleSubMenuClose(setSyllabusAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (GTSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (GTSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
                   </Menu>
+
                   <Link to="/blogs">
                     <li
                       className={`text-nowrap ${
@@ -274,7 +295,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Blog")}>
+                      onClick={() => handleButtonClick("Blog")}
+                    >
                       Blogs
                     </li>
                   </Link>
@@ -285,7 +307,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Gallery")}>
+                      onClick={() => handleButtonClick("Gallery")}
+                    >
                       Gallery
                     </li>
                   </Link>
@@ -296,18 +319,88 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("ContactUs")}>
+                      onClick={() => handleButtonClick("ContactUs")}
+                    >
                       Contact Us
                     </li>
                   </Link>
                 </ul>
               </div>
 
-              <button
-                className="bg-[#ED1450] px-8 p-2 rounded-full font-bold text-lg text-white"
-                onClick={() => navigate("/login")}>
-                Login
-              </button>
+              {isLogined === "Login" ? (
+                <>
+                  <button
+                    className="flex justify-center items-center gap-3"
+                    onClick={handleProfileMenuOpen}
+                  >
+                    <img src={img} className="rounded-full w-10" alt="" />
+                    <ArrowDropDownIcon />
+                  </button>
+                  {/* 
+                  <Menu
+                    anchorEl={menuRef.current}
+                    open={showProfileMenu}
+                    onClose={handleProfileMenuClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    getContentAnchorEl={null}
+                    sx={{ mt: 2, mr: 0, ml: 14 }}
+                  >
+                    <MenuItem>Profile</MenuItem>
+                    <MenuItem>My Content</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  </Menu> */}
+                  <Menu
+                    anchorEl={menuRef.current}
+                    open={showProfileMenu}
+                    onClose={handleProfileMenuClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    getContentAnchorEl={null}
+                    sx={{
+                      mt: { xs: 5, sm: 20, lg: 2 },
+                      ml: { xs: 0, sm: 10, lg: 16 }, // Adjust ml (left margin) for different screen sizes
+                      mr: { xs: 0, sm: 0 }, // Adjust mr (right margin) for different screen sizes
+                    }}
+                  >
+                    <MenuItem>Profile</MenuItem>
+                    <MenuItem onClick={() => navigate("/paidresources")}>
+                      My Content
+                    </MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                ""
+              )}
+
+              {isLogined === "Logout" ? (
+                <>
+                  <button
+                    className="bg-[#ED1450] px-8 p-2 rounded-full font-bold text-lg text-white"
+                    onClick={() => {
+                      navigate("/login");
+                      window.location.reload();
+                    }}
+                  >
+                    Login
+                  </button>
+                </>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

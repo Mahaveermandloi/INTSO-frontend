@@ -32,6 +32,17 @@ import Success from "../../src/Frontend/component/Login/Success";
 import ChangePassword from "../../src/Frontend/component/Login/ChangePassword";
 import UserDashboard from "../../src/Frontend/component/User/UserDashboard";
 import UserKnowledgeDesk from "../Frontend/component/User/UserKnowledgeDesk";
+import FreeResources from "../Frontend/component/Knowledge/Free Resources/FreeResources";
+
+import PaidImages from "../Frontend/component/Knowledge/Paid Resources/PaidImages";
+import PaidVideos from "../Frontend/component/Knowledge/Paid Resources/PaidVideos";
+import PaidPdfs from "../Frontend/component/Knowledge/Paid Resources/PaidPdfs";
+
+import Images from "../Frontend/component/Knowledge/MoreData/Images";
+import Videos from "../Frontend/component/Knowledge/MoreData/Videos";
+import Pdfs from "../Frontend/component/Knowledge/MoreData/Pdfs";
+import PaidResources from "../Frontend/component/Knowledge/PaidResources";
+import PaidKnowledge from "../Frontend/component/Knowledge/Paid Resources/PaidKnowledge";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -70,10 +81,40 @@ const UserRoutes = () => {
           path="/knowledge"
           element={
             <Layout>
-              <Knowledge />
+              {/* <Knowledge /> */}
+              <FreeResources />
             </Layout>
           }
         />
+
+        {/* MAHAVEER MODIFIED */}
+        <Route
+          path="/images"
+          element={
+            <Layout>
+              {/* <Knowledge /> */}
+              <Images />
+            </Layout>
+          }
+        />
+        <Route
+          path="/videos"
+          element={
+            <Layout>
+              <Videos />
+            </Layout>
+          }
+        />
+        <Route
+          path="/pdfs"
+          element={
+            <Layout>
+              <Pdfs />
+            </Layout>
+          }
+        />
+
+        {/*  */}
         <Route
           path="/register"
           element={
@@ -259,21 +300,48 @@ const UserRoutes = () => {
         {isAuthenticated && (
           <>
             <Route
-              path="/userdashboard"
+              path="/"
               element={
                 <Layout>
-                  <UserDashboard />
+                  <Main />
+                </Layout>
+              }
+            />
+
+            <Route
+              path="/paidimage"
+              element={
+                <Layout>
+                  <PaidImages />
                 </Layout>
               }
             />
             <Route
-              path="/userknowledge"
+              path="/paidvideos"
               element={
                 <Layout>
-                  <UserKnowledgeDesk />
+                  <PaidVideos />
                 </Layout>
               }
             />
+            <Route
+              path="/paidpdfs"
+              element={
+                <Layout>
+                  <PaidPdfs />
+                </Layout>
+              }
+            />
+
+            <Route
+              path="/paidresources"
+              element={
+                <Layout>
+                  <PaidKnowledge />
+                </Layout>
+              }
+            />
+
             <Route path="/login" element={<Navigate to="/" />} />
             <Route path="/forgotpassword" element={<Navigate to="/" />} />
             <Route path="/otp" element={<Navigate to="/" />} />

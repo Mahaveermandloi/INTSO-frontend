@@ -16,7 +16,7 @@ const useFetchData = () => {
       try {
         const data = await fetch(url);
         const jsonData = await data.json();
-        console.log(jsonData);  
+        // console.log(jsonData);  
         setData1(jsonData.homedata.bannerData);
         setData3(jsonData.homedata.testiMonialData);
         setData4(jsonData.homedata.blogData);

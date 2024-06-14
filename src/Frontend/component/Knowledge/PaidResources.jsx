@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SerchBar from "./SerchBar";
-import ResourceList from "./ResourceList";
+import PaidResourceList from "./PaidResourceList";
 import { Achivement } from "../Home/Achivement";
 import { Testimonial } from "../Home/Testimonial";
 import { useLocation } from "react-router-dom";
 
-const Knowledge = () => {
+const PaidResources = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [triggerSearch, setTriggerSearch] = useState(true);
@@ -68,7 +68,7 @@ const Knowledge = () => {
         </div>
       </div>
 
-      <ResourceList
+      <PaidResourceList
         searchInput={searchInput}
         selectedOption={selectedOption}
         triggerSearch={triggerSearch}
@@ -84,4 +84,4 @@ const Knowledge = () => {
   );
 };
 
-export default Knowledge;
+export default PaidResources;

@@ -4,7 +4,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import img from "../../../assets/Frontend_images/LoginPage2.png";
 import logo from "../../../assets/Frontend_images/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IP_ADDRESS } from "../utils/constants";
+import { IP_ADDRESS, PORT } from "../utils/constants";
 
 const Login = () => {
   const location = useLocation();
@@ -28,6 +28,7 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -44,23 +45,30 @@ const Login = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
+        console.log(data.student);
+
         const token = data.token;
+        const email = data.student.email;
 
         localStorage.setItem("token", token);
+        localStorage.setItem("email", email);
 
-        setStatusMessage("Your message has been sent successfully!");
+        setStatusMessage("Login successful!");
         setFormData({
           email: "",
           password: "",
         });
-        navigate("/userdashboard");
+        // Optionally navigate to the user dashboard or reload the page
+        navigate("/");
         window.location.reload();
       } else {
-        setStatusMessage("Failed to send your message. Please try again.");
+        const errorData = await res.json();
+        setStatusMessage(
+          `Login failed: ${errorData.message || "Please try again."}`
+        );
       }
     } catch (err) {
-      console.error("Sending message failed:", err);
+      console.error("Login failed:", err);
       setStatusMessage("An error occurred. Please try again later.");
     }
   };

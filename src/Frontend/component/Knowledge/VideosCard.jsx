@@ -3,14 +3,18 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 import VideoPlayer from "./VideoPlayer";
 import img from "../../../../src/assets/Frontend_images/Play_SVG.png";
-import useFetchKnowledgeData from "../utils/hooks/useFetchKnowledgeData";
+import { useNavigate } from "react-router-dom";
 
 const VideosCard = ({ resources }) => {
+  const navigate = useNavigate();
+
   const [selectedVideo, setSelectedVideo] = useState(null);
-  console.log("kjfkadjfkajf", resources);
+  console.log("Resources:", resources);
+
   const handlePlayClick = (video) => {
     setSelectedVideo(video);
   };
+
   const handleCloseModal = () => {
     setSelectedVideo(null);
   };
@@ -41,9 +45,19 @@ const VideosCard = ({ resources }) => {
       console.error("Download error:", error);
     }
   };
+
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const handleShowMore = () => {
+    const hasPaidResources = resources.some((item) => item.is_paid);
+    if (hasPaidResources) {
+      navigate("/paidvideos");
+    } else {
+      navigate("/videos");
+    }
   };
 
   return (
@@ -68,7 +82,8 @@ const VideosCard = ({ resources }) => {
                     onClick={() => handlePlayClick(item)}
                     className="rounded-xl flex flex-col space-y-2 border border-gray-300"
                     data-aos="zoom-in"
-                    key={item.id}>
+                    key={item.id}
+                  >
                     <div className="relative w-full rounded-lg overflow-hidden">
                       <img
                         src={`http://${IP_ADDRESS}:${PORT}${item.thumbnail}`}
@@ -111,7 +126,10 @@ const VideosCard = ({ resources }) => {
           </div>
           {resources.length > 0 && (
             <div className="flex justify-center mt-6">
-              <button className="bg-[#ED1450] text-white p-3 rounded-full w-32">
+              <button
+                onClick={handleShowMore}
+                className="bg-[#ED1450] text-white p-3 rounded-full w-32"
+              >
                 Show More
               </button>
             </div>

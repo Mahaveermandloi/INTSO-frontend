@@ -1,20 +1,54 @@
-// import React from "react";
-// import { IP_ADDRESS, PORT } from "../utils/constants";
-// import Spinner1 from "../common files/Spinner1";
-// import img from "../../../../src/assets/Frontend_images/Download_SVG.png";
-// import useFetchKnowledgeData from "../utils/hooks/useFetchKnowledgeData";
+// import React, { useState, useEffect } from "react";
+// import { IP_ADDRESS, PORT } from "../../utils/constants";
+// import Spinner1 from "../../common files/Spinner1"; // Assuming Spinner1 is correctly imported
+// import img from "../../../../../src/assets/Frontend_images/Download_SVG.png";
 // import { useNavigate } from "react-router-dom";
 
-// const ImagesCard = ({ resources, searchInput }) => {
+// const Images = () => {
 //   const navigate = useNavigate();
+//   const [data, setData] = useState([]);
+//   const [loading, setLoading] = useState(true); // State to track loading state
 
-//   const handleDownload = async (pdfUrl) => {
-//     // console.log("Starting download for:", pdfUrl);
+//   useEffect(() => {
+//     fetchData();
+//   }, []); // Fetch data on component mount
+
+//   const fetchData = async () => {
 //     try {
-//       const response = await fetch(pdfUrl, {
+//       const response = await fetch(
+//         `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallimages`
+//       );
+
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+
+//       const jsonData = await response.json();
+
+//       const data = jsonData.resourceData;
+
+//       console.log("this is paid ", data);
+
+//       const filterUnpaidResources = (data) => {
+//         return data.filter((data) => !data.is_paid);
+//       };
+
+//       filterUnpaidResources(data);
+
+//       setData(data); // Update state with fetched data
+//       setLoading(false); // Set loading to false once data is fetched
+//     } catch (error) {
+//       console.error("Fetch data error:", error);
+//       setLoading(false); // Set loading to false on error as well
+//     }
+//   };
+
+//   const handleDownload = async (imageUrl) => {
+//     try {
+//       const response = await fetch(imageUrl, {
 //         method: "GET",
 //         headers: {
-//           "Content-Type": "application/pdf",
+//           "Content-Type": "image/jpeg", // Adjust content type as per your image type
 //         },
 //       });
 
@@ -26,7 +60,7 @@
 //       const url = window.URL.createObjectURL(blob);
 //       const link = document.createElement("a");
 //       link.href = url;
-//       link.setAttribute("download", pdfUrl.split("/").pop());
+//       link.setAttribute("download", imageUrl.split("/").pop());
 //       document.body.appendChild(link);
 //       link.click();
 //       document.body.removeChild(link);
@@ -40,23 +74,19 @@
 //     const options = { year: "numeric", month: "long", day: "numeric" };
 //     return new Date(dateString).toLocaleDateString(undefined, options);
 //   };
+
 //   return (
-//     <div className="space-y-10 p-3">
-//       <div className="max-w-screen-xl mx-auto lg:px-24 px-6">
-//         <div className="flex flex-col py-7 justify-center items-center ">
-//           <h1 className="text-[#ED1450] font-bold text-2xl">
-//             All images related to work
-//           </h1>
-//           <p className="w-16 border-b-2 border-[#ED1450]"></p>
-//         </div>
-//         <div className="flex justify-center ">
-//           {resources.length === 0 ? (
-//             <div className="flex justify-center">
-//               <Spinner1 />
-//             </div>
-//           ) : (
-//             <div className="grid grid-cols-1  sm:grid-cols-2  md:grid-cols-3 gap-5">
-//               {resources.map((item) => (
+//     <>
+//       <div className="text-center text-[#ED1450] font-bold text-2xl my-5">
+//         All Images
+//       </div>
+//       <div className="flex justify-center">
+//         {loading ? ( // Display spinner while loading
+//           <Spinner1 />
+//         ) : (
+//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+//             {data &&
+//               data.map((item) => (
 //                 <div
 //                   key={item.id}
 //                   className="rounded-xl flex flex-col space-y-2 border border-gray-300"
@@ -92,7 +122,7 @@
 //                           className="text-white text-sm flex items-center"
 //                           onClick={() =>
 //                             handleDownload(
-//                               `  http://${IP_ADDRESS}:${PORT}${item.resource_url}`
+//                               `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
 //                             )
 //                           }
 //                         >
@@ -104,41 +134,75 @@
 //                   </div>
 //                 </div>
 //               ))}
-//             </div>
-//           )}
-//         </div>
+//           </div>
+//         )}
 //       </div>
-//       {resources.length > 0 && (
+//       {data.length > 0 && (
 //         <div className="flex justify-center mt-6">
 //           <button
-//             onClick={() => navigate("/images")}
+//             onClick={() => navigate("/images")} // Navigate to '/images' route
 //             className="bg-[#ED1450] text-white p-3 rounded-full w-32"
 //           >
 //             Show More
 //           </button>
 //         </div>
 //       )}
-//     </div>
+//     </>
 //   );
 // };
 
-// export default ImagesCard;
-import React from "react";
-import { IP_ADDRESS, PORT } from "../utils/constants";
-import Spinner1 from "../common files/Spinner1";
-import img from "../../../../src/assets/Frontend_images/Download_SVG.png";
+// export default Images;
+
+import React, { useState, useEffect } from "react";
+import { IP_ADDRESS, PORT } from "../../utils/constants";
+import Spinner1 from "../../common files/Spinner1"; // Assuming Spinner1 is correctly imported
+import img from "../../../../../src/assets/Frontend_images/Download_SVG.png";
 import { useNavigate } from "react-router-dom";
 
-const ImagesCard = ({ resources, searchInput }) => {
+const Images = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true); // State to track loading state
 
-  const handleDownload = async (pdfUrl) => {
-    // console.log("Starting download for:", pdfUrl);
+  useEffect(() => {
+    fetchData();
+  }, []); // Fetch data on component mount
+
+  const fetchData = async () => {
     try {
-      const response = await fetch(pdfUrl, {
+      const response = await fetch(
+        `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallimages`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const jsonData = await response.json();
+
+      const allData = jsonData.resourceData;
+
+      console.log("Fetched data:", allData);
+
+      // Filter out paid resources
+      const unpaidData = allData.filter((item) => !item.is_paid);
+
+      console.log(unpaidData);
+
+      setData(unpaidData); // Update state with filtered data
+      setLoading(false); // Set loading to false once data is fetched
+    } catch (error) {
+      console.error("Fetch data error:", error);
+      setLoading(false); // Set loading to false on error as well
+    }
+  };
+
+  const handleDownload = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl, {
         method: "GET",
         headers: {
-          "Content-Type": "application/pdf",
+          "Content-Type": "image/jpeg", // Adjust content type as per your image type
         },
       });
 
@@ -150,7 +214,7 @@ const ImagesCard = ({ resources, searchInput }) => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", pdfUrl.split("/").pop());
+      link.setAttribute("download", imageUrl.split("/").pop());
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -165,32 +229,18 @@ const ImagesCard = ({ resources, searchInput }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  const handleShowMore = () => {
-    const hasPaidResources = resources.some((item) => item.is_paid);
-    if (hasPaidResources) {
-      navigate("/paidimage");
-    } else {
-      navigate("/images");
-    }
-  };
-
   return (
-    <div className="space-y-10 p-3">
-      <div className="max-w-screen-xl mx-auto lg:px-24 px-6">
-        <div className="flex flex-col py-7 justify-center items-center">
-          <h1 className="text-[#ED1450] font-bold text-2xl">
-            All images related to work
-          </h1>
-          <p className="w-16 border-b-2 border-[#ED1450]"></p>
-        </div>
-        <div className="flex justify-center">
-          {resources.length === 0 ? (
-            <div className="flex justify-center">
-              <Spinner1 />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {resources.map((item) => (
+    <>
+      <div className="text-center text-[#ED1450] font-bold text-2xl my-5">
+        All Images
+      </div>
+      <div className="flex justify-center">
+        {loading ? ( // Display spinner while loading
+          <Spinner1 />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {data &&
+              data.map((item) => (
                 <div
                   key={item.id}
                   className="rounded-xl flex flex-col space-y-2 border border-gray-300"
@@ -238,22 +288,12 @@ const ImagesCard = ({ resources, searchInput }) => {
                   </div>
                 </div>
               ))}
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-      {resources.length > 0 && (
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={handleShowMore}
-            className="bg-[#ED1450] text-white p-3 rounded-full w-32"
-          >
-            Show More
-          </button>
-        </div>
-      )}
-    </div>
+      {data.length > 0 && <div className="flex justify-center mt-6"></div>}
+    </>
   );
 };
 
-export default ImagesCard;
+export default Images;
