@@ -106,7 +106,7 @@ const OTPPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         navigate("/changepassword");
       } else {
         const errorData = await response.json();

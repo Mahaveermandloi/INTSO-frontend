@@ -30,7 +30,7 @@ const SchoolRequests = () => {
             (school) =>
               school.status === "pending" || school.status === "rejected"
           );
-          console.log(filteredData);
+          // console.log(filteredData);
           setSchoolData(filteredData);
         }
       } catch (error) {

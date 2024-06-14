@@ -26,7 +26,7 @@ const Banner = () => {
         );
 
         setGallery(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } else {
         toast.error("No access token found");
       }

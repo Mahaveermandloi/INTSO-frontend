@@ -41,31 +41,15 @@ const Knowledge = () => {
   return (
     <div className="shadow-inner shadow-gray-300">
       <div className="flex items-center justify-center">
+   
         <SerchBar
           handleSearchInputChange={handleSearchInputChange}
           searchInput={searchInput}
           handleSearchButtonClick={handleSearchButtonClick}
+          selectedOption={selectedOption}
+          handleOptionChange={handleOptionChange}
+          options={options}
         />
-        <div className="flex items-center ml-2">
-          <select
-            className="p-3 rounded-full font-bold bg-[#ED1450] text-white border-none outline-none cursor-pointer"
-            value={selectedOption}
-            onChange={handleOptionChange}
-          >
-            <option value="" disabled className="bg-white text-black">
-              Select Class
-            </option>
-            {options.map((option) => (
-              <option
-                key={option}
-                value={`${option}`}
-                className="bg-white text-black"
-              >
-                Class {option}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       <ResourceList

@@ -58,7 +58,7 @@ const Video = () => {
 
         setData(filteredData);
 
-        console.log(filteredData);
+        // console.log(filteredData);
       } else {
         console.error("No access token found");
       }
@@ -126,9 +126,9 @@ const Video = () => {
       formData.append("resource_type", "video"); // Assuming image is always selected
       formData.append("is_paid", selectedOption === "paid");
 
-      console.log(formData);
+      // console.log(formData);
 
-      console.log(title, description, resourceURL, selectedOption);
+      // console.log(title, description, resourceURL, selectedOption);
 
       try {
         const accessToken = localStorage.getItem("accessToken");

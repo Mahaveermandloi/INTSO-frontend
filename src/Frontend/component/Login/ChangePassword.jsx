@@ -58,7 +58,7 @@ const ChangePassword = ({ notShow }) => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          // console.log(data);
           navigate("/success");
         } else {
           const errorData = await response.json();

@@ -24,7 +24,7 @@ const CreateBlog = () => {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(`${URLPath}/api/v1/blogs/get-blogs`);
-        console.log(response.data.blogs);
+        // console.log(response.data.blogs);
         setGallery(response.data.blogs);
       } else {
         console.error("No access token found");

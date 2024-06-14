@@ -39,7 +39,7 @@ const Image = () => {
           }
         );
 
-        console.log(response.data.data);
+        // console.log(response.data.data);
         const imageResources = response.data.data.resourcesData.filter(
           (resource) => resource.resource_type === "image"
         );

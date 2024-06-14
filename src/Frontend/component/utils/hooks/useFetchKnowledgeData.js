@@ -48,10 +48,10 @@ const useFetchKnowledgeData = ({ searchInput, selectedOption }) => {
       try {
         // Construct the fetch URL with the searchInput parameter
         const url = `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}`;
-        console.log("Fetch URL:", url); // Log the URL to check if it's correct
+        // console.log("Fetch URL:", url); 
         const data = await fetch(url);
         const jsonData = await data.json();
-        console.log("Fetched Data:", jsonData); // Log the fetched data
+        // console.log("Fetched Data:", jsonData);
         setData1(jsonData.resourceData.imageArray);
         setData2(jsonData.resourceData.pdfArray);
         setData3(jsonData.resourceData.videoArray);

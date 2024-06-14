@@ -54,7 +54,7 @@ const ForgotPassword = () => {
         );
         if (res.ok) {
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
           setStatusMessage("OTP has been sent successfully!");
           navigate("/otp"); // Redirect to the OTP page
         } else {

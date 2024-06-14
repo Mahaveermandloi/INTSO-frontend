@@ -9,7 +9,7 @@ const VideosCard = ({ resources }) => {
   const navigate = useNavigate();
 
   const [selectedVideo, setSelectedVideo] = useState(null);
-  console.log("Resources:", resources);
+  // console.log("Resources:", resources);
 
   const handlePlayClick = (video) => {
     setSelectedVideo(video);

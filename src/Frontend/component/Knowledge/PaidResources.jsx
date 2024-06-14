@@ -46,7 +46,7 @@ const PaidResources = () => {
           searchInput={searchInput}
           handleSearchButtonClick={handleSearchButtonClick}
         />
-        <div className="flex items-center ml-2">
+        {/* <div className="flex items-center ml-2">
           <select
             className="p-3 rounded-full font-bold bg-[#ED1450] text-white border-none outline-none cursor-pointer"
             value={selectedOption}
@@ -65,7 +65,7 @@ const PaidResources = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
       </div>
 
       <PaidResourceList

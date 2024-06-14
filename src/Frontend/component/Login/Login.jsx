@@ -45,7 +45,7 @@ const Login = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data.student);
+        // console.log(data.student);
 
         const token = data.token;
         const email = data.student.email;

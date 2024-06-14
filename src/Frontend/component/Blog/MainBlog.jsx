@@ -7,7 +7,7 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 const MainBlog = () => {
   const location = useLocation();
   const { id } = useParams();
-  const { data1: blog } = useFetchBlogDetails(id);
+  const { data: blog } = useFetchBlogDetails(id);
   const { data: recentBlogs, loading } = useFetchBlogDetails(id);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const MainBlog = () => {
                 <div dangerouslySetInnerHTML={{ __html: blog.description }} />
               </div>
             </div>
-            <div className="text-left lg:w-[40%] w-full flex flex-col ">
+            {/* <div className="text-left lg:w-[40%] w-full flex flex-col ">
               <h1 className="text-4xl font-bold text-center py-4 ">
                 Recent Post
               </h1>
@@ -81,7 +81,7 @@ const MainBlog = () => {
                   <div className=" border-b-2 mt-3 border-gray-300 w-full"></div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

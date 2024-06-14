@@ -21,7 +21,7 @@ const Blog = () => {
         const response = await axios.get(
           `${URLPath}/api/v1/blogs/get-all-blog-details`
         );
-        console.log(response.data.data.blogData);
+        // console.log(response.data.data.blogData);
         setGallery(response.data.data.blogData);
       } else {
         console.error("No access token found");

@@ -11,7 +11,7 @@ const fetchResources = async (searchInput, selectedOption) => {
   );
 
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
 
   return data.resourceData;
 };
@@ -19,7 +19,6 @@ const fetchResources = async (searchInput, selectedOption) => {
 const filterUnpaidResources = (resources) => {
   return resources.filter((resource) => !resource.is_paid);
 };
-
 
 const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
   const [resources, setResources] = useState({
@@ -73,17 +72,23 @@ const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
       {resources.imageArray.length > 0 ? (
         <ImagesCard resources={resources.imageArray} />
       ) : (
-        <p>{noDataMessage.image}</p>
+        <p className="text-red-500 text-lg my-4 text-center">
+          {noDataMessage.image}
+        </p>
       )}
       {resources.pdfArray.length > 0 ? (
         <PdfCard resources={resources.pdfArray} />
       ) : (
-        <p>{noDataMessage.pdf}</p>
+        <p className="text-red-500 text-lg my-4 text-center">
+          {noDataMessage.pdf}
+        </p>
       )}
       {resources.videoArray.length > 0 ? (
         <VideosCard resources={resources.videoArray} />
       ) : (
-        <p>{noDataMessage.video}</p>
+        <p className="text-red-500 text-lg my-4 text-center">
+          {noDataMessage.video}
+        </p>
       )}
     </div>
   );
