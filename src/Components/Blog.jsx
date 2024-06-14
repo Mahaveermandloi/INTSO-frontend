@@ -6,7 +6,7 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { MdModeEdit } from "react-icons/md";
 import Loader from "./Loader"; // Import Loader component
-
+import img from "../assets/9214833.jpg";
 
 const Blog = () => {
   const [gallery, setGallery] = useState([]);
@@ -27,16 +27,6 @@ const Blog = () => {
         console.error("No access token found");
       }
     } catch (error) {
-      toast.error("No Blogs to show", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
     } finally {
       setIsLoading(false); // Reset loading state
     }
@@ -83,7 +73,11 @@ const Blog = () => {
         </div>
 
         <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 mt-5">
-          {gallery &&
+          {gallery.length === 0 ? (
+            <>
+              <img src={img} alt="" className="w-full" />
+            </>
+          ) : (
             gallery.map(
               ({ id, image, description, createdAt, posted_By, title }) => (
                 <BlogBox
@@ -96,7 +90,8 @@ const Blog = () => {
                   posted_By={posted_By}
                 />
               )
-            )}
+            )
+          )}
         </div>
       </div>
     </>

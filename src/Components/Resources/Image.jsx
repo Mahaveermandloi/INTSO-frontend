@@ -31,7 +31,7 @@ const Image = () => {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
-          `${URLPath}/api/v1/resource/get-all-resources-by-admin`,
+          `${URLPath}/api/v1/resource/get-all-data-by-admin`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -39,7 +39,7 @@ const Image = () => {
           }
         );
 
-        console.log(response.data.data);
+        console.log("this is admin data", response.data.data);
         const imageResources = response.data.data.resourcesData.filter(
           (resource) => resource.resource_type === "image"
         );
@@ -206,51 +206,6 @@ const Image = () => {
       }
     }
   };
-
-  // const handleDelete = async (id) => {
-
-  //     try {
-  //       const accessToken = localStorage.getItem("accessToken");
-  //       const response = await axios.delete(
-  //         `${URLPath}/api/v1/resource/delete-resource/${id}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         }
-  //       );
-
-  //       if (response.status === 200) {
-  //         toast.success("Image successfully deleted", {
-  //           position: "top-center",
-  //           autoClose: 3000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: "light",
-  //         });
-  //         setGallery((prevGallery) =>
-  //           prevGallery.filter((item) => item.id !== id)
-  //         );
-  //       }
-  //     } catch (error) {
-  //       toast.error("Error deleting image. Please try again.", {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //       });
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  // };
 
   const toggleMobileForm = () => {
     setIsMobileFormVisible(!isMobileFormVisible);

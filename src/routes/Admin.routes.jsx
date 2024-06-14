@@ -139,7 +139,7 @@ import { baseURL } from "../URLPath";
 import useTokenExpirationCheck from "../Components/useTokenExpirationCheck";
 
 const AdminRoutes = () => {
-  useTokenExpirationCheck();
+  // useTokenExpirationCheck();
 
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const token = localStorage.getItem("accessToken");

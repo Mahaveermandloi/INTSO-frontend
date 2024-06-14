@@ -29,7 +29,7 @@ const Video = () => {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
-          `${URLPath}/api/v1/resource/get-all-resources-by-admin`,
+          `${URLPath}/api/v1/resource/get-all-data-by-admin`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -41,6 +41,8 @@ const Video = () => {
         );
 
         let filteredData = imageResources;
+
+        console.log(filteredData);
 
         // Apply type-based filtering
         if (option === "free") {
