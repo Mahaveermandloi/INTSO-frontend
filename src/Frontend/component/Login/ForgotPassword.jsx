@@ -3,6 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import img1 from "../../../assets/Frontend_images/forgotPassword.png";
 import logo from "../../../assets/Frontend_images/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { IP_ADDRESS, PORT } from "../utils/constants";
 
 const ForgotPassword = () => {
   const location = useLocation();
@@ -54,7 +55,7 @@ const ForgotPassword = () => {
         );
         if (res.ok) {
           const data = await res.json();
-          // console.log(data);
+          console.log(data);
           setStatusMessage("OTP has been sent successfully!");
           navigate("/otp"); // Redirect to the OTP page
         } else {

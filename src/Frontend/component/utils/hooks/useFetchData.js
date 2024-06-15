@@ -16,14 +16,14 @@ const useFetchData = () => {
       try {
         const data = await fetch(url);
         const jsonData = await data.json();
-        // console.log(jsonData);  
-        setData1(jsonData.homedata.bannerData);
-        setData3(jsonData.homedata.testiMonialData);
-        setData4(jsonData.homedata.blogData);
-        setData2(jsonData.homedata.news_update.newsArray);
-        setData5(jsonData.homedata.news_update.EventAndExamArray);
-        setData6(jsonData.homedata.news_update.updateArray);
-        setData7(jsonData.homedata.galleryData);
+        // console.log(jsonData);
+        setData1(jsonData.data.homedata.bannerData);
+        setData3(jsonData.data.homedata.testiMonialData);
+        setData4(jsonData.data.homedata.blogData);
+        setData2(jsonData.data.homedata.news_update.newsArray);
+        setData5(jsonData.data.homedata.news_update.EventAndExamArray);
+        setData6(jsonData.data.homedata.news_update.updateArray);
+        setData7(jsonData.data.homedata.galleryData);
       } catch (e) {
         console.log(e);
       } finally {

@@ -103,7 +103,11 @@ const ImagesCard = ({ resources, searchInput }) => {
                             )
                           }>
                           Download
-                          <img src={img} className="size-5" alt="Download" />
+                          <img
+                            src={img}
+                            className="size-4 ml-2"
+                            alt="Download"
+                          />
                         </button>
                       </div>
                     </div>

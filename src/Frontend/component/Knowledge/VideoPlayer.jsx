@@ -2,42 +2,22 @@ import React from "react";
 import ReactPlayer from "react-player";
 const VideoPlayer = ({ resource, handleCloseModal }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        // alignItems: "center",
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        backgroundColor: "white",
-        padding: "20px",
-        zIndex: 1000,
-      }}>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 max-w-screen-md w-full md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg shadow-lg z-50">
       <button
-        onClick={handleCloseModal}
-        style={{
-          position: "absolute",
-          top: "10px",
-          right: "10px",
-          background: "none",
-          border: "none",
-          fontSize: "16px",
-          cursor: "pointer",
-        }}>
+        className="absolute top-2 right-2 bg-transparent border-none text-lg font-bold cursor-pointer"
+        onClick={handleCloseModal}>
         X
       </button>
-      <h2 className="text-black font-bold text-3xl ">{resource.title}</h2>
-      {/* <p>Uploaded by: {resource.uploaded_by}</p> */}
-      <ReactPlayer
-        url={resource.resource_url}
-        controls
-        width="800px"
-        height="480px"
-        style={{ marginBottom: "20px" }}
-      />
-      <p className="text-black ">{resource.description}</p>
+      <h2 className="text-3xl font-bold mb-4">{resource.title}</h2>
+      <div className="aspect-w-16 aspect-h-9 mb-4">
+        <ReactPlayer
+          url={resource.resource_url}
+          controls
+          width="100%"
+          height="100%"
+        />
+      </div>
+      <p className="text-base">{resource.description}</p>
     </div>
   );
 };
