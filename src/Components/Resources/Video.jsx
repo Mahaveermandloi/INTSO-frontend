@@ -163,7 +163,8 @@ const Video = () => {
 
           setResourceURL("");
 
-          window.location.reload();
+          console.log(response.data.data);
+          setData(filteredData);
         }
       } catch (error) {
         console.error("Error uploading video:", error);
@@ -196,7 +197,41 @@ const Video = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
+    let isConfirmed = false;
+
+    const confirmDeletion = () => {
+      isConfirmed = true;
+      toast.dismiss(confirmationToastId);
+    };
+
+    const confirmationToastId = toast.info(
+      "Are you sure you want to delete the image?",
+      {
+        autoClose: 5000,
+        closeOnClick: false,
+        draggable: false,
+        onClose: () => {
+          toast.dismiss(confirmationToastId);
+        },
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
+      }
+    );
+
+    // Wait until the user confirms deletion
+    while (!isConfirmed) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    if (isConfirmed) {
+      setLoading(true);
+
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
@@ -207,8 +242,9 @@ const Video = () => {
             },
           }
         );
+
         if (response.status === 200) {
-          toast.success("Image successfully deleted", {
+          toast.success("Video successfully deleted", {
             position: "top-center",
             autoClose: 1000,
             hideProgressBar: false,
@@ -222,7 +258,7 @@ const Video = () => {
           setData((prevdata) => prevdata.filter((item) => item.id !== id));
         }
       } catch (error) {
-        if (response.status === 403) {
+        if (error.response && error.response.status === 403) {
           toast.error("No resource with this id", {
             position: "top-center",
             autoClose: 3000,
@@ -233,9 +269,9 @@ const Video = () => {
             progress: undefined,
             theme: "light",
           });
-
+        } else {
           console.error("Error deleting image:", error);
-          toast.error("Error deleting image", {
+          toast.error("Error deleting image. Please try again.", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -248,7 +284,7 @@ const Video = () => {
           });
         }
       } finally {
-        setLoading(false); // Set loading state to false when deletion completes (whether success or error)
+        setLoading(false);
       }
     }
   };

@@ -28,7 +28,7 @@ const SchoolRequests = () => {
         if (response.status === 200) {
           const filteredData = response.data.data.getData.filter(
             (school) =>
-              school.status === "pending" || school.status === "rejected"
+              school.status === "pending" 
           );
           // console.log(filteredData);
           setSchoolData(filteredData);

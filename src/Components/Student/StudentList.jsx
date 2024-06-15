@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaChevronRight, FaInfoCircle } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa";
 import { URLPath } from "../../URLPath";
- 
+
 const StudentList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState(null);
@@ -54,7 +54,7 @@ const StudentList = () => {
         }
       );
 
-      let filteredData = studentResponse.data;
+      let filteredData = studentResponse.data.data;
 
       if (selectedClass && selectedSchoolName) {
         filteredData = filteredData.filter(

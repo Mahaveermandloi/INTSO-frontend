@@ -3,7 +3,7 @@ import axios from "axios";
 import { URLPath } from "../URLPath";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import img from "../assets/9214833.jpg";
 const ContactUs = () => {
   const [data, setData] = useState([]);
 
@@ -26,13 +26,14 @@ const ContactUs = () => {
             const data = response.data.data.contactUs;
             setData(data);
           } else {
-            toast.error("Failed to fetch contact details");
+            // toast.error("Failed to fetch contact details");
+
           }
         } else {
           toast.error("No token found");
         }
       } catch (error) {
-        toast.error("Error fetching contact details");
+        // toast.error("Error fetching contact details");
       }
     };
 
@@ -55,34 +56,45 @@ const ContactUs = () => {
         transition={Bounce}
       />
       <div>
-        {data.length > 0 ? (
-          <table className="min-w-full bg-white">
-            <thead className="">
-              <tr className="w-full rounded-2xl bg-gray-900 text-gray-200  uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">Name</th>
-                <th className="py-3 px-6 text-left">Email</th>
-                <th className="py-3 px-6 text-left">Mobile Number</th>
-                <th className="py-3 px-6 text-left">Message</th>
-              </tr>
+        <div className="lg:w-10/12 lg:ml-auto">
+          <div>
+            <h1 className="text-2xl lg:text-4xl font-bold">Contact Us</h1>
+          </div>
 
-            </thead>
-            <tbody className="text-gray-600 text-sm font-light">
-              {data.map(({ id, name, email, message, mobile_number }) => (
-                <tr
-                  className="border-b border-gray-200 hover:bg-gray-100"
-                  key={id}
-                >
-                  <td className="py-3 px-6 text-left whitespace-nowrap">{name}</td>
-                  <td className="py-3 px-6 text-left">{email}</td>
-                  <td className="py-3 px-6 text-left">{mobile_number}</td>
-                  <td className="py-3 px-6 text-left">{message}</td>
+          {data.length > 0 ? (
+            <table className="min-w-full bg-white">
+              <thead className="">
+                <tr className="w-full rounded-2xl bg-gray-900 text-gray-200  uppercase text-sm leading-normal">
+                  <th className="py-3 px-6 text-left">Name</th>
+                  <th className="py-3 px-6 text-left">Email</th>
+                  <th className="py-3 px-6 text-left">Mobile Number</th>
+                  <th className="py-3 px-6 text-left">Message</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No contact details available.</p>
-        )}
+              </thead>
+              <tbody className="text-gray-600 text-sm font-light">
+                {data.map(({ id, name, email, message, mobile_number }) => (
+                  <tr
+                    className="border-b border-gray-200 hover:bg-gray-100"
+                    key={id}
+                  >
+                    <td className="py-3 px-6 text-left whitespace-nowrap">
+                      {name}
+                    </td>
+                    <td className="py-3 px-6 text-left">{email}</td>
+                    <td className="py-3 px-6 text-left">{mobile_number}</td>
+                    <td className="py-3 px-6 text-left">{message}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <>
+              <div>
+                <img src={img} className="w-1/2" alt="" />
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

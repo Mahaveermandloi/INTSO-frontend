@@ -156,10 +156,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      <h1 className="text-2xl lg:text-4xl my-5 font-bold">Contact Us</h1>
-
-      <ContactUs />
     </div>
   );
 };

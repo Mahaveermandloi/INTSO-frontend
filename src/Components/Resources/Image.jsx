@@ -39,7 +39,6 @@ const Image = () => {
           }
         );
 
-
         console.log("this is admin data", response.data.data);
 
         const imageResources = response.data.data.resourcesData.filter(
@@ -131,7 +130,7 @@ const Image = () => {
           toast.success("Image uploaded successfully!");
 
           // Assuming setData is the state updater function for your resources list
-          setData((prevData) => [...prevData, response.data]);
+          setData((prevData) => [...prevData, response.data.data]);
 
           // Clear the form fields
           setSelectedFile(null);

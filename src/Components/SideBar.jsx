@@ -181,12 +181,6 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               </Link>
             </ul>
 
-            <Link onClick={handleItemClick} to={`${baseURL}/newsletter`}>
-              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
-                <RiArticleLine className="mr-2" />
-                News Letter
-              </li>
-            </Link>
             <Link onClick={handleItemClick} to={`${baseURL}/blog`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <RiArticleLine className="mr-2" />
@@ -204,6 +198,20 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaQuoteLeft className="mr-2" />
                 Testimonials
+              </li>
+            </Link>
+
+            <Link onClick={handleItemClick} to={`${baseURL}/newsletter`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <RiArticleLine className="mr-2" />
+                News Letter
+              </li>
+            </Link>
+
+            <Link onClick={handleItemClick} to={`${baseURL}/contactus`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <RiArticleLine className="mr-2" />
+                Contact Us
               </li>
             </Link>
 
@@ -240,4 +248,3 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
 };
 
 export default SideBar;
-

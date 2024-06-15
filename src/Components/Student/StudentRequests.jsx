@@ -30,7 +30,7 @@ const StudentRequests = () => {
         );
 
         if (response.status === 200) {
-          setStudentData(response.data);
+          setStudentData(response.data.data);
         }
       } catch (error) {
         toast.error("Error fetching data:");
@@ -117,6 +117,49 @@ const StudentRequests = () => {
     setCurrentPage(pageNumber);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.delete(
+        `${URLPath}/api/v1/student/deleteStudentRequest/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Student request successfully deleted", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setIsModalOpen(false);
+        setStudentData((prevData) => prevData.filter((item) => item.id !== id));
+      } else {
+        throw new Error("Failed to delete student request");
+      }
+    } catch (error) {
+      console.error("Error deleting student request:", error.response || error);
+      toast.error("Error deleting student request. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   const totalPages = Math.ceil(studentData.length / entriesPerPage);
 
   const currentEntries = studentData.slice(
@@ -177,33 +220,45 @@ const StudentRequests = () => {
               </tr>
             </thead>
             <tbody className="bg-gray-100">
-              {currentEntries.map(
-                ({
-                  id,
-                  school_name,
-                  email,
-                  city,
-                  student_class,
-                  mobile_number,
-                  name,
-                }) => (
-                  <tr
-                    key={id}
-                    className="border-b  border-gray-200 dark:border-gray-700 text-base"
-                  >
-                    <td className="px-6 py-2 text-base">{school_name}</td>
-                    <td className="px-4 py-2 text-base">{name}</td>
-                    <td className="px-4 py-2 text-base">{mobile_number}</td>
-                    <td className="px-4 py-2 text-base">{student_class}</td>
-                    <td className="px-4 py-2 text-base">{email}</td>
-                    <td className="px-4 py-2 text-base">{city}</td>
-                    <td className="px-4 py-2 text-base text-center">
-                      <button onClick={() => toggleModal(id)}>
-                        <FaInfoCircle size={25} className="text-[#ed1450]" />
-                      </button>
-                    </td>
-                  </tr>
-                )
+              {currentEntries.length === 0 ? (
+                <>
+                  <div className="m-2 text-2xl">No Data Found</div>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {currentEntries.map(
+                    ({
+                      id,
+                      school_name,
+                      email,
+                      city,
+                      student_class,
+                      mobile_number,
+                      name,
+                    }) => (
+                      <tr
+                        key={id}
+                        className="border-b  border-gray-200 dark:border-gray-700 text-base"
+                      >
+                        <td className="px-6 py-2 text-base">{school_name}</td>
+                        <td className="px-4 py-2 text-base">{name}</td>
+                        <td className="px-4 py-2 text-base">{mobile_number}</td>
+                        <td className="px-4 py-2 text-base">{student_class}</td>
+                        <td className="px-4 py-2 text-base">{email}</td>
+                        <td className="px-4 py-2 text-base">{city}</td>
+                        <td className="px-4 py-2 text-base text-center">
+                          <button onClick={() => toggleModal(id)}>
+                            <FaInfoCircle
+                              size={25}
+                              className="text-[#ed1450]"
+                            />
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  )}
+                </>
               )}
             </tbody>
           </table>
@@ -407,6 +462,14 @@ const StudentRequests = () => {
               >
                 Approve
               </button>
+
+              <button
+                className="bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
+                onClick={() => handleDelete(selectedSchool.id)}
+              >
+                Delete
+              </button>
+
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600"

@@ -24,7 +24,7 @@ const UploadStudent = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
 
-      // download a excel file including 
+      // download a excel file including
       const schoolResponse = await axios.get(
         `${URLPath}/api/v1/school/get-approved-schools`,
         {
@@ -34,9 +34,9 @@ const UploadStudent = () => {
         }
       );
 
-      console.log(schoolResponse.data);
+      console.log(schoolResponse.data.data);
       if (schoolResponse.status === 200) {
-        setSchoolNameList(schoolResponse.data);
+        setSchoolNameList(schoolResponse.data.data);
       }
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Ensure you have this line to import styles
-import { URLPath  , baseURL} from "../URLPath";
+import { URLPath, baseURL } from "../URLPath";
 import { MdModeEdit } from "react-icons/md";
 import Loader from "./Loader"; // Import Loader component
 
@@ -45,9 +45,9 @@ const NewsandUpdates = () => {
           `${URLPath}/api/v1/newsandupdates/get-news-and-updates`
         );
 
-        const news = response.data.newsArray;
-        const event = response.data.EventAndExamArray;
-        const update = response.data.updateArray;
+        const news = response.data.data.newsArray;
+        const event = response.data.data.EventAndExamArray;
+        const update = response.data.data.updateArray;
 
         setNews(news);
         setUpdates(update);

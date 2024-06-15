@@ -3,6 +3,7 @@ import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import Loader from "./Loader"; // Importing the Loader component
+import nodata from "../assets/9214833.jpg";
 
 import { URLPath } from "../URLPath";
 
@@ -25,8 +26,8 @@ const Banner = () => {
           `${URLPath}/api/v1/banner/getBannerData`
         );
 
-        setGallery(response.data);
-        // console.log(response.data);
+        setGallery(response.data.data);
+        console.log(response.data.data);
       } else {
         toast.error("No access token found");
       }
@@ -74,17 +75,25 @@ const Banner = () => {
             },
           }
         );
-        if (response.status === 200) {
-          toast.success("Image uploaded successfully!");
+        if (response.status === 201) {
+          // Check for 201 status code
+          toast.success("Banner uploaded successfully!");
 
           setSelectedFile(null);
           setTitle("");
           setDescription("");
           setLink("");
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          // Update the gallery state without reloading the page
+          const newBanner = {
+            id: response.data.data.id,
+            image: response.data.data.image,
+            title: response.data.data.title,
+            description: response.data.data.description,
+            link: response.data.data.link,
+          };
+
+          setGallery((prevGallery) => [...prevGallery, newBanner]);
         }
       } catch (error) {
         toast.error("Error uploading image. Please try again.");
@@ -113,7 +122,14 @@ const Banner = () => {
         onClose: () => {
           toast.dismiss(confirmationToastId);
         },
-        closeButton: <button onClick={confirmDeletion} className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3">Confirm</button>,
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
       }
     );
 
@@ -136,7 +152,7 @@ const Banner = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Image successfully deleted", {
+          toast.success("Banner successfully deleted", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -197,23 +213,31 @@ const Banner = () => {
 
           <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {gallery &&
-                gallery.map(({ id, image, link }) => (
-                  <div key={id} className="relative">
-                    <img
-                      className="h-auto max-w-full rounded-lg"
-                      src={`${URLPath}${image}`}
-                      alt={`Gallery image ${id}`}
-                    />
+           
+              {gallery.length === 0 ? (
+                <>
+                  <img src={nodata} alt="" />
+                </>
+              ) : (
+                <>
+                  {gallery.map(({ id, image, link }) => (
+                    <div key={id} className="relative">
+                      <img
+                        className="h-auto max-w-full rounded-lg"
+                        src={`${URLPath}${image}`}
+                        alt={`Gallery image ${id}`}
+                      />
 
-                    <button
-                      onClick={() => handleDelete(id)}
-                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                    >
-                      <RxCross1 size={30} className="p-1" />
-                    </button>
-                  </div>
-                ))}
+                      <button
+                        onClick={() => handleDelete(id)}
+                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
+                      >
+                        <RxCross1 size={30} className="p-1" />
+                      </button>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
 
@@ -371,22 +395,29 @@ const Banner = () => {
 
           <div className=" lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {gallery &&
-                gallery.map(({ id, image }) => (
-                  <div className="relative" key={id}>
-                    <img
-                      className="h-auto max-w-full rounded-lg"
-                      src={`${URLPath}${image}`}
-                      alt={`Gallery image`}
-                    />
-                    <button
-                      onClick={() => handleDelete(id)}
-                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                    >
-                      <RxCross1 size={20} className="p-1" />
-                    </button>
-                  </div>
-                ))}
+              {gallery.length === 0 ? (
+                <>
+                  <img src={nodata} alt="" />
+                </>
+              ) : (
+                <>
+                  {gallery.map(({ id, image }) => (
+                    <div className="relative" key={id}>
+                      <img
+                        className="h-auto max-w-full rounded-lg"
+                        src={`${URLPath}${image}`}
+                        alt={`Gallery image`}
+                      />
+                      <button
+                        onClick={() => handleDelete(id)}
+                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
+                      >
+                        <RxCross1 size={20} className="p-1" />
+                      </button>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>

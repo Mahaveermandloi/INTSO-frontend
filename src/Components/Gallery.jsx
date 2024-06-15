@@ -4,6 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import { URLPath } from "../URLPath";
 import Loader from "./Loader";
+import img from "../assets/9214833.jpg";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
@@ -30,7 +31,7 @@ const Gallery = () => {
             }
           );
 
-          setGallery(response.data);
+          setGallery(response.data.data);
         } else {
           toast.error("No token found");
         }
@@ -66,19 +67,18 @@ const Gallery = () => {
   const handleCaptionChange = (event) => {
     setCaption(event.target.value);
   };
-
   const handleUpload = async () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append("gallery_img", selectedFile);
       formData.append("caption", caption);
-
+  
       setLoading(true);
       setLoadingMessage("Uploading image...");
-
+  
       try {
         const accessToken = localStorage.getItem("accessToken");
-
+  
         const response = await axios.post(
           `${URLPath}/api/v1/gallery/postGallery`,
           formData,
@@ -89,8 +89,8 @@ const Gallery = () => {
             },
           }
         );
-
-        if (response.status === 200) {
+  
+        if (response.status === 201) { // Check for 201 status code
           toast.success("Image uploaded successfully!", {
             position: "top-center",
             autoClose: 3000,
@@ -101,12 +101,14 @@ const Gallery = () => {
             progress: undefined,
             theme: "light",
           });
-
+  
           // Update the gallery state without reloading the page
           const newImage = {
-            id: response.data.id, // Ensure this matches the ID in the response
-            gallery_img: response.data.gallery_img, // Ensure this matches the image path in the response
+            id: response.data.data.id, // Ensure this matches the ID in the response
+            gallery_img: response.data.data.gallery_img, // Ensure this matches the image path in the response
+            caption: response.data.data.caption // Ensure this includes the caption if necessary
           };
+  
           setGallery((prevGallery) => [...prevGallery, newImage]);
           setSelectedFile(null); // Reset selected file
           setCaption(""); // Reset caption
@@ -138,6 +140,7 @@ const Gallery = () => {
       });
     }
   };
+  
 
   const handleDelete = async (id) => {
     let isConfirmed = false;
@@ -147,8 +150,7 @@ const Gallery = () => {
       toast.dismiss(confirmationToastId);
     };
 
-    const confirmationToastId = 
-    toast.info(
+    const confirmationToastId = toast.info(
       "Are you sure you want to delete the image?",
       {
         autoClose: 5000, // Disable auto close for confirmation toast
@@ -157,7 +159,14 @@ const Gallery = () => {
         onClose: () => {
           toast.dismiss(confirmationToastId);
         },
-        closeButton: <button onClick={confirmDeletion} className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3">Confirm</button>,
+        closeButton: (
+          <button
+            onClick={confirmDeletion}
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+          >
+            Confirm
+          </button>
+        ),
       }
     );
 
@@ -195,7 +204,7 @@ const Gallery = () => {
           });
           setGallery((prevGallery) =>
             prevGallery.filter((item) => item.id !== id)
-          ); 
+          );
         }
       } catch (error) {
         toast.error("Error deleting image. Please try again.", {
@@ -244,22 +253,29 @@ const Gallery = () => {
 
           <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {gallery &&
-                gallery.map(({ id, gallery_img }) => (
-                  <div key={id} className="relative">
-                    <img
-                      className="h-auto max-w-full rounded-lg"
-                      src={`${URLPath}${gallery_img}`}
-                      alt={`Gallery image`}
-                    />
-                    <button
-                      onClick={() => handleDelete(id)}
-                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                    >
-                      <RxCross1 size={30} className="p-1" />
-                    </button>
-                  </div>
-                ))}
+              {gallery.length === 0 ? (
+                <>
+                  <img src={img} alt="" />
+                </>
+              ) : (
+                <>
+                  {gallery.map(({ id, gallery_img }) => (
+                    <div key={id} className="relative">
+                      <img
+                        className="h-auto max-w-full rounded-lg"
+                        src={`${URLPath}${gallery_img}`}
+                        alt={`Gallery image`}
+                      />
+                      <button
+                        onClick={() => handleDelete(id)}
+                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
+                      >
+                        <RxCross1 size={30} className="p-1" />
+                      </button>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
 
@@ -381,22 +397,29 @@ const Gallery = () => {
 
           <div className=" lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {gallery &&
-                gallery.map(({ gallery_img, id }) => (
-                  <div key={id} className="relative">
-                    <img
-                      className="h-auto max-w-full rounded-lg"
-                      src={`${URLPath}${gallery_img}`}
-                      alt={`Gallery image`}
-                    />
-                    <button
-                      onClick={() => handleDelete(id)}
-                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                    >
-                      <RxCross1 size={20} className="p-1" />
-                    </button>
-                  </div>
-                ))}
+              {gallery.length === 0 ? (
+                <>
+                  <img src={img} alt="" />
+                </>
+              ) : (
+                <>
+                  {gallery.map(({ gallery_img, id }) => (
+                    <div key={id} className="relative">
+                      <img
+                        className="h-auto max-w-full rounded-lg"
+                        src={`${URLPath}${gallery_img}`}
+                        alt={`Gallery image`}
+                      />
+                      <button
+                        onClick={() => handleDelete(id)}
+                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
+                      >
+                        <RxCross1 size={20} className="p-1" />
+                      </button>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>
