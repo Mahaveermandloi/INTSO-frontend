@@ -39,11 +39,10 @@ const Image = () => {
           }
         );
 
-<<<<<<< HEAD
         // console.log(response.data.data);
-=======
+
         console.log("this is admin data", response.data.data);
->>>>>>> 4c8f6669ba5206811ff8a837b512a8f8ec6e253b
+
         const imageResources = response.data.data.resourcesData.filter(
           (resource) => resource.resource_type === "image"
         );
@@ -173,8 +172,7 @@ const Image = () => {
         closeButton: (
           <button
             onClick={confirmDeletion}
-            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
-          >
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3">
             Confirm
           </button>
         ),
@@ -245,8 +243,7 @@ const Image = () => {
               <select
                 id="countries"
                 className="bg-gray-50 border text-center border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500  block w-full p-2.5 dark:bg-gray-200 "
-                onChange={handleClassChange}
-              >
+                onChange={handleClassChange}>
                 <option selected>Choose a class</option>
                 <option value="1" className="text-center ">
                   1
@@ -284,24 +281,21 @@ const Image = () => {
               onClick={handleAll}
               className={`p-2 rounded-md w-1/2 font-bold ${
                 selectedOption === "all" ? "bg-green-500" : "bg-slate-200"
-              }`}
-            >
+              }`}>
               All
             </button>
             <button
               onClick={handleFreeButtonClick}
               className={`p-2 rounded-md w-1/2 font-bold ${
                 selectedOption === "free" ? "bg-green-500" : "bg-slate-200"
-              }`}
-            >
+              }`}>
               Free
             </button>
             <button
               onClick={handlePaidButtonClick}
               className={`p-2 rounded-md w-1/2 font-bold ${
                 selectedOption === "paid" ? "bg-green-500" : "bg-slate-200"
-              }`}
-            >
+              }`}>
               Paid
             </button>
           </div>
@@ -325,8 +319,7 @@ const Image = () => {
 
                       <button
                         onClick={() => handleDelete(id)}
-                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                      >
+                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full">
                         <RxCross1 size={30} className="p-1" />
                       </button>
                     </div>
@@ -340,8 +333,7 @@ const Image = () => {
             <div className="flex items-center justify-center w-full">
               <label
                 htmlFor="dropzone-file"
-                className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100 "
-              >
+                className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100 ">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   {selectedFile ? (
                     <div className="flex justify-center mb-4">
@@ -385,8 +377,7 @@ const Image = () => {
             <select
               value={selectedOption}
               onChange={(e) => setSelectedOption(e.target.value)}
-              className="mt-2 p-2 border rounded-lg w-full"
-            >
+              className="mt-2 p-2 border rounded-lg w-full">
               <option value="paid">PAID</option>
               <option value="free">FREE</option>
             </select>
@@ -394,8 +385,7 @@ const Image = () => {
             <select
               value={resource_class}
               onChange={(e) => setClass(e.target.value)}
-              className="mt-2 p-2 border rounded-lg w-full"
-            >
+              className="mt-2 p-2 border rounded-lg w-full">
               <option value="">Select the class</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -428,8 +418,7 @@ const Image = () => {
 
             <button
               className="mt-4 p-2 bg-[#ed1456] text-white rounded-md w-full font-bold"
-              onClick={handleUpload}
-            >
+              onClick={handleUpload}>
               Upload
             </button>
           </div>
@@ -441,15 +430,13 @@ const Image = () => {
           <div className="flex">
             <button
               className="p-2 bg-[#ed1450] rounded-md text-white w-full font-bold"
-              onClick={() => setFilter(!filter)}
-            >
+              onClick={() => setFilter(!filter)}>
               {filter ? "Hide Filter" : "Open filter"}
             </button>
 
             <button
               className="p-2 bg-[#ed1450] rounded-md text-white w-full font-bold"
-              onClick={toggleMobileForm}
-            >
+              onClick={toggleMobileForm}>
               {isMobileFormVisible ? "Hide Form" : "Upload Image"}
             </button>
           </div>
@@ -460,8 +447,7 @@ const Image = () => {
                 <select
                   id="countries"
                   className="bg-gray-50 border text-center border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500  block w-full p-2.5 dark:bg-gray-200 "
-                  onChange={handleClassChange}
-                >
+                  onChange={handleClassChange}>
                   <option selected>Choose a class</option>
                   <option value="1" className="text-center ">
                     1
@@ -499,24 +485,21 @@ const Image = () => {
                 onClick={handleAll}
                 className={`p-2 rounded-md w-1/2 font-bold ${
                   selectedOption === "all" ? "bg-green-500" : "bg-slate-200"
-                }`}
-              >
+                }`}>
                 All
               </button>
               <button
                 onClick={handleFreeButtonClick}
                 className={`p-2 rounded-md w-1/2 font-bold ${
                   selectedOption === "free" ? "bg-green-500" : "bg-slate-200"
-                }`}
-              >
+                }`}>
                 Free
               </button>
               <button
                 onClick={handlePaidButtonClick}
                 className={`p-2 rounded-md w-1/2 font-bold ${
                   selectedOption === "paid" ? "bg-green-500" : "bg-slate-200"
-                }`}
-              >
+                }`}>
                 Paid
               </button>
             </div>
@@ -539,8 +522,7 @@ const Image = () => {
 
                         <button
                           onClick={() => handleDelete(id)}
-                          className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                        >
+                          className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full">
                           <RxCross1 size={30} className="p-1" />
                         </button>
                       </div>
@@ -553,8 +535,7 @@ const Image = () => {
                 <div className="flex items-center justify-center w-full">
                   <label
                     htmlFor="dropzone-file"
-                    className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100 "
-                  >
+                    className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100 ">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {selectedFile ? (
                         <div className="flex justify-center mb-4">
@@ -600,8 +581,7 @@ const Image = () => {
                 <select
                   value={selectedOption}
                   onChange={(e) => setSelectedOption(e.target.value)}
-                  className="mt-2 p-2 border rounded-lg w-full"
-                >
+                  className="mt-2 p-2 border rounded-lg w-full">
                   <option value="paid">PAID</option>
                   <option value="free">FREE</option>
                 </select>
@@ -609,8 +589,7 @@ const Image = () => {
                 <select
                   value={resource_class}
                   onChange={(e) => setClass(e.target.value)}
-                  className="mt-2 p-2 border rounded-lg w-full"
-                >
+                  className="mt-2 p-2 border rounded-lg w-full">
                   <option value="">Select the class</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -644,8 +623,7 @@ const Image = () => {
                 {/* Submit button */}
                 <button
                   className="mt-4 p-2 bg-[#ed1456] text-white rounded-md w-full font-bold"
-                  onClick={handleUpload}
-                >
+                  onClick={handleUpload}>
                   Upload
                 </button>
               </div>
@@ -666,8 +644,7 @@ const Image = () => {
                     />
                     <button
                       onClick={() => handleDelete(id)}
-                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                    >
+                      className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full">
                       <RxCross1 size={30} className="p-1" />
                     </button>
                   </div>

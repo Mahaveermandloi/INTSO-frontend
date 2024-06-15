@@ -3,10 +3,11 @@ import img from "../../../assets/Frontend_images/OTP.png";
 import logo from "../../../assets/Frontend_images/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { IP_ADDRESS, PORT } from "../utils/constants";
 
 const OTPPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10); // Initial countdown time for 2 minutes
+  const [timeLeft, setTimeLeft] = useState(120); // Initial countdown time for 2 minutes
   const [resendEnabled, setResendEnabled] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [error, setError] = useState("");
@@ -59,7 +60,7 @@ const OTPPage = () => {
       if (response.ok) {
         const data = await response.json();
         setError("OTP resend successfully");
-        setTimeLeft(10);
+        setTimeLeft(120);
         setResendEnabled(false);
       } else {
         const errorData = await response.json();

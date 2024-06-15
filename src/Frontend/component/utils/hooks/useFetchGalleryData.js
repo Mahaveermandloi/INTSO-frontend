@@ -11,8 +11,8 @@ const useFetchGalleryData = () => {
       try {
         const data = await fetch(url);
         const jsonData = await data.json();
-    
-        setData(jsonData);
+
+        setData(jsonData.data);
       } catch (e) {
         console.log(e);
       } finally {

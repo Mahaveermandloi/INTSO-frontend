@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ImageModal from "./ImageModal";
 import useFetchData from "../utils/hooks/useFetchData";
 import { IP_ADDRESS, PORT } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 export const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,11 +72,13 @@ export const Gallery = () => {
             );
           })}
         </div>
-        <div className="flex justify-center p-5">
-          <button className="bg-[#ED1450] text-white p-3 rounded-full w-40">
-            View More
-          </button>
-        </div>
+        <Link to="/gallery">
+          <div className="flex justify-center p-5">
+            <button className="bg-[#ED1450] text-white p-3 rounded-full w-40">
+              View More
+            </button>
+          </div>
+        </Link>
       </div>
       {isModalOpen && (
         <ImageModal

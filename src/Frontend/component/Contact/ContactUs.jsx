@@ -13,7 +13,7 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    mobile_Number: "",
+    mobile_number: "",
     message: "",
   });
   const [statusMessage, setStatusMessage] = useState("");
@@ -41,7 +41,7 @@ const ContactUs = () => {
         setFormData({
           name: "",
           email: "",
-          mobile_Number: "",
+          mobile_number: "",
           message: "",
         });
       } else {
@@ -107,8 +107,8 @@ const ContactUs = () => {
                   </label>
                   <input
                     type="tel"
-                    name="mobile_Number"
-                    value={formData.mobile_Number}
+                    name="mobile_number"
+                    value={formData.mobile_number}
                     onChange={handleChange}
                     placeholder="Enter Your Mobile Number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"

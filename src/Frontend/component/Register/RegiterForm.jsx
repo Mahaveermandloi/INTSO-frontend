@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
-import useFormValidation from "../utils/hooks/useFormValidation"; // Adjust the import path as needed
+import useFormValidation from "../utils/hooks/useFormValidation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import img from "../../../../src/assets/Frontend_images/Regitration_Graphics.png";
 
@@ -52,6 +54,7 @@ const RegisterForm = () => {
           const data = await res.json();
           // console.log("Response data:", data);
           setStatusMessage("Your message has been sent successfully!");
+          toast.success("Your message has been sent successfully!");
           setFormData({
             school_name: "",
             email: "",
@@ -71,13 +74,16 @@ const RegisterForm = () => {
           const errorData = await res.json();
           console.error("Failed to send message:", errorData);
           setStatusMessage("Failed to send your message. Please try again.");
+          toast.error("Failed to send your message. Please try again.");
         }
       } catch (err) {
         console.error("Sending message failed:", err);
         setStatusMessage("An error occurred. Please try again later.");
+        toast.error("An error occurred. Please try again later.");
       }
     } else {
       setStatusMessage("Please correct the errors and try again.");
+      toast.error("Please correct the errors and try again.");
     }
   };
 
@@ -118,6 +124,7 @@ const RegisterForm = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="shadow-inner shadow-gray-300 mb-20" data-aos="fade-up">
         <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
           <div className="sm:mx-20 mx-5 shadow-xl">

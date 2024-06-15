@@ -7,6 +7,7 @@ import img from "../../../assets/Frontend_images/LoginPage2.png";
 import logo from "../../../assets/Frontend_images/logo.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { IP_ADDRESS, PORT } from "../utils/constants";
 
 const ChangePassword = ({ notShow }) => {
   const [showPassword1, setShowPassword1] = useState(false);

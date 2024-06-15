@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./register.module.css";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import img from "../../../../src/assets/Frontend_images/Regitration_Graphics.png";
 import useFormValidation from "../utils/hooks/useFormValidation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./register.module.css";
 
 const StudentRegisterPage = () => {
   const location = useLocation();
@@ -22,9 +24,9 @@ const StudentRegisterPage = () => {
   });
 
   const { errors, validate, setIsSubmitting } = useFormValidation(formData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({ ...formData, [name]: value });
   };
 
@@ -32,6 +34,7 @@ const StudentRegisterPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     validate(formData);
+
     if (Object.keys(errors).length === 0) {
       try {
         const res = await fetch(
@@ -44,9 +47,11 @@ const StudentRegisterPage = () => {
             },
           }
         );
+
+        const responseData = await res.json();
+
         if (res.ok) {
-          const data = await res.json();
-          setStatusMessage("Your message has been sent successfully!");
+          toast.success("Your message has been sent successfully!");
           setFormData({
             name: "",
             email: "",
@@ -60,25 +65,28 @@ const StudentRegisterPage = () => {
             student_class: "",
           });
         } else {
-          const errorData = await res.json();
-          console.error("Failed to send message:", errorData);
+          console.error("Failed to send message:", responseData);
           setStatusMessage("Failed to send your message. Please try again.");
+          toast.error("Failed to send your message. Please try again.");
         }
       } catch (err) {
         console.error("Sending message failed:", err);
         setStatusMessage("An error occurred. Please try again later.");
+        toast.error("An error occurred. Please try again later.");
       }
     } else {
       setStatusMessage("Please correct the errors and try again.");
+      toast.error("Please correct the errors and try again.");
     }
+
+    setIsSubmitting(false);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const classes = ["1", "2", "3", "4 ", "5", " 6", " 7", "8", " 9", "10"];
-
+  const classes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
   const states = [
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -112,21 +120,22 @@ const StudentRegisterPage = () => {
 
   return (
     <>
-      <div className=" shadow-inner shadow-gray-300 mb-10" data-aos="fade-up">
+      <ToastContainer />
+      <div className="shadow-inner shadow-gray-300 mb-10" data-aos="fade-up">
         <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
-          <div className=" sm:mx-20 mx-5 shadow-xl">
-            <div className=" flex flex-col py-7 justify-center items-center ">
-              <h1 className="text-[#ED1450] font-bold text-2xl ">
+          <div className="sm:mx-20 mx-5 shadow-xl">
+            <div className="flex flex-col py-7 justify-center items-center">
+              <h1 className="text-[#ED1450] font-bold text-2xl">
                 Student Registration Form
               </h1>
               <p className="w-20 border-b-2 border-[#ED1450]"></p>
-              <img src={img} className="mt-10" />
+              <img src={img} className="mt-10" alt="Registration Graphics" />
             </div>
             <form
               onSubmit={handleSubmit}
               className="flex flex-col md:px-10 p-6">
-              <div className="grid gap-x-4 gap-y-2  ">
-                <div className="flex flex-col ">
+              <div className="grid gap-x-4 gap-y-2">
+                <div className="flex flex-col">
                   <label className="text-left p-2">
                     Student Name<span className="text-red-500 text-lg">*</span>
                   </label>
@@ -138,11 +147,6 @@ const StudentRegisterPage = () => {
                     placeholder="Enter student name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
-                  {/* {errors.student_name && (
-                    <p className="text-red-500 text-sm">
-                      {errors.student_name}
-                    </p>
-                  )} */}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -153,14 +157,14 @@ const StudentRegisterPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Enter Your Email.ID"
+                    placeholder="Enter Your Email ID"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm">{errors.email}</p>
                   )}
                 </div>
-                <div className="flex flex-col ">
+                <div className="flex flex-col">
                   <label className="text-left p-2">
                     School Name<span className="text-red-500 text-lg">*</span>
                   </label>
@@ -169,14 +173,14 @@ const StudentRegisterPage = () => {
                     name="school_name"
                     value={formData.school_name}
                     onChange={handleChange}
-                    placeholder="Enter student name"
+                    placeholder="Enter school name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
                   {errors.school_name && (
                     <p className="text-red-500 text-sm">{errors.school_name}</p>
                   )}
                 </div>
-                <div class="relative flex flex-col">
+                <div className="relative flex flex-col">
                   <label className="text-left p-2">
                     Class<span className="text-red-500 text-lg">*</span>
                   </label>
@@ -189,7 +193,7 @@ const StudentRegisterPage = () => {
                       Select Your class
                     </option>
                     {classes.map((cls) => (
-                      <option key={cls} value={parseInt(cls, 10)}>
+                      <option key={cls} value={cls}>
                         {cls}
                       </option>
                     ))}
@@ -197,15 +201,14 @@ const StudentRegisterPage = () => {
                 </div>
                 <div className="flex flex-col lg:col-span-2">
                   <label className="text-left p-2">
-                    Address
-                    <span className="text-red-500 text-lg">*</span>
+                    Address<span className="text-red-500 text-lg">*</span>
                   </label>
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    placeholder="Enter student Address"
+                    placeholder="Enter student address"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
                   {errors.address && (
@@ -223,14 +226,14 @@ const StudentRegisterPage = () => {
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
-                    placeholder="Enter Your City"
+                    placeholder="Enter your city"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
                   {errors.city && (
                     <p className="text-red-500 text-sm">{errors.city}</p>
                   )}
                 </div>
-                <div class="relative flex flex-col">
+                <div className="relative flex flex-col">
                   <label className="text-left p-2">
                     State<span className="text-red-500 text-lg">*</span>
                   </label>
@@ -261,7 +264,7 @@ const StudentRegisterPage = () => {
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleChange}
-                    placeholder="Enter Your Pin code"
+                    placeholder="Enter your pin code"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
                   {errors.pincode && (
@@ -269,7 +272,7 @@ const StudentRegisterPage = () => {
                   )}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-x-4 ">
+              <div className="grid grid-cols-2 gap-x-4">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
                     Mobile Number<span className="text-red-500 text-lg">*</span>
@@ -279,7 +282,7 @@ const StudentRegisterPage = () => {
                     name="mobile_number"
                     value={formData.mobile_number}
                     onChange={handleChange}
-                    placeholder="Enter Your Mobile Number"
+                    placeholder="Enter your mobile number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
                   {errors.mobile_number && (
@@ -288,7 +291,6 @@ const StudentRegisterPage = () => {
                     </p>
                   )}
                 </div>
-
                 <div className="flex flex-col">
                   <label className="text-left p-2">
                     Syllabus<span className="text-red-500 text-lg">*</span>

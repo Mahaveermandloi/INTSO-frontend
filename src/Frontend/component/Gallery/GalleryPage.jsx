@@ -11,7 +11,7 @@ export const GalleryPage = () => {
   const [currentImage, setCurrentImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayedData, setDisplayedData] = useState([]);
-  const [visibleItemCount, setVisibleItemCount] = useState(9); // Initially display 6 items
+  const [visibleItemCount, setVisibleItemCount] = useState(9); // Initially display 9 items
   const location = useLocation();
 
   useEffect(() => {
@@ -79,6 +79,7 @@ export const GalleryPage = () => {
                   src={`http://${IP_ADDRESS}:${PORT}${item.gallery_img}`}
                   alt=""
                   className="w-full h-48 object-cover cursor-pointer"
+                  style={{ height: "200px", width: "100%", objectFit: "cover" }}
                   data-aos="zoom-in"
                   onClick={() => openModal(index)}
                 />
@@ -86,13 +87,15 @@ export const GalleryPage = () => {
             );
           })}
         </div>
-        <div className="flex justify-center p-5">
-          <button
-            className="bg-[#ED1450] text-white p-3 rounded-full w-40"
-            onClick={handleLoadMore}>
-            Load More
-          </button>
-        </div>
+        {visibleItemCount < data.length && (
+          <div className="flex justify-center p-5 mt-5">
+            <button
+              className="bg-[#ED1450] text-white p-3 rounded-full w-40"
+              onClick={handleLoadMore}>
+              Load More
+            </button>
+          </div>
+        )}
       </div>
       {isModalOpen && (
         <ImageModal
