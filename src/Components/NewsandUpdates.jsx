@@ -89,6 +89,7 @@ const NewsandUpdates = () => {
     event.preventDefault();
 
     setIsUploading(true);
+
     if (selectedFile && title && description) {
       const formData = new FormData();
 
@@ -113,8 +114,8 @@ const NewsandUpdates = () => {
           }
         );
 
-        if (response.status === 200) {
-          toast.success("Image uploaded successfully!", {
+        if (response.status === 201) {
+          toast.success("News and update uploaded successfully!", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -125,10 +126,11 @@ const NewsandUpdates = () => {
             theme: "light",
           });
 
+          setIsModalOpen(!isModalOpen);
           window.location.reload();
         }
       } catch (error) {
-        console.error("Error uploading image:", error);
+        console.error("Error uploading news and update:", error);
         toast.error("Error uploading image. Please try again.", {
           position: "top-center",
           autoClose: 3000,
@@ -156,58 +158,6 @@ const NewsandUpdates = () => {
       });
     }
   };
-
-  // const handleDelete = async (id) => {
-  //   if (window.confirm("Are you sure you want to delete this image?")) {
-  //     setIsDeleting(true);
-  //     try {
-  //       const accessToken = localStorage.getItem("accessToken");
-  //       const response = await axios.delete(
-  //         `${URLPath}/api/v1/newsandupdates/delete-news-and-updates/${id}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         }
-  //       );
-  //       if (response.status === 200) {
-  //         toast.success("Blog successfully deleted", {
-  //           position: "top-center",
-  //           autoClose: 1000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: "light",
-  //         });
-
-  //         setNews((prevNews) => prevNews.filter((item) => item.id !== id));
-  //         setEvents((prevEvents) =>
-  //           prevEvents.filter((item) => item.id !== id)
-  //         );
-  //         setUpdates((prevUpdates) =>
-  //           prevUpdates.filter((item) => item.id !== id)
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.error("Error deleting image:", error);
-  //       toast.error("Error deleting image. Please try again.", {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //         transition: Bounce,
-  //       });
-  //     } finally {
-  //       setIsDeleting(false); // Reset deleting state
-  //     }
-  //   }
-  // };
 
   const handleDelete = async (id) => {
     let isConfirmed = false;
@@ -435,10 +385,10 @@ const NewsandUpdates = () => {
         {isFetching ? (
           <Loader message={"Loading"} /> // Fetching Loader
         ) : (
-          <div className="lg:flex flex-col  lg:flex-row lg:space-x-4 p-4">
+          <div className="lg:flex flex-col   lg:flex-row lg:space-x-4  ">
             {/* News Section */}
 
-            <div className=" lg:w-1/3   p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar ">
+            <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px]  overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar ">
               <h2 className=" text-xl font-bold mb-2 text-red-600">News</h2>
 
               <div className="overflow-y-auto h-[90%] custom-scrollbar">
@@ -475,7 +425,7 @@ const NewsandUpdates = () => {
             </div>
 
             {/* EVENT AND EXAM */}
-            <div className=" lg:w-1/3   p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
+            <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
               <h2 className="text-xl font-bold mb-2 text-red-600">
                 Events and Exam
               </h2>
@@ -514,7 +464,7 @@ const NewsandUpdates = () => {
             </div>
 
             {/* UPDATES */}
-            <div className="  lg:w-1/3   p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
+            <div className="  lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
               <h2 className="text-xl font-bold mb-2 text-red-600">Update</h2>
 
               <div className="overflow-y-auto h-[95%] custom-scrollbar">

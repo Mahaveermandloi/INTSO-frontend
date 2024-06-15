@@ -3,7 +3,7 @@ import axios from "axios";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import Editor from "./Editor";
 import { useNavigate, useParams } from "react-router-dom";
-import {URLPath } from "../URLPath";
+import { URLPath, baseURL } from "../URLPath";
 const UpdateBlog = () => {
   const [blogData, setBlogData] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);

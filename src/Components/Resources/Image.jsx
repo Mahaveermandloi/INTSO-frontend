@@ -25,8 +25,9 @@ const Image = () => {
     fetchdata(selectedOption, which_class);
   };
 
+  
   const fetchdata = async (option = "all", which_class = null) => {
-    setLoading(true); // Set loading state to true
+    setLoading(true);
     try {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
@@ -62,9 +63,9 @@ const Image = () => {
         toast.error("No access token found");
       }
     } catch (error) {
-      toast.error("Error fetching data:");
+      toast.error(`Error fetching data: ${error.message}`);
     } finally {
-      setLoading(false); // Set loading state to false regardless of success or failure
+      setLoading(false);
     }
   };
 
@@ -74,6 +75,7 @@ const Image = () => {
 
   const handleFreeButtonClick = () => {
     setSelectedOption("free");
+    alert("resource ", resource_class);
     fetchdata("free", resource_class);
   };
 
