@@ -146,7 +146,7 @@ const Video = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Image uploaded successfully!", {
+          toast.success("Video uploaded successfully!", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -163,8 +163,7 @@ const Video = () => {
 
           setResourceURL("");
 
-          console.log(response.data.data);
-          setData(filteredData);
+          window.location.reload();
         }
       } catch (error) {
         console.error("Error uploading video:", error);
@@ -395,14 +394,11 @@ const Video = () => {
 "
             >
               {data &&
-                data.map(({ id, thumbnail }) => {
+                data.map(({ id, thumbnail, resource_url }) => {
                   return (
                     <>
                       <div key={id} className="relative">
-                        <a
-                          href="https://www.youtube.com/watch?v=K7Xo3_QclA4"
-                          target="_blank"
-                        >
+                        <a href={resource_url} target="_blank">
                           <img
                             className="h-auto max-w-full rounded-lg hover:opacity-50"
                             src={`${URLPath}${thumbnail}`}

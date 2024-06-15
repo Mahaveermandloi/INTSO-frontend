@@ -32,9 +32,7 @@ const StudentRequests = () => {
         if (response.status === 200) {
           setStudentData(response.data.data);
         }
-      } catch (error) {
-        toast.error("Error fetching data:");
-      }
+      } catch (error) {}
     };
 
     const fetchSchoolName = async () => {
@@ -54,9 +52,7 @@ const StudentRequests = () => {
         if (schoolResponse.status === 200) {
           setSchoolName(schoolResponse.data.data.getData);
         }
-      } catch (error) {
-        toast.error("Error fetching data:");
-      }
+      } catch (error) {}
     };
 
     fetchData();
