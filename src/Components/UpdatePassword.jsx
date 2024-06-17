@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
 import { URLPath, baseURL } from "../URLPath";
 
@@ -17,6 +18,8 @@ const UpdatePassword = () => {
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -46,8 +49,6 @@ const UpdatePassword = () => {
     }
 
     try {
-      const accessToken = localStorage.getItem("accessToken");
-
       const response = await axios.put(
         `${URLPath}/update-password`,
         {
@@ -130,31 +131,41 @@ const UpdatePassword = () => {
 
           <div>
             <div className="flex flex-col space-y-4">
-              <div className="flex flex-row items-center justify-center mx-auto w-full max-w-xs">
-                <div className="h-16">
+              <div className="relative flex flex-row items-center justify-center mx-auto w-full max-w-xs">
+                <div className="h-16 w-full relative">
                   <input
-                    className="text-black hover:bg-primary-700  focus:outline-none focus:ring-primary-300 font-normal rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
-                    border
-                    border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                    type="password"
+                    className="w-full text-black hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-normal rounded-lg px-5 py-2.5 text-center border border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                    type={showOldPassword ? "text" : "password"}
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
                     placeholder="Enter old password"
                   />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center pr-3"
+                    type="button"
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                  >
+                    {showOldPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
                 </div>
               </div>
 
-              <div className="flex flex-row items-center justify-center mx-auto w-full max-w-xs">
-                <div className="h-16">
+              <div className="relative flex flex-row items-center justify-center mx-auto w-full max-w-xs">
+                <div className="h-16 w-full relative">
                   <input
-                    className="text-black hover:bg-primary-700  focus:outline-none focus:ring-primary-300 font-normal rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
-                    border
-                    border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                    type="password"
+                    className="w-full text-black hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-normal rounded-lg px-5 py-2.5 text-center border border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                    type={showNewPassword ? "text" : "password"}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Enter new password"
                   />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center pr-3"
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
                 </div>
               </div>
 
@@ -171,7 +182,11 @@ const UpdatePassword = () => {
                 <div>
                   <button
                     className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    onClick={() => navigate(`${baseURL}/login`)}
+                    onClick={() => {
+                      localStorage.removeItem("accessToken");
+                      navigate(`${baseURL}/login`);
+                      window.location.reload();
+                    }}
                   >
                     Go back to Login
                   </button>

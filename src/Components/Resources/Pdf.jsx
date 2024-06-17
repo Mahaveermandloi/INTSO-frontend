@@ -4,7 +4,8 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 import thumbnail from "../../../public/pdf.png";
 import Loader from "../Loader"; // Import the Loader component
 import { RxCross1 } from "react-icons/rx";
-import { URLPath , baseURL} from "../../URLPath";
+import { URLPath, baseURL } from "../../URLPath";
+import img from "../../assets/9214833.jpg";
 
 const Pdf = () => {
   const [data, setData] = useState([]);
@@ -14,19 +15,19 @@ const Pdf = () => {
   const [resourceURL, setResourceURL] = useState("");
   const [isMobileFormVisible, setIsMobileFormVisible] = useState(false);
   const [filter, setFilter] = useState(false);
-  const [resource_class, setClass] = useState(true);
+  const [resource_class, setClass] = useState(null);
   const [selectedOption, setSelectedOption] = useState("all");
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); // New state for loading indicator
 
   const handleClassChange = (event) => {
-    const which_class = parseInt(event.target.value, 10); // Convert to integer
+    const which_class = parseInt(event.target.value, 10) || null;
     setClass(which_class);
-    fetchdata(selectedOption, which_class); // Pass the selected option and class
+    fetchdata(selectedOption, which_class);
   };
 
-  const fetchdata = async (option = "all", which_class = null) => {
+  const fetchdata = async (option, which_class) => {
+    setLoading(true);
     try {
-      setLoading(true); // Set loading state to true before fetching data
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
@@ -37,34 +38,28 @@ const Pdf = () => {
             },
           }
         );
-        const pdfResources = response.data.data.resourcesData.filter(
-          (resource) => resource.resource_type === "pdf"
+        const imageResources = response.data.data.resourcesData.filter(
+          (resource) => resource.resource_type === "image"
         );
-
-        let filteredData = pdfResources;
-
-        // Apply type-based filtering
+        let filteredData = imageResources;
         if (option === "free") {
           filteredData = filteredData.filter((item) => !item.is_paid);
         } else if (option === "paid") {
           filteredData = filteredData.filter((item) => item.is_paid);
         }
-
-        // Apply class-based filtering
         if (which_class !== null && !isNaN(which_class)) {
           filteredData = filteredData.filter(
             (item) => item.resource_class === which_class
           );
         }
-
         setData(filteredData);
-        setLoading(false); // Set loading state to false after fetching data
       } else {
-        console.error("No access token found");
+        toast.error("No access token found");
       }
     } catch (error) {
-      setLoading(false); // Set loading state to false if there's an error fetching data
-      console.error("Error fetching data:", error);
+      toast.error(`Error fetching data: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,7 +67,6 @@ const Pdf = () => {
     fetchdata();
   }, []);
 
-  // Event handlers for free and paid buttons
   const handleFreeButtonClick = () => {
     setSelectedOption("free");
     fetchdata("free", resource_class);
@@ -83,7 +77,6 @@ const Pdf = () => {
     fetchdata("paid", resource_class);
   };
 
-  // Event handler for "All" button
   const handleAll = () => {
     setSelectedOption("all");
     fetchdata("all", resource_class);
@@ -91,35 +84,37 @@ const Pdf = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file && file.type === "application/pdf") {
+    if (file && file.type.startsWith("application/pdf")) {
       setSelectedFile(file);
     } else {
       setSelectedFile(null);
-      toast.error("Please select a PDF file.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Please select an pdf file.");
     }
   };
 
   const handleUpload = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
+    if (
+      selectedOption === "all" ||
+      (selectedOption !== "free" && selectedOption !== "paid")
+    ) {
+      toast.error("Please choose either PAID or FREE.");
+      setLoading(false);
+      return;
+    }
+
     if (selectedFile && title && description) {
-      setLoading(true); // Set loading state to true before uploading
       const formData = new FormData();
-      formData.append("pdf", selectedFile);
+      formData.append("image", selectedFile);
       formData.append("title", title);
       formData.append("description", description);
-
-      formData.append("resource_url", resourceURL);
       formData.append("resource_class", resource_class);
-      formData.append("resource_type", "pdf");
+      formData.append("resource_url", resourceURL);
+      formData.append("resource_type", "image");
+
+      // Determine is_paid based on selectedOption
       formData.append("is_paid", selectedOption === "paid");
 
       try {
@@ -136,111 +131,33 @@ const Pdf = () => {
         );
 
         if (response.status === 200) {
-          toast.success("PDF uploaded successfully!", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
+          toast.success("PDF uploaded successfully!");
+          setData((prevData) => [...prevData, response.data.data]);
           setSelectedFile(null);
           setTitle("");
           setDescription("");
-
           setResourceURL("");
-
-          window.location.reload();
         }
+        window.location.reload();
       } catch (error) {
-        console.error("Error uploading PDF:", error);
-        toast.error("Error uploading PDF. Please try again.", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.error("Error uploading image:", error);
       } finally {
-        setLoading(false); // Set loading state to false after uploading
+        setLoading(false);
       }
     } else {
-      toast.error("Please fill in all required fields.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Please fill in all required fields.");
+      setLoading(false);
     }
   };
 
-  // const handleDelete = async (id) => {
-  //   if (window.confirm("Are you sure you want to delete this PDF?")) {
-  //     setLoading(true); // Set loading state to true before deleting
-  //     try {
-  //       const accessToken = localStorage.getItem("accessToken");
-  //       const response = await axios.delete(
-  //         `${URLPath}/api/v1/resource/delete-resource/${id}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         }
-  //       );
-  //       if (response.status === 200) {
-  //         toast.success("PDF successfully deleted", {
-  //           position: "top-center",
-  //           autoClose: 1000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: "light",
-  //         });
-
-  //         setData((prevdata) => prevdata.filter((item) => item.id !== id));
-  //       }
-  //     } catch (error) {
-  //       console.error("Error deleting PDF:", error);
-  //       toast.error("Error deleting PDF", {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //         transition: Bounce,
-  //       });
-  //     } finally {
-  //       setLoading(false); // Set loading state to false after deleting
-  //     }
-  //   }
-  // };
-
   const handleDelete = async (id) => {
     let isConfirmed = false;
-
     const confirmDeletion = () => {
       isConfirmed = true;
       toast.dismiss(confirmationToastId);
     };
-
     const confirmationToastId = toast.info(
-      "Are you sure you want to delete the pdf?",
+      "Are you sure you want to delete the PDF?",
       {
         autoClose: 5000,
         closeOnClick: false,
@@ -258,14 +175,11 @@ const Pdf = () => {
         ),
       }
     );
-
     while (!isConfirmed) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
-
     if (isConfirmed) {
       setLoading(true);
-
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
@@ -276,37 +190,15 @@ const Pdf = () => {
             },
           }
         );
-
         if (response.status === 200) {
-          toast.success("PDF successfully deleted", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
+          toast.success("PDF successfully deleted");
           setData((prevdata) => prevdata.filter((item) => item.id !== id));
-          setLoading(false);
-
         }
       } catch (error) {
-        console.log(error);
-        toast.error("Error deleting PDF. Please try again.", error, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.error("Error deleting PDF:", error);
+        toast.error("Error deleting PDF");
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading state to false after deletion attempt
       }
     }
   };
@@ -314,6 +206,8 @@ const Pdf = () => {
   const toggleMobileForm = () => {
     setIsMobileFormVisible(!isMobileFormVisible);
   };
+
+  // PDF Handling Section
 
   return (
     <>
@@ -412,7 +306,11 @@ const Pdf = () => {
           <div className="hidden lg:w-2/3 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-1 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             {/* data display */}
             <div className="grid grid-cols-2  md:grid-cols-3 gap-2 ">
-              {data &&
+              {data.length === 0 ? (
+                <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                  <img src={img} className="w-1/2" alt="" />
+                </div>
+              ) : (
                 data.map(({ id, title }) => {
                   return (
                     <>
@@ -434,7 +332,8 @@ const Pdf = () => {
                       </div>
                     </>
                   );
-                })}
+                })
+              )}
             </div>
           </div>
 
@@ -504,6 +403,7 @@ const Pdf = () => {
                 onChange={(e) => setSelectedOption(e.target.value)}
                 className="border p-2 rounded w-full mb-4"
               >
+                <option>Choose PAID or FREE</option>
                 <option value="paid">Paid</option>
                 <option value="free">Free</option>
               </select>
@@ -637,8 +537,12 @@ const Pdf = () => {
               <div className="hidden lg:w-1/2 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
                 {/* data display */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {data &&
-                    data.map(({ id, resource_url, is_paid }) => (
+                  {data.length === 0 ? (
+                    <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                      <img src={img} className="w-1/2" alt="" />
+                    </div>
+                  ) : (
+                    data.map(({ id, resource_url }) => (
                       <div key={id} className="relative">
                         <img
                           className="h-auto max-w-full rounded-lg"
@@ -653,11 +557,13 @@ const Pdf = () => {
                           <RxCross1 size={30} className="p-1" />
                         </button>
                       </div>
-                    ))}
+                    ))
+                  )}
                 </div>
               </div>
 
               {/* Form for both desktop and mobile view */}
+
               <div className="w-full lg:w-1/2 flex flex-col items-center mt-5 p-5 border-2 border-gray-400 rounded-lg shadow-lg">
                 <div className="flex items-center justify-center w-full">
                   <label
@@ -714,6 +620,7 @@ const Pdf = () => {
                   onChange={(e) => setSelectedOption(e.target.value)}
                   className="mt-2 p-2 border rounded-lg w-full"
                 >
+                  <option>Choose PAID or FREE</option>
                   <option value="paid">PAID</option>
                   <option value="free">FREE</option>
                 </select>
@@ -765,7 +672,11 @@ const Pdf = () => {
           )}
 
           <div className="grid grid-cols-2  md:grid-cols-3 gap-2 ">
-            {data &&
+            {data.length === 0 ? (
+              <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                <img src={img} className="w-1/2" alt="" />
+              </div>
+            ) : (
               data.map(({ id, title }) => {
                 return (
                   <>
@@ -787,7 +698,8 @@ const Pdf = () => {
                     </div>
                   </>
                 );
-              })}
+              })
+            )}
           </div>
         </div>
       </div>

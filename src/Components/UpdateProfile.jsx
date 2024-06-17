@@ -12,7 +12,7 @@ const UpdateProfile = () => {
     name: "",
     email: "",
     number: "",
-    profilePhoto: null,
+    image: null,
   });
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const UpdateProfile = () => {
             name: userData.name || "",
             email: userData.email || "",
             number: userData.number || "",
-            profilePhoto: userData.image || "",
+            image: userData.image || "",
           });
         } else {
           console.error("No access token found");
@@ -51,7 +51,7 @@ const UpdateProfile = () => {
     if (files) {
       setFormData({
         ...formData,
-        profilePhoto: files[0],
+        image: files[0],
       });
     } else {
       setFormData({
@@ -94,7 +94,7 @@ const UpdateProfile = () => {
     }
 
     // Check if only email and number are updated
-    if (formData.name === "" && formData.profilePhoto === null) {
+    if (formData.name === "" && formData.image === null) {
       toast.error("No fields updated", {
         position: "top-center",
         autoClose: 3000,
@@ -108,7 +108,6 @@ const UpdateProfile = () => {
       return;
     }
 
-    // If validation passes, proceed with form submission
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       console.error("No access token found");
@@ -129,7 +128,16 @@ const UpdateProfile = () => {
     updatedData.append("name", formData.name);
     updatedData.append("email", formData.email);
     updatedData.append("number", formData.number);
-    updatedData.append("image", formData.profilePhoto);
+    if (formData.image) {
+      updatedData.append("image", formData.image);
+    }
+
+    console.log("Form Data: ", {
+      name: formData.name,
+      email: formData.email,
+      number: formData.number,
+      image: formData.image,
+    });
 
     try {
       const response = await axios.put(
@@ -172,8 +180,7 @@ const UpdateProfile = () => {
           theme: "light",
         });
       }
-
-      console.error("email error ", error);
+      console.error("Error updating profile:", error);
     }
   };
 
@@ -265,14 +272,14 @@ const UpdateProfile = () => {
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="profilePhoto"
+                htmlFor="image"
               >
                 Profile Photo
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="profilePhoto"
-                name="profilePhoto"
+                id="image"
+                name="image"
                 type="file"
                 accept="image/*"
                 onChange={handleChange}

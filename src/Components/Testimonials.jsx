@@ -96,7 +96,7 @@ const Testimonials = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Image uploaded successfully!", {
+          toast.success("Testimonial uploaded successfully!", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -111,8 +111,8 @@ const Testimonials = () => {
           }, 2000); // Wait for 2 seconds before reloading
         }
       } catch (error) {
-        console.error("Error uploading image:", error);
-        toast.error("Error uploading image. Please try again.", {
+        console.error("Error uploading testimoninal:", error);
+        toast.error("Error uploading testimonial. Please try again.", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -337,7 +337,7 @@ const Testimonials = () => {
                   {selectedFile ? (
                     <div className="flex justify-center mb-4">
                       <img
-                        className="rounded-lg"
+                        className="rounded-lg h-44"
                         src={URL.createObjectURL(selectedFile)}
                         alt="Preview"
                       />
