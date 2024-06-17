@@ -6,9 +6,11 @@ import DOMPurify from "dompurify";
 const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details`;
 
 const useFetchBlogDetails = () => {
+  console.log("this is use Fetchook");
+
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
-  const { id, permalink } = useParams();
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,10 +20,12 @@ const useFetchBlogDetails = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            api_key: API_KEY,
+            api_key: "ajeet",
           },
         });
         const jsonData = await data.json();
+
+        console.log("kmsdvkkdkksdmkksnksdnkvnknesknkkfskcnk");
         console.log("asdsdsfadfda", jsonData);
         setData(jsonData.data.blogs);
         const sanitizedHtml = DOMPurify.sanitize(
