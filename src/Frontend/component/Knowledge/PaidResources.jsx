@@ -36,7 +36,7 @@ const PaidResources = () => {
     }
   }, [triggerSearch]);
 
-  const options = Array.from({ length: 10 }, (_, index) => index + 1);
+  // const options = Array.from({ length: 10 }, (_, index) => index + 1);
 
   return (
     <div className="shadow-inner shadow-gray-300">
@@ -45,27 +45,9 @@ const PaidResources = () => {
           handleSearchInputChange={handleSearchInputChange}
           searchInput={searchInput}
           handleSearchButtonClick={handleSearchButtonClick}
+          selectedOption={selectedOption}
+          handleOptionChange={handleOptionChange}
         />
-        {/* <div className="flex items-center ml-2">
-          <select
-            className="p-3 rounded-full font-bold bg-[#ED1450] text-white border-none outline-none cursor-pointer"
-            value={selectedOption}
-            onChange={handleOptionChange}
-          >
-            <option value="" disabled className="bg-white text-black">
-              Select Class
-            </option>
-            {options.map((option) => (
-              <option
-                key={option}
-                value={`${option}`}
-                className="bg-white text-black"
-              >
-                Class {option}
-              </option>
-            ))}
-          </select>
-        </div> */}
       </div>
 
       <PaidResourceList

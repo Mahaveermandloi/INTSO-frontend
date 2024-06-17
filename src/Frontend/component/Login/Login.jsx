@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import img from "../../../assets/Frontend_images/LoginPage2.png";
@@ -12,66 +14,73 @@ const Login = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
   const navigate = useNavigate();
   const [statusMessage, setStatusMessage] = useState("");
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleIcon = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch(
-        `http://${IP_ADDRESS}:${PORT}/api/v1/user/login`,
-        {
-          method: "POST",
-          body: JSON.stringify(formData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (res.ok) {
-        const data = await res.json();
-        // console.log(data.student);
-
-        const token = data.token;
-        const email = data.student.email;
-
-        localStorage.setItem("token", token);
-        localStorage.setItem("email", email);
-
-        setStatusMessage("Login successful!");
-        setFormData({
-          email: "",
-          password: "",
-        });
-        // Optionally navigate to the user dashboard or reload the page
-        navigate("/");
-        window.location.reload();
-      } else {
-        const errorData = await res.json();
-        setStatusMessage(
-          `Login failed: ${errorData.message || "Please try again."}`
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+    }),
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        const res = await fetch(
+          `http://${IP_ADDRESS}:${PORT}/api/v1/user/login`,
+          {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
+
+        if (res.ok) {
+          const data = await res.json();
+          const token = data.token;
+          const email = data.student.email;
+
+          localStorage.setItem("token", token);
+          localStorage.setItem("email", email);
+
+          setStatusMessage("Login successful!");
+          formik.resetForm();
+          navigate("/");
+          window.location.reload();
+        } else {
+          const errorData = await res.json();
+          let errorMessage = `Login failed: ${
+            errorData.message || "Please try again."
+          }`;
+          if (errorData.message.includes("email not registered")) {
+            errorMessage = "The email you entered is not registered.";
+          } else if (errorData.message.includes("incorrect password")) {
+            errorMessage = "The password you entered is incorrect.";
+          }
+          setStatusMessage(errorMessage);
+        }
+      } catch (err) {
+        console.error("Login failed:", err);
+        setStatusMessage("An error occurred. Please try again later.");
+      } finally {
+        setSubmitting(false);
       }
-    } catch (err) {
-      console.error("Login failed:", err);
-      setStatusMessage("An error occurred. Please try again later.");
-    }
-  };
+    },
+  });
 
   return (
     <div className="">
@@ -93,7 +102,7 @@ const Login = () => {
                 </p>
               </div>
               <div className="w-2/3 mt-6">
-                <form className="space-y-4" onSubmit={handleSubmit}>
+                <form className="space-y-4" onSubmit={formik.handleSubmit}>
                   <div className="flex flex-col">
                     <label className="text-[#313866]">Email ID</label>
                     <input
@@ -101,10 +110,20 @@ const Login = () => {
                       type="text"
                       name="email"
                       placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="border border-[#C5CAD9] p-2 rounded-lg"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className={`border p-2 rounded-lg ${
+                        formik.touched.email && formik.errors.email
+                          ? "border-red-500"
+                          : "border-[#C5CAD9]"
+                      }`}
                     />
+                    {formik.touched.email && formik.errors.email ? (
+                      <p className="text-red-500 text-sm">
+                        {formik.errors.email}
+                      </p>
+                    ) : null}
                   </div>
                   <div className="flex flex-col relative">
                     <label className="text-[#313866]">Password</label>
@@ -112,29 +131,39 @@ const Login = () => {
                       required
                       type={showPassword ? "text" : "password"}
                       name="password"
-                      value={formData.password}
-                      onChange={handleChange}
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                       placeholder="Enter your password"
-                      className="border border-[#C5CAD9] p-2 rounded-lg"
+                      className={`border p-2 rounded-lg ${
+                        formik.touched.password && formik.errors.password
+                          ? "border-red-500"
+                          : "border-[#C5CAD9]"
+                      }`}
                     />
                     {showPassword ? (
                       <VisibilityIcon
                         onClick={toggleIcon}
-                        className="absolute right-3 top-8"
+                        className="absolute right-3 top-8 cursor-pointer"
                       />
                     ) : (
                       <VisibilityOffIcon
                         onClick={toggleIcon}
-                        className="absolute right-3 top-8"
+                        className="absolute right-3 top-8 cursor-pointer"
                       />
                     )}
+                    {formik.touched.password && formik.errors.password ? (
+                      <p className="text-red-500 text-sm">
+                        {formik.errors.password}
+                      </p>
+                    ) : null}
                   </div>
                   <div>
                     <button
                       type="submit"
                       className="bg-[#ED1450] text-white p-2 w-full rounded-full"
-                    >
-                      Login
+                      disabled={formik.isSubmitting}>
+                      {formik.isSubmitting ? "Logging in..." : "Login"}
                     </button>
                   </div>
                   <Link to="/forgotpassword">
@@ -143,11 +172,11 @@ const Login = () => {
                     </p>
                   </Link>
                 </form>
-                {statusMessage && (
+                {/* {statusMessage && (
                   <p className="text-center mt-4 text-red-500">
                     {statusMessage}
                   </p>
-                )}
+                )} */}
               </div>
             </div>
           </div>

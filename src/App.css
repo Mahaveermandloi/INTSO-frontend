@@ -169,6 +169,12 @@
   }
 }
 
+/* @media print {
+  html,
+  body {
+     display: none;
+  }
+} */
 
 
 

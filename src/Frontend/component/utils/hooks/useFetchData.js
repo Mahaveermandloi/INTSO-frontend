@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IP_ADDRESS, PORT } from "../constants";
+import { API_KEY, IP_ADDRESS, PORT } from "../constants";
 
 const url = `http://${IP_ADDRESS}:${PORT}/api/v1/home/homeData`;
 const useFetchData = () => {
@@ -14,7 +14,13 @@ const useFetchData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(url);
+        const data = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            api_key: API_KEY,
+          },
+        });
         const jsonData = await data.json();
         // console.log(jsonData);
         setData1(jsonData.data.homedata.bannerData);

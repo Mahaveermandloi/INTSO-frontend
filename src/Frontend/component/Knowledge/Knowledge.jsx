@@ -1,3 +1,74 @@
+// import React, { useEffect, useState } from "react";
+// import SerchBar from "./SerchBar";
+// import ResourceList from "./ResourceList";
+// import { Achivement } from "../Home/Achivement";
+// import { Testimonial } from "../Home/Testimonial";
+// import { useLocation } from "react-router-dom";
+
+// const Knowledge = () => {
+//   const [searchInput, setSearchInput] = useState("");
+//   const [selectedOption, setSelectedOption] = useState("");
+//   const [triggerSearch, setTriggerSearch] = useState(true);
+
+//   const handleSearchInputChange = (event) => {
+//     setSearchInput(event.target.value);
+//     setTriggerSearch(!triggerSearch);
+//   };
+
+//   const handleOptionChange = (event) => {
+//     setSelectedOption(event.target.value);
+//     setTriggerSearch(!triggerSearch);
+//   };
+
+//   const handleSearchButtonClick = () => {
+//     setTriggerSearch(!triggerSearch);
+//   };
+
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, [location]);
+
+//   useEffect(() => {
+//     if (triggerSearch) {
+//       setTriggerSearch(false);
+//     }
+//   }, [triggerSearch]);
+
+//   const options = Array.from({ length: 10 }, (_, index) => index + 1);
+
+//   return (
+//     <div className="shadow-inner shadow-gray-300">
+//       <div className="flex items-center justify-center">
+//         <SerchBar
+//           handleSearchInputChange={handleSearchInputChange}
+//           searchInput={searchInput}
+//           handleSearchButtonClick={handleSearchButtonClick}
+//           selectedOption={selectedOption}
+//           handleOptionChange={handleOptionChange}
+//           options={options}
+//         />
+//       </div>
+
+//       <ResourceList
+//         searchInput={searchInput}
+//         selectedOption={selectedOption}
+//         triggerSearch={triggerSearch}
+//       />
+
+//       <div className="mt-10">
+//         <Achivement />
+//       </div>
+//       <div>
+//         <Testimonial />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Knowledge;
+
 import React, { useEffect, useState } from "react";
 import SerchBar from "./SerchBar";
 import ResourceList from "./ResourceList";
@@ -8,20 +79,18 @@ import { useLocation } from "react-router-dom";
 const Knowledge = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-  const [triggerSearch, setTriggerSearch] = useState(true);
+  const [triggerSearch, setTriggerSearch] = useState(false);
 
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
-    setTriggerSearch(!triggerSearch);
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    setTriggerSearch(!triggerSearch);
   };
 
   const handleSearchButtonClick = () => {
-    setTriggerSearch(!triggerSearch);
+    setTriggerSearch(true); // Trigger the search on button click
   };
 
   const location = useLocation();
@@ -32,23 +101,19 @@ const Knowledge = () => {
 
   useEffect(() => {
     if (triggerSearch) {
-      setTriggerSearch(false);
+      setTriggerSearch(false); // Reset triggerSearch after handling search
     }
   }, [triggerSearch]);
-
-  const options = Array.from({ length: 10 }, (_, index) => index + 1);
 
   return (
     <div className="shadow-inner shadow-gray-300">
       <div className="flex items-center justify-center">
-   
         <SerchBar
           handleSearchInputChange={handleSearchInputChange}
           searchInput={searchInput}
           handleSearchButtonClick={handleSearchButtonClick}
           selectedOption={selectedOption}
           handleOptionChange={handleOptionChange}
-          options={options}
         />
       </div>
 

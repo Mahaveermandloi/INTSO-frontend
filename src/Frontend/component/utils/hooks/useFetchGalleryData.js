@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IP_ADDRESS, PORT } from "../constants";
+import { API_KEY, IP_ADDRESS, PORT } from "../constants";
 
 const url = `http://${IP_ADDRESS}:${PORT}/api/v1/gallery/getGallery`;
 
@@ -9,7 +9,13 @@ const useFetchGalleryData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(url);
+        const data = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            api_key: API_KEY,
+          },
+        });
         const jsonData = await data.json();
 
         setData(jsonData.data);
