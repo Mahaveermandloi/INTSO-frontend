@@ -5,7 +5,7 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 import Loader from "./Loader"; // Importing the Loader component
 import nodata from "../assets/9214833.jpg";
 
-import { URLPath } from "../URLPath";
+import { URLPath, API_KEY } from "../URLPath";
 
 const Banner = () => {
   const [gallery, setGallery] = useState([]);
@@ -23,8 +23,15 @@ const Banner = () => {
 
       if (accessToken) {
         const response = await axios.get(
-          `${URLPath}/api/v1/banner/getBannerData`
+          `${URLPath}/api/v1/banner/getBannerData`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              api_key: API_KEY, // Replace 'api_key' with your actual API key variable
+            },
+          }
         );
+        // Handle response
 
         setGallery(response.data.data);
         console.log(response.data.data);
@@ -213,7 +220,6 @@ const Banner = () => {
 
           <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-           
               {gallery.length === 0 ? (
                 <>
                   <img src={nodata} alt="" />

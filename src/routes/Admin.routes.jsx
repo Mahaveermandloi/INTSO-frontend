@@ -66,41 +66,49 @@ const AdminRoutes = () => {
 
 export default AdminRoutes;
 
-const AuthenticatedApp = () => (
-  <div className="">
-    <Header />
-    <SideBar />
-    <main className="p-5 ml-auto w-full">
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/banner" element={<Banner />} />
-        <Route path="/newsandupdates" element={<NewsandUpdates />} />
-        <Route path="/studentrequest" element={<StudentRequests />} />
-        <Route path="/uploadstudent" element={<UploadStudent />} />
-        <Route path="/studentlist" element={<StudentList />} />
-        <Route path="/schoolrequests" element={<SchoolRequests />} />
-        <Route path="/uploadschool" element={<UploadSchool />} />
-        <Route path="/schoollist" element={<SchoolList />} />
-        <Route path="/newsletter" element={<NewsLetter />} />
+const AuthenticatedApp = () => {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-        <Route path="/contactus" element={<ContactUs />} />
-
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/createblog" element={<CreateBlog />} />
-        <Route path="/updateblog/:id" element={<UpdateBlog />} />
-
-        <Route path="/testimonials" element={<Testimonials />} />
-        <Route path="/addschool" element={<UploadSchool />} />
-        <Route path="/image" element={<Image />} />
-        <Route path="/video" element={<Video />} />
-        <Route path="/pdf" element={<Pdf />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/updateprofile" element={<UpdateProfile />} />
-        <Route path="/updatepassword" element={<UpdatePassword />} />
-        {/* Redirect all other routes to dashboard */}
-        <Route path="*" element={<Navigate to={`${baseURL}/dashboard`} />} />
-      </Routes>
-    </main>
-  </div>
-);
+  return (
+    <div className="">
+      <Header />
+      <SideBar />
+      <main className="p-5 ml-auto w-full">
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/banner" element={<Banner />} />
+          <Route path="/newsandupdates" element={<NewsandUpdates />} />
+          <Route path="/studentrequest" element={<StudentRequests />} />
+          <Route path="/uploadstudent" element={<UploadStudent />} />
+          <Route path="/studentlist" element={<StudentList />} />
+          <Route path="/schoolrequests" element={<SchoolRequests />} />
+          <Route path="/uploadschool" element={<UploadSchool />} />
+          <Route path="/schoollist" element={<SchoolList />} />
+          <Route path="/newsletter" element={<NewsLetter />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/createblog" element={<CreateBlog />} />
+          <Route path="/updateblog/:id" element={<UpdateBlog />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/addschool" element={<UploadSchool />} />
+          <Route path="/image" element={<Image />} />
+          <Route path="/video" element={<Video />} />
+          <Route path="/pdf" element={<Pdf />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/updateprofile" element={<UpdateProfile />} />
+          <Route path="/updatepassword" element={<UpdatePassword />} />
+          {/* Redirect all other routes to dashboard */}
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </main>
+      <footer>
+        <div className="relative text-center mt-[60%] lg:mt-[276px] text-white p-2 lg:w-10/12 bg-gray-800 bottom-0 lg:ml-auto">
+          <span className="text-sm text-gray-400 sm:text-center dark:text-gray-400 p-3">
+            Copyright {currentYear} | Design & Developed By: Ozonesoft Solutions
+          </span>
+        </div>
+      </footer>
+    </div>
+  );
+};

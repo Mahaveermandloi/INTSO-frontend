@@ -3,3 +3,5 @@ export const URLPath = "http://localhost:8000";
 
 export const baseURL = "/admin";
 
+export const API_KEY = "ajeet";
+

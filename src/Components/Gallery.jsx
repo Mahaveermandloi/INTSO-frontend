@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, toast, Bounce } from "react-toastify";
-import { URLPath } from "../URLPath";
+import { URLPath , API_KEY } from "../URLPath";
 import Loader from "./Loader";
 import img from "../assets/9214833.jpg";
 
@@ -27,6 +27,7 @@ const Gallery = () => {
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
+                api_key: API_KEY, 
               },
             }
           );
