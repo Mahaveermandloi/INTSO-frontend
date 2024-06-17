@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import ImagesCard from "./ImagesCard";
 import PdfCard from "./PdfCard";
 import VideosCard from "./VideosCard";
-import { IP_ADDRESS, PORT } from "../utils/constants";
+import { API_KEY, IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 
 const fetchResources = async (searchInput, selectedOption) => {
   const response = await fetch(
-    `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}`
+    `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        api_key: API_KEY,
+      },
+    }
   );
 
   const data = await response.json();
