@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
+import img from "../../assets/9214833.jpg";
 import axios from "axios";
-import { RiFilter3Fill } from "react-icons/ri";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import Loader from "../Loader"; // Assuming Loader component is in the same directory
 import { URLPath, baseURL } from "../../URLPath";
 import { RxCross1 } from "react-icons/rx";
-
 const Image = () => {
   const [data, setData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -13,20 +12,19 @@ const Image = () => {
   const [description, setDescription] = useState("");
   const [resourceURL, setResourceURL] = useState("");
   const [isMobileFormVisible, setIsMobileFormVisible] = useState(false);
-  const [disable, setDisable] = useState(true);
-  const [resource_class, setClass] = useState(true);
+  const [resource_class, setClass] = useState(null);
   const [filter, setFilter] = useState(false);
   const [selectedOption, setSelectedOption] = useState("all");
   const [loading, setLoading] = useState(false); // New state for loading indicator
-
   const handleClassChange = (event) => {
-    const which_class = parseInt(event.target.value, 10);
+    const which_class = event.target.value
+      ? parseInt(event.target.value, 10)
+      : null;
     setClass(which_class);
     fetchdata(selectedOption, which_class);
   };
 
-  
-  const fetchdata = async (option = "all", which_class = null) => {
+  const fetchdata = async (option, which_class) => {
     setLoading(true);
     try {
       const accessToken = localStorage.getItem("accessToken");
@@ -39,25 +37,20 @@ const Image = () => {
             },
           }
         );
-
         const imageResources = response.data.data.resourcesData.filter(
           (resource) => resource.resource_type === "image"
         );
-
         let filteredData = imageResources;
-
         if (option === "free") {
           filteredData = filteredData.filter((item) => !item.is_paid);
         } else if (option === "paid") {
           filteredData = filteredData.filter((item) => item.is_paid);
         }
-
         if (which_class !== null && !isNaN(which_class)) {
           filteredData = filteredData.filter(
             (item) => item.resource_class === which_class
           );
         }
-
         setData(filteredData);
       } else {
         toast.error("No access token found");
@@ -75,7 +68,6 @@ const Image = () => {
 
   const handleFreeButtonClick = () => {
     setSelectedOption("free");
-    alert("resource ", resource_class);
     fetchdata("free", resource_class);
   };
 
@@ -86,7 +78,7 @@ const Image = () => {
 
   const handleAll = () => {
     setSelectedOption("all");
-    fetchdata("all", resource_class);
+    fetchdata("all", resource_class); // This should not affect the filtered data due to changes in fetchdata
   };
 
   const handleFileChange = (event) => {
@@ -101,7 +93,16 @@ const Image = () => {
 
   const handleUpload = async (event) => {
     event.preventDefault();
-    setLoading(true); // Set loading state to true during upload
+    setLoading(true);
+
+    if (
+      selectedOption === "all" ||
+      (selectedOption !== "free" && selectedOption !== "paid")
+    ) {
+      toast.error("Please choose either PAID or FREE.");
+      setLoading(false);
+      return;
+    }
 
     if (selectedFile && title && description) {
       const formData = new FormData();
@@ -111,6 +112,8 @@ const Image = () => {
       formData.append("resource_class", resource_class);
       formData.append("resource_url", resourceURL);
       formData.append("resource_type", "image");
+
+      // Determine is_paid based on selectedOption
       formData.append("is_paid", selectedOption === "paid");
 
       try {
@@ -128,36 +131,30 @@ const Image = () => {
 
         if (response.status === 200) {
           toast.success("Image uploaded successfully!");
-
-          // Assuming setData is the state updater function for your resources list
           setData((prevData) => [...prevData, response.data.data]);
-
-          // Clear the form fields
           setSelectedFile(null);
           setTitle("");
           setDescription("");
           setResourceURL("");
         }
+        window.location.reload();
       } catch (error) {
         toast.error("Error uploading image:", error);
-        toast.error("Error uploading image. Please try again.");
       } finally {
-        setLoading(false); // Set loading state to false after upload attempt
+        setLoading(false);
       }
     } else {
       toast.error("Please fill in all required fields.");
-      setLoading(false); // Set loading state to false if fields are not filled
+      setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
     let isConfirmed = false;
-
     const confirmDeletion = () => {
       isConfirmed = true;
       toast.dismiss(confirmationToastId);
     };
-
     const confirmationToastId = toast.info(
       "Are you sure you want to delete the image?",
       {
@@ -177,14 +174,11 @@ const Image = () => {
         ),
       }
     );
-
     while (!isConfirmed) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
-
     if (isConfirmed) {
       setLoading(true);
-
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
@@ -200,14 +194,13 @@ const Image = () => {
           setData((prevdata) => prevdata.filter((item) => item.id !== id));
         }
       } catch (error) {
-        toast.error("Error deleting image:");
+        toast.error("Error deleting image:", error);
         toast.error("Error deleting image");
       } finally {
         setLoading(false); // Set loading state to false after deletion attempt
       }
     }
   };
-
   const toggleMobileForm = () => {
     setIsMobileFormVisible(!isMobileFormVisible);
   };
@@ -310,8 +303,12 @@ const Image = () => {
             {/* data display */}
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {data &&
-                data.map(({ id, resource_url }) => {
+              {data.length === 0 ? (
+                <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                  <img src={img} className="w-1/2" alt="" />
+                </div>
+              ) : (
+                data.map(({ id, resource_url, resource_class }) => {
                   return (
                     <div key={id} className="relative">
                       <img
@@ -319,7 +316,9 @@ const Image = () => {
                         src={`${URLPath}${resource_url}`}
                         alt={`data image ${id}`}
                       />
-
+                      <div className="absolute top-2 left-2 text-black bg-white  p-1 rounded-full">
+                        {resource_class}
+                      </div>
                       <button
                         onClick={() => handleDelete(id)}
                         className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
@@ -328,7 +327,8 @@ const Image = () => {
                       </button>
                     </div>
                   );
-                })}
+                })
+              )}
             </div>
           </div>
 
@@ -384,6 +384,7 @@ const Image = () => {
               onChange={(e) => setSelectedOption(e.target.value)}
               className="mt-2 p-2 border rounded-lg w-full"
             >
+              <option>Choose PAID or FREE</option>
               <option value="paid">PAID</option>
               <option value="free">FREE</option>
             </select>
@@ -599,6 +600,7 @@ const Image = () => {
                   onChange={(e) => setSelectedOption(e.target.value)}
                   className="mt-2 p-2 border rounded-lg w-full"
                 >
+                  <option>Choose PAID or FREE</option>
                   <option value="paid">PAID</option>
                   <option value="free">FREE</option>
                 </select>
@@ -653,7 +655,11 @@ const Image = () => {
 
           <div className="lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {data &&
+              {data.length === 0 ? (
+                <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                  <img src={img} className="w-1/2" alt="" />
+                </div> ):
+                
                 data.map(({ id, resource_url }) => (
                   <div key={id} className="relative">
                     <img
@@ -669,6 +675,7 @@ const Image = () => {
                     </button>
                   </div>
                 ))}
+                
             </div>
           </div>
         </div>

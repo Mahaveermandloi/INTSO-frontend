@@ -3,29 +3,327 @@ import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, Bounce, toast } from "react-toastify";
 import { URLPath } from "../../URLPath";
+import img from "../../assets/9214833.jpg";
+
 import Loader from "../Loader"; // Import the loader component
 
 const Video = () => {
+  // const [data, setData] = useState([]);
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [title, setTitle] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [filter, setFilter] = useState(false);
+  // const [resourceURL, setResourceURL] = useState("");
+  // const [isMobileFormVisible, setIsMobileFormVisible] = useState(false);
+  // const [resource_class, setClass] = useState(true);
+  // const [selectedOption, setSelectedOption] = useState("all");
+  // const [loading, setLoading] = useState(false); // State to manage loading
+
+  // const handleClassChange = (event) => {
+  //   const which_class = event.target.value
+  //     ? parseInt(event.target.value, 10)
+  //     : null;
+  //   setClass(which_class);
+  //   fetchdata(selectedOption, which_class);
+  // };
+
+  // const fetchdata = async (option, which_class) => {
+  //   try {
+  //     setLoading(true); // Set loading to true when fetching data
+  //     const accessToken = localStorage.getItem("accessToken");
+  //     if (accessToken) {
+  //       const response = await axios.get(
+  //         `${URLPath}/api/v1/resource/get-all-data-by-admin`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
+  //       const imageResources = response.data.data.resourcesData.filter(
+  //         (resource) => resource.resource_type === "video"
+  //       );
+
+  //       let filteredData = imageResources;
+
+  //       console.log(filteredData);
+
+  //       // Apply type-based filtering
+  //       if (option === "free") {
+  //         filteredData = filteredData.filter((item) => !item.is_paid);
+  //       } else if (option === "paid") {
+  //         filteredData = filteredData.filter((item) => item.is_paid);
+  //       }
+
+  //       // Apply class-based filtering
+  //       if (which_class !== null && !isNaN(which_class)) {
+  //         filteredData = filteredData.filter(
+  //           (item) => item.resource_class === which_class
+  //         );
+  //       }
+
+  //       setData(filteredData);
+
+  //       // console.log(filteredData);
+  //     } else {
+  //       toast.error("No access token found");
+  //     }
+  //   } catch (error) {
+  //     toast.error(`Error fetching data: ${error.message}`);
+  //   } finally {
+  //     setLoading(false); // Set loading to false after fetching data
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchdata();
+  // }, []);
+
+  // // Event handlers for free and paid buttons
+  // const handleFreeButtonClick = () => {
+  //   setSelectedOption("free");
+  //   fetchdata("free", resource_class);
+  // };
+
+  // const handlePaidButtonClick = () => {
+  //   setSelectedOption("paid");
+  //   fetchdata("paid", resource_class);
+  // };
+
+  // const handleAll = () => {
+  //   setSelectedOption("all");
+  //   fetchdata("all", resource_class); // This should not affect the filtered data due to changes in fetchdata
+  // };
+
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file && file.type.startsWith("image/")) {
+  //     setSelectedFile(file);
+  //   } else {
+  //     setSelectedFile(null);
+  //     toast.error("Please select an image file.", {
+  //       position: "top-center",
+  //       autoClose: 3000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   }
+  // };
+
+  // const handleUpload = async (event) => {
+  //   event.preventDefault(); // Prevent default form submission behavior
+  //   setLoading(true);
+
+  //   if (
+  //     selectedOption === "all" ||
+  //     (selectedOption !== "free" && selectedOption !== "paid")
+  //   ) {
+  //     toast.error("Please choose either PAID or FREE.");
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   // Set loading state to true when upload begins
+  //   if (title && description) {
+  //     const formData = new FormData();
+  //     if (selectedFile) {
+  //       formData.append("thumbnail", selectedFile);
+  //     }
+
+  //     formData.append("title", title);
+  //     formData.append("description", description);
+
+  //     formData.append("resource_url", resourceURL);
+  //     formData.append("resource_class", resource_class);
+  //     formData.append("resource_type", "video"); // Assuming image is always selected
+  //     formData.append("is_paid", selectedOption === "paid");
+
+  //     try {
+  //       const accessToken = localStorage.getItem("accessToken");
+  //       const response = await axios.post(
+  //         `${URLPath}/api/v1/resource/create-resource`,
+  //         formData,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         }
+  //       );
+
+  //       if (response.status === 200) {
+  //         toast.success("Video uploaded successfully!", {
+  //           position: "top-center",
+  //           autoClose: 3000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+
+  //         setSelectedFile(null);
+  //         setTitle("");
+  //         setDescription("");
+
+  //         setResourceURL("");
+
+  //         window.location.reload();
+  //       }
+  //     } catch (error) {
+  //       console.error("Error uploading video:", error);
+  //       toast.error("Error uploading video. Please try again.", {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //         transition: Bounce,
+  //       });
+  //     } finally {
+  //       setLoading(false); // Set loading state to false when upload completes (whether success or error)
+  //     }
+  //   } else {
+  //     toast.error("Please fill in all required fields.", {
+  //       position: "top-center",
+  //       autoClose: 3000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   }
+  // };
+
+  // const handleDelete = async (id) => {
+  //   let isConfirmed = false;
+
+  //   const confirmDeletion = () => {
+  //     isConfirmed = true;
+  //     toast.dismiss(confirmationToastId);
+  //   };
+
+  //   const confirmationToastId = toast.info(
+  //     "Are you sure you want to delete the image?",
+  //     {
+  //       autoClose: 5000,
+  //       closeOnClick: false,
+  //       draggable: false,
+  //       onClose: () => {
+  //         toast.dismiss(confirmationToastId);
+  //       },
+  //       closeButton: (
+  //         <button
+  //           onClick={confirmDeletion}
+  //           className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+  //         >
+  //           Confirm
+  //         </button>
+  //       ),
+  //     }
+  //   );
+
+  //   // Wait until the user confirms deletion
+  //   while (!isConfirmed) {
+  //     await new Promise((resolve) => setTimeout(resolve, 100));
+  //   }
+
+  //   if (isConfirmed) {
+  //     setLoading(true);
+
+  //     try {
+  //       const accessToken = localStorage.getItem("accessToken");
+  //       const response = await axios.delete(
+  //         `${URLPath}/api/v1/resource/delete-resource/${id}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
+
+  //       if (response.status === 200) {
+  //         toast.success("Video successfully deleted", {
+  //           position: "top-center",
+  //           autoClose: 1000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+
+  //         setData((prevdata) => prevdata.filter((item) => item.id !== id));
+  //       }
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 403) {
+  //         toast.error("No resource with this id", {
+  //           position: "top-center",
+  //           autoClose: 3000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+  //       } else {
+  //         console.error("Error deleting image:", error);
+  //         toast.error("Error deleting image. Please try again.", {
+  //           position: "top-center",
+  //           autoClose: 3000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //           transition: Bounce,
+  //         });
+  //       }
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  // };
+
+  // const toggleMobileForm = () => {
+  //   setIsMobileFormVisible(!isMobileFormVisible);
+  // };
+
   const [data, setData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [filter, setFilter] = useState(false);
   const [resourceURL, setResourceURL] = useState("");
   const [isMobileFormVisible, setIsMobileFormVisible] = useState(false);
-  const [resource_class, setClass] = useState(true);
+  const [resource_class, setClass] = useState(null);
   const [selectedOption, setSelectedOption] = useState("all");
   const [loading, setLoading] = useState(false); // State to manage loading
+  const [filter, setFilter] = useState(false);
 
   const handleClassChange = (event) => {
-    const which_class = parseInt(event.target.value, 10); // Convert to integer
+    const which_class = event.target.value
+      ? parseInt(event.target.value, 10)
+      : null;
     setClass(which_class);
-    fetchdata(selectedOption, which_class); // Pass the selected option and class
+    fetchdata(selectedOption, which_class);
   };
 
-  const fetchdata = async (option = "all", which_class = null) => {
+  const fetchdata = async (option, which_class) => {
+    setLoading(true); // Set loading to true when fetching data
     try {
-      setLoading(true); // Set loading to true when fetching data
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
@@ -36,13 +334,11 @@ const Video = () => {
             },
           }
         );
-        const imageResources = response.data.data.resourcesData.filter(
+        const videoResources = response.data.data.resourcesData.filter(
           (resource) => resource.resource_type === "video"
         );
 
-        let filteredData = imageResources;
-
-        console.log(filteredData);
+        let filteredData = videoResources;
 
         // Apply type-based filtering
         if (option === "free") {
@@ -59,13 +355,11 @@ const Video = () => {
         }
 
         setData(filteredData);
-
-        // console.log(filteredData);
       } else {
-        console.error("No access token found");
+        toast.error("No access token found");
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error(`Error fetching data: ${error.message}`);
     } finally {
       setLoading(false); // Set loading to false after fetching data
     }
@@ -86,51 +380,43 @@ const Video = () => {
     fetchdata("paid", resource_class);
   };
 
-  // Event handler for "All" button
   const handleAll = () => {
     setSelectedOption("all");
-    fetchdata("all", resource_class);
+    fetchdata("all", resource_class); // This should not affect the filtered data due to changes in fetchdata
   };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file && file.type.startsWith("image")) {
+    if (file && file.type.startsWith("image/")) {
       setSelectedFile(file);
     } else {
       setSelectedFile(null);
-      toast.error("Please select an image file.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Please select a thumbnail file.");
     }
   };
 
   const handleUpload = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
-    setLoading(true); // Set loading state to true when upload begins
-    if (title && description) {
-      const formData = new FormData();
-      if (selectedFile) {
-        formData.append("thumbnail", selectedFile);
-      }
+    setLoading(true);
 
+    if (
+      selectedOption === "all" ||
+      (selectedOption !== "free" && selectedOption !== "paid")
+    ) {
+      toast.error("Please choose either PAID or FREE.");
+      setLoading(false);
+      return;
+    }
+
+    if (selectedFile && title && description) {
+      const formData = new FormData();
+      formData.append("thumbnail", selectedFile); // Assuming video thumbnail is uploaded as thumbnail
       formData.append("title", title);
       formData.append("description", description);
-
       formData.append("resource_url", resourceURL);
       formData.append("resource_class", resource_class);
-      formData.append("resource_type", "video"); // Assuming image is always selected
+      formData.append("resource_type", "video");
       formData.append("is_paid", selectedOption === "paid");
-
-      // console.log(formData);
-
-      // console.log(title, description, resourceURL, selectedOption);
 
       try {
         const accessToken = localStorage.getItem("accessToken");
@@ -146,52 +432,21 @@ const Video = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Video uploaded successfully!", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
+          toast.success("Video uploaded successfully!");
           setSelectedFile(null);
           setTitle("");
           setDescription("");
-
           setResourceURL("");
-
           window.location.reload();
         }
       } catch (error) {
-        console.error("Error uploading video:", error);
-        toast.error("Error uploading video. Please try again.", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.error("Please fill in all required fields.");
       } finally {
         setLoading(false); // Set loading state to false when upload completes (whether success or error)
       }
     } else {
-      toast.error("Please fill in all required fields.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Please fill in all required fields.");
+      setLoading(false);
     }
   };
 
@@ -204,7 +459,7 @@ const Video = () => {
     };
 
     const confirmationToastId = toast.info(
-      "Are you sure you want to delete the image?",
+      "Are you sure you want to delete the video?",
       {
         autoClose: 5000,
         closeOnClick: false,
@@ -214,8 +469,8 @@ const Video = () => {
         },
         closeButton: (
           <button
-            onClick={confirmDeletion}
             className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
+            onClick={confirmDeletion}
           >
             Confirm
           </button>
@@ -243,44 +498,15 @@ const Video = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Video successfully deleted", {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
-          setData((prevdata) => prevdata.filter((item) => item.id !== id));
+          toast.success("Video successfully deleted");
+          setData((prevData) => prevData.filter((item) => item.id !== id));
         }
       } catch (error) {
         if (error.response && error.response.status === 403) {
-          toast.error("No resource with this id", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+          toast.error("No video with this id");
         } else {
-          console.error("Error deleting image:", error);
-          toast.error("Error deleting image. Please try again.", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          console.error("Error deleting video:", error);
+          toast.error("Error deleting video. Please try again.");
         }
       } finally {
         setLoading(false);
@@ -393,7 +619,11 @@ const Video = () => {
               className="grid grid-cols-2 md:grid-cols-3 gap-4
 "
             >
-              {data &&
+              {data.length === 0 ? (
+                <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                  <img src={img} className="w-1/2" alt="" />
+                </div>
+              ) : (
                 data.map(({ id, thumbnail, resource_url }) => {
                   return (
                     <>
@@ -415,7 +645,8 @@ const Video = () => {
                       </div>
                     </>
                   );
-                })}
+                })
+              )}
             </div>
           </div>
 
@@ -470,6 +701,7 @@ const Video = () => {
               onChange={(e) => setSelectedOption(e.target.value)}
               className="mt-2 p-2 border rounded-lg w-full"
             >
+              <option>Choose PAID or FREE</option>
               <option value="paid">PAID</option>
               <option value="free">FREE</option>
             </select>
@@ -611,7 +843,11 @@ const Video = () => {
               <div className="hidden lg:w-1/2 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
                 {/* data display */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {data &&
+                  {data.length === 0 ? (
+                    <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                      <img src={img} className="w-1/2" alt="" />
+                    </div>
+                  ) : (
                     data.map(({ id, resource_url, is_paid }) => (
                       <div key={id} className="relative">
                         <img
@@ -627,7 +863,8 @@ const Video = () => {
                           <RxCross1 size={30} className="p-1" />
                         </button>
                       </div>
-                    ))}
+                    ))
+                  )}
                 </div>
               </div>
 
@@ -685,6 +922,7 @@ const Video = () => {
                   onChange={(e) => setSelectedOption(e.target.value)}
                   className="mt-2 p-2 border rounded-lg w-full"
                 >
+                  <option>Choose FREE or PAID</option>
                   <option value="paid">PAID</option>
                   <option value="free">FREE</option>
                 </select>
@@ -739,7 +977,11 @@ const Video = () => {
 
           <div className="lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {data &&
+              {data.length === 0 ? (
+                <div className="col-span-2 md:col-span-3 text-center text-gray-500">
+                  <img src={img} className="w-1/2" alt="" />
+                </div>
+              ) : (
                 data.map(({ id, thumbnail }) => (
                   <div key={id} className="relative">
                     <a
@@ -760,7 +1002,8 @@ const Video = () => {
                       <RxCross1 size={30} className="p-1" />
                     </button>
                   </div>
-                ))}
+                ))
+              )}
             </div>
           </div>
         </div>
