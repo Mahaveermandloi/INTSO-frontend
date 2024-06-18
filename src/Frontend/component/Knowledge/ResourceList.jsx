@@ -68,7 +68,7 @@ const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
 
   useEffect(() => {
     fetchData();
-  }, [searchInput, selectedOption, triggerSearch]);
+  }, [triggerSearch]);
 
   if (loading) {
     return <Spinner1 />;

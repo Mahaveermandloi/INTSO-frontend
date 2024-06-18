@@ -1,40 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { IP_ADDRESS, PORT } from "../../utils/constants";
+import { API_KEY, IP_ADDRESS, PORT } from "../../utils/constants";
 import Spinner1 from "../../common files/Spinner1"; // Assuming Spinner1 is correctly imported
 import img from "../../../../../src/assets/Frontend_images/Download_SVG.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import img1 from "../../../../../src/assets/Frontend_images/PDF_BG_1.png";
 
 const Pdfs = () => {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading state
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     fetchData();
-  }, []); // Fetch data on component mount
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallpdfs`
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-  //     const jsonData = await response.json();
-  //     console.log(jsonData.resourceData);
-  //     setData(jsonData.resourceData); // Update state with fetched data
-  //     setLoading(false); // Set loading to false once data is fetched
-  //   } catch (error) {
-  //     console.error("Fetch data error:", error);
-  //     setLoading(false); // Set loading to false on error as well
-  //   }
-  // };
+  }, []);
 
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallpdfs`
+        `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallpdfs`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            api_key: API_KEY,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -97,7 +91,7 @@ const Pdfs = () => {
       <div className="text-center text-[#ED1450] font-bold text-2xl my-5">
         All PDF's
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center max-w-screen-xl mx-auto lg:px-24 px-6">
         {loading ? ( // Display spinner while loading
           <Spinner1 />
         ) : (
@@ -107,10 +101,9 @@ const Pdfs = () => {
                 <div
                   key={item.id}
                   className="rounded-xl flex flex-col space-y-2 border border-gray-300"
-                  data-aos="zoom-in"
-                >
+                  data-aos="zoom-in">
                   <img
-                    src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
+                    src={img1}
                     className="rounded-lg w-full h-64"
                     alt={item.title}
                   />
@@ -141,8 +134,7 @@ const Pdfs = () => {
                             handleDownload(
                               `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
                             )
-                          }
-                        >
+                          }>
                           Download
                           <img src={img} className="size-5" alt="Download" />
                         </button>

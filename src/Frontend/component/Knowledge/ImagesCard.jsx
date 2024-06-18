@@ -4,7 +4,7 @@ import Spinner1 from "../common files/Spinner1";
 import img from "../../../../src/assets/Frontend_images/Download_SVG.png";
 import { useNavigate } from "react-router-dom";
 
-const ImagesCard = ({ resources, searchInput }) => {
+const ImagesCard = ({ resources }) => {
   const navigate = useNavigate();
 
   const handleDownload = async (pdfUrl) => {
@@ -118,7 +118,7 @@ const ImagesCard = ({ resources, searchInput }) => {
           )}
         </div>
       </div>
-      {resources.length > 0 && (
+      {resources.length > 3 && (
         <div className="flex justify-center mt-6">
           <button
             onClick={handleShowMore}

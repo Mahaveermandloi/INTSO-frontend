@@ -101,7 +101,7 @@ const Knowledge = () => {
 
   useEffect(() => {
     if (triggerSearch) {
-      setTriggerSearch(false); // Reset triggerSearch after handling search
+      setTriggerSearch(false);
     }
   }, [triggerSearch]);
 
