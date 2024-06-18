@@ -27,6 +27,7 @@ const Testimonials = () => {
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
+                api_key: "ajeet",
               },
             }
           );
