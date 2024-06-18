@@ -39,16 +39,21 @@ const MainBlog = () => {
               <div className="flex justify-between py-4">
                 <h1>
                   Posted By :
-                  <span className="text-[#ED1450] font-bold ">Admin</span>
+                  <span className="text-[#ED1450] font-bold ">
+                    {blog.posted_By}
+                  </span>
                 </h1>
-                <h1 className="text-[#ED1450] font-bold ">2 days ago</h1>
+                <h1 className="text-[#ED1450] font-bold ">
+                  {" "}
+                  {formatDate(blog.createdAt)}
+                </h1>
               </div>
               <div className=" border-b-2 mt-3 border-gray-300 w-full"></div>
               <div className="py-6 space-y-6">
                 <div dangerouslySetInnerHTML={{ __html: blog.description }} />
               </div>
             </div>
-            <div className="text-left lg:w-[40%] w-full flex flex-col ">
+            <div className="text-left lg:w-[40%] w-full flex flex-col mt-8">
               <h1 className="text-4xl font-bold text-center ">Recent Post</h1>
               <div className="space-y-5 border border-gray-300 p-6 rounded-xl mt-10">
                 <div className="flex gap-6 flex-col sm:flex-row lg:flex-col">
@@ -63,7 +68,11 @@ const MainBlog = () => {
                           {item.title}
                         </h1>
                         <p className=" text-xl  md:text-lg">
-                          {item.description}
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: item.description,
+                            }}
+                          />
                         </p>
                         <div className=" border-b-2 mt-3 border-gray-300"></div>
                         <div className=" py-4  md:text-lg">

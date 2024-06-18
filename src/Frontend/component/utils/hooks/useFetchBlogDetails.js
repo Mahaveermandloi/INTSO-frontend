@@ -25,8 +25,6 @@ const useFetchBlogDetails = () => {
         });
         const jsonData = await data.json();
 
-       
-
         setData(jsonData.data.blogs);
         const sanitizedHtml = DOMPurify.sanitize(
           jsonData.data.blog.description
@@ -34,6 +32,7 @@ const useFetchBlogDetails = () => {
         setData({ ...jsonData.data.blog, description: sanitizedHtml });
         console.log(jsonData.data.recentBlogs);
         setData1(jsonData.data.recentBlogs);
+        console.log(jsonData.data.recentBlogs);
       } catch (error) {
         console.log(error);
       } finally {

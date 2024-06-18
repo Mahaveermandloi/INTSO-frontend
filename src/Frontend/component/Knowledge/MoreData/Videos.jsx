@@ -80,7 +80,7 @@ const Videos = () => {
         All Videos
       </div>
       <div className="flex justify-center">
-        {loading ? ( // Display spinner while loading
+        {loading ? (
           <Spinner1 />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
@@ -89,8 +89,7 @@ const Videos = () => {
                 <div
                   key={item.id}
                   className="rounded-xl flex flex-col space-y-2 border border-gray-300"
-                  data-aos="zoom-in"
-                >
+                  data-aos="zoom-in">
                   <img
                     src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
                     className="rounded-lg w-full h-64"

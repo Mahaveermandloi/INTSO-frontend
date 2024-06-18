@@ -23,6 +23,11 @@ const BlogPage = () => {
     setVisibleItemCount((prev) => prev + 4);
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <>
       <div className="shadow-inner shadow-gray-300">
@@ -54,7 +59,10 @@ const BlogPage = () => {
                       {item.posted_By}
                     </span>
                   </h1>
-                  <h1 className="text-[#ED1450] font-bold">2 days ago</h1>
+                  <h1 className="text-[#ED1450] font-bold">
+                    {" "}
+                    {formatDate(item.createdAt)}
+                  </h1>
                 </div>
               </div>
             ))}
