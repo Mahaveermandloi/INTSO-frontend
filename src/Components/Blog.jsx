@@ -19,7 +19,12 @@ const Blog = () => {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
-          `${URLPath}/api/v1/blogs/get-all-blog-details`
+          `${URLPath}/api/v1/blogs/get-all-blog-details`,
+          {
+            headers: {
+              api_key: "ajeet",
+            },
+          }
         );
         // console.log(response.data.data.blogData);
         setGallery(response.data.data.blogData);
