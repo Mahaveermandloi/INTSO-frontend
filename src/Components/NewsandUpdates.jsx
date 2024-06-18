@@ -42,7 +42,12 @@ const NewsandUpdates = () => {
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
         const response = await axios.get(
-          `${URLPath}/api/v1/newsandupdates/get-news-and-updates`
+          `${URLPath}/api/v1/newsandupdates/get-news-and-updates`,
+          {
+            headers: {
+              api_key: "ajeet",
+            },
+          }
         );
 
         const news = response.data.data.newsArray;
