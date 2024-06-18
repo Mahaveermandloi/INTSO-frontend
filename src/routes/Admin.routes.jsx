@@ -30,6 +30,7 @@ import SchoolRequests from "../Components/School/SchoolRequests";
 import NewsLetter from "../Components/NewsLetter";
 import { baseURL } from "../URLPath";
 import useTokenExpirationCheck from "../Components/useTokenExpirationCheck";
+import Layouts from "../Components/Layouts";
 
 const AdminRoutes = () => {
   useTokenExpirationCheck();
@@ -67,8 +68,6 @@ const AdminRoutes = () => {
 export default AdminRoutes;
 
 const AuthenticatedApp = () => {
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-
   return (
     <div className="">
       <Header />
@@ -102,13 +101,7 @@ const AuthenticatedApp = () => {
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </main>
-      <footer>
-        <div className="relative text-center mt-[60%] lg:mt-[276px] text-white p-2 lg:w-10/12 bg-gray-800 bottom-0 lg:ml-auto">
-          <span className="text-sm text-gray-400 sm:text-center dark:text-gray-400 p-3">
-            Copyright {currentYear} | Design & Developed By: Ozonesoft Solutions
-          </span>
-        </div>
-      </footer>
+      <Layouts />
     </div>
   );
 };
