@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import useFetchBlogDetails from "../utils/hooks/useFetchBlogDetails";
 import { IP_ADDRESS, PORT } from "../utils/constants";
@@ -58,15 +58,17 @@ const MainBlog = () => {
               <div className="space-y-5 border border-gray-300 p-6 rounded-xl mt-10">
                 <div className="flex gap-6 flex-col sm:flex-row lg:flex-col">
                   {recentBlogs.map((item) => (
-                    <div className="flex lg:flex-row flex-col  ">
+                    <div className="flex lg:flex-row flex-col">
                       <img
                         src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
                         className="lg:w-40 w-full h-40 object-cover rounded-xl "
                       />
                       <div className="px-2">
-                        <h1 className="font-bold text-xl md:text-lg">
-                          {item.title}
-                        </h1>
+                        <Link to={`/blogsdetails/${item.id}`}>
+                          <h1 className="font-bold text-xl md:text-lg">
+                            {item.title}
+                          </h1>
+                        </Link>
                         <p className=" text-xl  md:text-lg">
                           <div
                             dangerouslySetInnerHTML={{

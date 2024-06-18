@@ -9,7 +9,6 @@ const VideosCard = ({ resources }) => {
   const navigate = useNavigate();
 
   const [selectedVideo, setSelectedVideo] = useState(null);
-  // console.log("Resources:", resources);
 
   const handlePlayClick = (video) => {
     setSelectedVideo(video);
@@ -82,8 +81,7 @@ const VideosCard = ({ resources }) => {
                     onClick={() => handlePlayClick(item)}
                     className="rounded-xl flex flex-col space-y-2 border border-gray-300"
                     data-aos="zoom-in"
-                    key={item.id}
-                  >
+                    key={item.id}>
                     <div className="relative w-full rounded-lg overflow-hidden">
                       <img
                         src={`http://${IP_ADDRESS}:${PORT}${item.thumbnail}`}
@@ -124,12 +122,11 @@ const VideosCard = ({ resources }) => {
               </div>
             )}
           </div>
-          {resources.length > 0 && (
+          {resources.length >= 3 && (
             <div className="flex justify-center mt-6">
               <button
                 onClick={handleShowMore}
-                className="bg-[#ED1450] text-white p-3 rounded-full w-32"
-              >
+                className="bg-[#ED1450] text-white p-3 rounded-full w-32">
                 Show More
               </button>
             </div>

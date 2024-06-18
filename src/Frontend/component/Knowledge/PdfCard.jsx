@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
@@ -72,8 +70,7 @@ const PdfCard = ({ resources }) => {
                 <div
                   className="rounded-xl flex flex-col border border-gray-300"
                   data-aos="zoom-in"
-                  key={item.id}
-                >
+                  key={item.id}>
                   <div className="relative rounded-lg overflow-hidden">
                     <img
                       src={img1}
@@ -109,8 +106,7 @@ const PdfCard = ({ resources }) => {
                             handleDownload(
                               `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
                             )
-                          }
-                        >
+                          }>
                           Download
                           <img
                             src={img2}
@@ -126,12 +122,11 @@ const PdfCard = ({ resources }) => {
             </div>
           )}
         </div>
-        {resources.length > 0 && (
+        {resources.length >= 3 && (
           <div className="flex justify-center mt-6">
             <button
               onClick={handleShowMore}
-              className="bg-[#ED1450] text-white p-3 rounded-full w-32"
-            >
+              className="bg-[#ED1450] text-white p-3 rounded-full w-32">
               Show More
             </button>
           </div>

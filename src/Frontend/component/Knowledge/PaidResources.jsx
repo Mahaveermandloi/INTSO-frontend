@@ -8,20 +8,18 @@ import { useLocation } from "react-router-dom";
 const PaidResources = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-  const [triggerSearch, setTriggerSearch] = useState(true);
+  const [triggerSearch, setTriggerSearch] = useState(false);
 
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
-    setTriggerSearch(!triggerSearch);
   };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    setTriggerSearch(!triggerSearch);
   };
 
   const handleSearchButtonClick = () => {
-    setTriggerSearch(!triggerSearch);
+    setTriggerSearch(true);
   };
 
   const location = useLocation();
@@ -36,7 +34,7 @@ const PaidResources = () => {
     }
   }, [triggerSearch]);
 
-  // const options = Array.from({ length: 10 }, (_, index) => index + 1);
+
 
   return (
     <div className="shadow-inner shadow-gray-300">
