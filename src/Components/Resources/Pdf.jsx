@@ -39,7 +39,7 @@ const Pdf = () => {
           }
         );
         const imageResources = response.data.data.resourcesData.filter(
-          (resource) => resource.resource_type === "image"
+          (resource) => resource.resource_type === "pdf"
         );
         let filteredData = imageResources;
         if (option === "free") {
@@ -107,12 +107,12 @@ const Pdf = () => {
 
     if (selectedFile && title && description) {
       const formData = new FormData();
-      formData.append("image", selectedFile);
+      formData.append("pdf", selectedFile);
       formData.append("title", title);
       formData.append("description", description);
       formData.append("resource_class", resource_class);
       formData.append("resource_url", resourceURL);
-      formData.append("resource_type", "image");
+      formData.append("resource_type", "pdf");
 
       // Determine is_paid based on selectedOption
       formData.append("is_paid", selectedOption === "paid");
