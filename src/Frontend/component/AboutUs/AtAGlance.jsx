@@ -6,7 +6,7 @@ const AtAGlance = () => {
       <div className="bg-slate-100 sm:p-14 p-6 space-y-6">
         <div className="max-w-screen-xl mx-auto lg:p-24 p-6">
           <div
-            className=" flex flex-col justify-center items-center"
+            className=" flex flex-col justify-center items-center mb-10"
             data-aos="fade-up">
             <h1 className="text-[#ED1450] font-bold text-2xl ">At a Glance</h1>
             <p className="w-16 border-b-2 border-[#ED1450] "></p>

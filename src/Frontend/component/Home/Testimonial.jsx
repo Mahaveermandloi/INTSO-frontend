@@ -58,7 +58,8 @@ export const Testimonial = () => {
                       />
                       <div className="p-10 flex flex-col justify-center items-center space-y-3">
                         <h1 className="font-bold text-white text-xl">
-                          {item.name}
+                          {item.name.charAt(0).toUpperCase() +
+                            item.name.slice(1)}
                         </h1>
                         <p className="text-white">{item.description}</p>
                       </div>

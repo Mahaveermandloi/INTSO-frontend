@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ImagesCard = ({ resources }) => {
   const navigate = useNavigate();
-
+  console.log(resources);
   const handleDownload = async (pdfUrl) => {
     try {
       const response = await fetch(pdfUrl, {
@@ -118,7 +118,7 @@ const ImagesCard = ({ resources }) => {
           )}
         </div>
       </div>
-      {resources.length > 3 && (
+      {resources.length >= 3 && (
         <div className="flex justify-center mt-6">
           <button
             onClick={handleShowMore}

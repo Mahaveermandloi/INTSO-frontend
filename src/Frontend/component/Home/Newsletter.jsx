@@ -49,19 +49,21 @@ const Newsletter = () => {
             Lorem Ipsum is simply dummy text of the printing and typesetting
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="space-x-4 flex justify-end">
+        <form
+          onSubmit={handleSubmit}
+          className="space-x-4 flex items-center justify-end">
           <input
             type="email"
             placeholder="Enter your emailId"
             name="email"
-            className="bg-white lg:p-2 p-3 px-3 rounded-lg w-[70%]"
+            className="text-black lg:p-2 px-3 rounded-lg w-[70%]"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <button
             type="submit"
-            className="bg-[#ED1450] px-12 lg:p-2 p-3 w-40 rounded-full">
+            className="bg-[#ED1450] px-12 lg:p-2 h-10  w-32 rounded-full">
             Submit
           </button>
         </form>

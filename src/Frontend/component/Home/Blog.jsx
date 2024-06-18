@@ -50,8 +50,8 @@ export const Blog = () => {
                     }`}
                   />
                   <div>
-                    <div className="p-4 space-y-2 ">
-                      <h1>{item.title}</h1>
+                    <div className="p-4 space-y-2  ">
+                      <h1 className="font-bold">{item.title}</h1>
                       <p>
                         {item.description}
                         <Link to={`/blogsdetails/${item.id}`}>

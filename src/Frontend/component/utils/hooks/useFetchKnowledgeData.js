@@ -55,7 +55,7 @@ const useFetchKnowledgeData = ({ searchInput, selectedOption }) => {
           },
         });
         const jsonData = await data.json();
-        // console.log("Fetched Data:", jsonData);
+        console.log("Fetched Data:", jsonData);
         setData1(jsonData.resourceData.imageArray);
         setData2(jsonData.resourceData.pdfArray);
         setData3(jsonData.resourceData.videoArray);
@@ -66,8 +66,7 @@ const useFetchKnowledgeData = ({ searchInput, selectedOption }) => {
       }
     };
     fetchData();
-  }, [searchInput, selectedOption]); // Include searchInput in the dependency array
-  // Include searchInput in the dependency array
+  }, [searchInput, selectedOption]); 
   return { data1, data2, data3, loading };
 };
 export default useFetchKnowledgeData;
