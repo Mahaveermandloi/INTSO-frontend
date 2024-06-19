@@ -43,7 +43,7 @@ export const Blog = () => {
                   }`}>
                   <img
                     src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
-                    className={`text-left border border-gray-300 rounded-3xl ${
+                    className={`text-left border border-gray-300  object-cover rounded-3xl ${
                       index === 0
                         ? "h-52 w-full rounded-3xl object-cover "
                         : "md:w-[35%] w-full h-full object-cover "
@@ -54,7 +54,7 @@ export const Blog = () => {
                       <h1 className="font-bold">{item.title}</h1>
                       <p>
                         {item.description}
-                        <Link to={`/blogsdetails/${item.id}`}>
+                        <Link to={`/blogsdetails/${item.permalink}`}>
                           <span className="text-[#ED1450] font-bold p-4">
                             Read More...
                           </span>

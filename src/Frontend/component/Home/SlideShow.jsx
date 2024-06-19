@@ -31,12 +31,12 @@ const Slideshow = () => {
             {bannerData.map((item, index) => (
               <div key={index} style={{ position: "relative" }}>
                 <img
-                  className="carousel-image md:h-[430px] h-full"
+                  className="carousel-image md:h-[430px] h-full object-cover"
                   src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
                   alt="not found"
                 />
                 <div className="flex flex-col lg:px-36 px-10 md:py-28 py-2 2xl:px-[440px] 2xl:py-24  text-left sm:gap-2 gap-1 absolute top-0 left-0 text-[#ED1450] ">
-                  <div className="max-w-screen-xl mx-auto  ">
+                  <div className="max-w-screen-xl mx-auto 2xl:w-full">
                     <p className="sm:text-5xl text-xl 2xl:text-6xl font-bold">
                       {item.title.toUpperCase()}
                     </p>

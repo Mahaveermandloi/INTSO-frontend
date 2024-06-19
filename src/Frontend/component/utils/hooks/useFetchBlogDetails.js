@@ -3,20 +3,20 @@ import { IP_ADDRESS, PORT } from "../constants";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 
-const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details`;
+const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details/`;
 
 const useFetchBlogDetails = () => {
   console.log("this is use Fetchook");
 
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
-  const { id } = useParams();
+  const { permalink } = useParams();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(`${url}/${id}`, {
+        const data = await fetch(`${url}/${permalink}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -24,6 +24,7 @@ const useFetchBlogDetails = () => {
           },
         });
         const jsonData = await data.json();
+        // console.log("mkdmaskmfk;asmf", jsonData);
 
         setData(jsonData.data.blogs);
         const sanitizedHtml = DOMPurify.sanitize(
@@ -41,7 +42,7 @@ const useFetchBlogDetails = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [permalink]);
 
   return { data, data1, loading };
 };

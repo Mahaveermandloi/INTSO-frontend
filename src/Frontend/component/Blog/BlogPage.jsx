@@ -39,13 +39,13 @@ const BlogPage = () => {
                 className="flex flex-col shadow-2xl rounded-xl space-y-2 p-5">
                 <img
                   src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
-                  className="h-52 rounded-2xl"
+                  className="h-52 rounded-2xl  object-cover"
                   alt={item.title}
                 />
                 <h1 className="text-left text-2xl font-bold">{item.title}</h1>
                 <p className="text-left">
                   {item.description}
-                  <Link to={`/blogsdetails/${item.id}`}>
+                  <Link to={`/blogsdetails/${item.permalink}`}>
                     <span className="text-[#ED1450] font-bold p-4">
                       Read More...
                     </span>

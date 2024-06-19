@@ -6,10 +6,12 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 
 const MainBlog = () => {
   const location = useLocation();
-  const { id } = useParams();
-  const { data: blog, loading } = useFetchBlogDetails(id);
-  const { data1: recentBlogs } = useFetchBlogDetails(id);
-  console.log(recentBlogs);
+  const { permalink } = useParams();
+  console.log(permalink);
+  const { data: blog, loading } = useFetchBlogDetails(permalink);
+  const { data1: recentBlogs } = useFetchBlogDetails(permalink);
+  console.log("kklasjfksafaskf", blog);
+  console.log("sdksdkskasj", recentBlogs);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -44,7 +46,6 @@ const MainBlog = () => {
                   </span>
                 </h1>
                 <h1 className="text-[#ED1450] font-bold ">
-                  {" "}
                   {formatDate(blog.createdAt)}
                 </h1>
               </div>
@@ -64,7 +65,7 @@ const MainBlog = () => {
                         className="lg:w-40 w-full h-40 object-cover rounded-xl "
                       />
                       <div className="px-2">
-                        <Link to={`/blogsdetails/${item.id}`}>
+                        <Link to={`/blogsdetails/${item.permalink}`}>
                           <h1 className="font-bold text-xl md:text-lg">
                             {item.title}
                           </h1>
