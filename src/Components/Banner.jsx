@@ -39,7 +39,7 @@ const Banner = () => {
         toast.error("No access token found");
       }
     } catch (error) {
-      toast.error("Error fetching banner data");
+      toast.info("Error fetching banner data");
     } finally {
       setLoading(false); // Stop loading
     }

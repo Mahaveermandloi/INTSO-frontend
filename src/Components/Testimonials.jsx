@@ -5,6 +5,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import logo from "../assets/pdf.png";
 import { URLPath } from "../URLPath";
 import Loader from "./Loader";
+import img from "../assets/9214833.jpg";
 
 const Testimonials = () => {
   const [testimonial, setTestimonial] = useState([]);
@@ -294,8 +295,11 @@ const Testimonials = () => {
           <div className=" hidden lg:w-3/4 gap-3  lg:grid grid-cols-2 lg:items-start lg:mt-5  lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             {isLoading ? (
               <Loader message={"Loading..."} />
+            ) : testimonial.length === 0 ? (
+              <>
+                <img src={img} alt="" className="" />
+              </>
             ) : (
-              testimonial &&
               testimonial.map(({ id, image, name, description }) => (
                 <div
                   key={id}
@@ -497,8 +501,9 @@ const Testimonials = () => {
           <div className="flex flex-col gap-5">
             {isLoading ? (
               <Loader message={"Loading..."} />
+            ) : testimonial.length === 0 ? (
+              <img src={img} alt="" className="" />
             ) : (
-              testimonial &&
               testimonial.map(({ id, image, name, description }) => (
                 <div className="relative flex h-28 lg:flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:bg-gray-100 overflow-hidden">
                   <img

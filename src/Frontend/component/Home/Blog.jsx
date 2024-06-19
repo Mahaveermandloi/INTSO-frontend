@@ -54,7 +54,7 @@ export const Blog = () => {
                       <h1 className="font-bold">{item.title}</h1>
                       <p>
                         {item.description}
-                        <Link to={`/blogsdetails/${item.id}`}>
+                        <Link to={`/blogsdetails/${item.permalink}`}>
                           <span className="text-[#ED1450] font-bold p-4">
                             Read More...
                           </span>

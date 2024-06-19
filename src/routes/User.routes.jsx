@@ -124,7 +124,7 @@ const UserRoutes = () => {
           }
         />
         <Route
-          path="/blogsdetails/:id"
+          path="/blogsdetails/:permalink"
           element={
             <Layout>
               <MainBlog />
