@@ -49,7 +49,7 @@ const useFormValidation = (formData) => {
     }
     if (!values.mobile_number) {
       errors.mobile_number = "Mobile number is required";
-    } else if (!/^\d{10}$/.test(values.mobile_number)) {
+    } else if (!/^\d{9}$/.test(values.mobile_number)) {
       errors.mobile_number = "Mobile number is invalid";
     }
     if (!values.principal_name_prefix) {

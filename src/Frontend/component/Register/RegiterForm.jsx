@@ -49,9 +49,8 @@ const RegisterForm = () => {
             },
           }
         );
-        if (res.ok) {
+        if (res.status === 201) {
           const data = await res.json();
-          setStatusMessage("Your message has been sent successfully!");
           toast.success("Your message has been sent successfully!");
           setFormData({
             school_name: "",
@@ -68,30 +67,19 @@ const RegisterForm = () => {
             principal_name: "",
             syllabus: "",
           });
-        } else {
-          const errorData = await res.json();
-          console.error("Failed to send message:", errorData);
-          if (errorData.message === "This email is already registered") {
-            // setStatusMessage(
-            //   "This email is already registered. Please use a different email."
-            // );
-            toast.error(
-              "This email is already registered. Please use a different email."
-            );
-          } else {
-            // setStatusMessage("Failed to send your message. Please try again.");
-            toast.error("Failed to send your message. Please try again.");
-          }
+        } else if (res.status === 409) {
+          toast.error("This email is already registered.");
+        } else if (res.status === 400) {
+          toast.error("please fill the all required fields");
         }
       } catch (err) {
-        console.error("Sending message failed:", err);
-        // setStatusMessage("An error occurred. Please try again later.");
         toast.error("An error occurred. Please try again later.");
       }
     } else {
-      // setStatusMessage("Please correct the errors and try again.");
       toast.error("Please correct the errors and try again.");
     }
+
+    setIsSubmitting(false);
   };
 
   useEffect(() => {
@@ -222,9 +210,7 @@ const RegisterForm = () => {
                     name="state"
                     value={formData.state}
                     onChange={handleChange}>
-                    <option value="" disabled>
-                      Select Your State
-                    </option>
+                    <option value="">Select Your State</option>
                     {states.map((state) => (
                       <option key={state} value={state}>
                         {state}
@@ -312,11 +298,11 @@ const RegisterForm = () => {
                     placeholder="Enter Your Mobile Number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
-                  {errors.mobile_number && (
+                  {/* {errors.mobile_number && (
                     <p className="text-red-500 text-sm">
                       {errors.mobile_number}
                     </p>
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">

@@ -53,7 +53,7 @@ import { IP_ADDRESS, PORT } from "../constants";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 
-const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details/`;
+const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details`;
 
 const useFetchBlogDetails = () => {
   console.log("this is use Fetchook");

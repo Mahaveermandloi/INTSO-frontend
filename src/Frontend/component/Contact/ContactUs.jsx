@@ -36,18 +36,18 @@ const ContactUs = () => {
           },
         }
       );
-      if (res.ok) {
+      if (res.status === 200) {
         const data = await res.json();
         toast.success("Your message has been sent successfully!");
-        // setStatusMessage("Your message has been sent successfully!");
         setFormData({
           name: "",
           email: "",
           mobile_number: "",
           message: "",
         });
+      } else if (res.status === 400) {
+        toast.error("please fill the all required fields");
       } else {
-        // setStatusMessage("Failed to send your message. Please try again.");
         toast.error("Failed to send your message. Please try again.");
       }
     } catch (err) {
@@ -89,7 +89,6 @@ const ContactUs = () => {
                     onChange={handleChange}
                     placeholder="Enter Your name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
-                    required
                   />
                 </div>
                 <div className="flex flex-col">
@@ -103,7 +102,6 @@ const ContactUs = () => {
                     onChange={handleChange}
                     placeholder="Enter Your EmailID"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
-                    required
                   />
                 </div>
                 <div className="flex flex-col">
@@ -117,7 +115,6 @@ const ContactUs = () => {
                     onChange={handleChange}
                     placeholder="Enter Your Mobile Number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
-                    required
                   />
                 </div>
               </div>
@@ -130,8 +127,7 @@ const ContactUs = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className="border border-gray-300 p-2 px-4 rounded-lg"
-                  placeholder="Type Message"
-                  required></textarea>
+                  placeholder="Type Message"></textarea>
               </div>
               <div className="flex justify-center">
                 <button

@@ -128,7 +128,7 @@ const UserRoutes = () => {
           element={
             <Layout>
               <MainBlog />
-            </Layout>
+            </Layout>    
           }
         />
         <Route
