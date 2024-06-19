@@ -43,7 +43,7 @@ export const Blog = () => {
                   }`}>
                   <img
                     src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
-                    className={`text-left border border-gray-300 rounded-3xl ${
+                    className={`text-left border border-gray-300  object-cover rounded-3xl ${
                       index === 0
                         ? "h-52 w-full rounded-3xl object-cover "
                         : "md:w-[35%] w-full h-full object-cover "

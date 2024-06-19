@@ -52,7 +52,9 @@ import { useState, useEffect } from "react";
 import { IP_ADDRESS, PORT } from "../constants";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
-const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details`;
+
+const url = `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-blog-details/`;
+
 const useFetchBlogDetails = () => {
   console.log("this is use Fetchook");
   const [data, setData] = useState([]);
@@ -70,6 +72,7 @@ const useFetchBlogDetails = () => {
           },
         });
         const jsonData = await data.json();
+
         setData(jsonData.data.blogs);
         const sanitizedHtml = DOMPurify.sanitize(
           jsonData.data.blog.description
@@ -86,6 +89,7 @@ const useFetchBlogDetails = () => {
     };
     fetchData();
   }, [permalink]);
+
   return { data, data1, loading };
 };
 export default useFetchBlogDetails;

@@ -4,6 +4,8 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,12 +28,14 @@ const Newsletter = () => {
 
       // Reset email input after successful submission
       setEmail("");
-      alert("Newsletter subscription successful!");
+      setSuccessMessage("Newsletter subscription successful!");
+      setErrorMessage(""); // Clear any previous error message
     } catch (error) {
       console.error("Error submitting newsletter subscription:", error.message);
-      alert(
+      setErrorMessage(
         "Failed to submit newsletter subscription. Please try again later."
       );
+      setSuccessMessage(""); // Clear any previous success message
     }
   };
 
@@ -42,8 +46,8 @@ const Newsletter = () => {
         backgroundImage: `url(${img})`,
         backgroundSize: "cover",
       }}>
-      <div className=" max-w-screen-xl mx-auto grid lg:grid-cols-2 mt-10 lg-gap-y-0 gap-y-6 grid-cols-1 lg:px-28 gap-x-10 px-6 p-16 text-white">
-        <div className="">
+      <div className="max-w-screen-xl mx-auto grid lg:grid-cols-2 mt-10 lg-gap-y-0 gap-y-6 grid-cols-1 lg:px-28 gap-x-10 px-6 p-16 text-white">
+        <div>
           <h1 className="text-3xl">Newsletter</h1>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -63,10 +67,16 @@ const Newsletter = () => {
           />
           <button
             type="submit"
-            className="bg-[#ED1450] px-12 lg:p-2 h-10  w-32 rounded-full">
+            className="bg-[#ED1450] px-12 lg:p-2 h-10 w-32 rounded-full">
             Submit
           </button>
         </form>
+        {successMessage && (
+          <div className="mt-4 text-green-500">{successMessage}</div>
+        )}
+        {errorMessage && (
+          <div className="mt-4 text-red-500">{errorMessage}</div>
+        )}
       </div>
     </div>
   );

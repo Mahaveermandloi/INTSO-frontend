@@ -250,10 +250,13 @@ import useFetchBlogDetails from "../utils/hooks/useFetchBlogDetails";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 const MainBlog = () => {
   const location = useLocation();
-  // const { id } = useParams();
+  // const { permalink } = useParams();
+  // console.log(permalink);
   const { data: blog, loading } = useFetchBlogDetails();
   const { data1: recentBlogs } = useFetchBlogDetails();
+
   console.log(recentBlogs);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -272,7 +275,7 @@ const MainBlog = () => {
           <div className=" py-10 flex lg:flex-row flex-col gap-5 ">
             <div className="lg:w-[60%] w-full">
               <h1 className="text-left py-4 text-4xl font-bold">
-                {blog.title} 
+                {blog.title}
               </h1>
               <img
                 src={`http://${IP_ADDRESS}:${PORT}${blog.image}`}
@@ -287,7 +290,6 @@ const MainBlog = () => {
                   </span>
                 </h1>
                 <h1 className="text-[#ED1450] font-bold ">
-                  {" "}
                   {formatDate(blog.createdAt)}
                 </h1>
               </div>

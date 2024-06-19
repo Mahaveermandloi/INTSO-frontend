@@ -4,7 +4,8 @@ import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import img1 from "../../../../src/assets/Frontend_images/Contact Vector.png";
 
 const ContactUs = () => {
@@ -37,7 +38,8 @@ const ContactUs = () => {
       );
       if (res.ok) {
         const data = await res.json();
-        setStatusMessage("Your message has been sent successfully!");
+        toast.success("Your message has been sent successfully!");
+        // setStatusMessage("Your message has been sent successfully!");
         setFormData({
           name: "",
           email: "",
@@ -45,11 +47,13 @@ const ContactUs = () => {
           message: "",
         });
       } else {
-        setStatusMessage("Failed to send your message. Please try again.");
+        // setStatusMessage("Failed to send your message. Please try again.");
+        toast.error("Failed to send your message. Please try again.");
       }
     } catch (err) {
       console.error("Sending message failed:", err);
       setStatusMessage("An error occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.");
     }
   };
 
@@ -59,6 +63,7 @@ const ContactUs = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className=" bg-gray-100 lg:px-4 px-10 py-8">
         <div>
           <div className="lg:px-24 max-w-screen-xl mx-auto">
@@ -126,14 +131,12 @@ const ContactUs = () => {
                   onChange={handleChange}
                   className="border border-gray-300 p-2 px-4 rounded-lg"
                   placeholder="Type Message"
-                  required
-                ></textarea>
+                  required></textarea>
               </div>
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="lg:col-span-2 w-[40%] bg-[#ED1450] text-white text-lg p-3 rounded-full mt-10"
-                >
+                  className="lg:col-span-2 w-[40%] bg-[#ED1450] text-white text-lg p-3 rounded-full mt-10">
                   Register
                 </button>
               </div>
@@ -176,8 +179,7 @@ const ContactUs = () => {
             width="100%"
             height="400"
             allowFullScreen=""
-            loading="lazy"
-          ></iframe>
+            loading="lazy"></iframe>
         </div>
       </div>
     </>

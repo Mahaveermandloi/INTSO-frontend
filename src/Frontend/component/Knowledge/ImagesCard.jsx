@@ -71,7 +71,7 @@ const ImagesCard = ({ resources }) => {
                   data-aos="zoom-in">
                   <img
                     src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
-                    className="rounded-lg w-full h-64"
+                    className="rounded-lg w-full h-64  object-cover"
                     alt={item.title}
                   />
                   <div className="flex flex-col space-y-3 p-2">

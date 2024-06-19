@@ -85,7 +85,7 @@ const VideosCard = ({ resources }) => {
                     <div className="relative w-full rounded-lg overflow-hidden">
                       <img
                         src={`http://${IP_ADDRESS}:${PORT}${item.thumbnail}`}
-                        className="w-full h-64"
+                        className="w-full h-64  object-cover"
                         alt={item.title}
                         style={{ display: "block" }}
                       />

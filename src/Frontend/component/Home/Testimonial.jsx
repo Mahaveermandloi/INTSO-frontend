@@ -52,7 +52,7 @@ export const Testimonial = () => {
                     </div>
                     <div className="space-y-1">
                       <img
-                        className="carousel-image1"
+                        className="carousel-image1 object-cover"
                         src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
                         alt={item.alt}
                       />

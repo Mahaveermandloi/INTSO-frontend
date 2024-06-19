@@ -122,7 +122,7 @@ const BlogPage = () => {
               >
                 <img
                   src={`http://${IP_ADDRESS}:${PORT}${item.image}`}
-                  className="h-52 rounded-2xl"
+                  className="h-52 rounded-2xl  object-cover"
                   alt={item.title}
                 />
                 <h1 className="text-left text-2xl font-bold">{item.title}</h1>
