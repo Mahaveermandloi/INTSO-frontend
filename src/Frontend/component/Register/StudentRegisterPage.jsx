@@ -30,52 +30,154 @@ const StudentRegisterPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   validate(formData);
+
+  //   if (Object.keys(errors).length === 0) {
+  //     try {
+  //       const res = await fetch(
+  //         `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
+  //         {
+  //           method: "POST",
+  //           body: JSON.stringify(formData),
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       );
+
+  //       if (res.status === 201) {
+  //         const responseData = await res.json();
+  //         toast.success("Your message has been sent successfully!");
+  //         setFormData({
+  //           name: "",
+  //           email: "",
+  //           address: "",
+  //           city: "",
+  //           state: "",
+  //           pincode: "",
+  //           mobile_number: "",
+  //           syllabus: "",
+  //           school_name: "",
+  //           student_class: "",
+  //         });
+  //       } else if (res.status === 409) {
+  //         toast.error("This email is already registered.");
+  //       } else if (res.status === 400) {
+  //         toast.error("please fill the all required fields");
+  //       }
+  //     } catch (err) {
+  //       toast.error("An error occurred. Please try again later.");
+  //     }
+  //   } else {
+  //     toast.error("Please correct the errors and try again.");
+  //   }
+
+  //   setIsSubmitting(false);
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault(); // Prevent default form submission
+
+  //   // setIsSubmitting(true); // Set submitting state
+  //   validate(formData); // Validate form data
+
+  //   console.log(formData);
+
+  //   if (Object.keys(errors).length === 0) {
+  //     // Check if there are no errors
+  //     try {
+  //       const res = await fetch(
+  //         `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
+  //         {
+  //           method: "POST",
+  //           body: JSON.stringify(formData),
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       );
+
+  //       if (res.status === 201) {
+  //         const responseData = await res.json();
+  //         toast.success("Your message has been sent successfully!");
+  //         setFormData({
+  //           // Reset form data after successful submission
+  //           name: "",
+  //           email: "",
+  //           address: "",
+  //           city: "",
+  //           state: "",
+  //           pincode: "",
+  //           mobile_number: "",
+  //           syllabus: "",
+  //           school_name: "",
+  //           student_class: "",
+  //         });
+
+  //         window.location.reload();
+  //       } else if (res.status === 409) {
+  //         toast.error("This email is already registered.");
+  //       } else if (res.status === 400) {
+  //         toast.error("Please fill in all required fields.");
+  //       }
+  //     } catch (err) {
+  //       toast.error("An error occurred. Please try again later.");
+  //     }
+  //   } else {
+  //     toast.error("Please correct the errors and try again.");
+  //   }
+
+  //   // setIsSubmitting(false); // Reset submitting state
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e.preventDefault(); // Prevent default form submission
+
+    // Validate form data
     validate(formData);
 
-    if (Object.keys(errors).length === 0) {
-      try {
-        const res = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
-          {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (res.status === 201) {
-          const responseData = await res.json();
-          toast.success("Your message has been sent successfully!");
-          setFormData({
-            name: "",
-            email: "",
-            address: "",
-            city: "",
-            state: "",
-            pincode: "",
-            mobile_number: "",
-            syllabus: "",
-            school_name: "",
-            student_class: "",
-          });
-        } else if (res.status === 409) {
-          toast.error("This email is already registered.");
-        } else if (res.status === 400) {
-          toast.error("please fill the all required fields");
+    try {
+      const res = await fetch(
+        `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      } catch (err) {
-        toast.error("An error occurred. Please try again later.");
-      }
-    } else {
-      toast.error("Please correct the errors and try again.");
-    }
+      );
 
-    setIsSubmitting(false);
+      if (res.status === 201) {
+        const responseData = await res.json();
+        toast.success("Your message has been sent successfully!");
+
+        // Reset form data only after successful submission
+        setFormData({
+          ...formData,
+          name: "",
+          email: "",
+          address: "",
+          city: "",
+          state: "",
+          pincode: "",
+          mobile_number: "",
+          syllabus: "",
+          school_name: "",
+          student_class: "",
+        });
+      } else if (res.status === 409) {
+        toast.error("This email is already registered.");
+      } else if (res.status === 400) {
+        toast.error("Please fill in all required fields.");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("An error occurred. Please try again later.");
+    }
   };
 
   useEffect(() => {
@@ -129,7 +231,8 @@ const StudentRegisterPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:px-10 p-6">
+              className="flex flex-col md:px-10 p-6"
+            >
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -180,11 +283,13 @@ const StudentRegisterPage = () => {
                   <label className="text-left p-2">
                     Class<span className="text-red-500 text-lg">*</span>
                   </label>
+
                   <select
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="student_class"
                     value={formData.student_class}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option value="">Select Your class</option>
                     {classes.map((cls) => (
                       <option key={cls} value={cls}>
@@ -235,7 +340,8 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option disabled selected>
                       Select Your State
                     </option>
@@ -279,11 +385,6 @@ const StudentRegisterPage = () => {
                     placeholder="Enter your mobile number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
-                  {/* {errors.mobile_number && (
-                    <p className="text-red-500 text-sm">
-                      {errors.mobile_number}
-                    </p>
-                  )} */}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -293,11 +394,12 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option value="">Select Syllabus</option>
-                    <option>CBSE</option>
-                    <option>ICSE</option>
-                    <option>State Board</option>
+                    <option value="CBSE">CBSE</option>
+                    <option value="ICSE">ICSE</option>
+                    <option value="State Board">State Board</option>
                   </select>
                 </div>
               </div>

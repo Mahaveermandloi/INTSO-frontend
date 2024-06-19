@@ -186,7 +186,7 @@ const ContactUs = () => {
   const [toggle, setToggle] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {

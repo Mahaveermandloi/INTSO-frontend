@@ -37,46 +37,43 @@ const RegisterForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     validate(formData);
-    if (Object.keys(errors).length === 0) {
-      try {
-        const res = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/school/registerSchool`,
-          {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (res.status === 201) {
-          const data = await res.json();
-          toast.success("Your message has been sent successfully!");
-          setFormData({
-            school_name: "",
-            email: "",
-            address: "",
-            city: "",
-            state: "",
-            district: "",
-            STD_code: "",
-            landline: "",
-            pincode: "",
-            mobile_number: "",
-            principal_name_prefix: "",
-            principal_name: "",
-            syllabus: "",
-          });
-        } else if (res.status === 409) {
-          toast.error("This email is already registered.");
-        } else if (res.status === 400) {
-          toast.error("please fill the all required fields");
+
+    try {
+      const res = await fetch(
+        `http://${IP_ADDRESS}:${PORT}/api/v1/school/registerSchool`,
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      } catch (err) {
-        toast.error("An error occurred. Please try again later.");
+      );
+      if (res.status === 201) {
+        const data = await res.json();
+        toast.success("Your message has been sent successfully!");
+        setFormData({
+          school_name: "",
+          email: "",
+          address: "",
+          city: "",
+          state: "",
+          district: "",
+          STD_code: "",
+          landline: "",
+          pincode: "",
+          mobile_number: "",
+          principal_name_prefix: "",
+          principal_name: "",
+          syllabus: "",
+        });
+      } else if (res.status === 409) {
+        toast.error("This email is already registered.");
+      } else if (res.status === 400) {
+        toast.error("please fill the all required fields");
       }
-    } else {
-      toast.error("Please correct the errors and try again.");
+    } catch (err) {
+      toast.error("An error occurred. Please try again later.");
     }
 
     setIsSubmitting(false);
@@ -132,7 +129,8 @@ const RegisterForm = () => {
             </div>
             <form
               className="flex flex-col md:px-10 p-6"
-              onSubmit={handleSubmit}>
+              onSubmit={handleSubmit}
+            >
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -209,7 +207,8 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option value="">Select Your State</option>
                     {states.map((state) => (
                       <option key={state} value={state}>
@@ -318,7 +317,8 @@ const RegisterForm = () => {
                       name="principal_name_prefix"
                       value={formData.principal_name_prefix}
                       onChange={handleChange}
-                      className="p-2 border border-gray-300 rounded-l-lg">
+                      className="p-2 border border-gray-300 rounded-l-lg"
+                    >
                       <option value="" disabled>
                         Prefix
                       </option>
@@ -350,7 +350,8 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option value="" disabled>
                       Select Syllabus
                     </option>
@@ -365,7 +366,8 @@ const RegisterForm = () => {
               </div>
               <button
                 type="submit"
-                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full">
+                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full"
+              >
                 Submit
               </button>
             </form>
