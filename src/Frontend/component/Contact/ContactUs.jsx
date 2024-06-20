@@ -36,7 +36,7 @@ const ContactUs = () => {
           },
         }
       );
-      if (res.status === 200) {
+      if (res.status === 201) {
         const data = await res.json();
         toast.success("Your message has been sent successfully!");
         setFormData({

@@ -98,7 +98,7 @@ const AuthenticatedApp = () => {
           <Route path="/updateprofile" element={<UpdateProfile />} />
           <Route path="/updatepassword" element={<UpdatePassword />} />
           {/* Redirect all other routes to dashboard */}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+          <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Routes>
       </main>
       <Layouts />
