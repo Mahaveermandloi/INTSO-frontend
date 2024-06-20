@@ -11,25 +11,7 @@ const Pdfs = () => {
 
   useEffect(() => {
     fetchData();
-  }, []); // Fetch data on component mount
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallpdfs`
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-  //     const jsonData = await response.json();
-  //     console.log(jsonData.resourceData);
-  //     setData(jsonData.resourceData); // Update state with fetched data
-  //     setLoading(false); // Set loading to false once data is fetched
-  //   } catch (error) {
-  //     console.error("Fetch data error:", error);
-  //     setLoading(false); // Set loading to false on error as well
-  //   }
-  // };
+  }, []); 
 
   const fetchData = async () => {
     try {
@@ -45,12 +27,12 @@ const Pdfs = () => {
 
       const allData = jsonData.resourceData;
 
-      // console.log("Fetched data:", allData);
+    
 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => item.is_paid);
 
-      // console.log(unpaidData);
+   
 
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched

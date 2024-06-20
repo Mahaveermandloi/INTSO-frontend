@@ -23,7 +23,7 @@ const Profile = () => {
 
           const userData = response.data.data;
 
-          console.log(userData.data);
+        
           setProfile(userData.data);
         } else {
           console.error("No access token found");

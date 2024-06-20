@@ -32,7 +32,7 @@ const UpdateBlog = () => {
             description,
           });
 
-          console.log(title, posted_By, permalink, description);
+        
         } catch (error) {
           console.error("Error fetching blog data:", error);
           toast.error("Error fetching blog data", {
@@ -82,13 +82,7 @@ const UpdateBlog = () => {
       formData.append("permalink", blogData.permalink);
       formData.append("description", blogData.description);
 
-      console.log(
-        blogData.title,
-        blogData.description,
-        blogData.posted_By,
-        blogData.permalink
-      );
-
+   
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.put(
         `${URLPath}/api/v1/blogs/update-blog-details/${id}`,

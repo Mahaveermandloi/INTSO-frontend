@@ -39,12 +39,12 @@ const Pdfs = () => {
 
       const allData = jsonData.resourceData;
 
-      // console.log("Fetched data:", allData);
+    
 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => !item.is_paid);
 
-      // console.log(unpaidData);
+    
 
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched

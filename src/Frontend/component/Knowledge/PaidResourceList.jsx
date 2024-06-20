@@ -23,7 +23,7 @@ const fetchResources = async (searchInput, selectedOption, triggerSearch) => {
     }
 
     const data = await response.json();
-    // console.log("Fetched data:", data);
+   
 
     return data.resourceData;
   } catch (error) {

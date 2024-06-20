@@ -14,17 +14,17 @@ const Editor = ({ value, onChange }) => {
           data={value} // Set the initial editor content
          
           onReady={(editor) => {
-            console.log("Editor is ready to use!", editor);
+          
           }}
           onChange={(event, editor) => {
             const data = editor.getData();
             onChange(data); // Call the callback function with the editor data
           }}
           onBlur={(event, editor) => {
-            console.log("Blur.", editor);
+           
           }}
           onFocus={(event, editor) => {
-            console.log("Focus.", editor);
+           
           }}
         />
       </div>

@@ -132,12 +132,7 @@ const UpdateProfile = () => {
       updatedData.append("image", formData.image);
     }
 
-    console.log("Form Data: ", {
-      name: formData.name,
-      email: formData.email,
-      number: formData.number,
-      image: formData.image,
-    });
+   
 
     try {
       const response = await axios.put(
@@ -166,7 +161,7 @@ const UpdateProfile = () => {
         navigate(`${baseURL}/profile`);
       }, 2000);
 
-      console.log("Profile updated successfully:", response.data);
+    
     } catch (error) {
       if (error.response.status === 400) {
         toast.error("Email Duplicacy", {
