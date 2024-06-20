@@ -41,7 +41,7 @@ const StudentRequests = () => {
 
         // Fetch school data
         const schoolResponse = await axios.get(
-          `${URLPath}/api/v1/school/getSchoolData`,
+          `${URLPath}/api/v1/school/get-approved-schools`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -49,8 +49,10 @@ const StudentRequests = () => {
           }
         );
 
+        console.log("this  ", schoolResponse);
+
         if (schoolResponse.status === 200) {
-          setSchoolName(schoolResponse.data.data.getData);
+          setSchoolName(schoolResponse.data.data);
         }
       } catch (error) {}
     };

@@ -65,8 +65,61 @@ const UploadSchool = () => {
     });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const accessToken = localStorage.getItem("accessToken");
+  //     const response = await axios.post(
+  //       `${URLPath}/api/v1/school/uploadSchool`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.status === 200) {
+  //       toast.success("School registered successfully!");
+  //       setTimeout(() => {
+  //         navigate("/admin/schoollist");
+  //       }, 2000);
+  //     } else {
+  //       toast.error("Failed to register school. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     if (error.response) {
+  //       const { status, data } = error.response;
+  //       if (status === 400) {
+  //         toast.error(data.message || "Bad Data!");
+  //       } else if (status === 409) {
+  //         toast.error("School with this email is already registered.");
+  //       } else {
+  //         toast.error("Failed to register school. Please try again.");
+  //       }
+  //     } else {
+  //       toast.error("Network error. Please try again later.");
+  //     }
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate email format
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Invalid email address");
+      return;
+    }
+
+    // Validate mobile number format (must be exactly 10 digits)
+    const mobileNumberRegex = /^\d{10}$/;
+    if (!mobileNumberRegex.test(formData.mobile_number)) {
+      toast.error("Mobile number must be exactly 10 digits long");
+      return;
+    }
+
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
@@ -79,7 +132,7 @@ const UploadSchool = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("School registered successfully!");
         setTimeout(() => {
           navigate("/admin/schoollist");

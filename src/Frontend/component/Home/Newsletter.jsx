@@ -29,6 +29,9 @@ const Newsletter = () => {
       // Reset email input after successful submission
       setEmail("");
       setSuccessMessage("Newsletter subscription successful!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
       setErrorMessage(""); // Clear any previous error message
     } catch (error) {
       console.error("Error submitting newsletter subscription:", error.message);
@@ -45,7 +48,8 @@ const Newsletter = () => {
       style={{
         backgroundImage: `url(${img})`,
         backgroundSize: "cover",
-      }}>
+      }}
+    >
       <div className="max-w-screen-xl mx-auto grid lg:grid-cols-2 mt-10 lg-gap-y-0 gap-y-6 grid-cols-1 lg:px-28 gap-x-10 px-6 p-16 text-white">
         <div>
           <h1 className="text-3xl">Newsletter</h1>
@@ -55,7 +59,8 @@ const Newsletter = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="space-x-4 flex items-center justify-end">
+          className="space-x-4 flex items-center justify-end"
+        >
           <input
             type="email"
             placeholder="Enter your emailId"
@@ -67,7 +72,8 @@ const Newsletter = () => {
           />
           <button
             type="submit"
-            className="bg-[#ED1450] px-12 lg:p-2 h-10 w-32 rounded-full">
+            className="bg-[#ED1450] px-12 lg:p-2 h-10 w-32 rounded-full"
+          >
             Submit
           </button>
         </form>

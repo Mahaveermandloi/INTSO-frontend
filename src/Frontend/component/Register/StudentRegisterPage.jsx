@@ -30,9 +30,8 @@ const StudentRegisterPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     // Validate form data
     validate(formData);
@@ -49,13 +48,13 @@ const StudentRegisterPage = () => {
         }
       );
 
+      const responseData = await res.json();
+
       if (res.status === 201) {
-        const responseData = await res.json();
         toast.success("Your message has been sent successfully!");
 
-        // Reset form data only after successful submission
+        // Reset form data
         setFormData({
-          ...formData,
           name: "",
           email: "",
           address: "",
@@ -68,19 +67,18 @@ const StudentRegisterPage = () => {
           student_class: "",
         });
       } else if (res.status === 409) {
-        toast.error("This email is already registered.");
-      } else if (res.status === 400) {
-        toast.error("Please fill in all required fields.");
+        toast.error("Email already exists");
+      } else {
+        // Handle specific error messages from backend
+        toast.error(
+          responseData.message || "An error occurred. Please try again."
+        );
       }
     } catch (err) {
-     
+      console.error("Error:", err);
       toast.error("An error occurred. Please try again later.");
     }
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
 
   const classes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
   const states = [
@@ -129,8 +127,7 @@ const StudentRegisterPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:px-10 p-6"
-            >
+              className="flex flex-col md:px-10 p-6">
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -149,14 +146,17 @@ const StudentRegisterPage = () => {
                   <label className="text-left p-2">
                     Email<span className="text-red-500 text-lg">*</span>
                   </label>
+
                   <input
-                    type="text"
+                    type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter Your Email ID"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
+                    required
                   />
+
                   {errors.email && (
                     <p className="text-red-500 text-sm">{errors.email}</p>
                   )}
@@ -186,8 +186,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="student_class"
                     value={formData.student_class}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Your class</option>
                     {classes.map((cls) => (
                       <option key={cls} value={cls}>
@@ -238,8 +237,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option disabled selected>
                       Select Your State
                     </option>
@@ -276,7 +274,7 @@ const StudentRegisterPage = () => {
                     Mobile Number<span className="text-red-500 text-lg">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="tel"
                     name="mobile_number"
                     value={formData.mobile_number}
                     onChange={handleChange}
@@ -292,8 +290,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Syllabus</option>
                     <option value="CBSE">CBSE</option>
                     <option value="ICSE">ICSE</option>
