@@ -36,7 +36,6 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    validate(formData);
 
     try {
       const res = await fetch(
@@ -49,9 +48,12 @@ const RegisterForm = () => {
           },
         }
       );
-      if (res.status === 201) {
+
+      if (res.ok) {
         const data = await res.json();
-        toast.success("Your message has been sent successfully!");
+        toast.success("School registered successfully!");
+
+        // Reset form data after successful submission
         setFormData({
           school_name: "",
           email: "",
@@ -67,16 +69,29 @@ const RegisterForm = () => {
           principal_name: "",
           syllabus: "",
         });
-      } else if (res.status === 409) {
-        toast.error("This email is already registered.");
-      } else if (res.status === 400) {
-        toast.error("please fill the all required fields");
+      } else {
+        const errorData = await res.json();
+
+        if (res.status === 409) {
+          toast.error("This email is already registered.");
+        } else if (res.status === 400) {
+          if (
+            errorData.message === "Mobile number must be exactly 10 digits long"
+          ) {
+            toast.error("Mobile number must be exactly 10 digits long");
+          } else {
+            toast.error("Failed to register school. Please try again.");
+          }
+        } else {
+          toast.error("An error occurred. Please try again later.");
+        }
       }
     } catch (err) {
+      console.error("Error:", err);
       toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   useEffect(() => {

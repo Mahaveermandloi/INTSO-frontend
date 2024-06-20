@@ -30,7 +30,8 @@ import SchoolRequests from "../Components/School/SchoolRequests";
 import NewsLetter from "../Components/NewsLetter";
 import { baseURL } from "../URLPath";
 import useTokenExpirationCheck from "../Components/useTokenExpirationCheck";
-import Layouts from "../Components/Layouts";
+// import Layouts from "../Components/Layouts";
+import AdminFooter from "../Components/AdminFooter";
 
 const AdminRoutes = () => {
   useTokenExpirationCheck();
@@ -52,7 +53,9 @@ const AdminRoutes = () => {
       {!isAuthenticated ? (
         <>
           <Route path={`/login`} element={<Login />} />
+          {/* <Route path={`/forgetpassword`} element={<ForgetPassword />} /> */}
           <Route path={`/forgetpassword`} element={<ForgetPassword />} />
+
           <Route path={`/otppage/:email`} element={<OtpPage />} />
           <Route path={`/changepassword`} element={<ChangePassword />} />
           {/* Redirect all other routes to login */}
@@ -72,7 +75,7 @@ const AuthenticatedApp = () => {
     <div className="">
       <Header />
       <SideBar />
-      <main className="p-5 ml-auto w-full">
+      <main className="p-5 ml-auto  w-full">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/gallery" element={<Gallery />} />
@@ -101,7 +104,10 @@ const AuthenticatedApp = () => {
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Routes>
       </main>
-      <Layouts />
+
+      <AdminFooter />
+
+      {/* <Layouts /> */}
     </div>
   );
 };

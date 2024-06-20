@@ -2,6 +2,8 @@ import { BiBookContent } from "react-icons/bi";
 import { RiArticleLine } from "react-icons/ri";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import AdminFooter from "../Components/AdminFooter";
+
 import { PiFlagBannerFold } from "react-icons/pi";
 import {
   FaHome,
@@ -64,7 +66,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
         className={`fixed flex flex-col top-22 left-0 h-[calc(100vh-4rem)] lg:w-1/6 z-50 bg-gray-800 text-white p-5 transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        onClick={(e) => e.stopPropagation()}>
+        onClick={(e) => e.stopPropagation()}
+      >
         <nav className="overflow-y-auto h-full custom-scrollbar">
           <ul>
             <Link onClick={handleItemClick} to={`${baseURL}/dashboard`}>
@@ -89,7 +92,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               className={`${
                 isDropdownOpen ? "" : "mb-4"
               } flex justify-between items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded`}
-              onClick={toggleDropdown}>
+              onClick={toggleDropdown}
+            >
               <div className="flex items-center">
                 <BiBookContent className="mr-2" />
                 Content
@@ -99,7 +103,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             <ul
               className={`ml-6 space-y-2 transition-all duration-500 ${
                 isDropdownOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-              } overflow-hidden`}>
+              } overflow-hidden`}
+            >
               <Link onClick={handleItemClick} to={`${baseURL}/image`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Image
@@ -120,7 +125,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               className={`${
                 isDropdownOpen2 ? "" : "mb-4"
               } flex justify-between items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded`}
-              onClick={toggleDropdown2}>
+              onClick={toggleDropdown2}
+            >
               <div className="flex items-center">
                 <BiBookContent className="mr-2" />
                 Student
@@ -130,7 +136,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             <ul
               className={`ml-6 space-y-2 transition-all duration-500 ${
                 isDropdownOpen2 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-              } overflow-hidden`}>
+              } overflow-hidden`}
+            >
               <Link onClick={handleItemClick} to={`${baseURL}/studentrequest`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   Student Request
@@ -151,7 +158,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               className={`${
                 isDropdownOpen3 ? "" : "mb-4"
               } flex justify-between items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded`}
-              onClick={toggleDropdown3}>
+              onClick={toggleDropdown3}
+            >
               <div className="flex items-center">
                 <BiBookContent className="mr-2" />
                 School
@@ -161,7 +169,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             <ul
               className={`ml-6 space-y-2 transition-all duration-500 ${
                 isDropdownOpen3 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-              } overflow-hidden`}>
+              } overflow-hidden`}
+            >
               <Link onClick={handleItemClick} to={`${baseURL}/schoolrequests`}>
                 <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
                   School Requests
@@ -215,7 +224,8 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                   handleItemClick();
                   localStorage.removeItem("accessToken");
                   window.location.reload(); //
-                }}>
+                }}
+              >
                 <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                   <FaSignOutAlt className="mr-2" />
                   Logout
@@ -225,6 +235,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
       </div>
+
       <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 0; /* Remove scrollbar space */

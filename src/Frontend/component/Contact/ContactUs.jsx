@@ -23,6 +23,8 @@ const ContactUs = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -36,6 +38,7 @@ const ContactUs = () => {
           },
         }
       );
+
       if (res.status === 201) {
         const data = await res.json();
         toast.success("Your message has been sent successfully!");
@@ -46,16 +49,25 @@ const ContactUs = () => {
           message: "",
         });
       } else if (res.status === 400) {
-        toast.error("please fill the all required fields");
+        const responseData = await res.json();
+        if (
+          responseData.message &&
+          responseData.message.includes("Mobile number must be exactly 10 digits long")
+        ) {
+          toast.error("Mobile number must be exactly 10 digits long");
+        } else {
+          toast.error(responseData.message || "Please fill in all required fields.");
+        }
       } else {
         toast.error("Failed to send your message. Please try again.");
       }
     } catch (err) {
       console.error("Sending message failed:", err);
-      setStatusMessage("An error occurred. Please try again later.");
       toast.error("An error occurred. Please try again later.");
     }
   };
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);

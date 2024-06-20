@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; // Incorrect import statement
 import { useNavigate } from "react-router-dom";
 
-const   useTokenExpirationCheck = () => {
+const useTokenExpirationCheck = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,9 +25,6 @@ const   useTokenExpirationCheck = () => {
         } catch (error) {
           console.error("Error decoding token:", error);
         }
-      } else {
-        navigate("/admin/login"); // Redirect to login if no token found
-        // window.location.reload(); // Problematic reloading here
       }
     };
 

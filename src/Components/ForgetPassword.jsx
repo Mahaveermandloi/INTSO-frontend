@@ -5,9 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import {URLPath, baseURL} from "../URLPath";
 const ForgetPassword = () => {
+  
+  
   const [email, setEmail] = useState("");
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const navigate = useNavigate();
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
