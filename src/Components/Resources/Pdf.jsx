@@ -312,25 +312,29 @@ const Pdf = () => {
                 </div>
               ) : (
                 data.map(({ id, title }) => {
+                  // Split the title into words
+                  const words = title.split(" ");
+
+                  // Take the first three words and join them back into a string
+                  const truncatedTitle = words.slice(0, 3).join(" ");
+
                   return (
-                    <>
-                      <div key={id} className="relative bg-gray-200">
-                        <img
-                          className=""
-                          src={thumbnail}
-                          alt={`data PDF ${id}`}
-                        />
-                        <center>
-                          <p className="text-xl  font-bold ">{title}</p>
-                        </center>
-                        <button
-                          onClick={() => handleDelete(id)}
-                          className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
-                        >
-                          <RxCross1 size={30} className="p-1" />
-                        </button>
-                      </div>
-                    </>
+                    <div key={id} className="relative bg-gray-200">
+                      <img
+                        className=""
+                        src={thumbnail}
+                        alt={`data PDF ${id}`}
+                      />
+                      <center>
+                        <p className="text-lg font-bold">{truncatedTitle}</p>
+                      </center>
+                      <button
+                        onClick={() => handleDelete(id)}
+                        className="absolute top-2 right-2 bg-[#ed1450] text-white p-1 rounded-full"
+                      >
+                        <RxCross1 size={30} className="p-1" />
+                      </button>
+                    </div>
                   );
                 })
               )}
