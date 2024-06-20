@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import useFetchBlogDetails from "../utils/hooks/useFetchBlogDetails";
@@ -7,10 +6,9 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 const MainBlog = () => {
   const location = useLocation();
 
+  
   const { data: blog, loading } = useFetchBlogDetails();
   const { data1: recentBlogs } = useFetchBlogDetails();
-
-
 
   useEffect(() => {
     window.scrollTo(0, 0);

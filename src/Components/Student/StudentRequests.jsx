@@ -49,7 +49,7 @@ const StudentRequests = () => {
           }
         );
 
-        console.log("this  ", schoolResponse);
+      
 
         if (schoolResponse.status === 200) {
           setSchoolName(schoolResponse.data.data);

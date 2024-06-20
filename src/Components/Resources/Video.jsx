@@ -46,7 +46,7 @@ const Video = () => {
 
   //       let filteredData = imageResources;
 
-  //       console.log(filteredData);
+  //    
 
   //       // Apply type-based filtering
   //       if (option === "free") {
@@ -64,7 +64,7 @@ const Video = () => {
 
   //       setData(filteredData);
 
-  //       // console.log(filteredData);
+
   //     } else {
   //       toast.error("No access token found");
   //     }

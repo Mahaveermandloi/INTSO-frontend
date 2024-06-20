@@ -45,8 +45,7 @@ const Images = () => {
       // Filter out paid resources
       const unpaidData = allData.filter((item) => item.is_paid);
 
-  
-      setData(unpaidData); // Update state with filtered data
+       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
     } catch (error) {
       console.error("Fetch data error:", error);

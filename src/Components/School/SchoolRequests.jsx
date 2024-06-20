@@ -30,7 +30,7 @@ const SchoolRequests = () => {
             (school) =>
               school.status === "pending" 
           );
-          // console.log(filteredData);
+        
           setSchoolData(filteredData);
         }
       } catch (error) {

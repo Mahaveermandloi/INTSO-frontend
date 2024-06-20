@@ -26,8 +26,7 @@ const Blog = () => {
             },
           }
         );
-     
-        setGallery(response.data.data.blogData);
+     setGallery(response.data.data.blogData);
       } else {
         console.error("No access token found");
       }
@@ -166,7 +165,7 @@ const BlogBox = ({ id, image, description, title, createdAt, posted_By }) => {
           window.location.reload();
         }
       } catch (error) {
-        console.log(error);
+        
         toast.error("Error deleting blog", error, {
           position: "top-center",
           autoClose: 3000,

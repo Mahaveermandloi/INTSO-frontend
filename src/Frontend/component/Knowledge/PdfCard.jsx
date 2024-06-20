@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const PdfCard = ({ resources }) => {
   const navigate = useNavigate();
-  
   const handleDownload = async (pdfUrl) => {
     try {
       const response = await fetch(pdfUrl, {

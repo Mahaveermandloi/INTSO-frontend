@@ -34,7 +34,7 @@ const UploadStudent = () => {
         }
       );
 
-      console.log(schoolResponse.data.data);
+     
       if (schoolResponse.status === 200) {
         setSchoolNameList(schoolResponse.data.data);
       }

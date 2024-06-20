@@ -334,7 +334,7 @@ const UserRoutes = () => {
             />
 
             <Route
-              path="/paidresources"
+              path="/mycontent"
               element={
                 <Layout>
                   <PaidKnowledge />

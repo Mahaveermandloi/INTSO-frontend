@@ -20,7 +20,7 @@ const useTokenExpirationCheck = () => {
             window.location.reload(); // Problematic reloading here
           } else {
             const remainingSeconds = decodedToken.exp - currentTimestamp;
-            console.log(`Token expires in ${remainingSeconds} seconds`);
+           
           }
         } catch (error) {
           console.error("Error decoding token:", error);

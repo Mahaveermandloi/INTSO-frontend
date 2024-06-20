@@ -40,8 +40,7 @@ const ForgotPassword = () => {
         );
         if (res.ok) {
           const data = await res.json();
-         
-          setStatus({
+         setStatus({
             msg: "OTP has been sent successfully!",
             type: "success",
           });
