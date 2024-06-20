@@ -1,16 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Menu, MenuItem } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import img from "../../image/user (1).png";
+import img1 from "../../../assets/Frontend_images/logo.png";
 
 const SubHeader = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef(null);
   const [showNav, setShowNav] = useState(false);
-  const [activeButton, setActiveButton] = useState("Home");
+  const [activeButton, setActiveButton] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [scheduleAnchorEl, setScheduleAnchorEl] = useState(null);
   const [syllabusAnchorEl, setSyllabusAnchorEl] = useState(null);
@@ -38,6 +40,18 @@ const SubHeader = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [showNav]);
+
+  useEffect(() => {
+    const pathMap = {
+      "/": "Home",
+      "/aboutus": "Aboutus",
+      "/knowledge": "Knowledge",
+      "/blogs": "Blog",
+      "/gallery": "Gallery",
+      "/contactUs": "ContactUs",
+    };
+    setActiveButton(pathMap[location.pathname] || null);
+  }, [location.pathname]);
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -96,8 +110,8 @@ const SubHeader = () => {
           <div className="flex justify-between p-3 w-full lg:w-auto">
             <div>
               <img
-                src="https://intso.co.in/wp-content/uploads/2023/06/logo-2.png"
-                className="lg:w-64 w-28"
+                src={img1}
+                className="lg:w-64 w-28 max-w-full h-auto"
                 alt="logo"
               />
             </div>
@@ -310,26 +324,7 @@ const SubHeader = () => {
                     <img src={img} className="rounded-full w-10" alt="" />
                     <ArrowDropDownIcon />
                   </button>
-                  {/* 
-                  <Menu
-                    anchorEl={menuRef.current}
-                    open={showProfileMenu}
-                    onClose={handleProfileMenuClose}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    getContentAnchorEl={null}
-                    sx={{ mt: 2, mr: 0, ml: 14 }}
-                  >
-                    <MenuItem>Profile</MenuItem>
-                    <MenuItem>My Content</MenuItem>
-                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                  </Menu> */}
+
                   <Menu
                     anchorEl={menuRef.current}
                     open={showProfileMenu}
@@ -345,8 +340,8 @@ const SubHeader = () => {
                     getContentAnchorEl={null}
                     sx={{
                       mt: { xs: 5, sm: 20, lg: 2 },
-                      ml: { xs: 0, sm: 10, lg: 16 }, // Adjust ml (left margin) for different screen sizes
-                      mr: { xs: 0, sm: 0 }, // Adjust mr (right margin) for different screen sizes
+                      ml: { xs: 0, sm: 10, lg: 16 },
+                      mr: { xs: 0, sm: 0 },
                     }}>
                     <MenuItem>Profile</MenuItem>
                     <MenuItem onClick={() => navigate("/paidresources")}>
@@ -380,5 +375,28 @@ const SubHeader = () => {
     </>
   );
 };
+
+const NavItem = ({ to, text, activeButton, onClick }) => (
+  <li>
+    <Link
+      to={to}
+      className={`px-2 py-1 block text-sm rounded focus:outline-none ${
+        activeButton === text ? "text-[#ED1450]" : ""
+      }`}
+      onClick={onClick}>
+      {text}
+    </Link>
+  </li>
+);
+
+const SubMenu = ({ text, to, onClick }) => (
+  <MenuItem onClick={onClick}>
+    <Link
+      to={to}
+      className="block px-4 py-2 text-sm hover:bg-gray-100 focus:outline-none">
+      {text}
+    </Link>
+  </MenuItem>
+);
 
 export default SubHeader;

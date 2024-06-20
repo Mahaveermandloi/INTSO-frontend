@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const VideosCard = ({ resources }) => {
   const navigate = useNavigate();
-  
-  const [selectedVideo, setSelectedVideo] = useState(null);
+   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handlePlayClick = (video) => {
     setSelectedVideo(video);

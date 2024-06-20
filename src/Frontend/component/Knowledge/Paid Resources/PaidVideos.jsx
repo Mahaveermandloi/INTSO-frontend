@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { IP_ADDRESS, PORT } from "../../utils/constants";
+import { API_KEY, IP_ADDRESS, PORT } from "../../utils/constants";
 import Spinner1 from "../../common files/Spinner1"; // Assuming Spinner1 is correctly imported
 import img from "../../../../../src/assets/Frontend_images/Download_SVG.png";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Videos = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading state
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     fetchData();
@@ -16,7 +22,14 @@ const Videos = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallvideos`
+        `http://${IP_ADDRESS}:${PORT}/api/v1/resource/getallvideos`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            api_key: API_KEY,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -27,11 +40,19 @@ const Videos = () => {
 
       const allData = jsonData.resourceData;
 
+<<<<<<< HEAD
      
+=======
+    
+>>>>>>> 67057c711fdcc39b4b86c08c11c6153e3f59bdff
 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => item.is_paid);
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 67057c711fdcc39b4b86c08c11c6153e3f59bdff
 
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
@@ -78,7 +99,7 @@ const Videos = () => {
       <div className="text-center text-[#ED1450] font-bold text-2xl my-5">
         All Videos
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center max-w-screen-xl mx-auto lg:px-24 px-6">
         {loading ? ( // Display spinner while loading
           <Spinner1 />
         ) : (
@@ -88,10 +109,10 @@ const Videos = () => {
                 <div
                   key={item.id}
                   className="rounded-xl flex flex-col space-y-2 border border-gray-300"
-                  data-aos="zoom-in"
-                >
+                  data-aos="zoom-in">
                   <img
-                    src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
+                    // src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
+                    src={`http://${IP_ADDRESS}:${PORT}${item.thumbnail}`}
                     className="rounded-lg w-full h-64"
                     alt={item.title}
                   />
@@ -115,7 +136,6 @@ const Videos = () => {
                           {formatDate(item.createdAt)}
                         </p>
                       </div>
-                      <div className="flex justify-center p-1 rounded-full bg-[#ED1450] w-28 sm:min-w-20 space-x-1"></div>
                     </div>
                   </div>
                 </div>

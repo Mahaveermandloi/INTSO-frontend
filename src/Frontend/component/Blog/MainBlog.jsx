@@ -5,11 +5,10 @@ import useFetchBlogDetails from "../utils/hooks/useFetchBlogDetails";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 const MainBlog = () => {
   const location = useLocation();
+
   
   const { data: blog, loading } = useFetchBlogDetails();
   const { data1: recentBlogs } = useFetchBlogDetails();
-
- 
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,18 +67,17 @@ const MainBlog = () => {
                             {item.title}
                           </h1>
                         </Link>
-                        <p className=" text-xl  md:text-lg">
+                        {/* <p className=" text-xl  md:text-lg">
                           <div
                             dangerouslySetInnerHTML={{
                               __html: item.description,
                             }}
                           />
-                        </p>
-                        <div className=" border-b-2 mt-3 border-gray-300"></div>
+                        </p> */}
                         <div className=" py-4  md:text-lg">
                           <h1>
                             Posted By :
-                            <span className="text-[#ED1450] font-bold ">
+                            <span className="text-[#ED1450] font-bold  ">
                               {item.posted_By}
                             </span>
                           </h1>

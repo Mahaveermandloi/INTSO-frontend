@@ -1,19 +1,15 @@
  
 import { useState, useEffect } from "react";
-
 const useFormValidation = (formData) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   useEffect(() => {
     if (isSubmitting) {
       validate(formData);
     }
   }, [formData]);
-
   const validate = (values) => {
     let errors = {};
-
     if (!values.school_name) {
       errors.school_name = "School Name is required";
     }
@@ -64,12 +60,9 @@ const useFormValidation = (formData) => {
     if (!values.syllabus) {
       errors.syllabus = "Syllabus is required";
     }
-
     setErrors(errors);
     setIsSubmitting(false);
   };
-
   return { errors, validate, setIsSubmitting };
 };
-
 export default useFormValidation;

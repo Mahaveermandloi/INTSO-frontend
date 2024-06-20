@@ -63,7 +63,7 @@ export const GalleryPage = () => {
           <h1 className="text-[#ED1450] font-bold text-2xl">Our Gallery</h1>
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
         </div>
-        <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 sm:grid-cols-1">
+        <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 grid-cols-1">
           {displayedData.map((item, index) => {
             let colSpanClass = "col-span-1";
             if (
@@ -71,7 +71,7 @@ export const GalleryPage = () => {
               index === 4 ||
               index === displayedData.length - 1
             ) {
-              colSpanClass = "col-span-2";
+              colSpanClass = "lg:col-span-2 col-span-1";
             }
             return (
               <div key={index} className={`${colSpanClass} relative w-full`}>

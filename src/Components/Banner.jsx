@@ -34,8 +34,7 @@ const Banner = () => {
         // Handle response
 
         setGallery(response.data.data);
-      
-      } else {
+    } else {
         toast.error("No access token found");
       }
     } catch (error) {

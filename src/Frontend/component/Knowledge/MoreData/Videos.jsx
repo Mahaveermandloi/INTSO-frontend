@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import img from "../../../../../src/assets/Frontend_images/Play_SVG.png";
 
 const Videos = () => {
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading state
   const location = useLocation();
@@ -40,13 +39,14 @@ const Videos = () => {
 
       const allData = jsonData.resourceData;
 
-     
+ 
 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => !item.is_paid);
 
    
-
+      
+ 
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
     } catch (error) {

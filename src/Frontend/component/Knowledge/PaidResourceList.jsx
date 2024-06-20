@@ -23,8 +23,7 @@ const fetchResources = async (searchInput, selectedOption, triggerSearch) => {
     }
 
     const data = await response.json();
-   
-
+ 
     return data.resourceData;
   } catch (error) {
     console.error("Error fetching resources:", error);
@@ -70,9 +69,9 @@ const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
       });
 
       setNoDataMessage({
-        image: paidImageArray.length === 0 ? "No data for image" : "",
-        pdf: paidPdfArray.length === 0 ? "No data for PDF" : "",
-        video: paidVideoArray.length === 0 ? "No data for video" : "",
+        image: paidImageArray.length === 0 ? "No Data Found For Image" : "",
+        pdf: paidPdfArray.length === 0 ? "No Data Found For PDF" : "",
+        video: paidVideoArray.length === 0 ? "No Data Found For Video" : "",
       });
     } catch (error) {
       console.error("Error processing resources:", error);
@@ -94,21 +93,21 @@ const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
       {resources.imageArray.length > 0 ? (
         <ImagesCard resources={resources.imageArray} />
       ) : (
-        <p className="text-red-500 text-lg my-4 text-center">
+        <p className="text-red-500 my-4 text-center text-2xl font-bold">
           {noDataMessage.image}
         </p>
       )}
       {resources.pdfArray.length > 0 ? (
         <PdfCard resources={resources.pdfArray} />
       ) : (
-        <p className="text-red-500 text-lg my-4 text-center">
+        <p className="text-red-500  my-4 text-center text-2xl font-bold">
           {noDataMessage.pdf}
         </p>
       )}
       {resources.videoArray.length > 0 ? (
         <VideosCard resources={resources.videoArray} />
       ) : (
-        <p className="text-red-500 text-lg my-4 text-center">
+        <p className="text-red-500  my-4 text-center text-2xl font-bold">
           {noDataMessage.video}
         </p>
       )}
