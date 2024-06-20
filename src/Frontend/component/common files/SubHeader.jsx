@@ -126,11 +126,13 @@ const SubHeader = () => {
             <div
               className={`lg:flex lg:space-x-8 ${
                 showNav ? "" : "hidden"
-              } flex-col lg:flex-row p-3`}>
+              } flex-col lg:flex-row p-3`}
+            >
               <div className="lg:flex lg:flex-row flex items-center lg:space-y-3 lg:space-x-5">
                 <ul
                   ref={menuRef}
-                  className="flex lg:flex-row flex-col justify-center items-start gap-2 lg:h-auto lg:gap-4 text-base font-semibold h-56">
+                  className="flex lg:flex-row flex-col justify-center items-start gap-2 lg:h-auto lg:gap-4 text-base font-semibold h-56"
+                >
                   <Link to="/">
                     <li
                       className={`text-nowrap ${
@@ -138,7 +140,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Home")}>
+                      onClick={() => handleButtonClick("Home")}
+                    >
                       Home
                     </li>
                   </Link>
@@ -149,7 +152,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Aboutus")}>
+                      onClick={() => handleButtonClick("Aboutus")}
+                    >
                       About Us
                     </li>
                   </Link>
@@ -160,7 +164,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Knowledge")}>
+                      onClick={() => handleButtonClick("Knowledge")}
+                    >
                       Knowledge Desk
                     </li>
                   </Link>
@@ -172,7 +177,8 @@ const SubHeader = () => {
                     }`}
                     onClick={handleDropdownOpen}
                     aria-controls="exam-details-menu"
-                    aria-haspopup="true">
+                    aria-haspopup="true"
+                  >
                     Exam Details <ArrowDropDownIcon />
                   </li>
                   <Menu
@@ -180,7 +186,8 @@ const SubHeader = () => {
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={handleDropdownClose}
-                    keepMounted>
+                    keepMounted
+                  >
                     <MenuItem onClick={handleSubMenuOpen(setScheduleAnchorEl)}>
                       (MTSO) Mathematics Talent Search Olympiad
                       <ArrowRightIcon />
@@ -191,18 +198,21 @@ const SubHeader = () => {
                       open={Boolean(scheduleAnchorEl)}
                       onClose={handleSubMenuClose(setScheduleAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <Link to="/mtso_about">
                         <MenuItem
                           onClick={() => {
                             handleSubMenuClose(setScheduleAnchorEl)();
                             handleDropdownClose();
-                          }}>
+                          }}
+                        >
                           (MTSO)About
                         </MenuItem>
                       </Link>
                       <MenuItem
-                        onClick={handleSubMenuClose(setScheduleAnchorEl)}>
+                        onClick={handleSubMenuClose(setScheduleAnchorEl)}
+                      >
                         (MTSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -214,13 +224,16 @@ const SubHeader = () => {
                       open={Boolean(syllabusAnchorEl)}
                       onClose={handleSubMenuClose(setSyllabusAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (ATSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (MATSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -232,13 +245,16 @@ const SubHeader = () => {
                       open={Boolean(resultsAnchorEl)}
                       onClose={handleSubMenuClose(setResultsAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setResultsAnchorEl)}>
+                        onClick={handleSubMenuClose(setResultsAnchorEl)}
+                      >
                         (ETSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setResultsAnchorEl)}>
+                        onClick={handleSubMenuClose(setResultsAnchorEl)}
+                      >
                         (ETSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -250,13 +266,16 @@ const SubHeader = () => {
                       open={Boolean(syllabusAnchorEl)}
                       onClose={handleSubMenuClose(setSyllabusAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (STSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (STSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -268,13 +287,16 @@ const SubHeader = () => {
                       open={Boolean(syllabusAnchorEl)}
                       onClose={handleSubMenuClose(setSyllabusAnchorEl)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}>
+                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    >
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (GTSO)About
                       </MenuItem>
                       <MenuItem
-                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}>
+                        onClick={handleSubMenuClose(setSyllabusAnchorEl)}
+                      >
                         (GTSO)Syllabus&Pattern
                       </MenuItem>
                     </Menu>
@@ -287,7 +309,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Blog")}>
+                      onClick={() => handleButtonClick("Blog")}
+                    >
                       Blogs
                     </li>
                   </Link>
@@ -298,7 +321,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("Gallery")}>
+                      onClick={() => handleButtonClick("Gallery")}
+                    >
                       Gallery
                     </li>
                   </Link>
@@ -309,7 +333,8 @@ const SubHeader = () => {
                           ? "underline decoration-[#ED1450] underline-offset-4 text-[#ED1450]"
                           : ""
                       }`}
-                      onClick={() => handleButtonClick("ContactUs")}>
+                      onClick={() => handleButtonClick("ContactUs")}
+                    >
                       Contact Us
                     </li>
                   </Link>
@@ -320,7 +345,8 @@ const SubHeader = () => {
                 <>
                   <button
                     className="flex justify-center items-center gap-3"
-                    onClick={handleProfileMenuOpen}>
+                    onClick={handleProfileMenuOpen}
+                  >
                     <img src={img} className="rounded-full w-10" alt="" />
                     <ArrowDropDownIcon />
                   </button>
@@ -342,9 +368,10 @@ const SubHeader = () => {
                       mt: { xs: 5, sm: 20, lg: 2 },
                       ml: { xs: 0, sm: 10, lg: 16 },
                       mr: { xs: 0, sm: 0 },
-                    }}>
+                    }}
+                  >
                     <MenuItem>Profile</MenuItem>
-                    <MenuItem onClick={() => navigate("/paidresources")}>
+                    <MenuItem onClick={() => navigate("/mycontent")}>
                       My Content
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
@@ -361,7 +388,8 @@ const SubHeader = () => {
                     onClick={() => {
                       navigate("/login");
                       window.location.reload();
-                    }}>
+                    }}
+                  >
                     Login
                   </button>
                 </>
@@ -383,7 +411,8 @@ const NavItem = ({ to, text, activeButton, onClick }) => (
       className={`px-2 py-1 block text-sm rounded focus:outline-none ${
         activeButton === text ? "text-[#ED1450]" : ""
       }`}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       {text}
     </Link>
   </li>
@@ -393,7 +422,8 @@ const SubMenu = ({ text, to, onClick }) => (
   <MenuItem onClick={onClick}>
     <Link
       to={to}
-      className="block px-4 py-2 text-sm hover:bg-gray-100 focus:outline-none">
+      className="block px-4 py-2 text-sm hover:bg-gray-100 focus:outline-none"
+    >
       {text}
     </Link>
   </MenuItem>
