@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
-
 const useFormValidation = (formData) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   useEffect(() => {
     if (isSubmitting) {
       validate(formData);
     }
   }, [formData]);
-
   const validate = (values) => {
     let errors = {};
-
     if (!values.school_name) {
       errors.school_name = "School Name is required";
     }
@@ -49,8 +45,8 @@ const useFormValidation = (formData) => {
     }
     if (!values.mobile_number) {
       errors.mobile_number = "Mobile number is required";
-    } else if (!/^\d{9}$/.test(values.mobile_number)) {
-      errors.mobile_number = "Mobile number is invalid";
+    } else if (!/^\d{10}$/.test(values.mobile_number)) {
+      errors.mobile_number = "Mobile number must be 10 digits long";
     }
     if (!values.principal_name_prefix) {
       errors.principal_name_prefix = "Prefix is required";
@@ -61,12 +57,9 @@ const useFormValidation = (formData) => {
     if (!values.syllabus) {
       errors.syllabus = "Syllabus is required";
     }
-
     setErrors(errors);
     setIsSubmitting(false);
   };
-
   return { errors, validate, setIsSubmitting };
 };
-
 export default useFormValidation;

@@ -30,109 +30,7 @@ const StudentRegisterPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsSubmitting(true);
-  //   validate(formData);
-
-  //   if (Object.keys(errors).length === 0) {
-  //     try {
-  //       const res = await fetch(
-  //         `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
-  //         {
-  //           method: "POST",
-  //           body: JSON.stringify(formData),
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-
-  //       if (res.status === 201) {
-  //         const responseData = await res.json();
-  //         toast.success("Your message has been sent successfully!");
-  //         setFormData({
-  //           name: "",
-  //           email: "",
-  //           address: "",
-  //           city: "",
-  //           state: "",
-  //           pincode: "",
-  //           mobile_number: "",
-  //           syllabus: "",
-  //           school_name: "",
-  //           student_class: "",
-  //         });
-  //       } else if (res.status === 409) {
-  //         toast.error("This email is already registered.");
-  //       } else if (res.status === 400) {
-  //         toast.error("please fill the all required fields");
-  //       }
-  //     } catch (err) {
-  //       toast.error("An error occurred. Please try again later.");
-  //     }
-  //   } else {
-  //     toast.error("Please correct the errors and try again.");
-  //   }
-
-  //   setIsSubmitting(false);
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault(); // Prevent default form submission
-
-  //   // setIsSubmitting(true); // Set submitting state
-  //   validate(formData); // Validate form data
-
-  //   console.log(formData);
-
-  //   if (Object.keys(errors).length === 0) {
-  //     // Check if there are no errors
-  //     try {
-  //       const res = await fetch(
-  //         `http://${IP_ADDRESS}:${PORT}/api/v1/student/createStudent`,
-  //         {
-  //           method: "POST",
-  //           body: JSON.stringify(formData),
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-
-  //       if (res.status === 201) {
-  //         const responseData = await res.json();
-  //         toast.success("Your message has been sent successfully!");
-  //         setFormData({
-  //           // Reset form data after successful submission
-  //           name: "",
-  //           email: "",
-  //           address: "",
-  //           city: "",
-  //           state: "",
-  //           pincode: "",
-  //           mobile_number: "",
-  //           syllabus: "",
-  //           school_name: "",
-  //           student_class: "",
-  //         });
-
-  //         window.location.reload();
-  //       } else if (res.status === 409) {
-  //         toast.error("This email is already registered.");
-  //       } else if (res.status === 400) {
-  //         toast.error("Please fill in all required fields.");
-  //       }
-  //     } catch (err) {
-  //       toast.error("An error occurred. Please try again later.");
-  //     }
-  //   } else {
-  //     toast.error("Please correct the errors and try again.");
-  //   }
-
-  //   // setIsSubmitting(false); // Reset submitting state
-  // };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
@@ -175,7 +73,7 @@ const StudentRegisterPage = () => {
         toast.error("Please fill in all required fields.");
       }
     } catch (err) {
-      console.log(err);
+     
       toast.error("An error occurred. Please try again later.");
     }
   };

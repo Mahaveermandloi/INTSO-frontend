@@ -22,7 +22,6 @@ const useFetchData = () => {
           },
         });
         const jsonData = await data.json();
-        // console.log(jsonData);
         setData1(jsonData.data.homedata.bannerData);
         setData3(jsonData.data.homedata.testiMonialData);
         setData4(jsonData.data.homedata.blogData);

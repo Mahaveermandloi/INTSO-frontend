@@ -26,7 +26,7 @@ const Blog = () => {
             },
           }
         );
-        // console.log(response.data.data.blogData);
+     
         setGallery(response.data.data.blogData);
       } else {
         console.error("No access token found");
