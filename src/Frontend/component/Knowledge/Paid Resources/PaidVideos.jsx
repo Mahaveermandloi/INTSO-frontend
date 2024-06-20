@@ -40,20 +40,10 @@ const Videos = () => {
 
       const allData = jsonData.resourceData;
 
-<<<<<<< HEAD
-     
-=======
-    
->>>>>>> 67057c711fdcc39b4b86c08c11c6153e3f59bdff
-
+ 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => item.is_paid);
-
-<<<<<<< HEAD
-=======
-    
->>>>>>> 67057c711fdcc39b4b86c08c11c6153e3f59bdff
-
+ 
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
     } catch (error) {
