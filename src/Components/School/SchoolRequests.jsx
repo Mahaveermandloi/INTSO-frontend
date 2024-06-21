@@ -10,7 +10,7 @@ const SchoolRequests = () => {
   const [selectedSchool, setSelectedSchool] = useState(null);
   const [schoolData, setSchoolData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 7;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +27,9 @@ const SchoolRequests = () => {
 
         if (response.status === 200) {
           const filteredData = response.data.data.getData.filter(
-            (school) =>
-              school.status === "pending" 
+            (school) => school.status === "pending"
           );
-        
+
           setSchoolData(filteredData);
         }
       } catch (error) {
@@ -250,7 +249,7 @@ const SchoolRequests = () => {
         </div>
 
         {totalPages > 1 && (
-          <div className="mt-2 fixed-bottom flex justify-center">
+          <div className="mt-2  fixed-bottom flex justify-center">
             {/* Previous button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -336,7 +335,7 @@ const SchoolRequests = () => {
 
         {isModalOpen && selectedSchool && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
-            <div className="mt-16 mx-auto max-w-lg w-full bg-white  p-8 rounded-lg shadow-lg">
+            <div className="mt-10 mx-auto max-w-lg w-full bg-white  p-5 rounded-lg shadow-lg">
               <h2 className="text-2xl mb-4">
                 {selectedSchool.school_name} Info
               </h2>
@@ -345,101 +344,101 @@ const SchoolRequests = () => {
                 <table className="min-w-full">
                   <thead className="bg-gray-100 border-b">
                     <tr>
-                      <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-4 py-1 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Field
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-4 py-1 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Data
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     <tr>
-                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td className="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Email
                       </td>
-                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td className="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.email}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         City
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.city}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         State
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.state}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Mobile Number
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.mobile_number}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Status
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.status}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Landline
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.landline}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         District
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.district}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         STD Code
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.STD_code}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Pincode
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.pincode}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Principal
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.principal_name_prefix} <span> </span>
                         {selectedSchool.principal_name}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Syllabus
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-base  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.syllabus}
                       </td>
                     </tr>
