@@ -49,7 +49,7 @@ const StudentRequests = () => {
           }
         );
 
-      
+        console.log("this is school Response:", schoolResponse.data.data);
 
         if (schoolResponse.status === 200) {
           setSchoolName(schoolResponse.data.data);
@@ -78,7 +78,7 @@ const StudentRequests = () => {
       const response = await axios.post(
         `${URLPath}/api/v1/studentList/createStudentList/${selectedSchool.id}`,
         {
-          schoolId: schoolId,
+          school_name: schoolId,
         },
         {
           headers: {
