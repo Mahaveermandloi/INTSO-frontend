@@ -194,22 +194,22 @@ const StudentRequests = () => {
           <table className="w-full text-sm text-left rtl:text-right  dark:text-gray-400">
             <thead className=" text-gray-700 uppercase  dark:text-gray-400 ">
               <tr className="">
-                <th scope="col" className="px-4 py-2 text-base bg-gray-800">
+                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
                   School Name
                 </th>
-                <th scope="col" className="px-4 py-2 text-base bg-gray-800">
+                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
                   Student Name
                 </th>
-                <th scope="col" className="px-4 py-2 text-base bg-gray-800">
+                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
                   Mobile Number
                 </th>
-                <th scope="col" className="px-4 py-2 text-base bg-gray-800">
+                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
                   Class
                 </th>
-                <th scope="col" className="px-4 py-2 text-base bg-gray-800">
+                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
                   Email
                 </th>
-                <th scope="col" className="px-4 py-2 text-base bg-gray-800">
+                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
                   City
                 </th>
                 <th scope="col" className="px-6 py-3 text-base bg-gray-200 ">
@@ -239,13 +239,13 @@ const StudentRequests = () => {
                         key={id}
                         className="border-b  border-gray-200 dark:border-gray-700 text-base"
                       >
-                        <td className="px-6 py-2 text-base">{school_name}</td>
-                        <td className="px-4 py-2 text-base">{name}</td>
-                        <td className="px-4 py-2 text-base">{mobile_number}</td>
-                        <td className="px-4 py-2 text-base">{student_class}</td>
-                        <td className="px-4 py-2 text-base">{email}</td>
-                        <td className="px-4 py-2 text-base">{city}</td>
-                        <td className="px-4 py-2 text-base text-center">
+                        <td className="px-6 py-1 text-base">{school_name}</td>
+                        <td className="px-4 py-1 text-base">{name}</td>
+                        <td className="px-4 py-1 text-base">{mobile_number}</td>
+                        <td className="px-4 py-1 text-base">{student_class}</td>
+                        <td className="px-4 py-1 text-base">{email}</td>
+                        <td className="px-4 py-1 text-base">{city}</td>
+                        <td className="px-4 py-1 text-base text-center">
                           <button onClick={() => toggleModal(id)}>
                             <FaInfoCircle
                               size={25}
@@ -339,92 +339,92 @@ const StudentRequests = () => {
               <table className="min-w-full">
                 <thead className="bg-gray-100 border-b">
                   <tr>
-                    <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-1 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Field {selectedSchool.id}
                     </th>
-                    <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-4 py-1 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Data
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
-                    <td className="text-base px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base px-4 py-1 whitespace-nowrap font-semibold">
                       Name
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.name}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       Class
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.student_class}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       Email
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.email}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       Address
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.address}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       City
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.city}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       State
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.state}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       Pincode
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.pincode}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       Mobile Number
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.mobile_number}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       School Name
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.school_name}
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       Syllabus
                     </td>
-                    <td className="text-base  px-4 py-2 whitespace-nowrap font-semibold">
+                    <td className="text-base  px-4 py-1 whitespace-nowrap font-semibold">
                       {selectedSchool.syllabus}
                     </td>
                   </tr>
@@ -456,13 +456,13 @@ const StudentRequests = () => {
             <div className="flex justify-between mt-4">
               <button
                 onClick={handleApprove}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
               >
                 Approve
               </button>
 
               <button
-                className="bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
+                className="bg-red-600 text-white font-bold py-1 px-4 rounded mr-2"
                 onClick={() => handleDelete(selectedSchool.id)}
               >
                 Delete
@@ -470,7 +470,7 @@ const StudentRequests = () => {
 
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600"
+                className="bg-[#ed1450] text-white px-4 py-1 rounded hover:bg-red-600"
               >
                 Close
               </button>
