@@ -11,8 +11,7 @@ export const Achivement = () => {
         style={{
           backgroundImage: `url(${img})`,
           backgroundSize: "cover",
-        }}
-      >
+        }}>
         <h1 className="text-center font-bold pt-8 sm:pt-16 sm:text-2xl text-lg">
           What We Achived
         </h1>
