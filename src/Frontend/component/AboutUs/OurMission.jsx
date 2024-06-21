@@ -4,7 +4,7 @@ export const OurMission = () => {
   return (
     <>
       <div data-aos="fade-up">
-        <div className="max-w-screen-xl mx-auto lg:px-28 px-6">
+        <div className="max-w-screen-xl mx-auto lg:px-28 px-6 mt-14">
           <div className=" flex flex-col py-7 justify-center items-center">
             <h1 className="text-[#ED1450] font-bold text-2xl ">Our Mission</h1>
             <p className="w-16 border-b-2 border-[#ED1450]"></p>
