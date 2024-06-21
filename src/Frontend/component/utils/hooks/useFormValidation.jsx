@@ -337,16 +337,16 @@ const validateFields = (formData, formType) => {
     if (!formData.STD_code?.trim()) {
       errors.STD_code = "STD code is required";
       isValid = false;
-    } else if (!/^\d{3}$/.test(formData.STD_code)) {
-      errors.STD_code = "STD code must be exactly 3 digits";
+    } else if (!/^\d{3,5}$/.test(formData.STD_code)) {
+      errors.STD_code = "STD code must be between 3 to 5 digits";
       isValid = false;
     }
 
     if (!formData.landline?.trim()) {
       errors.landline = "Landline number is required";
       isValid = false;
-    } else if (!/^\d{8}$/.test(formData.landline)) {
-      errors.landline = "Landline number must be exactly 8 digits";
+    } else if (!/^\d{10}$/.test(formData.landline)) {
+      errors.landline = "Landline number must be  atleast 10 digits";
       isValid = false;
     }
 
