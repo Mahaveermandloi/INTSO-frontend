@@ -38,7 +38,8 @@ const Pdfs = () => {
       const jsonData = await response.json();
 
       const allData = jsonData.resourceData;
- 
+      const unpaidData = allData.filter((item) => !item.is_paid);
+
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
     } catch (error) {
