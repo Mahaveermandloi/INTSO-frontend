@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ImagesCard = ({ resources }) => {
   const navigate = useNavigate();
- 
+
   const handleDownload = async (pdfUrl) => {
     try {
       const response = await fetch(pdfUrl, {
@@ -68,7 +68,8 @@ const ImagesCard = ({ resources }) => {
                 <div
                   key={item.id}
                   className="rounded-xl flex flex-col space-y-2 border border-gray-300"
-                  data-aos="zoom-in">
+                  data-aos="zoom-in"
+                >
                   <img
                     src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
                     className="rounded-lg w-full h-64  object-cover"
@@ -101,7 +102,8 @@ const ImagesCard = ({ resources }) => {
                             handleDownload(
                               `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
                             )
-                          }>
+                          }
+                        >
                           Download
                           <img
                             src={img}
@@ -122,7 +124,8 @@ const ImagesCard = ({ resources }) => {
         <div className="flex justify-center mt-6">
           <button
             onClick={handleShowMore}
-            className="bg-[#ED1450] text-white p-3 rounded-full w-32">
+            className="bg-[#ED1450] text-white p-3 rounded-full w-32"
+          >
             Show More
           </button>
         </div>

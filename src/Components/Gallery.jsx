@@ -252,7 +252,7 @@ const Gallery = () => {
         <div className="flex justify-around lg:gap-4">
           {/* Form for desktop view */}
 
-          <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
+          <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 h-[580px] lg:rounded-lg lg:shadow-lg overflow-y-scroll">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {gallery.length === 0 ? (
                 <>
@@ -333,7 +333,7 @@ const Gallery = () => {
         </div>
 
         {/* Toggle button and form for mobile view */}
-        <div className="lg:hidden m-2 flex flex-col gap-5">
+        <div className="lg:hidden m-2 flex flex-col  overflow-y-scroll h-[460px] rounded-lg border-2 border-gray-300 p-2  gap-5">
           <button
             className="p-2 bg-[#ed1450] rounded-md text-white w-full font-bold"
             onClick={toggleMobileForm}

@@ -299,7 +299,7 @@ const Image = () => {
 
         <div className="hidden lg:flex justify-around lg:gap-4">
           {/* Form for desktop view */}
-          <div className="hidden lg:w-1/2 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
+          <div className="hidden overflow-y-scroll  h-[580px] border-2 border-gray-400 p-2  rounded-lg lg:w-1/2 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             {/* data display */}
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -333,7 +333,7 @@ const Image = () => {
           </div>
 
           {/* Form for both desktop and mobile view */}
-          <div className="w-full lg:w-1/2 flex flex-col items-center mt-5 p-5 border-2 border-gray-400 rounded-lg shadow-lg">
+          <div className="w-full  lg:w-1/2 flex flex-col items-center mt-5 p-5 border-2 border-gray-400 rounded-lg shadow-lg">
             <div className="flex items-center justify-center w-full">
               <label
                 htmlFor="dropzone-file"
@@ -435,7 +435,7 @@ const Image = () => {
 
         {/* Toggle button and form for mobile view */}
 
-        <div className="lg:hidden m-2 flex flex-col gap-2">
+        <div className="lg:hidden overflow-y-scroll  h-[470px] border-2 border-gray-400 p-2  rounded-lg m-2 flex flex-col gap-2">
           <div className="flex">
             <button
               className="p-2 bg-[#ed1450] rounded-md text-white w-full font-bold"

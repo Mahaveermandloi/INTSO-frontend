@@ -1,5 +1,5 @@
 import React from "react";
-// ./Achive.png
+
 import img from "../../../../src/assets/Frontend_images/Achivedd.png";
 
 export const Achivement = () => {
@@ -11,8 +11,7 @@ export const Achivement = () => {
         style={{
           backgroundImage: `url(${img})`,
           backgroundSize: "cover",
-        }}
-      >
+        }}>
         <h1 className="text-center font-bold pt-8 sm:pt-16 sm:text-2xl text-lg">
           What We Achived
         </h1>
