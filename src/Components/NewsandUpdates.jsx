@@ -512,7 +512,7 @@ const NewsandUpdates = () => {
         <Loader message={"Uploading"} />
       ) : (
         isModalOpen && (
-          <div className="fixed mt-12 bg-black inset-0 flex items-center justify-center bg-opacity-75">
+          <div className="fixed mt-16 bg-black inset-0 flex items-center justify-center bg-opacity-75">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
               <div>
                 <h2 className="text-2xl font-bold mb-4">Create New Entry</h2>

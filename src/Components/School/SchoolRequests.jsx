@@ -27,10 +27,9 @@ const SchoolRequests = () => {
 
         if (response.status === 200) {
           const filteredData = response.data.data.getData.filter(
-            (school) =>
-              school.status === "pending" 
+            (school) => school.status === "pending"
           );
-        
+
           setSchoolData(filteredData);
         }
       } catch (error) {
@@ -154,7 +153,7 @@ const SchoolRequests = () => {
               <tr className="">
                 <th
                   scope="col"
-                  className="px-4 py-2 text-base bg-gray-800 dark:bg-gray-800"
+                  className="px-4 py-1 text-base bg-gray-800 dark:bg-gray-800"
                 >
                   School Name
                 </th>
@@ -192,7 +191,7 @@ const SchoolRequests = () => {
                 <tr>
                   <td
                     colSpan="8"
-                    className="px-4 py-2  text-center text-gray-500"
+                    className="px-4 py-1  text-center text-gray-500"
                   >
                     No matching records found
                   </td>
@@ -212,17 +211,17 @@ const SchoolRequests = () => {
                       key={school_id}
                       className="border-b border-gray-200 dark:border-gray-700 text-base"
                     >
-                      <td className="px-4 py-2  whitespace-nowrap">
+                      <td className="px-4 py-1  whitespace-nowrap">
                         {school_name}
                       </td>
-                      <td className="px-4 py-2 ">{email}</td>
+                      <td className="px-4 py-1 ">{email}</td>
 
-                      <td className="px-4 py-2 ">{city}</td>
-                      <td className="px-4 py-2 ">{state}</td>
+                      <td className="px-4 py-1 ">{city}</td>
+                      <td className="px-4 py-1 ">{state}</td>
 
-                      <td className="px-4 py-2 ">{mobile_number}</td>
+                      <td className="px-4 py-1 ">{mobile_number}</td>
 
-                      <td className="px-4 py-2 ">
+                      <td className="px-4 py-1 ">
                         <span
                           className={` ${
                             status === "approved"
@@ -236,7 +235,7 @@ const SchoolRequests = () => {
                         </span>
                       </td>
 
-                      <td className="px-4 py-2  text-center">
+                      <td className="px-4 py-1  text-center">
                         <button onClick={() => toggleModal(school_id)}>
                           <FaInfoCircle size={30} className="text-[#ed1450]" />
                         </button>
@@ -345,101 +344,101 @@ const SchoolRequests = () => {
                 <table className="min-w-full">
                   <thead className="bg-gray-100 border-b">
                     <tr>
-                      <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-4 py-1 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Field
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-4 py-1 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Data
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     <tr>
-                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td className="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Email
                       </td>
-                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td className="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.email}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         City
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.city}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         State
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.state}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Mobile Number
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.mobile_number}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Status
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.status}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Landline
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.landline}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         District
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.district}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         STD Code
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.STD_code}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Pincode
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.pincode}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Principal
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.principal_name_prefix} <span> </span>
                         {selectedSchool.principal_name}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         Syllabus
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4 py-1 whitespace-nowrap font-semibold">
                         {selectedSchool.syllabus}
                       </td>
                     </tr>
@@ -450,19 +449,19 @@ const SchoolRequests = () => {
               <div className="flex justify-between mt-4">
                 <button
                   onClick={handleApprove}
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
                 >
                   Approve
                 </button>
                 <button
                   onClick={handleReject}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
                 >
                   Reject
                 </button>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600"
+                  className="bg-[#ed1450] text-white px-4 py-1 rounded hover:bg-red-600"
                 >
                   Close
                 </button>
