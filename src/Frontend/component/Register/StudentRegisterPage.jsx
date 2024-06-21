@@ -23,7 +23,10 @@ const StudentRegisterPage = () => {
     student_class: "",
   });
 
-  const { errors, validate, setIsSubmitting } = useFormValidation(formData);
+  const { errors, validate, setIsSubmitting } = useFormValidation(
+    formData,
+    "student"
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -127,7 +130,8 @@ const StudentRegisterPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:px-10 p-6">
+              className="flex flex-col md:px-10 p-6"
+            >
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -141,6 +145,9 @@ const StudentRegisterPage = () => {
                     placeholder="Enter student name"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm">{errors.name}</p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -186,7 +193,8 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="student_class"
                     value={formData.student_class}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option value="">Select Your class</option>
                     {classes.map((cls) => (
                       <option key={cls} value={cls}>
@@ -194,6 +202,12 @@ const StudentRegisterPage = () => {
                       </option>
                     ))}
                   </select>
+
+                  {errors.school_class && (
+                    <p className="text-red-500 text-sm">
+                      {errors.school_class}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col lg:col-span-2">
                   <label className="text-left p-2">
@@ -237,7 +251,8 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option disabled selected>
                       Select Your State
                     </option>
@@ -281,6 +296,12 @@ const StudentRegisterPage = () => {
                     placeholder="Enter your mobile number"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
                   />
+
+                  {errors.mobile_number && (
+                    <p className="text-red-500 text-sm">
+                      {errors.mobile_number}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -290,12 +311,17 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                  >
                     <option value="">Select Syllabus</option>
                     <option value="CBSE">CBSE</option>
                     <option value="ICSE">ICSE</option>
                     <option value="State Board">State Board</option>
                   </select>
+
+                  {errors.syllabus && (
+                    <p className="text-red-500 text-sm">{errors.syllabus}</p>
+                  )}
                 </div>
               </div>
               <div className="flex justify-center">

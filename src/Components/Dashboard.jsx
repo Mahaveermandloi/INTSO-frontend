@@ -41,14 +41,11 @@ const Dashboard = () => {
 
             setStats(formattedStats);
           } else {
-            toast.error("Failed to fetch statistics");
           }
         } else {
           toast.error("No token found");
         }
-      } catch (error) {
-        toast.error("Error fetching dashboard statistics");
-      }
+      } catch (error) {}
     };
 
     fetchStats();
