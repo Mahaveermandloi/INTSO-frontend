@@ -7,7 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./register.module.css";
 
-
 const StudentRegisterPage = () => {
   const location = useLocation();
   const [statusMessage, setStatusMessage] = useState("");
@@ -84,11 +83,9 @@ const StudentRegisterPage = () => {
     }
   };
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
 
   const classes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
   const states = [
@@ -129,7 +126,7 @@ const StudentRegisterPage = () => {
         <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
           <div className="sm:mx-20 mx-5 shadow-xl">
             <div className="flex flex-col py-7 justify-center items-center">
-              <h1 className="text-[#ED1450] font-bold text-2xl">
+              <h1 className="text-[#ED1450] font-bold text-2xl text-center">
                 Student Registration Form
               </h1>
               <p className="w-20 border-b-2 border-[#ED1450]"></p>
@@ -167,7 +164,6 @@ const StudentRegisterPage = () => {
                     onChange={handleChange}
                     placeholder="Enter Your Email ID"
                     className="border border-gray-300 p-2 px-4 rounded-lg"
-                    
                   />
 
                   {errors.email && (

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
@@ -142,9 +141,9 @@ const RegisterForm = () => {
       <ToastContainer />
       <div className="shadow-inner shadow-gray-300 mb-20" data-aos="fade-up">
         <div className="max-w-screen-xl mx-auto lg:px-28 px-6 py-10">
-          <div className="sm:mx-20 mx-5 shadow-xl">
+          <div className="sm:mx-20 shadow-xl">
             <div className="flex flex-col py-7 justify-center items-center ">
-              <h1 className="text-[#ED1450] font-bold text-2xl">
+              <h1 className="text-[#ED1450] font-bold text-2xl text-center">
                 School Registration Form
               </h1>
               <p className="w-20 border-b-2 border-[#ED1450]"></p>
@@ -152,8 +151,7 @@ const RegisterForm = () => {
             </div>
             <form
               className="flex flex-col md:px-10 p-6"
-              onSubmit={handleSubmit}
-            >
+              onSubmit={handleSubmit}>
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -237,8 +235,7 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Your State</option>
                     {states.map((state) => (
                       <option key={state} value={state}>
@@ -323,7 +320,6 @@ const RegisterForm = () => {
                   {errors.landline && (
                     <p className="text-red-500 text-sm">{errors.landline}</p>
                   )}
-                  
                 </div>
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -345,7 +341,7 @@ const RegisterForm = () => {
                   )}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+              <div className="grid md:grid-cols-2  grid-cols-1 gap-x-4 gap-y-2">
                 <div className="text-start">
                   <div className="flex gap-3">
                     <label className="p-2 text-nowrap">
@@ -358,17 +354,13 @@ const RegisterForm = () => {
                       name="principal_name_prefix"
                       value={formData.principal_name_prefix}
                       onChange={handleChange}
-                      className="p-2 border border-gray-300 rounded-l-lg"
-                    >
+                      className="p-2 border border-gray-300 rounded-l-lg">
                       <option value="" disabled>
                         Prefix
                       </option>
                       <option>Mr.</option>
                       <option>Ms.</option>
                       <option>Mrs.</option>
-                   
-                   
-                   
                     </select>
 
                     <input
@@ -380,7 +372,7 @@ const RegisterForm = () => {
                       className="p-2 border border-gray-300 rounded-r-lg w-full"
                     />
                   </div>
-                  {errors.principal_name_prefix&& (
+                  {errors.principal_name_prefix && (
                     <p className="text-red-500 text-sm">
                       {errors.principal_name_prefix}
                     </p>
@@ -400,8 +392,7 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Syllabus</option>
                     <option value="CBSE">CBSE</option>
                     <option value="ICSE">ICSE</option>
@@ -414,8 +405,7 @@ const RegisterForm = () => {
               </div>
               <button
                 type="submit"
-                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full"
-              >
+                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full">
                 Submit
               </button>
             </form>
