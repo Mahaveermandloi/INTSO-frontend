@@ -130,8 +130,7 @@ const StudentRegisterPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:px-10 p-6"
-            >
+              className="flex flex-col md:px-10 p-6">
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -193,8 +192,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="student_class"
                     value={formData.student_class}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Your class</option>
                     {classes.map((cls) => (
                       <option key={cls} value={cls}>
@@ -251,8 +249,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option disabled selected>
                       Select Your State
                     </option>
@@ -283,7 +280,7 @@ const StudentRegisterPage = () => {
                   )}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-x-4">
+              <div className="grid md:grid-cols-2  gird-cols-1 gap-x-4">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
                     Mobile Number<span className="text-red-500 text-lg">*</span>
@@ -311,8 +308,7 @@ const StudentRegisterPage = () => {
                     className="border border-gray-300 p-3 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Syllabus</option>
                     <option value="CBSE">CBSE</option>
                     <option value="ICSE">ICSE</option>

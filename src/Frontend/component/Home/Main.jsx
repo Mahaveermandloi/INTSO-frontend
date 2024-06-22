@@ -14,6 +14,7 @@ import Slideshow from "./SlideShow";
 import { useLocation } from "react-router-dom";
 import { GalleryPage } from "../Gallery/GalleryPage";
 import { Gallery } from "./Gallery";
+import { Adds } from "../common files/Adds";
 
 export const Main = () => {
   const location = useLocation();
@@ -37,7 +38,9 @@ export const Main = () => {
         <AboutExam />
         <Gallery />
       </div>
-      <div className="relative ">{/* <Adds /> */}</div>
+      {/* <div className="relative ">
+        <Adds />
+      </div> */}
     </>
   );
 };
