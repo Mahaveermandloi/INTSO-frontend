@@ -85,7 +85,6 @@ const validateFields = (formData, formType) => {
       isValid = false;
     }
   } else if (formType === "student") {
-    
     if (!formData.name?.trim()) {
       errors.name = "Student name is required";
       isValid = false;
@@ -144,7 +143,6 @@ const validateFields = (formData, formType) => {
       errors.student_class = "Class is required";
       isValid = false;
     }
-
   }
 
   return errors;

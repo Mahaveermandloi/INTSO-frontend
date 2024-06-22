@@ -292,7 +292,7 @@ const Testimonials = () => {
         <div className="flex justify-around   lg:gap-4 ">
           {/* Form for desktop view */}
 
-          <div className=" hidden lg:w-3/4 gap-3  lg:grid grid-cols-2 lg:items-start lg:mt-5  lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
+          <div className=" hidden lg:w-3/4 gap-3  overflow-y-scroll  h-[470px] border-2 border-gray-400 p-2  rounded-lg lg:grid grid-cols-2 lg:items-start lg:mt-5  lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             {isLoading ? (
               <Loader message={"Loading..."} />
             ) : testimonial.length === 0 ? (
@@ -332,7 +332,7 @@ const Testimonials = () => {
             {/* images should be displayed here  in desktop view  */}
           </div>
 
-          <div className="hidden w-1/4 lg:flex  lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
+          <div className="hidden w-1/4 lg:flex   lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
             <div className="flex items-center justify-center w-full">
               <label
                 htmlFor="dropzone-file"

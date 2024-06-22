@@ -303,7 +303,7 @@ const Pdf = () => {
 
         <div className="hidden lg:flex justify-around lg:gap-4">
           {/* Form for desktop view */}
-          <div className="hidden lg:w-2/3 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-1 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg overflow-y-auto">
+          <div className="hidden overflow-y-scroll  h-[580px] border-2 border-gray-400 p-2  rounded-lg lg:w-2/3 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-1 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg ">
             {/* data display */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 h-96 ">
               {data.length === 0 ? (
@@ -448,7 +448,7 @@ const Pdf = () => {
           </div>
         </div>
 
-        <div className="lg:hidden flex flex-col gap-2 ">
+        <div className="lg:hidden flex flex-col gap-2 overflow-y-scroll  h-[470px] border-2 border-gray-400 p-2  rounded-lg ">
           {/* Form for mobile view */}
 
           <div className="flex">

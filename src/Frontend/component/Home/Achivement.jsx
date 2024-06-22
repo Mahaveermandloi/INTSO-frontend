@@ -1,5 +1,5 @@
 import React from "react";
-// ./Achive.png
+
 import img from "../../../../src/assets/Frontend_images/Achivedd.png";
 
 export const Achivement = () => {

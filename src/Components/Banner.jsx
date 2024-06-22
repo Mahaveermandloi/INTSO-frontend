@@ -34,7 +34,7 @@ const Banner = () => {
         // Handle response
 
         setGallery(response.data.data);
-    } else {
+      } else {
         toast.error("No access token found");
       }
     } catch (error) {
@@ -217,7 +217,7 @@ const Banner = () => {
         <div className="flex justify-around lg:gap-4">
           {/* Form for desktop view */}
 
-          <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 lg:rounded-lg lg:shadow-lg">
+          <div className="hidden lg:w-3/4 lg:flex lg:flex-col lg:items-end lg:mt-5 lg:p-5 lg:border-2 lg:border-gray-400 h-[580px] overflow-y-scroll lg:rounded-lg lg:shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {gallery.length === 0 ? (
                 <>
@@ -318,7 +318,7 @@ const Banner = () => {
         </div>
 
         {/* Toggle button and form for mobile view */}
-        <div className="lg:hidden m-2 flex flex-col gap-2">
+        <div className="lg:hidden m-2 flex flex-col gap-2 overflow-y-scroll  h-[470px] border-2 border-gray-400 p-2  rounded-lg">
           <button
             className="p-2 bg-[#ed1450] rounded-md text-white w-full font-bold"
             onClick={toggleMobileForm}
@@ -425,6 +425,7 @@ const Banner = () => {
               )}
             </div>
           </div>
+        
         </div>
       </div>
     </>
