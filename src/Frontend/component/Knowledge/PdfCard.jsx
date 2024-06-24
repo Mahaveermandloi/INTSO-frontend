@@ -1,10 +1,9 @@
 import React from "react";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
-
 import img1 from "../../../../src/assets/Frontend_images/PDF_BG_1.png";
-import img2 from "../../../../src/assets/Frontend_images/Download_SVG.png";
 import { useNavigate } from "react-router-dom";
+import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
 
 const PdfCard = ({ resources }) => {
   const navigate = useNavigate();
@@ -88,32 +87,28 @@ const PdfCard = ({ resources }) => {
                     <div>
                       <p className="border-b-2 border-gray-300 text-center mx-3"></p>
                     </div>
-                    <div className="flex items-center mx-3 gap-x-2 justify-between">
-                      <div>
-                        <p className="text-xs text-nowrap">
-                          <span className="text-[#ED1450]">Uploaded By </span>
+                    <div className="flex  justify-between gap-2 mx-2 ">
+                      <p className="text-sm">
+                        <p>
+                          <strong className="text-[#ED1450]">
+                            Uploaded By
+                          </strong>{" "}
                           {item.uploaded_by}
                         </p>
-                        <p className="text-xs text-start">
-                          {formatDate(item.createdAt)}
-                        </p>
-                      </div>
-                      <div className="flex justify-center p-1 rounded-full bg-[#ED1450] w-28 sm:min-w-20 space-x-1">
-                        <button
-                          className="text-white text-sm flex items-center"
-                          onClick={() =>
-                            handleDownload(
-                              `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
-                            )
-                          }>
-                          Download
-                          <img
-                            src={img2}
-                            className="ml-2 size-5"
-                            alt="Download Icon"
-                          />
-                        </button>
-                      </div>
+                        {formatDate(item.createdAt)}
+                      </p>
+                      <button
+                        className="bg-[#ED1450] rounded-full flex justify-center items-center gap-1 px-1 p-1 h-fit font-seibold"
+                        onClick={() =>
+                          handleDownload(
+                            `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
+                          )
+                        }>
+                        <h1 className="hidden md:block text-white">Download</h1>
+                        <DownloadForOfflineOutlinedIcon
+                          sx={{ color: "white" }}
+                        />
+                      </button>
                     </div>
                   </div>
                 </div>
