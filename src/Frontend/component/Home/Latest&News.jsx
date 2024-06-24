@@ -54,7 +54,7 @@ export const News = () => {
                 : "gray-200"
             }  sm:p-3 p-1  sm:w-36 w-auto  rounded-full`}
             onClick={() => handleButtonClick("eventsExam")}>
-            Events & Exam
+            Events
           </button>
           <button
             className={`text-black bg-${
@@ -63,7 +63,7 @@ export const News = () => {
                 : "gray-200"
             }   rounded-full sm:p-3 p-1  sm:w-36 w-auto`}
             onClick={() => handleButtonClick("latestUpdates")}>
-            Latest Updates
+            Exams
           </button>
         </div>
         {renderComponent()}

@@ -8,7 +8,7 @@ export const AboutExam = () => {
         <div className="max-w-screen-xl mx-auto lg:p-24 p-6">
           <div className="grid lg:grid-cols-2 sm:grid-cols-1  gap-3 items-center justify-center">
             <div className=" text-black text-justify space-y-3">
-              <h1 className="text-2xl font-bold">WHAT IS OLYMPIOAD EXAMS?</h1>
+              <h1 className="text-2xl font-bold">WHAT IS OLYMPIAD EXAMS?</h1>
               <p>
                 Olympiad exams are academic competitions designed to challenge
                 students in various subjects beyond the standard curriculum.

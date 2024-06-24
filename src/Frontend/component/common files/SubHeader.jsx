@@ -204,9 +204,19 @@ const SubHeader = () => {
                             </MenuItem>
                             <Popper
                               open={submenuType === "mtso"}
-                              anchorEl={submenuAnchorEl}
-                              placement="right-start"
-                              transition>
+                              anchorEl={anchorEl}
+                              placement="bottom-start"
+                              transition
+                              modifiers={{
+                                flip: {
+                                  enabled: true,
+                                },
+                                preventOverflow: {
+                                  enabled: true,
+                                  boundariesElement: "viewport",
+                                },
+                              }}
+                              style={{ zIndex: 1300 }}>
                               {({ TransitionProps }) => (
                                 <Grow
                                   {...TransitionProps}
@@ -220,6 +230,7 @@ const SubHeader = () => {
                                             onClick={() => {
                                               handleSubMenuClose();
                                               handleDropdownClose();
+                                              setShowNav(false);
                                             }}>
                                             (MTSO)About
                                           </MenuItem>
@@ -233,6 +244,7 @@ const SubHeader = () => {
                                 </Grow>
                               )}
                             </Popper>
+
                             <MenuItem
                               onClick={(event) =>
                                 handleSubMenuOpen(event, "atso")
@@ -242,9 +254,19 @@ const SubHeader = () => {
                             </MenuItem>
                             <Popper
                               open={submenuType === "atso"}
-                              anchorEl={submenuAnchorEl}
-                              placement="right-start"
-                              transition>
+                              anchorEl={anchorEl}
+                              placement="bottom-start"
+                              transition
+                              modifiers={{
+                                flip: {
+                                  enabled: true,
+                                },
+                                preventOverflow: {
+                                  enabled: true,
+                                  boundariesElement: "viewport",
+                                },
+                              }}
+                              style={{ zIndex: 1300 }}>
                               {({ TransitionProps }) => (
                                 <Grow
                                   {...TransitionProps}
@@ -257,7 +279,7 @@ const SubHeader = () => {
                                           (ATSO)About
                                         </MenuItem>
                                         <MenuItem onClick={handleSubMenuClose}>
-                                          (MATSO)Syllabus&Pattern
+                                          (ATSO)Syllabus&Pattern
                                         </MenuItem>
                                       </MenuList>
                                     </ClickAwayListener>
@@ -265,6 +287,7 @@ const SubHeader = () => {
                                 </Grow>
                               )}
                             </Popper>
+
                             <MenuItem
                               onClick={(event) =>
                                 handleSubMenuOpen(event, "etso")
@@ -274,9 +297,19 @@ const SubHeader = () => {
                             </MenuItem>
                             <Popper
                               open={submenuType === "etso"}
-                              anchorEl={submenuAnchorEl}
-                              placement="right-start"
-                              transition>
+                              anchorEl={anchorEl}
+                              placement="bottom-start"
+                              transition
+                              modifiers={{
+                                flip: {
+                                  enabled: true,
+                                },
+                                preventOverflow: {
+                                  enabled: true,
+                                  boundariesElement: "viewport",
+                                },
+                              }}
+                              style={{ zIndex: 1300 }}>
                               {({ TransitionProps }) => (
                                 <Grow
                                   {...TransitionProps}
@@ -363,7 +396,7 @@ const SubHeader = () => {
                   }}
                   getContentAnchorEl={null}
                   sx={{
-                    mt: { xs: 5, sm: 0, lg: 0 },
+                    mt: { xs: 0, sm: 0, lg: 0 },
                     ml: { xs: 0, sm: 5, lg: 10 },
                     mr: { xs: 0, sm: 5 },
                   }}>

@@ -44,11 +44,11 @@ const Slideshow = () => {
                       {item.description.charAt(0).toUpperCase() +
                         item.description.slice(1)}
                     </p>
-                    <button
-                      className="sm:p-2 sm:px-5 px-2 sm:w-48 w-32 2xl:w-72 2xl:text-xl  bg-[#ED1450] text-white rounded-full"
-                      onClick={() => handleButtonClick(item.link)}>
-                      {item.link}
-                    </button>
+                    <Link to="/studentregister">
+                      <button className="sm:p-2 sm:px-5 px-2 sm:w-48 w-32 2xl:w-72 2xl:text-xl  bg-[#ED1450] text-white rounded-full">
+                        Student Registration
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
