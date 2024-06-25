@@ -12,7 +12,10 @@ import {
   FaQuoteLeft,
   FaSignOutAlt,
   FaChevronDown,
+  // FaQuoteLeft,
+  FaMedal,
 } from "react-icons/fa";
+// import { LiaMedalSolid } from "react-icons/lia";
 import { baseURL } from "../URLPath";
 
 const SideBar = ({ isOpen, toggleSidebar }) => {
@@ -80,6 +83,16 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaImages className="mr-2" />
                 Gallery
+              </li>
+            </Link>
+            <Link
+              onClick={handleItemClick}
+              to={`${baseURL}/reward-recognition`}
+            >
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                {/* <FaImages className="mr-2" /> */}
+                <FaMedal className="mr-2" />
+                Reward
               </li>
             </Link>
             <Link onClick={handleItemClick} to={`${baseURL}/banner`}>

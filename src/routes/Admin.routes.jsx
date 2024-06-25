@@ -32,6 +32,7 @@ import { baseURL } from "../URLPath";
 import useTokenExpirationCheck from "../Components/useTokenExpirationCheck";
 // import Layouts from "../Components/Layouts";
 import AdminFooter from "../Components/AdminFooter";
+import RewardAndRecognition from "../Components/rewardAndRecognition";
 
 const AdminRoutes = () => {
   useTokenExpirationCheck();
@@ -100,6 +101,10 @@ const AuthenticatedApp = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/updateprofile" element={<UpdateProfile />} />
           <Route path="/updatepassword" element={<UpdatePassword />} />
+          <Route
+            path="/reward-recognition"
+            element={<RewardAndRecognition />}
+          />
           {/* Redirect all other routes to dashboard */}
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Routes>
