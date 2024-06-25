@@ -1,35 +1,35 @@
 import { useState, useEffect } from "react";
 import { API_KEY, IP_ADDRESS, PORT } from "../constants";
-
-const url = `http://${IP_ADDRESS}:${PORT}/api/v1/gallery/getGallery`;
-
-const useFetchGalleryData = () => {
+const useFetchGalleryData = (page, limit) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            api_key: API_KEY,
-          },
-        });
-        const jsonData = await data.json();
-
-        setData(jsonData.data);
+        const response = await fetch(
+          `http://${IP_ADDRESS}:${PORT}/api/v1/gallery/getGalleryData-By-page?page=${page}&limit=${limit}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              api_key: API_KEY,
+            },
+          }
+        );
+        const jsonData = await response.json();
+        if (page === 1) {
+          setData(jsonData.data);
+        } else {
+          setData((prevData) => [...prevData, ...jsonData.data]);
+        }
       } catch (e) {
         console.log(e);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [url]);
-
+  }, [page, limit]);
   return { data, loading };
 };
-
 export default useFetchGalleryData;

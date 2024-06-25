@@ -3,36 +3,29 @@ import ImageModal from "../Home/ImageModal";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import useFetchGalleryData from "../utils/hooks/useFetchGalleryData";
-
 export const GalleryPage = () => {
-  const { data } = useFetchGalleryData();
-
+  const [page, setPage] = useState(1);
+  const limit = 9; // Number of items per page
+  const { data, loading } = useFetchGalleryData(page, limit);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayedData, setDisplayedData] = useState([]);
-  const [visibleItemCount, setVisibleItemCount] = useState(9); // Initially display 9 items
   const location = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
   useEffect(() => {
-    // Slice the first `visibleItemCount` items from `data` for initial display
-    setDisplayedData(data.slice(0, visibleItemCount));
-  }, [data, visibleItemCount]);
-
+    setDisplayedData(data);
+  }, [data]);
   const openModal = (index) => {
     setCurrentImage(`http://${IP_ADDRESS}:${PORT}${data[index].gallery_img}`);
     setCurrentIndex(index);
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
   const showPreviousImage = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : data.length - 1;
     setCurrentIndex(newIndex);
@@ -40,7 +33,6 @@ export const GalleryPage = () => {
       `http://${IP_ADDRESS}:${PORT}${data[newIndex].gallery_img}`
     );
   };
-
   const showNextImage = () => {
     const newIndex = currentIndex < data.length - 1 ? currentIndex + 1 : 0;
     setCurrentIndex(newIndex);
@@ -48,12 +40,9 @@ export const GalleryPage = () => {
       `http://${IP_ADDRESS}:${PORT}${data[newIndex].gallery_img}`
     );
   };
-
   const handleLoadMore = () => {
-    // Increase visibleItemCount by 6 to display next 6 items
-    setVisibleItemCount((prev) => prev + 6);
+    setPage((prev) => prev + 1);
   };
-
   return (
     <>
       <div className="">
@@ -87,12 +76,13 @@ export const GalleryPage = () => {
             );
           })}
         </div>
-        {visibleItemCount < data.length && (
+        {data.length >= page * limit && (
           <div className="flex justify-center p-5 mt-5">
             <button
               className="bg-[#ED1450] text-white p-3 rounded-full w-40"
-              onClick={handleLoadMore}>
-              Load More
+              onClick={handleLoadMore}
+              disabled={loading}>
+              {loading ? "Loading..." : "Load More"}
             </button>
           </div>
         )}

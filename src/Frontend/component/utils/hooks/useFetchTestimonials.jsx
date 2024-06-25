@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { API_KEY, IP_ADDRESS, PORT } from "../constants";
-const useFetchBlogData = (page, limit) => {
-  const [data, setData] = useState([]);
+const useFetchTestimonials = (page, limit) => {
+  const [testimonialData, setTestimonialData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-all-blog-By-page?page=${page}&limit=${limit}`,
+          `http://${IP_ADDRESS}:${PORT}/api/v1/testiMonial/get-testimonial-by-page?page=${page}&limit=${limit}`,
           {
             method: "GET",
             headers: {
@@ -17,10 +18,11 @@ const useFetchBlogData = (page, limit) => {
           }
         );
         const jsonData = await response.json();
+
         if (page === 1) {
-          setData(jsonData.data.blogData);
+          setTestimonialData(jsonData.data);
         } else {
-          setData((prevData) => [...prevData, ...jsonData.data.blogData]);
+          setTestimonialData((prevData) => [...prevData, ...jsonData.data]);
         }
       } catch (e) {
         console.log(e);
@@ -30,6 +32,6 @@ const useFetchBlogData = (page, limit) => {
     };
     fetchData();
   }, [page, limit]);
-  return { data, loading };
+  return { testimonialData, loading };
 };
-export default useFetchBlogData;
+export default useFetchTestimonials;

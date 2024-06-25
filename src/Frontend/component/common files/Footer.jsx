@@ -34,7 +34,7 @@ export const Footer = () => {
             <div className="flex sm:items-center items-start flex-col text-left lg:border-r-2 border-gray-20 p-5">
               <div>
                 <h1 className="text-[#ED1450] py-3  font-bold text-2xl">
-                  Registration
+                  Quick Links
                 </h1>
                 <ul className="flex flex-col space-y-2 text-gray-600">
                   <Link to="/register">
@@ -46,10 +46,16 @@ export const Footer = () => {
                   <Link to="/login">
                     <li className="hover:underline ">Login</li>
                   </Link>
-                  <Link to="/">
+                  <Link to="/rewards">
                     <li className="hover:underline ">
                       Rewards And Recognition
                     </li>
+                  </Link>
+                  <Link to="/career">
+                    <li className="hover:underline ">Career With Us</li>
+                  </Link>
+                  <Link to="/faq">
+                    <li className="hover:underline ">FAQ</li>
                   </Link>
                   {/* <Link to="/hotlink">
                     <li className="hover:underline ">Hotlinks</li>
@@ -84,7 +90,12 @@ export const Footer = () => {
                       <a>Gallery</a>
                     </li>
                   </Link>
-                  <Link to="/contactus">
+                  <Link to="/testimonials">
+                    <li className="hover:underline mt-2">
+                      <a>Testimonials</a>
+                    </li>
+                  </Link>
+                  <Link to="/">
                     <li className="hover:underline mt-2">
                       <a>Become a Co-ordinater</a>
                     </li>
