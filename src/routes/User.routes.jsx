@@ -43,6 +43,10 @@ import Videos from "../Frontend/component/Knowledge/MoreData/Videos";
 import Pdfs from "../Frontend/component/Knowledge/MoreData/Pdfs";
 import PaidResources from "../Frontend/component/Knowledge/PaidResources";
 import PaidKnowledge from "../Frontend/component/Knowledge/Paid Resources/PaidKnowledge";
+import TestimonialPage from "../Frontend/component/Testimonials/TestimonialPage";
+import { RewardImages } from "../Frontend/component/Gallery/RewardImages";
+import CareerWithUs from "../Frontend/component/Career/CareerWithUs";
+import FAQ from "../Frontend/component/FAQ/FAQ";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -128,7 +132,7 @@ const UserRoutes = () => {
           element={
             <Layout>
               <MainBlog />
-            </Layout>    
+            </Layout>
           }
         />
         <Route
@@ -248,6 +252,38 @@ const UserRoutes = () => {
           element={
             <Layout>
               <Class10 />
+            </Layout>
+          }
+        />
+        <Route
+          path="/testimonials"
+          element={
+            <Layout>
+              <TestimonialPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/rewards"
+          element={
+            <Layout>
+              <RewardImages />
+            </Layout>
+          }
+        />
+        <Route
+          path="/career"
+          element={
+            <Layout>
+              <CareerWithUs />
+            </Layout>
+          }
+        />
+        <Route
+          path="/faq"
+          element={
+            <Layout>
+              <FAQ />
             </Layout>
           }
         />

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { API_KEY, IP_ADDRESS, PORT } from "../constants";
-const useFetchBlogData = (page, limit) => {
+const useFetchRewards = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/blogs/get-all-blog-By-page?page=${page}&limit=${limit}`,
+          `http://${IP_ADDRESS}:${PORT}/api/v1/reward/getReward-data`,
           {
             method: "GET",
             headers: {
@@ -17,11 +17,7 @@ const useFetchBlogData = (page, limit) => {
           }
         );
         const jsonData = await response.json();
-        if (page === 1) {
-          setData(jsonData.data.blogData);
-        } else {
-          setData((prevData) => [...prevData, ...jsonData.data.blogData]);
-        }
+        setData(jsonData.data);
       } catch (e) {
         console.log(e);
       } finally {
@@ -29,7 +25,7 @@ const useFetchBlogData = (page, limit) => {
       }
     };
     fetchData();
-  }, [page, limit]);
+  }, []);
   return { data, loading };
 };
-export default useFetchBlogData;
+export default useFetchRewards;
