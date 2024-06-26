@@ -1,10 +1,11 @@
 import React from "react";
-import useFetchData from "../utils/hooks/useFetchData";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 import { Link } from "react-router-dom";
-export const LatestNews = () => {
-  const { data2: newsArray, loading } = useFetchData();
+import useFetchNewsUpdate from "../utils/hooks/useFetchNewsUpdate";
+export const LatestNewsMain = () => {
+  const { data1: newsArray, loading } = useFetchNewsUpdate();
+  console.log("newArray", newsArray);
 
   return (
     <>
@@ -39,15 +40,6 @@ export const LatestNews = () => {
                 </div>
               ))}
             </div>
-          )}
-          {!loading && (
-            <Link to="/newspage">
-              <div className="flex justify-center p-5">
-                <button className="bg-[#ED1450] text-white p-3 rounded-full w-32">
-                  Know More
-                </button>
-              </div>
-            </Link>
           )}
         </div>
       </div>

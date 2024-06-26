@@ -47,6 +47,11 @@ import TestimonialPage from "../Frontend/component/Testimonials/TestimonialPage"
 import { RewardImages } from "../Frontend/component/Gallery/RewardImages";
 import CareerWithUs from "../Frontend/component/Career/CareerWithUs";
 import FAQ from "../Frontend/component/FAQ/FAQ";
+import { ArchiverCorner } from "../Frontend/component/Gallery/ArchiverCorner";
+import { MemberShipCertification } from "../Frontend/component/Gallery/MemberShipCertification";
+import Hotlinks from "../Frontend/component/Reference/Hotlinks";
+import { SubjectTabs } from "../Frontend/component/Content/SubjectTabs";
+import { NewsAndUpdatePage } from "../Frontend/component/NewsAndUpdate/NewsAndUpdatePage";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -284,6 +289,46 @@ const UserRoutes = () => {
           element={
             <Layout>
               <FAQ />
+            </Layout>
+          }
+        />
+        <Route
+          path="/achivercorner"
+          element={
+            <Layout>
+              <ArchiverCorner />
+            </Layout>
+          }
+        />
+        <Route
+          path="/content"
+          element={
+            <Layout>
+              <SubjectTabs />
+            </Layout>
+          }
+        />
+        <Route
+          path="/membership"
+          element={
+            <Layout>
+              <MemberShipCertification />
+            </Layout>
+          }
+        />
+        <Route
+          path="/hotlinks"
+          element={
+            <Layout>
+              <Hotlinks />
+            </Layout>
+          }
+        />
+        <Route
+          path="/newspage"
+          element={
+            <Layout>
+              <NewsAndUpdatePage />
             </Layout>
           }
         />

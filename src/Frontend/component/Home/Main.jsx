@@ -32,7 +32,6 @@ export const Main = () => {
         <News />
         <Achivement />
         <Blog />
-        {/* <Newssss /> */}
         <OurExams />
         <Testimonial />
         <AboutExam />
