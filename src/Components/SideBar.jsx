@@ -12,7 +12,7 @@ import {
   FaQuoteLeft,
   FaSignOutAlt,
   FaChevronDown,
-  // FaQuoteLeft,
+  FaDoorOpen,
   FaMedal,
 } from "react-icons/fa";
 // import { LiaMedalSolid } from "react-icons/lia";
@@ -220,6 +220,12 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <RiArticleLine className="mr-2" />
                 News Letter
+              </li>
+            </Link>
+            <Link onClick={handleItemClick} to={`${baseURL}/careerList`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <FaDoorOpen className="mr-2" />
+                Career With Us
               </li>
             </Link>
 

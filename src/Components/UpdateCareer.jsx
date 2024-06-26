@@ -4,8 +4,8 @@ import { ToastContainer, Bounce, toast } from "react-toastify";
 import Editor from "./Editor";
 import { useNavigate, useParams } from "react-router-dom";
 import { URLPath, baseURL } from "../URLPath";
-const UpdateBlog = () => {
-  const [blogData, setBlogData] = useState({});
+const UpdateCareer = () => {
+  const [careerData, setBlogData] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -16,20 +16,16 @@ const UpdateBlog = () => {
         try {
           const accessToken = localStorage.getItem("accessToken");
           const response = await axios.get(
-            `${URLPath}/api/v1/blogs/get-edit-blog-details/${id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
+            `${URLPath}/api/v1/career/edit-career-details/${id}`
           );
-          const { title, posted_By, permalink, description } =
-            response.data.data.blogData;
+          const { job_role, job_type, job_location, job_description } =
+            response.data.data.data;
+          console.log("Career Data", response.data.data.data);
           setBlogData({
-            title,
-            posted_By,
-            permalink,
-            description,
+            job_role,
+            job_type,
+            job_location,
+            job_description,
           });
         } catch (error) {
           console.error("Error fetching blog data:", error);
@@ -69,31 +65,86 @@ const UpdateBlog = () => {
     }
   };
 
+  //   const handleSubmit = async (event) => {
+  //     event.preventDefault();
+
+  //     try {
+  //       const formData = new FormData();
+
+  //       formData.append("job_role", careerData.job_role);
+  //       formData.append("job_type", careerData.job_type);
+  //       formData.append("job_location", careerData.job_location);
+  //       formData.append("job_description", careerData.job_description);
+
+  //       const accessToken = localStorage.getItem("accessToken");
+  //       const response = await axios.put(
+  //         `${URLPath}/api/v1/career/edit-career-with-us/${id}`,
+  //         formData,
+  //         {
+  //           headers: {
+  //             // Authorization: `Bearer ${accessToken}`,
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         }
+  //       );
+
+  //       if (response.status === 200) {
+  //         toast.success("Blog updated successfully!", {
+  //           position: "top-center",
+  //           autoClose: 3000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+
+  //         setTimeout(() => {
+  //           navigate(`${baseURL}/blog`);
+  //         }, 1000);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error updating blog:", error);
+  //       toast.error("Error updating blog", {
+  //         position: "top-center",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //         transition: Bounce,
+  //       });
+  //     }
+  //   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const formData = new FormData();
-      formData.append("image", selectedFile);
-      formData.append("title", blogData.title);
-      formData.append("posted_By", blogData.posted_By);
-      formData.append("permalink", blogData.permalink);
-      formData.append("description", blogData.description);
+      const updatedCareerData = {
+        job_role: careerData.job_role,
+        job_type: careerData.job_type,
+        job_location: careerData.job_location,
+        job_description: careerData.job_description,
+      };
 
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.put(
-        `${URLPath}/api/v1/blogs/update-blog-details/${id}`,
-        formData,
+        `${URLPath}/api/v1/career/edit-career-with-us/${id}`,
+        updatedCareerData,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${accessToken}`, // Uncomment if using authentication
           },
         }
       );
 
       if (response.status === 200) {
-        toast.success("Blog updated successfully!", {
+        toast.success("Career updated successfully!", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -105,12 +156,12 @@ const UpdateBlog = () => {
         });
 
         setTimeout(() => {
-          navigate(`${baseURL}/blog`);
+          navigate(`${baseURL}/careerList`);
         }, 1000);
       }
     } catch (error) {
-      console.error("Error updating blog:", error);
-      toast.error("Error updating blog", {
+      console.error("Error updating career:", error);
+      toast.error("Error updating career", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -142,14 +193,14 @@ const UpdateBlog = () => {
       <div className="lg:w-10/12 lg:ml-auto">
         <div className="flex justify-between items-center flex-col">
           <div>
-            <h1 className="text-2xl lg:text-4xl font-bold">Update Blog</h1>
+            <h1 className="text-2xl lg:text-4xl font-bold">Update Career</h1>
           </div>
 
           <div className="flex w-full">
             <div className="w-full p-2 flex items-center bg-opacity-75">
               <div className="w-full p-3 lg:p-3 bg-gray-200 rounded-lg shadow-lg">
                 <div className="flex justify-between">
-                  <h2 className="text-2xl font-bold mb-4">Update Blog</h2>
+                  <h2 className="text-2xl font-bold mb-4">Update Career</h2>
                 </div>
 
                 <form
@@ -160,18 +211,18 @@ const UpdateBlog = () => {
                     <div className="w-1/2">
                       <label
                         className="block text-sm font-medium mb-1"
-                        htmlFor="title"
+                        htmlFor="job_role"
                       >
-                        Title
+                        Job Role
                       </label>
                       <input
                         type="text"
-                        id="title"
-                        value={blogData.title}
+                        id="job_role"
+                        value={careerData.job_role}
                         onChange={(e) =>
                           setBlogData((prevData) => ({
                             ...prevData,
-                            title: e.target.value,
+                            job_role: e.target.value,
                           }))
                         }
                         className="w-full p-2 rounded bg-gray-100"
@@ -182,18 +233,18 @@ const UpdateBlog = () => {
                     <div className="w-1/2">
                       <label
                         className="block text-sm font-medium mb-1"
-                        htmlFor="posted_By"
+                        htmlFor="job_role"
                       >
-                        Posted By
+                        Job Type
                       </label>
                       <input
                         type="text"
-                        id="posted_By"
-                        value={blogData.posted_By}
+                        id="job_type"
+                        value={careerData.job_type}
                         onChange={(e) =>
                           setBlogData((prevData) => ({
                             ...prevData,
-                            posted_By: e.target.value,
+                            job_type: e.target.value,
                           }))
                         }
                         className="w-full p-2 rounded bg-gray-100"
@@ -205,18 +256,18 @@ const UpdateBlog = () => {
                   <div>
                     <label
                       className="block text-sm font-medium mb-1"
-                      htmlFor="permalink"
+                      htmlFor="job_location"
                     >
-                      Permalink
+                      Job Location
                     </label>
                     <input
                       type="text"
-                      id="permalink"
-                      value={blogData.permalink}
+                      id="job_location"
+                      value={careerData.job_location}
                       onChange={(e) =>
                         setBlogData((prevData) => ({
                           ...prevData,
-                          permalink: e.target.value,
+                          job_location: e.target.value,
                         }))
                       }
                       className="w-full p-2 rounded bg-gray-100"
@@ -225,30 +276,24 @@ const UpdateBlog = () => {
                   </div>
 
                   <div className="">
-                    <Editor
-                      value={blogData.description}
-                      onChange={(value) =>
-                        setBlogData((prevData) => ({
-                          ...prevData,
-                          description: value,
-                        }))
-                      }
-                    />
-                  </div>
-
-                  <div>
                     <label
                       className="block text-sm font-medium mb-1"
-                      htmlFor="image"
+                      htmlFor="job_location"
                     >
-                      Image
+                      Description
                     </label>
-                    <input
-                      type="file"
-                      id="image"
-                      accept="image/*"
-                      onChange={handleFileChange}
+                    <textarea
+                      type="text"
+                      id="job_description"
+                      value={careerData.job_description}
+                      onChange={(e) =>
+                        setBlogData((prevData) => ({
+                          ...prevData,
+                          job_description: e.target.value,
+                        }))
+                      }
                       className="w-full p-2 rounded bg-gray-100"
+                      required
                     />
                   </div>
 
@@ -256,7 +301,7 @@ const UpdateBlog = () => {
                     type="submit"
                     className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600"
                   >
-                    Update Blog
+                    Update Career
                   </button>
                 </form>
               </div>
@@ -268,4 +313,4 @@ const UpdateBlog = () => {
   );
 };
 
-export default UpdateBlog;
+export default UpdateCareer;
