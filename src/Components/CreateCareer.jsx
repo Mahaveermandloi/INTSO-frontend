@@ -28,7 +28,12 @@ const CreateCareer = () => {
         setIsPostingCareer(true); // Set loading state for career posting
         const response = await axios.post(
           `${URLPath}/api/v1/career/post-career-with-us`,
-          careerData
+          careerData,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
         );
 
         if (response.status === 200) {

@@ -150,12 +150,12 @@ const BlogBox = ({ id, jobType, description, location, jobRole }) => {
       try {
         const accessToken = localStorage.getItem("accessToken");
         const response = await axios.delete(
-          `${URLPath}/api/v1/career/delete-career-data/${id}`
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${accessToken}`,
-          //     },
-          //   }
+          `${URLPath}/api/v1/career/delete-career-data/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
         );
 
         if (response.status === 200) {

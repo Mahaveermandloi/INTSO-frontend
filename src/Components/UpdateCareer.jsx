@@ -138,7 +138,7 @@ const UpdateCareer = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${accessToken}`, // Uncomment if using authentication
+            Authorization: `Bearer ${accessToken}`, // Uncomment if using authentication
           },
         }
       );
