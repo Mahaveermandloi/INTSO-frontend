@@ -54,12 +54,15 @@ export const Footer = () => {
                   <Link to="/career">
                     <li className="hover:underline ">Career With Us</li>
                   </Link>
+                  <Link to="/achivercorner">
+                    <li className="hover:underline ">Achiver Corner</li>
+                  </Link>
                   <Link to="/faq">
                     <li className="hover:underline ">FAQ</li>
                   </Link>
-                  {/* <Link to="/hotlink">
+                  <Link to="/hotlinks">
                     <li className="hover:underline ">Hotlinks</li>
-                  </Link> */}
+                  </Link>
                 </ul>
               </div>
             </div>
@@ -98,6 +101,16 @@ export const Footer = () => {
                   <Link to="/">
                     <li className="hover:underline mt-2">
                       <a>Become a Co-ordinater</a>
+                    </li>
+                  </Link>
+                  <Link to="/content">
+                    <li className="hover:underline mt-2">
+                      <a>Content</a>
+                    </li>
+                  </Link>
+                  <Link to="/membership">
+                    <li className="hover:underline mt-2">
+                      <a>Memberships Associations & Certification</a>
                     </li>
                   </Link>
                 </ul>
