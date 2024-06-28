@@ -13,12 +13,19 @@ const UserProfile = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
 
-  const toggleIcon = () => {
-    setShowPassword(!showPassword);
+  const toggleIcon1 = () => {
+    setShowPassword1(!showPassword1);
   };
-
+  const toggleIcon2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+  const toggleIcon3 = () => {
+    setShowPassword3(!showPassword3);
+  };
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -76,6 +83,12 @@ const UserProfile = () => {
 
       if (response.ok) {
         toast.success("Password changed successfully");
+
+        // Clear input fields
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+
         toggleModal();
       } else {
         if (response.status === 401) {
@@ -164,202 +177,94 @@ const UserProfile = () => {
         <div
           className="h-screen w-full flex justify-center items-center z-50  overflow-y-auto  fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           aria-hidden="true">
-          <div className="flex flex-col gap-3 p-3 max-w-96 w-full bg-blue-400">
+          <div className="flex flex-col gap-3 p-3 max-w-96 w-full bg-white rounded-lg">
             <p className="flex justify-between items-center px-2">
-              <h1>Change Password</h1>X
+              <h1>Change Password</h1>
+              <CloseIcon onClick={toggleModal} />
             </p>
-            <p className="flex  justify-between items-center border rounded-md bg-white">
-              <input
-                type="text"
-                placeholder="old password"
-                className=" px-2 p-1 w-full"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                required
-              />
-              {showPassword ? (
-                <VisibilityIcon
-                  onClick={toggleIcon}
-                  className=" cursor-pointer mr-2"
+            <form onSubmit={handlePasswordChange} className="space-y-3">
+              <div className="flex  justify-between items-center border rounded-md bg-white">
+                <input
+                  type={showPassword1 ? "text" : "password"}
+                  placeholder="old password"
+                  className=" px-2 p-1 w-full"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  required
                 />
-              ) : (
-                <VisibilityOffIcon
-                  onClick={toggleIcon}
-                  className=" cursor-pointer mr-2"
-                />
-              )}
-            </p>
+                {showPassword1 ? (
+                  <VisibilityIcon
+                    onClick={toggleIcon1}
+                    className=" cursor-pointer mr-2"
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    onClick={toggleIcon1}
+                    className=" cursor-pointer mr-2"
+                  />
+                )}
+              </div>
 
-            <p className="flex  justify-between items-center border rounded-md bg-white">
-              <input
-                type="text"
-                placeholder="old password"
-                className=" px-2 p-1 w-full"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                required
-              />
-              {showPassword ? (
-                <VisibilityIcon
-                  onClick={toggleIcon}
-                  className=" cursor-pointer mr-2"
+              <div className="flex  justify-between items-center border rounded-md bg-white">
+                <input
+                  type={showPassword2 ? "text" : "password"}
+                  placeholder="New password"
+                  className=" px-2 p-1 w-full"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
                 />
-              ) : (
-                <VisibilityOffIcon
-                  onClick={toggleIcon}
-                  className=" cursor-pointer mr-2"
-                />
-              )}
-            </p>
+                {showPassword2 ? (
+                  <VisibilityIcon
+                    onClick={toggleIcon2}
+                    className=" cursor-pointer mr-2"
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    onClick={toggleIcon2}
+                    className=" cursor-pointer mr-2"
+                  />
+                )}
+              </div>
 
-            <p className="flex  justify-between items-center border rounded-md bg-white">
-              <input
-                type="text"
-                placeholder="old password"
-                className=" px-2 p-1 w-full"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                required
-              />
-              {showPassword ? (
-                <VisibilityIcon
-                  onClick={toggleIcon}
-                  className=" cursor-pointer mr-2"
+              <div className="flex  justify-between items-center border rounded-md bg-white">
+                <input
+                  type={showPassword3 ? "text" : "password"}
+                  placeholder="confirm password"
+                  className=" px-2 p-1 w-full"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
                 />
-              ) : (
-                <VisibilityOffIcon
-                  onClick={toggleIcon}
-                  className=" cursor-pointer mr-2"
-                />
-              )}
-            </p>
+                {showPassword3 ? (
+                  <VisibilityIcon
+                    onClick={toggleIcon3}
+                    className=" cursor-pointer mr-2"
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    onClick={toggleIcon3}
+                    className=" cursor-pointer mr-2"
+                  />
+                )}
+              </div>
 
-            <p className="flex justify-end gap-2">
-              <button className="bg-red-400 p-2 px-4 font-semibold rounded-full">
-                Delete
-              </button>
-              <button className="bg-red-400 p-2 px-4 font-semibold rounded-full">
-                Cancel
-              </button>
-            </p>
+              <p className="flex justify-end gap-2">
+                <button
+                  type="submit"
+                  className="bg-[#ED1450] text-white p-2 px-4 font-semibold rounded-full">
+                  change
+                </button>
+                <button
+                  type="button"
+                  onClick={toggleModal}
+                  className="bg-white  border border-gray-300 p-2 px-4 font-semibold rounded-full">
+                  Cancel
+                </button>
+              </p>
+            </form>
           </div>
         </div>
-        // <div className="fixed z-50 inset-0 overflow-y-auto">
-        //   <div className="flex items-center justify-center min-h-screen">
-        //     <div
-        //       className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-        //       aria-hidden="true"></div>
-        //     <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-        //       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        //         <div className="sm:flex sm:items-start  w-full">
-        //           <div className="mt-3 text-center sm:mt-0 sm:ml-4 ">
-        //             <h3 className="flex justify-between text-lg leading-6 font-medium text-gray-900">
-        //               Change Password
-        //               <CloseIcon onClick={toggleModal} />
-        //             </h3>
-        //             <div className="mt-2 ">
-        //               <form onSubmit={handlePasswordChange} className="w-full flex flex-col justify-center items-center">
-        //                 <div className="flex flex-col relative w-full">
-        //                   <input
-        //                     type={showPassword ? "text" : "password"}
-        //                     placeholder="Old Password"
-        //                     className="border border-gray-300 p-2 max-w-full mt-2"
-        //                     value={oldPassword}
-        //                     onChange={(e) => setOldPassword(e.target.value)}
-        //                     required
-        //                   />
-        //                   {showPassword ? (
-        //                     <VisibilityIcon
-        //                       onClick={toggleIcon}
-        //                       className="absolute right-3 top-5 cursor-pointer"
-        //                     />
-        //                   ) : (
-        //                     <VisibilityOffIcon
-        //                       onClick={toggleIcon}
-        //                       className="absolute right-3 top-5 cursor-pointer"
-        //                     />
-        //                   )}
-        //                 </div>
-        //                 <input
-        //                   type="password"
-        //                   placeholder="New Password"
-        //                   className="border border-gray-300 p-2 w-full mt-2"
-        //                   value={newPassword}
-        //                   onChange={(e) => setNewPassword(e.target.value)}
-        //                   required
-        //                 />
-        //                 <div className="flex flex-col relative w-full">
-        //                   <input
-        //                     type={showPassword ? "text" : "password"}
-        //                     placeholder="Old Password"
-        //                     className="border border-gray-300 p-2 w-full mt-2"
-        //                     value={oldPassword}
-        //                     onChange={(e) => setOldPassword(e.target.value)}
-        //                     required
-        //                   />
-        //                   {showPassword ? (
-        //                     <VisibilityIcon
-        //                       onClick={toggleIcon}
-        //                       className="absolute right-3 top-5 cursor-pointer"
-        //                     />
-        //                   ) : (
-        //                     <VisibilityOffIcon
-        //                       onClick={toggleIcon}
-        //                       className="absolute right-3 top-5 cursor-pointer"
-        //                     />
-        //                   )}
-        //                 </div>
-        //                 <input
-        //                   type="password"
-        //                   placeholder="Confirm Password"
-        //                   className="border border-gray-300 p-2 w-full mt-2"
-        //                   value={confirmPassword}
-        //                   onChange={(e) => setConfirmPassword(e.target.value)}
-        //                   required
-        //                 />
-
-        //                 <div className="flex flex-col relative w-full">
-        //                   <input
-        //                     type={showPassword ? "text" : "password"}
-        //                     placeholder="Old Password"
-        //                     className="border border-gray-300 p-2 w-full mt-2"
-        //                     value={oldPassword}
-        //                     onChange={(e) => setOldPassword(e.target.value)}
-        //                     required
-        //                   />
-        //                   {showPassword ? (
-        //                     <VisibilityIcon
-        //                       onClick={toggleIcon}
-        //                       className="absolute right-3 top-5 cursor-pointer"
-        //                     />
-        //                   ) : (
-        //                     <VisibilityOffIcon
-        //                       onClick={toggleIcon}
-        //                       className="absolute right-3 top-5 cursor-pointer"
-        //                     />
-        //                   )}
-        //                 </div>
-        //                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex justify-evenly sm:flex-row-reverse w-96">
-        //                   <button
-        //                     type="submit"
-        //                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-[#ED1450] text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-        //                     Change
-        //                   </button>
-        //                   <button
-        //                     type="button"
-        //                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-        //                     onClick={toggleModal}>
-        //                     Cancel
-        //                   </button>
-        //                 </div>
-        //               </form>
-        //             </div>
-        //           </div>
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        // </div>
       )}
     </>
   );
