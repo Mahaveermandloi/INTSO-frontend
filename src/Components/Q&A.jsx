@@ -18,8 +18,8 @@ const QandAns = () => {
   const [isUpdating, setIsUpdating] = useState(false); // Updating loading state
 
   const [selectedOption, setSelectedOption] = useState("");
-  const [question, setquestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const [updateselectedOption, setUpdateSelectedOption] = useState("");
   const [updatetitle, setUpdateTitle] = useState("");
@@ -86,114 +86,58 @@ const QandAns = () => {
       });
     }
   };
-
-  // const handleUpload = async (event) => {
-  //   event.preventDefault();
-
-  //   setIsUploading(true);
-
-  //   if (question && answer) {
-  //     const formData = new FormData();
-
-  //     if (selectedFile) {
-  //       formData.append("image", selectedFile);
-  //     }
-
-  //     formData.append("question", question);
-  //     formData.append("answer", answer);
-
-  //     formData.append("post_Type", selectedOption);
-
-  //     try {
-  //       const accessToken = localStorage.getItem("accessToken");
-  //       const response = await axios.post(
-  //         `${URLPath}/api/v1/Q&A/upload-ques-and-ans`,
-  //         formData,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //             "Content-Type": "multipart/form-data",
-  //           },
-  //         }
-  //       );
-
-  //       if (response.status === 201) {
-  //         toast.success("Data uploaded successfully!", {
-  //           position: "top-center",
-  //           autoClose: 3000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: "light",
-  //         });
-
-  //         setIsModalOpen(false);
-  //         window.location.reload();
-  //       }
-  //     } catch (error) {
-  //       console.error("Error uploading news and update:", error);
-  //       toast.error("Error uploading image. Please try again.", {
-  //         position: "top-center",
-  //         autoClose: 3000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //         transition: Bounce,
-  //       });
-  //     } finally {
-  //       setIsUploading(false); // Reset uploading state
-  //     }
-  //   } else {
-  //     toast.error("Please fill in all required fields.", {
-  //       position: "top-center",
-  //       autoClose: 3000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   }
-  // };
-
   const handleUpload = async (event) => {
     event.preventDefault();
 
-    if (!question || !answer || !selectedOption) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
+    setIsUploading(true);
 
-    const formData = new FormData();
-    formData.append("question", question);
-    formData.append("answer", answer);
-    formData.append("post_Type", selectedOption);
+    if (title && description && selectedOption) {
+      const formData = new FormData();
 
-    if (selectedFile) {
-      formData.append("image", selectedFile);
-    }
+      if (selectedFile) {
+        formData.append("image", selectedFile);
+      }
 
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.post(
-        `${URLPath}/api/v1/Q&A/upload-ques-and-ans`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data",
-          },
+      formData.append("question", title);
+      formData.append("answer", description);
+      formData.append("post_Type", selectedOption);
+
+      console.log("jecdbf", title, description, selectedOption);
+
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await axios.post(
+          `${URLPath}/api/v1/Q&A/upload-ques-and-ans`,
+          formData,
+          {
+            headers: {
+              // Authorization: `Bearer ${accessToken}`, // Uncomment if needed
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          toast.success("Data uploaded successfully!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+
+          setIsModalOpen(!isModalOpen);
+          window.location.reload();
         }
-      );
-
-      if (response.status === 201) {
-        toast.success("Data uploaded successfully!", {
+      } catch (error) {
+        console.error("Error uploading data:", error);
+        if (error.response) {
+          console.error("Server response:", error.response.data);
+        }
+        toast.error("Error uploading data. Please try again.", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -202,15 +146,13 @@ const QandAns = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
+          transition: Bounce,
         });
-
-        // Optionally close modal or handle UI update
-        // setIsModalOpen(false);
-        // window.location.reload();
+      } finally {
+        setIsUploading(false); // Reset uploading state
       }
-    } catch (error) {
-      console.error("Error uploading data:", error);
-      toast.error("Error uploading data. Please try again.", {
+    } else {
+      toast.error("Please fill in all required fields.", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -220,6 +162,7 @@ const QandAns = () => {
         progress: undefined,
         theme: "light",
       });
+      setIsUploading(false); // Reset uploading state if validation fails
     }
   };
 
@@ -311,105 +254,6 @@ const QandAns = () => {
     }
   };
 
-  const handleUpdate = async (id) => {
-    setIsUpdating(true);
-    setIsUpdateModal(true);
-    setUpdateId(id);
-
-    try {
-      const response = await axios.get(
-        `${URLPath}/api/v1/newsandupdates/get-news/${id}`
-      );
-
-      const data = response.data.data.newsUpdate;
-      setUpdateSelectedOption(data.post_Type);
-      setUpdateTitle(data.title);
-      setUpdateDescription(data.description);
-      setUpdatePostedBy(data.posted_By);
-      setUpdateEventDate(data.event_Date || "");
-      setUpdateEventTime(data.event_Time || "");
-    } catch (error) {
-      console.error("Error fetching update data:", error);
-    } finally {
-      setIsUpdating(false); // Reset updating state
-    }
-  };
-
-  const handleUpdateSubmit = async (event) => {
-    event.preventDefault();
-
-    if (updatetitle && updatedescription) {
-      setIsUpdating(true);
-      const formData = new FormData();
-
-      formData.append("title", updatetitle);
-      formData.append("description", updatedescription);
-      formData.append("posted_By", updatepostedBy);
-      formData.append("post_Type", updateselectedOption);
-      formData.append("event_Date", updateeventDate);
-      formData.append("event_Time", updateeventTime);
-
-      if (selectedFile) {
-        formData.append("image", selectedFile);
-      }
-
-      try {
-        const accessToken = localStorage.getItem("accessToken");
-        const response = await axios.put(
-          `${URLPath}/api/v1/newsandupdates/update-news-and-updates/${updateId}`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          toast.success("News updated successfully!", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
-          window.location.reload();
-        }
-      } catch (error) {
-        console.error("Error updating news:", error);
-        toast.error("Error updating news. Please try again.", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      } finally {
-        setIsUpdating(false); // Reset updating state
-      }
-    } else {
-      toast.error("Please fill in all required fields.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  };
-
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -479,19 +323,13 @@ const QandAns = () => {
                       >
                         <RxCross1 className="p-1" size={30} />
                       </button>
-                      <button
-                        onClick={() => handleUpdate(item.id)}
-                        className="text-white p-1 mt-4 bg-[#ed1450] hover:bg-green-500 rounded-full"
-                      >
-                        <MdModeEdit className="p-1" size={30} />
-                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* EVENT AND EXAM */}
+            {/* Formula */}
             <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
               <h2 className="text-xl font-bold mb-2 text-red-600">Formula</h2>
 
@@ -518,19 +356,13 @@ const QandAns = () => {
                       >
                         <RxCross1 className="p-1" size={30} />
                       </button>
-                      <button
-                        onClick={() => handleUpdate(item.id)}
-                        className="text-white p-1 mt-4 bg-[#ed1450] hover:bg-green-500 rounded-full"
-                      >
-                        <MdModeEdit className="p-1" size={30} />
-                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* UPDATES */}
+            {/* Grammer */}
             <div className="  lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
               <h2 className="text-xl font-bold mb-2 text-red-600">Grammer</h2>
 
@@ -557,12 +389,6 @@ const QandAns = () => {
                       >
                         <RxCross1 className="p-1" size={30} />
                       </button>
-                      <button
-                        onClick={() => handleUpdate(item.id)}
-                        className="text-white p-1 mt-4 bg-[#ed1450] hover:bg-green-500 rounded-full"
-                      >
-                        <MdModeEdit className="p-1" size={30} />
-                      </button>
                     </div>
                   </div>
                 ))}
@@ -576,23 +402,25 @@ const QandAns = () => {
         <Loader message={"Uploading"} />
       ) : (
         isModalOpen && (
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">
+          <div className="fixed mt-16 bg-black inset-0 flex items-center justify-center bg-opacity-75">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-              <h2 className="text-2xl font-bold mb-4">Create New Entry</h2>
+              <div>
+                <h2 className="text-2xl font-bold mb-4">Create New Entry</h2>
+              </div>
 
               <form onSubmit={handleUpload} className="space-y-4">
                 <div>
                   <label
-                    htmlFor="question"
                     className="block text-sm font-medium mb-1"
+                    htmlFor="title"
                   >
                     Question
                   </label>
                   <input
                     type="text"
-                    id="question"
-                    value={question}
-                    onChange={(e) => setquestion(e.target.value)}
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100"
                     required
                   />
@@ -600,15 +428,15 @@ const QandAns = () => {
 
                 <div>
                   <label
-                    htmlFor="answer"
                     className="block text-sm font-medium mb-1"
+                    htmlFor="description"
                   >
                     Answer
                   </label>
                   <textarea
-                    id="answer"
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100"
                     required
                   ></textarea>
@@ -616,8 +444,8 @@ const QandAns = () => {
 
                 <div>
                   <label
-                    htmlFor="type"
                     className="block text-sm font-medium mb-1"
+                    htmlFor="type"
                   >
                     Type
                   </label>
@@ -625,20 +453,26 @@ const QandAns = () => {
                     id="type"
                     value={selectedOption}
                     onChange={(e) => setSelectedOption(e.target.value)}
-                    className="w-full p-2 rounded bg-gray-100"
+                    className="w-full p-2 rounded bg-gray-100 border border-gray-300"
                     required
                   >
-                    <option value="">Select Type</option>
-                    <option value="gk">GK & Current Affairs</option>
-                    <option value="formula">Std. Definition and formula</option>
-                    <option value="grammar">English grammar</option>
+                    <option value="" disabled>
+                      Select Type
+                    </option>
+                    <option value="GK & Current Affairs">
+                      GK & Current Affairs
+                    </option>
+                    <option value="Std. Definition and Formula">
+                      Std. Definition and Formula
+                    </option>
+                    <option value="English Grammar">English Grammar</option>
                   </select>
                 </div>
 
                 <div>
                   <label
-                    htmlFor="image"
                     className="block text-sm font-medium mb-1"
+                    htmlFor="image"
                   >
                     Image
                   </label>
@@ -651,182 +485,16 @@ const QandAns = () => {
                   />
                 </div>
 
-                <div className="flex justify-between">
-                  <button
-                    type="submit"
-                    className={`w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600 ${
-                      isUploading ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
-                    disabled={isUploading}
-                  >
-                    {isUploading ? "Uploading..." : "Upload"}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={toggleModal}
-                    className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600 ml-2"
-                  >
-                    Close
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )
-      )}
-
-      {/* This is update Model */}
-      {isUpdating ? (
-        <Loader message={"Updating..."} />
-      ) : (
-        updateModal && (
-          <div className="fixed mt-12 bg-black inset-0 flex items-center justify-center bg-opacity-75">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-              <div>
-                <h2 className="text-2xl font-bold mb-4">Update the News</h2>
-              </div>
-
-              <form onSubmit={handleUpdateSubmit} className="space-y-4">
-                <div>
-                  <label
-                    className="block text-sm font-medium mb-1"
-                    htmlFor="updatetitle"
-                  >
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    id="updatetitle"
-                    value={updatetitle}
-                    onChange={(e) => setUpdateTitle(e.target.value)}
-                    className="w-full p-2 rounded bg-gray-100"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    className="block text-sm font-medium mb-1"
-                    htmlFor="updatedescription"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    id="updatedescription"
-                    value={updatedescription}
-                    onChange={(e) => setUpdateDescription(e.target.value)}
-                    className="w-full p-2 rounded bg-gray-100"
-                    required
-                  ></textarea>
-                </div>
-
-                <div>
-                  <label
-                    className="block text-sm font-medium mb-1"
-                    htmlFor="updatepostedBy"
-                  >
-                    Posted By
-                  </label>
-                  <input
-                    type="text"
-                    id="updatepostedBy"
-                    value={updatepostedBy}
-                    onChange={(e) => setUpdatePostedBy(e.target.value)}
-                    className="w-full p-2 rounded bg-gray-100"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    className="block text-sm font-medium mb-1"
-                    htmlFor="updatetype"
-                  >
-                    Type
-                  </label>
-                  <select
-                    id="updatetype"
-                    value={updateselectedOption}
-                    onChange={(e) => setUpdateSelectedOption(e.target.value)}
-                    className="w-full p-2 rounded bg-gray-100"
-                    required
-                  >
-                    <option value="">Select Type</option>
-                    <option value="news">News</option>
-                    <option value="event">Event</option>
-                    <option value="update">Update</option>
-                    <option value="exam">Exam</option>
-                  </select>
-                </div>
-
-                {(updateselectedOption === "event" ||
-                  updateselectedOption === "exam") && (
-                  <>
-                    <div>
-                      <label
-                        className="block text-sm font-medium mb-1"
-                        htmlFor="updateeventDate"
-                      >
-                        Event Date
-                      </label>
-                      <input
-                        type="date"
-                        id="updateeventDate"
-                        value={updateeventDate}
-                        onChange={(e) => setUpdateEventDate(e.target.value)}
-                        className="w-full p-2 rounded bg-gray-100"
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        className="block text-sm font-medium mb-1"
-                        htmlFor="updateeventTime"
-                      >
-                        Event Time
-                      </label>
-                      <input
-                        type="time"
-                        id="updateeventTime"
-                        value={updateeventTime}
-                        onChange={(e) => setUpdateEventTime(e.target.value)}
-                        className="w-full p-2 rounded bg-gray-100"
-                        required
-                      />
-                    </div>
-                  </>
-                )}
-
-                <div>
-                  <label
-                    className="block text-sm font-medium mb-1"
-                    htmlFor="updateimage"
-                  >
-                    Image
-                  </label>
-                  <input
-                    type="file"
-                    id="updateimage"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="w-full p-2 rounded bg-gray-100"
-                  />
-                </div>
-
                 <button
                   type="submit"
                   className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600"
                 >
-                  Update
+                  Upload
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => {
-                    setIsUpdateModal(false);
-                  }}
+                  onClick={toggleModal}
                   className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600"
                 >
                   Close
@@ -836,6 +504,7 @@ const QandAns = () => {
           </div>
         )
       )}
+      {/* This is update Model */}
     </>
   );
 };
