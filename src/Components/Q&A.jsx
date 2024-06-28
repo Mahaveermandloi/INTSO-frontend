@@ -111,7 +111,7 @@ const QandAns = () => {
           formData,
           {
             headers: {
-              // Authorization: `Bearer ${accessToken}`, // Uncomment if needed
+              Authorization: `Bearer ${accessToken}`, // Uncomment if needed
               "Content-Type": "multipart/form-data",
             },
           }
