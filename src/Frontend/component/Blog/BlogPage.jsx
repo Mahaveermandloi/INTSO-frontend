@@ -5,7 +5,7 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 const BlogPage = () => {
   const location = useLocation();
   const [page, setPage] = useState(1);
-  const limit = 10; // Number of blogs to fetch per page
+  const limit = 10; 
   const { data: blogs, loading } = useFetchBlogData(page, limit);
   useEffect(() => {
     window.scrollTo(0, 0);

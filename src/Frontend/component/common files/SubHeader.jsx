@@ -400,7 +400,11 @@ const SubHeader = () => {
                     ml: { xs: 0, sm: 5, lg: 10 },
                     mr: { xs: 0, sm: 5 },
                   }}>
-                  <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
+                  <Link to="/userprofile">
+                    <MenuItem onClick={handleProfileMenuClose}>
+                      Profile
+                    </MenuItem>
+                  </Link>
                   <MenuItem onClick={() => navigate("/mycontent")}>
                     My Content
                   </MenuItem>

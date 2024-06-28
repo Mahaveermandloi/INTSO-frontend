@@ -10,9 +10,9 @@ import img from "../../../../src/assets/Frontend_images/Action_1.png";
 
 const Slideshow = () => {
   const { data1: bannerData, loading } = useFetchData();
-  const handleButtonClick = (route) => {
-    window.location.href = route;
-  };
+  // const handleButtonClick = (route) => {
+  //   window.location.href = route;
+  // };
 
   return (
     <>
@@ -37,15 +37,15 @@ const Slideshow = () => {
                 />
                 <div className="flex flex-col lg:px-36 px-10 md:py-28 py-2 2xl:px-[440px] 2xl:pl-56  text-left sm:gap-2 gap-1 absolute top-0 left-0 text-[#ED1450] ">
                   <div className="max-w-screen-xl mx-auto 2xl:w-full">
-                    <p className="sm:text-5xl text-xl 2xl:text-6xl font-bold">
+                    <p className="sm:text-5xl text-base 2xl:text-6xl font-bold">
                       {item.title.toUpperCase()}
                     </p>
-                    <p className="text-xl 2xl:text-4xl  font-semibold">
+                    <p className="text-base sm:text-2xl 2xl:text-4xl  font-semibold">
                       {item.description.charAt(0).toUpperCase() +
                         item.description.slice(1)}
                     </p>
                     <Link to="/studentregister">
-                      <button className="sm:p-2 sm:px-5 px-2 sm:w-48 w-32 2xl:w-72 2xl:text-xl  bg-[#ED1450] text-white rounded-full">
+                      <button className="sm:p-2 text-nowrap sm:px-5 px-2 w-fit text-xs lg:text-lg 2xl:text-xl bg-[#ED1450] text-white rounded-full">
                         Student Registration
                       </button>
                     </Link>

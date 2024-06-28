@@ -52,6 +52,7 @@ import { MemberShipCertification } from "../Frontend/component/Gallery/MemberShi
 import Hotlinks from "../Frontend/component/Reference/Hotlinks";
 import { SubjectTabs } from "../Frontend/component/Content/SubjectTabs";
 import { NewsAndUpdatePage } from "../Frontend/component/NewsAndUpdate/NewsAndUpdatePage";
+import UserProfile from "../Frontend/component/Profile/UserProfile";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -419,6 +420,14 @@ const UserRoutes = () => {
               element={
                 <Layout>
                   <PaidKnowledge />
+                </Layout>
+              }
+            />
+            <Route
+              path="/userprofile"
+              element={
+                <Layout>
+                  <UserProfile />
                 </Layout>
               }
             />
