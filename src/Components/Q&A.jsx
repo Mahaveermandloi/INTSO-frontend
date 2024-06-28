@@ -32,17 +32,6 @@ const QandAns = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateModal, setIsUpdateModal] = useState(false);
   const [updateId, setUpdateId] = useState(null);
-  const [formData, setFormData] = useState({
-    question: "",
-    answer: "",
-    post_Type: "",
-    // image: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const fetchData = async () => {
     setIsFetching(true);
@@ -176,25 +165,25 @@ const QandAns = () => {
   const handleUpload = async (event) => {
     event.preventDefault();
 
-    if (!formData.question || !formData.answer || !formData.post_Type) {
+    if (!question || !answer || !selectedOption) {
       toast.error("Please fill in all required fields.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("question", formData.question);
-    formData.append("answer", formData.answer);
-    formData.append("post_Type", formData.post_Type);
+    formData.append("question", question);
+    formData.append("answer", answer);
+    formData.append("post_Type", selectedOption);
 
     if (selectedFile) {
-      formData1.append("image", formData.selectedFile);
+      formData.append("image", selectedFile);
     }
 
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.post(
         `${URLPath}/api/v1/Q&A/upload-ques-and-ans`,
-        formData1,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -213,11 +202,6 @@ const QandAns = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-        });
-        setFormData({
-          question: "",
-          answer: "",
-          post_Type: "",
         });
 
         // Optionally close modal or handle UI update
@@ -607,9 +591,8 @@ const QandAns = () => {
                   <input
                     type="text"
                     id="question"
-                    name="question"
-                    value={formData.question}
-                    onChange={handleChange}
+                    value={question}
+                    onChange={(e) => setquestion(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100"
                     required
                   />
@@ -624,10 +607,8 @@ const QandAns = () => {
                   </label>
                   <textarea
                     id="answer"
-                    name="answer"
-                    rows={5}
-                    value={formData.answer}
-                    onChange={handleChange}
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100"
                     required
                   ></textarea>
@@ -642,9 +623,8 @@ const QandAns = () => {
                   </label>
                   <select
                     id="type"
-                    name="post_Type"
-                    value={formData.post_Type}
-                    onChange={handleChange}
+                    value={selectedOption}
+                    onChange={(e) => setSelectedOption(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100"
                     required
                   >
