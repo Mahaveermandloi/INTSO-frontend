@@ -22,6 +22,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
+  const [isDropdownOpen4, setIsDropdownOpen4] = useState(false);
 
   // Detect screen width on component mount
   const [isMobileScreen, setIsMobileScreen] = useState(false);
@@ -55,6 +56,9 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
 
   const toggleDropdown3 = () => {
     setIsDropdownOpen3(!isDropdownOpen3);
+  };
+  const toggleDropdown4 = () => {
+    setIsDropdownOpen4(!isDropdownOpen4);
   };
 
   return (
@@ -134,6 +138,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 </li>
               </Link>
             </ul>
+
             <li
               className={`${
                 isDropdownOpen2 ? "" : "mb-4"
@@ -207,6 +212,12 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaNewspaper className="mr-2" />
                 News & Updates
+              </li>
+            </Link>
+            <Link onClick={handleItemClick} to={`${baseURL}/question-ans`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <FaNewspaper className="mr-2" />
+                Q&A
               </li>
             </Link>
             <Link onClick={handleItemClick} to={`${baseURL}/testimonials`}>
