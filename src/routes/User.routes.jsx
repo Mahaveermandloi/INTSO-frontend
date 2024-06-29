@@ -53,6 +53,7 @@ import Hotlinks from "../Frontend/component/Reference/Hotlinks";
 import { SubjectTabs } from "../Frontend/component/Content/SubjectTabs";
 import { NewsAndUpdatePage } from "../Frontend/component/NewsAndUpdate/NewsAndUpdatePage";
 import UserProfile from "../Frontend/component/Profile/UserProfile";
+import Cordinator from "../Frontend/component/Register/Cordinator";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -290,6 +291,14 @@ const UserRoutes = () => {
           element={
             <Layout>
               <FAQ />
+            </Layout>
+          }
+        />
+        <Route
+          path="/cordinator"
+          element={
+            <Layout>
+              <Cordinator />
             </Layout>
           }
         />

@@ -98,7 +98,7 @@ export const Footer = () => {
                       <a>Testimonials</a>
                     </li>
                   </Link>
-                  <Link to="/">
+                  <Link to="/cordinator">
                     <li className="hover:underline mt-2">
                       <a>Become a Co-ordinater</a>
                     </li>

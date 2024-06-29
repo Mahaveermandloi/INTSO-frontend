@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { API_KEY, IP_ADDRESS, PORT } from "../constants";
 
-const useFetchQandA = (page, limit) => {
-  const [data1, setData1] = useState([]);
-  const [data2, setData2] = useState([]);
-  const [data3, setData3] = useState([]);
+const useFetchQandA = (postType, page, limit) => {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/Q&A/get-ques-and-ans?page=${page}`,
+          `http://${IP_ADDRESS}:${PORT}/api/v1/Q&A/getData-by-postType?post_Type=${encodeURIComponent(
+            postType
+          )}&page=${page}&limit=${limit}`,
           {
             method: "GET",
             headers: {
@@ -23,34 +23,22 @@ const useFetchQandA = (page, limit) => {
         const jsonData = await response.json();
 
         if (page === 1) {
-          setData1(jsonData.data.GkAndCurrentAffairs);
-          setData2(jsonData.data.Definitionandformula);
-          setData3(jsonData.data.EnglishGrammar);
+          setData(jsonData.data || []);
         } else {
-          setData1((prevData) => [
-            ...prevData,
-            ...jsonData.data.GkAndCurrentAffairs,
-          ]);
-          setData2((prevData) => [
-            ...prevData,
-            ...jsonData.data.Definitionandformula,
-          ]);
-          setData3((prevData) => [
-            ...prevData,
-            ...jsonData.data.EnglishGrammar,
-          ]);
+          setData((prevData) => [...prevData, ...(jsonData.data || [])]);
         }
       } catch (e) {
-        console.log(e);
+        console.error(e);
+        setData([]); // Ensure data is set to an empty array in case of error
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [page, limit]);
+  }, [postType, page, limit]);
 
-  return { data1, data2, data3, loading };
+  return { data, loading };
 };
 
 export default useFetchQandA;
