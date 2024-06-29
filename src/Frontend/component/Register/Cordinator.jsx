@@ -23,7 +23,7 @@ const Cordinator = () => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `http://${IP_ADDRESS}:${PORT}/api/v1/contact/postContact`,
+        `http://${IP_ADDRESS}:${PORT}/api/v1/co-ordinator/post-co-ordinator`,
         {
           method: "POST",
           body: JSON.stringify(formData),
@@ -35,7 +35,7 @@ const Cordinator = () => {
 
       if (res.status === 201) {
         const data = await res.json();
-        toast.success("Your remark has been sent successfully!");
+        toast.success("Your message has been sent successfully!");
         setFormData({
           name: "",
           email: "",
@@ -45,22 +45,22 @@ const Cordinator = () => {
       } else if (res.status === 400) {
         const responseData = await res.json();
         if (
-          responseData.remark &&
-          responseData.remark.includes(
+          responseData.message &&
+          responseData.message.includes(
             "Mobile number must be exactly 10 digits long"
           )
         ) {
           toast.error("Mobile number must be exactly 10 digits long");
         } else {
           toast.error(
-            responseData.remark || "Please fill in all required fields."
+            responseData.message || "Please fill in all required fields."
           );
         }
       } else {
-        toast.error("Failed to send your remark. Please try again.");
+        toast.error("Failed to send your meassage. Please try again.");
       }
     } catch (err) {
-      console.error("Sending remark failed:", err);
+      console.error("Sending message failed:", err);
       toast.error("An error occurred. Please try again later.");
     }
   };
@@ -125,7 +125,7 @@ const Cordinator = () => {
               </label>
               <input
                 type="tel"
-                name="mobile_number"
+                name="remark"
                 value={formData.remark}
                 onChange={handleChange}
                 placeholder="Enter Your Mobile Number"
