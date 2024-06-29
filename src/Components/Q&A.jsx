@@ -111,7 +111,7 @@ const QandAns = () => {
           formData,
           {
             headers: {
-              // Authorization: `Bearer ${accessToken}`, // Uncomment if needed
+              Authorization: `Bearer ${accessToken}`, // Uncomment if needed
               "Content-Type": "multipart/form-data",
             },
           }
@@ -186,8 +186,7 @@ const QandAns = () => {
         closeButton: (
           <button
             onClick={confirmDeletion}
-            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3"
-          >
+            className="bg-blue-400 p-2 text-white rounded-lg h-10 ml-4 mt-3">
             Confirm
           </button>
         ),
@@ -270,8 +269,7 @@ const QandAns = () => {
           <div>
             <button
               onClick={toggleModal}
-              className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            >
+              className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
               Create
             </button>
           </div>
@@ -305,8 +303,7 @@ const QandAns = () => {
                 {gkData.map((item) => (
                   <div
                     key={item.id}
-                    className="mb-4 border-2 border-gray-200 rounded-lg p-1"
-                  >
+                    className="mb-4 border-2 border-gray-200 rounded-lg p-1">
                     {item.image && (
                       <img
                         src={`${URLPath}${item.image}`}
@@ -319,8 +316,7 @@ const QandAns = () => {
                     <div className="flex gap-3">
                       <button
                         className="text-white p-1 mt-4 bg-[#ed1450] hover:bg-red-800 rounded-full"
-                        onClick={() => handleDelete(item.id)}
-                      >
+                        onClick={() => handleDelete(item.id)}>
                         <RxCross1 className="p-1" size={30} />
                       </button>
                     </div>
@@ -338,8 +334,7 @@ const QandAns = () => {
                 {formula.map((item) => (
                   <div
                     key={item.id}
-                    className="mb-4 border-2 border-gray-200 rounded-lg p-1"
-                  >
+                    className="mb-4 border-2 border-gray-200 rounded-lg p-1">
                     {item.image && (
                       <img
                         src={`${URLPath}${item.image}`}
@@ -352,8 +347,7 @@ const QandAns = () => {
                     <div className="flex gap-3">
                       <button
                         className="text-white p-1 mt-4 bg-[#ed1450] hover:bg-red-800 rounded-full"
-                        onClick={() => handleDelete(item.id)}
-                      >
+                        onClick={() => handleDelete(item.id)}>
                         <RxCross1 className="p-1" size={30} />
                       </button>
                     </div>
@@ -371,8 +365,7 @@ const QandAns = () => {
                 {grammer.map((item) => (
                   <div
                     key={item.id}
-                    className="mb-4 border-2 border-gray-200 rounded-lg p-1"
-                  >
+                    className="mb-4 border-2 border-gray-200 rounded-lg p-1">
                     {item.image && (
                       <img
                         src={`${URLPath}${item.image}`}
@@ -385,8 +378,7 @@ const QandAns = () => {
                     <div className="flex gap-3">
                       <button
                         className="text-white p-1 mt-4 bg-[#ed1450] hover:bg-red-800 rounded-full"
-                        onClick={() => handleDelete(item.id)}
-                      >
+                        onClick={() => handleDelete(item.id)}>
                         <RxCross1 className="p-1" size={30} />
                       </button>
                     </div>
@@ -412,8 +404,7 @@ const QandAns = () => {
                 <div>
                   <label
                     className="block text-sm font-medium mb-1"
-                    htmlFor="title"
-                  >
+                    htmlFor="title">
                     Question
                   </label>
                   <input
@@ -429,8 +420,7 @@ const QandAns = () => {
                 <div>
                   <label
                     className="block text-sm font-medium mb-1"
-                    htmlFor="description"
-                  >
+                    htmlFor="description">
                     Answer
                   </label>
                   <textarea
@@ -438,15 +428,13 @@ const QandAns = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100"
-                    required
-                  ></textarea>
+                    required></textarea>
                 </div>
 
                 <div>
                   <label
                     className="block text-sm font-medium mb-1"
-                    htmlFor="type"
-                  >
+                    htmlFor="type">
                     Type
                   </label>
                   <select
@@ -454,8 +442,7 @@ const QandAns = () => {
                     value={selectedOption}
                     onChange={(e) => setSelectedOption(e.target.value)}
                     className="w-full p-2 rounded bg-gray-100 border border-gray-300"
-                    required
-                  >
+                    required>
                     <option value="" disabled>
                       Select Type
                     </option>
@@ -472,8 +459,7 @@ const QandAns = () => {
                 <div>
                   <label
                     className="block text-sm font-medium mb-1"
-                    htmlFor="image"
-                  >
+                    htmlFor="image">
                     Image
                   </label>
                   <input
@@ -487,16 +473,14 @@ const QandAns = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600"
-                >
+                  className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600">
                   Upload
                 </button>
 
                 <button
                   type="button"
                   onClick={toggleModal}
-                  className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600"
-                >
+                  className="w-full bg-[#ed1450] text-white p-2 rounded hover:bg-red-600">
                   Close
                 </button>
               </form>
