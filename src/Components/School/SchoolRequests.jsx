@@ -354,91 +354,91 @@ const SchoolRequests = () => {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     <tr>
-                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td className="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Email
                       </td>
-                      <td className="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td className="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.email}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         City
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.city}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         State
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.state}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Mobile Number
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.mobile_number}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Status
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.status}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Landline
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.landline}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         District
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.district}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         STD Code
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.STD_code}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Pincode
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.pincode}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Principal
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.principal_name_prefix} <span> </span>
                         {selectedSchool.principal_name}
                       </td>
                     </tr>
                     <tr>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-semibold">
                         Syllabus
                       </td>
-                      <td class="text-md  lg:text-xl px-4 py-2 whitespace-nowrap font-semibold">
+                      <td class="text-md  lg:text-xl px-4py-1 whitespace-nowrap font-base">
                         {selectedSchool.syllabus}
                       </td>
                     </tr>
