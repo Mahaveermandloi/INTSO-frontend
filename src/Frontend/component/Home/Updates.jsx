@@ -4,6 +4,10 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 export const Updates = () => {
   const { data6: updateArray, loading } = useFetchData();
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
     <>
@@ -31,7 +35,7 @@ export const Updates = () => {
                       Post
                       <span className="text-black p-3 font-normal">
                         {item.posted_By}
-                        <span className="p-2 font-normal">August 30,2024</span>
+                        <span className="p-2 font-normal">{formatDate(item.createdAt)}</span>
                       </span>
                     </p>
                   </div>

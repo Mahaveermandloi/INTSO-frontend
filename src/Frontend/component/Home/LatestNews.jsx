@@ -5,7 +5,10 @@ import Spinner1 from "../common files/Spinner1";
 import { Link } from "react-router-dom";
 export const LatestNews = () => {
   const { data2: newsArray, loading } = useFetchData();
-
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   return (
     <>
       <div>
@@ -32,7 +35,7 @@ export const LatestNews = () => {
                       Post
                       <span className="text-black p-3 font-normal">
                         {item.posted_By}
-                        <span className="p-2 font-normal">August 30,2024</span>
+                        <span className="p-2 font-normal">{formatDate(item.createdAt)}</span>
                       </span>
                     </p>
                   </div>
