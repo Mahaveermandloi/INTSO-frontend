@@ -55,7 +55,7 @@ const Dashboard = () => {
     <div className="lg:w-10/12 lg:ml-auto">
       <h1 className="text-2xl lg:text-4xl my-5 font-bold">Dashboard</h1>
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
+        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-gray-800 dark:bg-gray-800">
           <div className="p-4 flex items-center">
             <div className="p-3 rounded-full text-orange-500 dark:text-orange-100 bg-orange-100 dark:bg-orange-500 mr-4">
               <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
@@ -63,17 +63,17 @@ const Dashboard = () => {
               </svg>
             </div>
             <div>
-              <p className="mb-2 text-xl font-medium text-gray-600 dark:text-gray-400">
+              <p className="mb-2 text-xl font-medium text-white  dark:text-gray-400">
                 No. of Students
               </p>
-              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              <p className="text-lg font-semibold text-white dark:text-gray-200">
                 {stats.numberOfStudents}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
+        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-gray-800 dark:bg-gray-800">
           <div className="p-4 flex items-center">
             <div className="p-3 rounded-full text-green-500 dark:text-green-100 bg-green-100 dark:bg-green-500 mr-4">
               <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
@@ -85,17 +85,17 @@ const Dashboard = () => {
               </svg>
             </div>
             <div>
-              <p className="mb-2 text-xl font-medium text-gray-600 dark:text-gray-400">
+              <p className="mb-2 text-xl font-medium text-white dark:text-gray-400">
                 No. of Schools
               </p>
-              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              <p className="text-lg font-semibold text-white dark:text-gray-200">
                 {stats.numberOfSchools}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
+        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-gray-800 dark:bg-gray-800">
           <div className="p-4 flex items-center">
             <div className="p-3 rounded-full text-blue-500 dark:text-blue-100 bg-blue-100 dark:bg-blue-500 mr-4">
               <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
@@ -103,17 +103,17 @@ const Dashboard = () => {
               </svg>
             </div>
             <div>
-              <p className="mb-2 text-xl font-medium text-gray-600 dark:text-gray-400">
+              <p className="mb-2 text-xl font-medium text-white dark:text-gray-400">
                 School Requests
               </p>
-              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              <p className="text-lg font-semibold text-white dark:text-gray-200">
                 {stats.schoolRequests}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
+        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-gray-800 dark:bg-gray-800">
           <div className="p-4 flex items-center">
             <div className="p-3 rounded-full text-teal-500 dark:text-teal-100 bg-teal-100 dark:bg-teal-500 mr-4">
               <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
@@ -125,17 +125,17 @@ const Dashboard = () => {
               </svg>
             </div>
             <div>
-              <p className="mb-2 text-xl font-medium text-gray-600 dark:text-gray-400">
+              <p className="mb-2 text-xl font-medium text-white dark:text-gray-400">
                 Free Content Count
               </p>
-              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              <p className="text-lg font-semibold text-white dark:text-gray-200">
                 {stats.freeContentCount}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
+        <div className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-gray-800 dark:bg-gray-800">
           <div className="p-4 flex items-center">
             <div className="p-3 rounded-full text-orange-500 dark:text-orange-100 bg-orange-100 dark:bg-orange-500 mr-4">
               <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
@@ -143,10 +143,10 @@ const Dashboard = () => {
               </svg>
             </div>
             <div>
-              <p className="mb-2 text-xl font-medium text-gray-600 dark:text-gray-400">
+              <p className="mb-2 text-xl font-medium text-white dark:text-gray-400">
                 Paid Content Count
               </p>
-              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              <p className="text-lg font-semibold text-white dark:text-gray-200">
                 {stats.paidContentCount}
               </p>
             </div>
