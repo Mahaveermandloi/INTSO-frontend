@@ -24,7 +24,7 @@ export const Intso = () => {
                 Comparisons. It Is Available For Students In Class 3 To 10 In
                 English, Mathematics, Science And General Knowledge.
               </p>
-              <Link to="/examdetails">
+              <Link to="/">
                 <button className="bg-[#ED1450] text-white p-3 rounded-full mt-5 w-32">
                   Read More
                 </button>
