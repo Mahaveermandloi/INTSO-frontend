@@ -42,6 +42,8 @@ const Cordinator = () => {
           mobile_number: "",
           remark: "",
         });
+      } else if (res.status === 409) {
+        toast.error("This email is already registered.");
       } else if (res.status === 400) {
         const responseData = await res.json();
         if (
@@ -78,7 +80,7 @@ const Cordinator = () => {
           </h1>
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="p-5">
           <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 mt-4">
             <div className="flex flex-col">
               <label className="text-left p-2">

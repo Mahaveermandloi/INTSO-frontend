@@ -45,14 +45,14 @@ export const GalleryPage = () => {
   };
   return (
     <>
-      <div className="">
+      <div className=" mb-10">
         <div
           className="flex flex-col py-6 justify-center items-center"
           data-aos="fade-up">
           <h1 className="text-[#ED1450] font-bold text-2xl">Our Gallery</h1>
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
         </div>
-        <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 grid-cols-1">
+        <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 grid-cols-1 ">
           {displayedData.map((item, index) => {
             let colSpanClass = "col-span-1";
             if (

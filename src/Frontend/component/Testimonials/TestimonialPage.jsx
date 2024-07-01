@@ -25,7 +25,7 @@ const TestimonialPage = () => {
         <h1 className="text-[#ED1450] font-bold text-2xl">Testimonials</h1>
         <p className="w-16 border-b-2 border-[#ED1450]"></p>
       </div>
-      <div className="max-w-screen-xl mx-auto lg:px-20 px-6 py-5 space-y-10">
+      <div className="max-w-screen-xl mx-auto lg:px-20 px-10 py-8 space-y-10">
         {data.map((item, index) => (
           <div
             key={index}
