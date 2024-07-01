@@ -73,14 +73,16 @@ const Cordinator = () => {
   return (
     <>
       <ToastContainer />
-      <div className="lg:px-24 max-w-screen-xl mx-auto">
-        <div className="flex flex-col py-7 justify-center items-center mt-10">
+      <div className="lg:px-24 max-w-screen-xl mx-auto ">
+        <div className="flex flex-col py-7 justify-center items-center mt-10 ">
           <h1 className="text-[#ED1450] font-bold text-2xl">
             Become a Co-ordinatore
           </h1>
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
         </div>
-        <form onSubmit={handleSubmit} className="p-5">
+        <form
+          onSubmit={handleSubmit}
+          className="p-5 border border-gray-200 mb-10 sm:px-28 px-10 m-10 ">
           <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 mt-4">
             <div className="flex flex-col">
               <label className="text-left p-2">
@@ -91,23 +93,11 @@ const Cordinator = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter Your name"
+                placeholder="Enter Your Name"
                 className="border border-gray-300 p-2 px-4 rounded-lg"
               />
             </div>
-            <div className="flex flex-col">
-              <label className="text-left p-2">
-                Email ID<span className="text-red-500 text-lg">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter Your EmailID"
-                className="border border-gray-300 p-2 px-4 rounded-lg"
-              />
-            </div>
+
             <div className="flex flex-col">
               <label className="text-left p-2">
                 Mobile<span className="text-red-500 text-lg">*</span>
@@ -121,23 +111,36 @@ const Cordinator = () => {
                 className="border border-gray-300 p-2 px-4 rounded-lg"
               />
             </div>
-            <div className="flex flex-col">
-              <label className="text-left p-2">
-                Remark<span className="text-red-500 text-lg">*</span>
-              </label>
-              <input
-                type="tel"
-                name="remark"
-                value={formData.remark}
-                onChange={handleChange}
-                placeholder="Enter Your Mobile Number"
-                className="border border-gray-300 p-2 px-4 rounded-lg"
-              />
-            </div>
-            {statusMessage && (
-              <p className="text-center mt-4 text-red-500">{statusMessage}</p>
-            )}
           </div>
+          <div className="flex flex-col">
+            <label className="text-left p-2">
+              Email ID<span className="text-red-500 text-lg">*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter Your Email"
+              className="border border-gray-300 p-2 px-4 rounded-lg"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-left p-2">
+              Remark<span className="text-red-500 text-lg">*</span>
+            </label>
+            <textarea
+              type="text"
+              name="remark"
+              value={formData.remark}
+              onChange={handleChange}
+              placeholder="Enter remark"
+              className="border border-gray-300 p-2 px-4 rounded-lg"
+            />
+          </div>
+          {statusMessage && (
+            <p className="text-center mt-4 text-red-500">{statusMessage}</p>
+          )}
           <div className="flex justify-center mb-10">
             <button
               type="submit"
