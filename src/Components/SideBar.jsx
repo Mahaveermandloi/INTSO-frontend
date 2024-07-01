@@ -2,8 +2,7 @@ import { BiBookContent } from "react-icons/bi";
 import { RiArticleLine } from "react-icons/ri";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AdminFooter from "../Components/AdminFooter";
-
+import { FaChalkboardTeacher } from "react-icons/fa";
 import { PiFlagBannerFold } from "react-icons/pi";
 import {
   FaHome,
@@ -239,6 +238,12 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 Career With Us
               </li>
             </Link>
+            <Link onClick={handleItemClick} to={`${baseURL}/co-ordinator`}>
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <FaChalkboardTeacher className="mr-2" />
+                Co-Ordinator
+              </li>
+            </Link>
 
             <Link onClick={handleItemClick} to={`${baseURL}/contactus`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
@@ -247,21 +252,21 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
               </li>
             </Link>
 
-            {!isMobileScreen && ( // Only show Logout on desktop screens
-              <Link
-                to={`${baseURL}/login`}
-                onClick={() => {
-                  handleItemClick();
-                  localStorage.removeItem("accessToken");
-                  window.location.reload(); //
-                }}
-              >
-                <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
-                  <FaSignOutAlt className="mr-2" />
-                  Logout
-                </li>
-              </Link>
-            )}
+            {/* {!isMobileScreen && ( // Only show Logout on desktop screens */}
+            <Link
+              to={`${baseURL}/login`}
+              onClick={() => {
+                handleItemClick();
+                localStorage.removeItem("accessToken");
+                window.location.reload(); //
+              }}
+            >
+              <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
+                <FaSignOutAlt className="mr-2" />
+                Logout
+              </li>
+            </Link>
+            {/* )} */}
           </ul>
         </nav>
       </div>

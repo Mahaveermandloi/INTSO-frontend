@@ -37,6 +37,7 @@ import CareerList from "../Components/CareerList";
 import UpdateCareer from "../Components/UpdateCareer";
 import CreateCareer from "../Components/CreateCareer";
 import QandAns from "../Components/Q&A";
+import BecomeCoOrdinator from "../Components/BecomeCoOrdinator";
 
 const AdminRoutes = () => {
   useTokenExpirationCheck();
@@ -113,6 +114,7 @@ const AuthenticatedApp = () => {
           <Route path="/updateCareer/:id" element={<UpdateCareer />} />
           <Route path="/createCareer" element={<CreateCareer />} />
           <Route path="/question-ans" element={<QandAns />} />
+          <Route path="/co-ordinator" element={<BecomeCoOrdinator />} />
 
           {/* Redirect all other routes to dashboard */}
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />

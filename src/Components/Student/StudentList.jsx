@@ -14,7 +14,7 @@ const StudentList = () => {
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedSchoolName, setSelectedSchoolName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 7;
 
   const handleClassChange = (event) => {
     const which_class = event.target.value;

@@ -264,62 +264,66 @@ const ContactUs = () => {
         transition={Bounce}
       />
       <div>
-        <div className="lg:w-10/12 lg:ml-auto">
+        <div className="p-4 lg:w-10/12 lg:ml-auto">
           <div>
             <h1 className="text-2xl lg:text-4xl font-bold">Contact Us</h1>
           </div>
 
           {currentData.length > 0 ? (
             <>
-              <table className="min-w-full bg-white">
-                <thead className="">
-                  <tr className="w-full rounded-2xl bg-gray-900 text-gray-200 uppercase text-sm leading-normal">
-                    <th className="py-3 px-6 text-left">Name</th>
-                    <th className="py-3 px-6 text-left">Email</th>
-                    <th className="py-3 px-6 text-left">Mobile Number</th>
-                    <th className="py-3 px-6 text-left">Message</th>
-                    <th className="py-3 px-6 text-left">Info</th>
-                  </tr>
-                </thead>
-                <tbody className="text-gray-600 text-sm font-light">
-                  {currentData.map(
-                    ({ id, name, email, message, mobile_number }) => (
-                      <tr
-                        className="border-b border-gray-200 hover:bg-gray-100"
-                        key={id}
-                      >
-                        <td className="py-3 px-6 text-left whitespace-nowrap font-semibold text-base">
-                          {name}
-                        </td>
-                        <td className="py-3 px-6 text-left font-semibold text-base">
-                          {email}
-                        </td>
-                        <td className="py-3 px-6 text-left font-semibold text-base">
-                          {mobile_number}
-                        </td>
-                        <td className="py-3 px-6 text-left font-semibold text-base">
-                          {truncateMessage(message, 3)}
-                        </td>
-                        <td
-                          className="py-3 px-6 text-left cursor-pointer"
-                          onClick={() =>
-                            handleModal({
-                              id,
-                              name,
-                              email,
-                              message,
-                              mobile_number,
-                            })
-                          }
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white">
+                  <thead className="">
+                    <tr className="w-full rounded-2xl bg-gray-900 text-gray-200 uppercase text-sm leading-normal">
+                      <th className="py-3 px-6 text-left">Name</th>
+                      <th className="py-3 px-6 text-left">Email</th>
+                      <th className="py-3 px-6 text-left">Mobile Number</th>
+                      <th className="py-3 px-6 text-left">Message</th>
+                      <th className="py-3 px-6 text-left">Info</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-600 text-sm font-light">
+                    {currentData.map(
+                      ({ id, name, email, message, mobile_number }) => (
+                        <tr
+                          className="border-b border-gray-200 hover:bg-gray-100"
+                          key={id}
                         >
-                          <FaInfoCircle size={20} className="text-green-400" />
-                        </td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
-
+                          <td className="py-3 px-6 text-left whitespace-nowrap font-semibold text-base">
+                            {name}
+                          </td>
+                          <td className="py-3 px-6 text-left font-semibold text-base">
+                            {email}
+                          </td>
+                          <td className="py-3 px-6 text-left font-semibold text-base">
+                            {mobile_number}
+                          </td>
+                          <td className="py-3 px-6 text-left font-semibold text-base">
+                            {truncateMessage(message, 3)}
+                          </td>
+                          <td
+                            className="py-3 px-6 text-left cursor-pointer"
+                            onClick={() =>
+                              handleModal({
+                                id,
+                                name,
+                                email,
+                                message,
+                                mobile_number,
+                              })
+                            }
+                          >
+                            <FaInfoCircle
+                              size={20}
+                              className="text-green-400"
+                            />
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              </div>
               {totalPages > 1 && (
                 <div className="mt-2 flex justify-center">
                   {/* Previous button */}
