@@ -69,7 +69,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
         />
       )}
       <div
-        className={`fixed flex flex-col top-22 left-0 h-[calc(90vh-4rem)]  lg:h-[calc(100vh-4rem)] lg:w-1/6 z-50 bg-gray-800 text-white p-5 transition-transform transform ${
+        className={`fixed flex flex-col top-22 left-0 h-[calc(92vh-4rem)]  lg:h-[calc(100vh-4rem)] lg:w-1/6 z-50 bg-gray-800 text-white p-5 transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         onClick={(e) => e.stopPropagation()}
