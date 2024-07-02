@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
-import { URLPath , baseURL } from "../URLPath";
+import { URLPath, baseURL } from "../URLPath";
 const ChangePassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -164,19 +164,19 @@ const ChangePassword = () => {
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-md rounded-2xl">
         <div className="mx-auto flex w-full max-w-md flex-col space-y-4">
           <div className="flex flex-col items-center justify-center text-center space-y-2">
-            <div className="font-semibold text-3xl">
+            <div className="font-semibold text-xl">
               <p className="text-gray-800">Change Password</p>
             </div>
           </div>
 
           <div>
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-2">
               <div className="flex flex-row items-center justify-center mx-auto w-full max-w-xs">
                 <div className="h-16">
                   <input
-                    className=" text-black hover:bg-primary-700  focus:outline-none focus:ring-primary-300 font-normal rounded-lg  px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
+                    className=" text-black hover:bg-primary-700  focus:outline-none focus:ring-primary-300 font-normal rounded-lg  px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
                     border
-                    border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                    border-gray-200 text-xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -188,9 +188,9 @@ const ChangePassword = () => {
               <div className="flex flex-row items-center justify-center mx-auto w-full max-w-xs">
                 <div className="h-16">
                   <input
-                    className="text-black hover:bg-primary-700  focus:outline-none focus:ring-primary-300 font-normal rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
+                    className="text-black hover:bg-primary-700  focus:outline-none focus:ring-primary-300 font-normal rounded-lg text-md px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800
                     border
-                    border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                    border-gray-200 text-xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
@@ -202,23 +202,23 @@ const ChangePassword = () => {
               <div className="flex flex-col space-y-5">
                 <div>
                   <button
-                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     onClick={handleChangePassword}
                   >
                     Change Password
                   </button>
                 </div>
 
-                <div>
+                {/* <div>
                   <button
-                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     onClick={() => navigate(`${baseURL}/login`)}
                   >
                     Go back to Login
                   </button>
-                </div>
+                </div> */}
 
-                <div className="text-red-500 font-bold text-2xl text-center">
+                <div className="text-red-500 font-bold text-xl text-center">
                   Time Remaining: {formatTime(timeRemaining)}
                 </div>
               </div>

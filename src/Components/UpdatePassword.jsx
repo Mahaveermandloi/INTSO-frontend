@@ -122,19 +122,19 @@ const UpdatePassword = () => {
         <img className="w-52 lg:w-56 lg:my-10" src={logo} alt="logo" />
       </center>
       <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-md rounded-2xl">
-        <div className="mx-auto flex w-full max-w-md flex-col space-y-4">
+        <div className="mx-auto flex w-full max-w-md flex-col space-y-2">
           <div className="flex flex-col items-center justify-center text-center space-y-2">
-            <div className="font-semibold text-3xl">
+            <div className="font-semibold text-2xl">
               <p className="text-gray-800">Change Password</p>
             </div>
           </div>
 
           <div>
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-2">
               <div className="relative flex flex-row items-center justify-center mx-auto w-full max-w-xs">
-                <div className="h-16 w-full relative">
+                <div className="h-16 w-full relative items-center flex ">
                   <input
-                    className="w-full text-black hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-normal rounded-lg px-5 py-2.5 text-center border border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                    className="w-full text-black hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-normal rounded-lg px-2 py-2 text-center border border-gray-200 text-xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                     type={showOldPassword ? "text" : "password"}
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
@@ -151,9 +151,9 @@ const UpdatePassword = () => {
               </div>
 
               <div className="relative flex flex-row items-center justify-center mx-auto w-full max-w-xs">
-                <div className="h-16 w-full relative">
+                <div className="h-16 w-full relative flex items-center">
                   <input
-                    className="w-full text-black hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-normal rounded-lg px-5 py-2.5 text-center border border-gray-200 text-2xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                    className="w-full text-black hover:bg-primary-700 focus:outline-none focus:ring-primary-300 font-normal rounded-lg px-3 py-2 text-center border border-gray-200 text-xl bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                     type={showNewPassword ? "text" : "password"}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
@@ -169,10 +169,10 @@ const UpdatePassword = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col space-y-5">
+              <div className="flex flex-col space-y-3">
                 <div>
                   <button
-                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     onClick={handleChangePassword}
                   >
                     Change Password
@@ -181,14 +181,12 @@ const UpdatePassword = () => {
 
                 <div>
                   <button
-                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     onClick={() => {
-                      localStorage.removeItem("accessToken");
-                      navigate(`${baseURL}/login`);
-                      window.location.reload();
+                      navigate(`${baseURL}/profile`);
                     }}
                   >
-                    Go back to Login
+                    back
                   </button>
                 </div>
               </div>

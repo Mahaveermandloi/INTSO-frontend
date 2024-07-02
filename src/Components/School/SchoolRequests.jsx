@@ -153,31 +153,40 @@ const SchoolRequests = () => {
               <tr className="">
                 <th
                   scope="col"
-                  className="px-4 py-1 text-base bg-gray-800 dark:bg-gray-800"
+                  className="px-4 py-1 text-base text-white bg-gray-800 dark:bg-gray-800"
                 >
                   School Name
                 </th>
-                <th scope="col" className="px-6 py-3 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-base text-white bg-gray-800"
+                >
                   Email
                 </th>
 
-                <th scope="col" className="px-6 py-3 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-base text-white bg-gray-800"
+                >
                   City
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 bg-gray-800 text-base dark:bg-gray-800"
+                  className="px-6 py-3 bg-gray-800 text-base text-white dark:bg-gray-800"
                 >
                   State
                 </th>
 
-                <th scope="col" className="px-6 py-3 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-base text-white bg-gray-800"
+                >
                   Mobile Number
                 </th>
 
                 <th
                   scope="col"
-                  className="px-6 py-3 bg-gray-800 text-base dark:bg-gray-800"
+                  className="px-6 py-3 bg-gray-800 text-base text-white dark:bg-gray-800"
                 >
                   Status
                 </th>

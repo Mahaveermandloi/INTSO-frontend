@@ -19,23 +19,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!validatePassword(password)) {
-      toast.error(
-        "Password must be at least 8 characters long and contain alphanumeric characters only.",
-        {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        }
-      );
-      return;
-    }
-
     setIsLoading(true);
     setLoaderMessage("Logging in...");
 
