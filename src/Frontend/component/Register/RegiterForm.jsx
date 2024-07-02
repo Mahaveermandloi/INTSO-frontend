@@ -25,7 +25,7 @@ const RegisterForm = () => {
     syllabus: "",
   });
 
-  const { errors, validate, setIsSubmitting } = useFormValidation(
+  const { errors, validate, setIsSubmitting, isSubmitting } = useFormValidation(
     formData,
     "school"
   );
@@ -151,8 +151,7 @@ const RegisterForm = () => {
             </div>
             <form
               className="flex flex-col md:px-10 p-6"
-              onSubmit={handleSubmit}
-            >
+              onSubmit={handleSubmit}>
               <div className="grid gap-x-4 gap-y-2">
                 <div className="flex flex-col">
                   <label className="text-left p-2">
@@ -236,8 +235,7 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Your State</option>
                     {states.map((state) => (
                       <option key={state} value={state}>
@@ -356,8 +354,7 @@ const RegisterForm = () => {
                       name="principal_name_prefix"
                       value={formData.principal_name_prefix}
                       onChange={handleChange}
-                      className="p-2 border border-gray-300 rounded-l-lg"
-                    >
+                      className="p-2 border border-gray-300 rounded-l-lg">
                       <option value="" disabled>
                         Prefix
                       </option>
@@ -395,8 +392,7 @@ const RegisterForm = () => {
                     className="border border-gray-300 p-3 px-4 rounded-lg"
                     name="syllabus"
                     value={formData.syllabus}
-                    onChange={handleChange}
-                  >
+                    onChange={handleChange}>
                     <option value="">Select Syllabus</option>
                     <option value="CBSE">CBSE</option>
                     <option value="ICSE">ICSE</option>
@@ -409,9 +405,8 @@ const RegisterForm = () => {
               </div>
               <button
                 type="submit"
-                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full"
-              >
-                Submit
+                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full">
+                {isSubmitting ? "Registering..." : "Register"}
               </button>
             </form>
           </div>

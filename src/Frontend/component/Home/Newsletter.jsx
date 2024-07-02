@@ -101,12 +101,12 @@ const Newsletter = () => {
           </button>
         </form>
         {successMessage && (
-          <div className="justify-center flex relative lg:-right-64   text-yellow-300 ">
+          <div className="justify-center flex relative lg:-right-[450px]   text-yellow-300 ">
             {successMessage}
           </div>
         )}
         {errorMessage && (
-          <div className="justify-center flex relative lg:-right-64 text-red-500">
+          <div className="justify-center flex relative lg:-right-[450px] text-red-500">
             {errorMessage}
           </div>
         )}

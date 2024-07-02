@@ -160,7 +160,7 @@ const useFormValidation = (formData, formType) => {
     return Object.keys(validationErrors).length === 0;
   };
 
-  return { errors, validate, setIsSubmitting };
+  return { errors, validate, setIsSubmitting,isSubmitting };
 };
 
 export default useFormValidation;

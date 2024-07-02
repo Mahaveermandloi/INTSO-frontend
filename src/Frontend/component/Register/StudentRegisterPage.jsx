@@ -23,7 +23,7 @@ const StudentRegisterPage = () => {
     student_class: "",
   });
 
-  const { errors, validate, setIsSubmitting } = useFormValidation(
+  const { errors, validate, setIsSubmitting, isSubmitting } = useFormValidation(
     formData,
     "student"
   );
@@ -35,7 +35,7 @@ const StudentRegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsSubmitting(true);
     // Validate form data
     validate(formData);
 
@@ -80,6 +80,8 @@ const StudentRegisterPage = () => {
     } catch (err) {
       console.error("Error:", err);
       toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -325,7 +327,7 @@ const StudentRegisterPage = () => {
               </div>
               <div className="flex justify-center">
                 <button className="lg:col-span-2 w-[40%] bg-[#ED1450] text-white text-lg p-3 rounded-full mt-10">
-                  Register
+                  {isSubmitting ? "Registering..." : "Register"}
                 </button>
               </div>
             </form>
