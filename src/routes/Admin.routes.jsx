@@ -117,7 +117,7 @@ const AuthenticatedApp = () => {
           <Route path="/co-ordinator" element={<BecomeCoOrdinator />} />
 
           {/* Redirect all other routes to dashboard */}
-          <Route path="*" element={<Navigate to="/admin/dashboard" />} />
+          <Route path="*" element={<Navigate to="/admin" />} />
         </Routes>
       </main>
 

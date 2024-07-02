@@ -194,25 +194,43 @@ const StudentRequests = () => {
           <table className="w-full text-sm text-left rtl:text-right  dark:text-gray-400">
             <thead className=" text-gray-700 uppercase  dark:text-gray-400 ">
               <tr className="">
-                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-1 text-base text-white bg-gray-800"
+                >
                   School Name
                 </th>
-                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-1 text-base text-white bg-gray-800"
+                >
                   Student Name
                 </th>
-                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-1 text-base text-white bg-gray-800"
+                >
                   Mobile Number
                 </th>
-                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-1 text-base text-white bg-gray-800"
+                >
                   Class
                 </th>
-                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-1 text-base text-white bg-gray-800"
+                >
                   Email
                 </th>
-                <th scope="col" className="px-4 py-1 text-base bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-1 text-base text-white bg-gray-800"
+                >
                   City
                 </th>
-                <th scope="col" className="px-6 py-3 text-base bg-gray-200 ">
+                <th scope="col" className="px-6 py-3 text-base  bg-gray-200 ">
                   INFO
                 </th>
               </tr>

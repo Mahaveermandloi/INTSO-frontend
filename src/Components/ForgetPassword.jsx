@@ -3,16 +3,13 @@ import axios from "axios";
 import logo from "../assets/Intso_Slicing_Assets/Header_Logo/Header_Logo.png";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
-import {URLPath, baseURL} from "../URLPath";
+import { URLPath, baseURL } from "../URLPath";
 const ForgetPassword = () => {
-  
-  
   const [email, setEmail] = useState("");
-  
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const navigate = useNavigate();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -27,7 +24,7 @@ const ForgetPassword = () => {
       });
       if (response.status === 200) {
         const email = response.data.data.email;
-      
+
         toast.success("OTP sent successfully", {
           position: "top-center",
           autoClose: 3000,
@@ -40,16 +37,13 @@ const ForgetPassword = () => {
         });
 
         setTimeout(() => {
-          
           navigate(`${baseURL}/otppage/${email}`);
         }, 2000);
       } else {
         console.error("Error:", response.statusText);
       }
     } catch (error) {
-      if (
-        error.response.status === 500
-      ) {
+      if (error.response.status === 500) {
         toast.error("Network Error", {
           position: "top-center",
           autoClose: 3000,
@@ -103,23 +97,25 @@ const ForgetPassword = () => {
             onSubmit={handleSubmit}
           >
             <div className="mb-4">
-              <label
-                className="block text-gray-800 text-2xl font-bold mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
+              <div>
+                <label
+                  className="block text-gray-800 text-2xl font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  required
+                />
+              </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col space-y-2 items-center justify-between">
               <button
                 className={`w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
                   isSubmitting ? "cursor-not-allowed" : ""
@@ -128,6 +124,14 @@ const ForgetPassword = () => {
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
+              </button>
+              <button
+                className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-3 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                onClick={() => {
+                  navigate(`${baseURL}/login`);
+                }}
+              >
+                back
               </button>
             </div>
           </form>

@@ -122,7 +122,8 @@ const SchoolList = () => {
             <div>
               <button
                 onClick={() => navigate("/admin/addschool")}
-                className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                className="w-full text-white bg-[#ed1450] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
                 Add School
               </button>
             </div>
@@ -147,23 +148,35 @@ const SchoolList = () => {
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 ">
               <tr className="">
-                <th scope="col" className="px-4 py-2 text-md bg-gray-800  ">
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-md bg-gray-800 text-white  "
+                >
                   School Name
                 </th>
 
-                <th scope="col" className="px-4 py-2 text-md bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-md bg-gray-800 text-white"
+                >
                   Mobile Number
                 </th>
 
-                <th scope="col" className="px-4 py-2 text-md bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-md bg-gray-800 text-white"
+                >
                   Email
                 </th>
 
-                <th scope="col" className="px-4 py-2 text-md bg-gray-800">
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-md bg-gray-800 text-white"
+                >
                   City
                 </th>
 
-                <th scope="col" className="px-4 py-2 text-md bg-gray-200 ">
+                <th scope="col" className="px-4 py-2 text-md bg-gray-200  ">
                   INFO
                 </th>
               </tr>
@@ -173,7 +186,8 @@ const SchoolList = () => {
                 <tr>
                   <td
                     colSpan="8"
-                    className="px-6 py-4 text-center text-gray-500">
+                    className="px-6 py-4 text-center text-gray-500"
+                  >
                     No matching records found
                   </td>
                 </tr>
@@ -181,7 +195,8 @@ const SchoolList = () => {
                 currentData.map((school) => (
                   <tr
                     className="bg-white border-b dark:bg-gray-100 dark:border-gray-300"
-                    key={school.school_id}>
+                    key={school.school_id}
+                  >
                     <td className="px-4 py-2 text-base font-bold text-black">
                       {school.school_name}
                     </td>
@@ -214,7 +229,8 @@ const SchoolList = () => {
                 currentPage === 1
                   ? "bg-gray-300 text-gray-500"
                   : "bg-blue-500 text-white"
-              }`}>
+              }`}
+            >
               <FaChevronLeft />
             </button>
 
@@ -227,7 +243,8 @@ const SchoolList = () => {
                   currentPage === number + 1
                     ? "bg-blue-500 text-white"
                     : "bg-gray-300 text-gray-500"
-                }`}>
+                }`}
+              >
                 {number + 1}
               </button>
             ))}
@@ -237,12 +254,14 @@ const SchoolList = () => {
               <>
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
-                  className="mx-1 px-3 py-1 rounded bg-gray-300 text-gray-500">
+                  className="mx-1 px-3 py-1 rounded bg-gray-300 text-gray-500"
+                >
                   ...
                 </button>
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
-                  className={`mx-1 px-3 py-1 rounded bg-blue-500 text-white`}>
+                  className={`mx-1 px-3 py-1 rounded bg-blue-500 text-white`}
+                >
                   {currentPage}
                 </button>
               </>
@@ -256,7 +275,8 @@ const SchoolList = () => {
                 currentPage === totalPages
                   ? "bg-gray-300 text-gray-500"
                   : "bg-blue-500 text-white"
-              }`}>
+              }`}
+            >
               <FaChevronRight />
             </button>
           </div>
@@ -332,6 +352,14 @@ const SchoolList = () => {
                     </tr>
                     <tr>
                       <td className="text-md lg:text-base px-4 py-2 whitespace-nowrap">
+                        Landline
+                      </td>
+                      <td className="text-md lg:text-base px-4 py-2 whitespace-nowrap">
+                        {selectedSchool.STD_code} | {selectedSchool.landline}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-md lg:text-base px-4 py-2 whitespace-nowrap">
                         School Name
                       </td>
                       <td className="text-md font-bold lg:text-base px-4 py-2 whitespace-nowrap">
@@ -362,7 +390,8 @@ const SchoolList = () => {
                 <button
                   // onClick={() => deleteSchool(selectedSchool.school_id)}
                   onClick={handleDeleteClick}
-                  className=" text-white px-4 py-2 rounded bg-red-600">
+                  className=" text-white px-4 py-2 rounded bg-red-600"
+                >
                   Delete
                 </button>
                 {isModalOpen1 && (
@@ -378,12 +407,14 @@ const SchoolList = () => {
                       <div className="flex justify-end">
                         <button
                           onClick={handleCancelDelete}
-                          className="mr-4 px-4 py-2 rounded bg-gray-300">
+                          className="mr-4 px-4 py-2 rounded bg-gray-300"
+                        >
                           Cancel
                         </button>
                         <button
                           onClick={handleConfirmDelete}
-                          className="px-4 py-2 rounded bg-red-600 text-white">
+                          className="px-4 py-2 rounded bg-red-600 text-white"
+                        >
                           Confirm
                         </button>
                       </div>
@@ -392,7 +423,8 @@ const SchoolList = () => {
                 )}
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600">
+                  className="bg-[#ed1450] text-white px-4 py-2 rounded hover:bg-red-600"
+                >
                   Close
                 </button>
               </div>
