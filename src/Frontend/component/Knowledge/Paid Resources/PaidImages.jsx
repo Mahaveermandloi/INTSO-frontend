@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { FaCheck, FaSpinner } from "react-icons/fa";
 
 const Images = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();

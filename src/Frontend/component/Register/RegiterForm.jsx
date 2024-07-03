@@ -403,11 +403,11 @@ const RegisterForm = () => {
                   )}
                 </div>
               </div>
-              <button
-                type="submit"
-                className="mt-10 py-3 rounded-xl bg-[#ED1450] text-white font-semibold w-full">
-                {isSubmitting ? "Registering..." : "Register"}
-              </button>
+              <div className="flex justify-center">
+                <button className="lg:col-span-2 w-[40%] bg-[#ED1450] text-white text-lg p-3 rounded-full mt-10">
+                  {isSubmitting ? "Registering..." : "Register"}
+                </button>
+              </div>
             </form>
           </div>
         </div>

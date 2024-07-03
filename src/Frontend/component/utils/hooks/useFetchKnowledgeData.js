@@ -9,7 +9,7 @@ const useFetchKnowledgeData = ({ searchInput, selectedOption }) => {
     const fetchData = async () => {
       try {
         // Construct the fetch URL with the searchInput parameter
-        const url = `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}`;
+        const url = `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}&is_paid=true`;
 
         const data = await fetch(url, {
           method: "GET",
@@ -19,6 +19,7 @@ const useFetchKnowledgeData = ({ searchInput, selectedOption }) => {
           },
         });
         const jsonData = await data.json();
+        
 
         setData1(jsonData.resourceData.imageArray);
         setData2(jsonData.resourceData.pdfArray);

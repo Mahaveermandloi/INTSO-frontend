@@ -6,33 +6,29 @@ import { API_KEY, IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 
 const fetchResources = async (searchInput, selectedOption, triggerSearch) => {
-  try {
-    const response = await fetch(
-      `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-paid-data-by-user?searchTerm=${searchInput}&resource_class=${selectedOption}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          api_key: API_KEY,
-        },
-      }
-    );
-
-    http: if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+  // try {
+  const response = await fetch(
+    `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}&is_paid=true`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        api_key: API_KEY,
+      },
     }
+  );
 
-    const data = await response.json();
- 
-    return data.resourceData;
-  } catch (error) {
-    console.error("Error fetching resources:", error);
-    throw error;
-  }
-};
+  // http: if (!response.ok) {
+  //   throw new Error(`HTTP error! Status: ${response.status}`);
+  // }
 
-const filterPaidResources = (resources) => {
-  return resources.filter((resource) => resource.is_paid);
+  const data = await response.json();
+
+  return data.resourceData;
+  // } catch (error) {
+  //   console.error("Error fetching resources:", error);
+  //   throw error;
+  // }
 };
 
 const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
@@ -58,9 +54,9 @@ const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
         throw new Error("Unexpected data structure");
       }
 
-      const paidImageArray = filterPaidResources(data.imageArray || []);
-      const paidPdfArray = filterPaidResources(data.pdfArray || []);
-      const paidVideoArray = filterPaidResources(data.videoArray || []);
+      const paidImageArray = data.imageArray || [];
+      const paidPdfArray = data.pdfArray || [];
+      const paidVideoArray = data.videoArray || [];
 
       setResources({
         imageArray: paidImageArray,

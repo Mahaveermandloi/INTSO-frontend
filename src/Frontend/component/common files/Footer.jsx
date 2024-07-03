@@ -105,7 +105,7 @@ export const Footer = () => {
                   </Link>
                   <Link to="/content">
                     <li className="hover:underline mt-2">
-                      <a>Content</a>
+                      <a>Q&A</a>
                     </li>
                   </Link>
                   <Link to="/membership">

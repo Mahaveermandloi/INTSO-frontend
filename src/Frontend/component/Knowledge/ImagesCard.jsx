@@ -3,9 +3,9 @@ import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 import { useNavigate } from "react-router-dom";
 import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
-import { FaCheck, FaSpinner } from "react-icons/fa"; // Import icons
+import { FaCheck, FaSpinner } from "react-icons/fa";
 
-const ImagesCard = ({ resources }) => {
+const ImagesCard = ({ resources, searchInput, selectedOption }) => {
   const navigate = useNavigate();
   const [downloadingId, setDownloadingId] = useState(null);
   const [showSuccessIcon, setShowSuccessIcon] = useState(null);
@@ -51,6 +51,8 @@ const ImagesCard = ({ resources }) => {
   };
 
   const handleShowMore = () => {
+    localStorage.setItem("searchInput", searchInput);
+    localStorage.setItem("selectedOption", selectedOption);
     const hasPaidResources = resources.some((item) => item.is_paid);
     if (hasPaidResources) {
       navigate("/paidimage");

@@ -402,7 +402,7 @@ const SubHeader = () => {
                   getContentAnchorEl={null}
                   sx={{
                     mt: { xs: 0, sm: 0, lg: 0 },
-                    ml: { xs: 0, sm: 5, lg: 10 },
+                    ml: { xs: 0, sm: 5, lg: 4 },
                     mr: { xs: 0, sm: 5 },
                   }}>
                   <Link to="/userprofile">

@@ -7,7 +7,7 @@ import Spinner1 from "../common files/Spinner1";
 
 const fetchResources = async (searchInput, selectedOption) => {
   const response = await fetch(
-    `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}`,
+    `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}&is_paid=false`,
     {
       method: "GET",
       headers: {
@@ -18,12 +18,8 @@ const fetchResources = async (searchInput, selectedOption) => {
   );
 
   const data = await response.json();
- 
-  return data.resourceData;
-};
 
-const filterUnpaidResources = (resources) => {
-  return resources.filter((resource) => !resource.is_paid);
+  return data.resourceData;
 };
 
 const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
@@ -43,9 +39,9 @@ const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
     setLoading(true);
     try {
       const data = await fetchResources(searchInput, selectedOption);
-      const unpaidImageArray = filterUnpaidResources(data.imageArray);
-      const unpaidPdfArray = filterUnpaidResources(data.pdfArray);
-      const unpaidVideoArray = filterUnpaidResources(data.videoArray);
+      const unpaidImageArray = data.imageArray;
+      const unpaidPdfArray = data.pdfArray;
+      const unpaidVideoArray = data.videoArray;
 
       setResources({
         imageArray: unpaidImageArray,
@@ -76,7 +72,11 @@ const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
   return (
     <div>
       {resources.imageArray.length > 0 ? (
-        <ImagesCard resources={resources.imageArray} />
+        <ImagesCard
+          resources={resources.imageArray}
+          searchInput={searchInput}
+          selectedOption={selectedOption}
+        />
       ) : (
         <p className="text-red-500  my-4 text-center text-2xl font-bold">
           {noDataMessage.image}
