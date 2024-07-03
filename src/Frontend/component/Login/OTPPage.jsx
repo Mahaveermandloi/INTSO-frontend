@@ -107,6 +107,15 @@ const OTPPage = () => {
     }
   };
 
+  // Function to handle focus shift
+  const handleChangeAndFocus = (e, index) => {
+    const { value } = e.target;
+    if (value.length === 1 && index < 4) {
+      document.querySelector(`input[name=otp${index + 1}]`).focus();
+    }
+    formik.handleChange(e);
+  };
+
   // Component JSX
   return (
     <div className="">
@@ -146,7 +155,7 @@ const OTPPage = () => {
                               ? "border-red-500"
                               : "border-gray-300"
                           } w-16 p-3 text-lg rounded-lg text-center`}
-                          onChange={formik.handleChange}
+                          onChange={(e) => handleChangeAndFocus(e, index)}
                           onBlur={formik.handleBlur}
                           value={formik.values[`otp${index}`]}
                         />
@@ -169,7 +178,8 @@ const OTPPage = () => {
                   <div className="mt-5 flex justify-center">
                     <button
                       type="submit"
-                      className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white">
+                      className="bg-[#ED1450] px-6 p-2 rounded-full font-bold text-lg text-white"
+                    >
                       Next
                     </button>
                   </div>
@@ -178,7 +188,8 @@ const OTPPage = () => {
                       <button
                         type="button"
                         className="bg-gray-300 px-6 p-2 rounded-full font-bold text-lg text-black"
-                        onClick={handleResendOTP}>
+                        onClick={handleResendOTP}
+                      >
                         Resend OTP
                       </button>
                     ) : (

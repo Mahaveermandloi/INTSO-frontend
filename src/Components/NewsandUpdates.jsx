@@ -360,7 +360,7 @@ const NewsandUpdates = () => {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl lg:text-4xl my-5 font-bold">
-              News, Events, Updates, Exam
+              News, Events, Exam
             </h1>
           </div>
           <div>
@@ -393,7 +393,7 @@ const NewsandUpdates = () => {
           <div className="lg:flex flex-col   lg:flex-row lg:space-x-4  ">
             {/* News Section */}
 
-            <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px]  overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar ">
+            <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px]  overflow-auto lg:max-h-[70vh]  lg:mb-0 custom-scrollbar ">
               <h2 className=" text-xl font-bold mb-2 text-red-600">News</h2>
 
               <div className="overflow-y-auto h-[90%] custom-scrollbar">
@@ -430,10 +430,8 @@ const NewsandUpdates = () => {
             </div>
 
             {/* EVENT AND EXAM */}
-            <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
-              <h2 className="text-xl font-bold mb-2 text-red-600">
-                Events and Exam
-              </h2>
+            <div className=" lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[70vh]  lg:mb-0 custom-scrollbar">
+              <h2 className="text-xl font-bold mb-2 text-red-600">Events</h2>
 
               <div className="overflow-y-auto h-[95%] custom-scrollbar">
                 {/* Adjust the height as needed */}
@@ -469,8 +467,8 @@ const NewsandUpdates = () => {
             </div>
 
             {/* UPDATES */}
-            <div className="  lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[76vh]  lg:mb-0 custom-scrollbar">
-              <h2 className="text-xl font-bold mb-2 text-red-600">Update</h2>
+            <div className="  lg:w-1/3  border-2 border-gray-500  p-4 rounded-lg shadow-lg mb-4 max-h-[420px] overflow-auto lg:max-h-[70vh]  lg:mb-0 custom-scrollbar">
+              <h2 className="text-xl font-bold mb-2 text-red-600">Exam</h2>
 
               <div className="overflow-y-auto h-[95%] custom-scrollbar">
                 {/* Adjust the height as needed */}
@@ -512,13 +510,13 @@ const NewsandUpdates = () => {
         <Loader message={"Uploading"} />
       ) : (
         isModalOpen && (
-          <div className="fixed mt-16 bg-black inset-0 flex items-center justify-center bg-opacity-75">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+          <div className="fixed mt-10 bg-black inset-0 flex items-center justify-center bg-opacity-75">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
               <div>
                 <h2 className="text-2xl font-bold mb-4">Create New Entry</h2>
               </div>
 
-              <form onSubmit={handleUpload} className="space-y-4">
+              <form onSubmit={handleUpload} className="space-y-2">
                 <div>
                   <label
                     className="block text-sm font-medium mb-1"
@@ -593,38 +591,40 @@ const NewsandUpdates = () => {
 
                 {(selectedOption === "event" || selectedOption === "exam") && (
                   <>
-                    <div>
-                      <label
-                        className="block text-sm font-medium mb-1"
-                        htmlFor="eventDate"
-                      >
-                        Event Date
-                      </label>
-                      <input
-                        type="date"
-                        id="eventDate"
-                        value={eventDate}
-                        onChange={(e) => setEventDate(e.target.value)}
-                        className="w-full p-2 rounded bg-gray-100"
-                        required
-                      />
-                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <label
+                          className="block text-sm font-medium mb-1"
+                          htmlFor="eventDate"
+                        >
+                          Event Date
+                        </label>
+                        <input
+                          type="date"
+                          id="eventDate"
+                          value={eventDate}
+                          onChange={(e) => setEventDate(e.target.value)}
+                          className="w-full p-2 rounded bg-gray-100"
+                          required
+                        />
+                      </div>
 
-                    <div>
-                      <label
-                        className="block text-sm font-medium mb-1"
-                        htmlFor="eventTime"
-                      >
-                        Event Time
-                      </label>
-                      <input
-                        type="time"
-                        id="eventTime"
-                        value={eventTime}
-                        onChange={(e) => setEventTime(e.target.value)}
-                        className="w-full p-2 rounded bg-gray-100"
-                        required
-                      />
+                      <div>
+                        <label
+                          className="block text-sm font-medium mb-1"
+                          htmlFor="eventTime"
+                        >
+                          Event Time
+                        </label>
+                        <input
+                          type="time"
+                          id="eventTime"
+                          value={eventTime}
+                          onChange={(e) => setEventTime(e.target.value)}
+                          className="w-full p-2 rounded bg-gray-100"
+                          required
+                        />
+                      </div>
                     </div>
                   </>
                 )}
