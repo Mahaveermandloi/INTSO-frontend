@@ -1,5 +1,5 @@
 import React from "react";
-
+import SearchIcon from "@mui/icons-material/Search";
 const SerchBar = ({
   handleSearchInputChange,
   searchInput,
@@ -8,6 +8,11 @@ const SerchBar = ({
   handleOptionChange,
 }) => {
   const options = Array.from({ length: 10 }, (_, index) => index + 1);
+  const handleResetButtonClick = () => {
+    handleSearchInputChange({ target: { value: "" } });
+    handleOptionChange({ target: { value: "" } });
+    handleSearchButtonClick();
+  };
   return (
     <div className="sm:p-10 p-5 space-y-16" data-aos="fade-up">
       <div className="text-center mb-4">
@@ -45,8 +50,16 @@ const SerchBar = ({
           />
           <button
             onClick={handleSearchButtonClick}
-            className="text-white p-2 rounded-full font-bold bg-[#ED1450] absolute right-0 top-0 bottom-0 w-16 sm:w-28">
-            Search
+            className="text-white p-2  flex justify-center gap-2 rounded-full font-bold bg-[#ED1450] absolute right-0 top-0 bottom-0 w-16 sm:w-28">
+            <p className="md:block hidden">Search</p>{" "}
+            <SearchIcon className="md:hidden" />
+          </button>
+        </div>
+        <div className="flex justify-center items-center">
+          <button
+            onClick={handleResetButtonClick}
+            className="bg-[#ED1450] text-white p-2 rounded-full font-bold w-16 sm:w-28">
+            Reset
           </button>
         </div>
       </div>

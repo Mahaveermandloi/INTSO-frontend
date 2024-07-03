@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Cordinator = () => {
   const location = useLocation();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,6 +21,7 @@ const Cordinator = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const res = await fetch(
         `http://${IP_ADDRESS}:${PORT}/api/v1/co-ordinator/post-co-ordinator`,
@@ -64,6 +65,8 @@ const Cordinator = () => {
     } catch (err) {
       console.error("Sending message failed:", err);
       toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -145,7 +148,7 @@ const Cordinator = () => {
             <button
               type="submit"
               className="lg:col-span-2  w-fit bg-[#ED1450] text-white text-lg px-6 py-2 rounded-full mt-10">
-              Register
+              {isSubmitting ? "Registering..." : "Register"}
             </button>
           </div>
         </form>

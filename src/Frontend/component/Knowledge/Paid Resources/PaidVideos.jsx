@@ -40,10 +40,9 @@ const Videos = () => {
 
       const allData = jsonData.resourceData;
 
- 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => item.is_paid);
- 
+
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
     } catch (error) {
@@ -112,6 +111,9 @@ const Videos = () => {
                         {item.title}
                       </h1>
                       <p className="text-xs text-start">{item.description}</p>
+                      <p className="text-xs text-start">
+                        Class- {item.resource_class}
+                      </p>
                     </div>
                     <div>
                       <p className="border-b-2 border-gray-300 text-center mx-3"></p>

@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
-import img from "../../../../src/assets/Frontend_images/Download_SVG.png";
 import { useNavigate } from "react-router-dom";
 import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
+import { FaCheck, FaSpinner } from "react-icons/fa"; // Import icons
 
 const ImagesCard = ({ resources }) => {
   const navigate = useNavigate();
+  const [downloadingId, setDownloadingId] = useState(null);
+  const [showSuccessIcon, setShowSuccessIcon] = useState(null);
 
-  const handleDownload = async (pdfUrl) => {
+  const handleDownload = async (pdfUrl, id) => {
+    setDownloadingId(id);
     try {
       const response = await fetch(pdfUrl, {
         method: "GET",
@@ -30,8 +33,15 @@ const ImagesCard = ({ resources }) => {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
+
+      setShowSuccessIcon(id);
+      setTimeout(() => {
+        setShowSuccessIcon(null);
+      }, 2000);
     } catch (error) {
       console.error("Download error:", error);
+    } finally {
+      setDownloadingId(null);
     }
   };
 
@@ -72,7 +82,7 @@ const ImagesCard = ({ resources }) => {
                   data-aos="zoom-in">
                   <img
                     src={`http://${IP_ADDRESS}:${PORT}${item.resource_url}`}
-                    className="rounded-lg w-full h-64  object-cover"
+                    className="rounded-lg w-full h-64 object-cover"
                     alt={item.title}
                   />
                   <div className="flex flex-col space-y-3 p-2">
@@ -81,11 +91,14 @@ const ImagesCard = ({ resources }) => {
                         {item.title}
                       </h1>
                       <p className="text-xs text-start">{item.description}</p>
+                      <p className="text-xs text-start">
+                        Class- {item.resource_class}
+                      </p>
                     </div>
                     <div>
                       <p className="border-b-2 border-gray-300 text-center mx-3"></p>
                     </div>
-                    <div className="flex  justify-between gap-2 mx-2 ">
+                    <div className="flex justify-between gap-2 mx-2">
                       <p className="text-sm">
                         <p>
                           <strong className="text-[#ED1450]">
@@ -96,13 +109,25 @@ const ImagesCard = ({ resources }) => {
                         {formatDate(item.createdAt)}
                       </p>
                       <button
-                        className="bg-[#ED1450] rounded-full flex justify-center items-center gap-1 px-1 p-1 h-fit font-seibold"
+                        className={`bg-[#ED1450] rounded-full flex justify-center items-center gap-1 px-1 p-1 h-fit font-semibold ${
+                          downloadingId === item.id ? "cursor-not-allowed" : ""
+                        }`}
                         onClick={() =>
                           handleDownload(
-                            `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
+                            `http://${IP_ADDRESS}:${PORT}${item.resource_url}`,
+                            item.id
                           )
-                        }>
-                        <h1 className="hidden md:block text-white">Download</h1>
+                        }
+                        disabled={downloadingId === item.id}>
+                        <h1 className="hidden md:block text-white">
+                          {downloadingId === item.id ? (
+                            <FaSpinner className="animate-spin" />
+                          ) : showSuccessIcon === item.id ? (
+                            <FaCheck />
+                          ) : (
+                            "Download"
+                          )}
+                        </h1>
                         <DownloadForOfflineOutlinedIcon
                           sx={{ color: "white" }}
                         />
