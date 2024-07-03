@@ -8,9 +8,14 @@ const BlogPage = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
   const { data: blogs, loading } = useFetchBlogData(page, limit);
+  const [displayedData, setDisplayedData] = useState([]);
+  console.log(blogs.length);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+  useEffect(() => {
+    setDisplayedData(blogs);
+  }, [blogs]);
   const handleLoadMore = () => {
     setPage((prev) => prev + 1);
   };
@@ -24,7 +29,7 @@ const BlogPage = () => {
       <div className="shadow-inner shadow-gray-300">
         <div className="max-w-screen-xl mx-auto lg:px-16 px-6">
           <div className="grid md:grid-cols-2 grid-cols-1 gap-5 sm:px-14 px-6 sm:p-10 p-6 py-10">
-            {blogs.map((item, index) => (
+            {displayedData.map((item, index) => (
               <div
                 key={index}
                 className="flex flex-col shadow-2xl rounded-xl space-y-2 p-5">

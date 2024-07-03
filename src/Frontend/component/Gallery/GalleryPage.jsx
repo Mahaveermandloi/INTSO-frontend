@@ -6,7 +6,7 @@ import useFetchGalleryData from "../utils/hooks/useFetchGalleryData";
 import img from "../../../assets/Image_not_available.png";
 export const GalleryPage = () => {
   const [page, setPage] = useState(1);
-  const limit = 9; // Number of items per page
+  const limit = 10; 
   const { data, loading } = useFetchGalleryData(page, limit);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");

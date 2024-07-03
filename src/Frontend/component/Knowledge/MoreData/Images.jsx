@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { API_KEY, IP_ADDRESS, PORT } from "../../utils/constants";
 import Spinner1 from "../../common files/Spinner1"; // Assuming Spinner1 is correctly imported
 import img from "../../../../../src/assets/Frontend_images/Download_SVG.png";
-import { useLocation } from "react-router-dom";
-
+import { useLocation, Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { FaCheck, FaSpinner } from "react-icons/fa";
+import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
 const Images = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading state
   const location = useLocation();
+  const [downloadingId, setDownloadingId] = useState(null);
+  const [showSuccessIcon, setShowSuccessIcon] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,11 +42,9 @@ const Images = () => {
 
       const allData = jsonData.resourceData;
 
- 
       // Filter out paid resources
       const unpaidData = allData.filter((item) => !item.is_paid);
 
- 
       setData(unpaidData); // Update state with filtered data
       setLoading(false); // Set loading to false once data is fetched
     } catch (error) {
@@ -51,7 +53,8 @@ const Images = () => {
     }
   };
 
-  const handleDownload = async (imageUrl) => {
+  const handleDownload = async (imageUrl, id) => {
+    setDownloadingId(id);
     try {
       const response = await fetch(imageUrl, {
         method: "GET",
@@ -73,8 +76,14 @@ const Images = () => {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
+      setShowSuccessIcon(id);
+      setTimeout(() => {
+        setShowSuccessIcon(null);
+      }, 2000);
     } catch (error) {
       console.error("Download error:", error);
+    } finally {
+      setDownloadingId(null);
     }
   };
 
@@ -126,14 +135,30 @@ const Images = () => {
                       </div>
                       <div className="flex justify-center p-1 rounded-full bg-[#ED1450] w-28 sm:min-w-20 space-x-1">
                         <button
-                          className="text-white text-sm flex items-center"
+                          className={`bg-[#ED1450] rounded-full flex justify-center items-center gap-1 px-1 p-1 h-fit font-semibold ${
+                            downloadingId === item.id
+                              ? "cursor-not-allowed"
+                              : ""
+                          }`}
                           onClick={() =>
                             handleDownload(
-                              `http://${IP_ADDRESS}:${PORT}${item.resource_url}`
+                              `http://${IP_ADDRESS}:${PORT}${item.resource_url}`,
+                              item.id
                             )
-                          }>
-                          Download
-                          <img src={img} className="size-5" alt="Download" />
+                          }
+                          disabled={downloadingId === item.id}>
+                          <h1 className="hidden md:block text-white">
+                            {downloadingId === item.id ? (
+                              <FaSpinner className="animate-spin" />
+                            ) : showSuccessIcon === item.id ? (
+                              <FaCheck />
+                            ) : (
+                              "Download"
+                            )}
+                          </h1>
+                          <DownloadForOfflineOutlinedIcon
+                            sx={{ color: "white" }}
+                          />
                         </button>
                       </div>
                     </div>

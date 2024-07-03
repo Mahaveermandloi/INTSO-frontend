@@ -100,6 +100,9 @@ const VideosCard = ({ resources }) => {
                           {item.title}
                         </h1>
                         <p className="text-xs text-start">{item.description}</p>
+                        <p className="text-xs text-start">
+                       Class- {item.resource_class}
+                      </p>
                       </div>
                       <div>
                         <p className="border-b-2 border-gray-300 text-center mx-3"></p>
