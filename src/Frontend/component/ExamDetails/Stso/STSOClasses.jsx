@@ -7,61 +7,60 @@ import { useLocation } from "react-router-dom";
 
 const faq = [
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 1st",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    Science: [ ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 2nd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    Science: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 3rd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
+    Science: [
+      "Force, work and energy",
+      "Air and water",
+      "Matter around us",
+      "The Plant Fairy (Plants around us)",
+      "Flying High",
+      "Foods we Eat( Food keeps us fit and healthy)",
+      "What is Cooking",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 4th",
-    Level1: [
-      "Fundamentals on numbers",
-      "Multiples and factors",
-      "Fundamentals on symmetry",
-      "Divisibility rules",
-      "Fundamentals on fractions",
+    Science: [
+      "Force, work and energy",
+      "Machines",
+      " Air and water",
+      "Changes around us",
+      "Ear to Ear",
+      "A Day with Nandu & The Story of Amritha",
+      "Anita and the Honeybees",
+      "The Valley of Flowers",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 5th",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Fractions and Decimals",
-      "Measurements",
-      " Multiples and factors",
+    Science: [
+        "Measurement",
+        "Force, Work and Energy",
+        "Change around us",
+        "Atmosphere and wind",
+        "Experiments with water",
+        "Super Senses",
+        "A Snake Charmer's Story",
+        "From Tasting to Dig",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 6th",
-    Level1: [
+    Science: [
       "Primary number system",
       "Fundamentals on  plane Geometry",
       " Divisibility criteria",
@@ -70,9 +69,9 @@ const faq = [
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 7th",
-    Level1: [
+    Science: [
       "Fractions and Decimals",
       "Lines and angles",
       "Simple equations",
@@ -81,9 +80,9 @@ const faq = [
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 8th",
-    Level1: [
+    Science: [
       "Rational numbers",
       "Linear equations in one variable",
       "Square roots and cube roots",
@@ -92,9 +91,9 @@ const faq = [
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 9th",
-    Level1: [
+    Science: [
       "Basic concepts on geometry",
       " Polynomials and factorization",
       "Linear equations in one variable",
@@ -103,9 +102,9 @@ const faq = [
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Science (STSO)",
     class: "Class 10th",
-    Level1: [
+    Science: [
       "Real numbers ",
       "Polynomials",
       " Analytical geometry",
@@ -162,10 +161,10 @@ const STSOClasses = () => {
                       <p className=" mb-4 text-[#ED1450] font-semibold">
                         {item.heading}
                       </p>
-                      {item.Level1 && item.Level1.length > 0 ? (
+                      {item.Science && item.Science.length > 0 ? (
                         <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                          {item.Science.map((ScienceItem, i) => (
+                            <li key={i}>{ScienceItem}</li>
                           ))}
                         </ol>
                       ) : (
@@ -176,10 +175,10 @@ const STSOClasses = () => {
                   <div className="">
                     <p className="text-[#ED1450] font-bold">Level 2</p>
                     <div className="border border-gray-200 p-10 rounded-xl">
-                      {item.Level1 && item.Level1.length > 0 ? (
+                      {item.Science && item.Science.length > 0 ? (
                         <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                          {item.Science.map((ScienceItem, i) => (
+                            <li key={i}>{ScienceItem}</li>
                           ))}
                         </ol>
                       ) : (

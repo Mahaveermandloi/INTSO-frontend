@@ -7,105 +7,110 @@ import { useLocation } from "react-router-dom";
 
 const faq = [
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 1st",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    SocialScience: [  ],
+    GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 2nd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    SocialScience: [  ],
+    GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 3rd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
+    SocialScience: [
+        "Basic concepts of our Universe",
+        "Basic Concepts of Indian Geography",
+        "India's Neighbouring Countries",
     ],
+     GKCurrentAffairs: [ 
+      "Indian States - Capitals",
+      "World - Countries - Capitals",
+      "Superlatives of the World and India",
+      "Picture Identification of Important",
+      "Historical Structures of India and World",
+
+      ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 4th",
-    Level1: [
+    SocialScience: [
       "Fundamentals on numbers",
       "Multiples and factors",
       "Fundamentals on symmetry",
       "Divisibility rules",
       "Fundamentals on fractions",
     ],
+     GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 5th",
-    Level1: [
+    SocialScience: [
       "Fundamentals on numbers",
       "Fundamentals on symmetry",
       "Fractions and Decimals",
       "Measurements",
       " Multiples and factors",
     ],
+     GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 6th",
-    Level1: [
+    SocialScience: [
       "Primary number system",
       "Fundamentals on  plane Geometry",
       " Divisibility criteria",
       "Decimals and fractions",
       "LCM & HCF",
     ],
+     GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 7th",
-    Level1: [
+    SocialScience: [
       "Fractions and Decimals",
       "Lines and angles",
       "Simple equations",
       "Number system",
       "LCM & HCF",
     ],
+     GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 8th",
-    Level1: [
+    SocialScience: [
       "Rational numbers",
       "Linear equations in one variable",
       "Square roots and cube roots",
       "Basics on geometry",
       " Exponents and  powers",
     ],
+     GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 9th",
-    Level1: [
+    SocialScience: [
       "Basic concepts on geometry",
       " Polynomials and factorization",
       "Linear equations in one variable",
       "Real numbers",
       "Lines and angles",
     ],
+     GKCurrentAffairs: [  ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 10th",
-    Level1: [
+    SocialScience: [
       "Real numbers ",
       "Polynomials",
       " Analytical geometry",
@@ -113,6 +118,7 @@ const faq = [
       "Quadratic equations",
       "Trigonometry",
     ],
+     GKCurrentAffairs: [  ],
   },
 ];
 
@@ -156,16 +162,30 @@ const GTSOClasses = () => {
               <div
                 className={`py-4 ${openIndex === index ? "block" : "hidden"}`}>
                 <div className="flex flex-col px-36 space-y-8">
-                  <div className="">
                     <p className="text-[#ED1450] font-bold">Level 1</p>
+                  <div className="flex justify-around">
+                    <div className="border border-gray-200 p-10 rounded-xl">
+                          <p className=" mb-4 text-[#ED1450] font-semibold">
+                            SocialScience
+                          </p>
+                          {item.GKCurrentAffairs && item.GKCurrentAffairs.length > 0 ? (
+                            <ol>
+                              {item.GKCurrentAffairs.map((GKCurrentAffairs, i) => (
+                                <li key={i}>{GKCurrentAffairs}</li>
+                              ))}
+                            </ol>
+                          ) : (
+                            <p>No syllabus available</p>
+                          )}
+                        </div>
                     <div className="border border-gray-200 p-10 rounded-xl">
                       <p className=" mb-4 text-[#ED1450] font-semibold">
-                        {item.heading}
+                      GK & Current Affairs
                       </p>
-                      {item.Level1 && item.Level1.length > 0 ? (
+                      {item.SocialScience && item.SocialScience.length > 0 ? (
                         <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                          {item.SocialScience.map((SocialScienceItem, i) => (
+                            <li key={i}>{SocialScienceItem}</li>
                           ))}
                         </ol>
                       ) : (
@@ -176,10 +196,10 @@ const GTSOClasses = () => {
                   <div className="">
                     <p className="text-[#ED1450] font-bold">Level 2</p>
                     <div className="border border-gray-200 p-10 rounded-xl">
-                      {item.Level1 && item.Level1.length > 0 ? (
+                      {item.SocialScience && item.SocialScience.length > 0 ? (
                         <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                          {item.SocialScience.map((SocialScienceItem, i) => (
+                            <li key={i}>{SocialScienceItem}</li>
                           ))}
                         </ol>
                       ) : (

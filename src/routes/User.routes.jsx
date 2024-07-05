@@ -59,6 +59,7 @@ import MTSO from "../Frontend/component/ExamDetails/Mtso/MTSO";
 import ATSO from "../Frontend/component/ExamDetails/Atso/ATSO";
 import ETSO from "../Frontend/component/ExamDetails/Etso/ETSO";
 import STSO from "../Frontend/component/ExamDetails/Stso/STSO";
+import GTSO from "../Frontend/component/ExamDetails/Gtso/GTSO";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -231,7 +232,7 @@ const UserRoutes = () => {
           path="/gtsosyllabus"
           element={
             <Layout>
-              <ATSO />
+              <GTSO />
             </Layout>
           }
         />

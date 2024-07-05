@@ -7,111 +7,147 @@ import { useLocation } from "react-router-dom";
 
 const faq = [
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 1st",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    English: [ ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 2nd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    English: [],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 3rd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    English: [ 
+      "Kinds of sentences",
+      "Nouns",
+      "Pronouns",
+      "Adjectives",
+      "Verbs",
+      "Prepositions",
+      "Conjunctions",
+      "Articles",
+      "Spelling",
+      "Singular – plural",
+       ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 4th",
-    Level1: [
-      "Fundamentals on numbers",
-      "Multiples and factors",
-      "Fundamentals on symmetry",
-      "Divisibility rules",
-      "Fundamentals on fractions",
+    English: [
+      "Kinds of sentences",
+      "Adjectives",
+      "Verbs",
+      "Prepositions",
+      "Conjunctions",
+      "Articles",
+      "Spelling",
+      "Singular – plural",
+      "Articles",
+      "Opposites",
+      
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 5th",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Fractions and Decimals",
-      "Measurements",
-      " Multiples and factors",
+    English: [
+      "Tenses",
+      "Parts of Speech",
+      "Articles",
+      "Verb forms",
+      "Spelling",
+      "Singular – plural",
+      "Synonyms & Antonyms",
+      "Degrees of comparison",
+      "Active and passive voice",
+     " Comprehension passages",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 6th",
-    Level1: [
-      "Primary number system",
-      "Fundamentals on  plane Geometry",
-      " Divisibility criteria",
-      "Decimals and fractions",
-      "LCM & HCF",
+    English: [
+      "Tenses",
+      "Parts of Speech",
+      "Verb forms",
+      "Spelling",
+      "Articles",
+      "Synonyms & Antonyms",
+      "Degrees of comparison",
+      "Active and passive voice",
+     " Direct and indirect speech",
+     " Comprehension passages",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 7th",
-    Level1: [
-      "Fractions and Decimals",
-      "Lines and angles",
-      "Simple equations",
-      "Number system",
-      "LCM & HCF",
+    English: [
+      "Tenses",
+      "Verb forms",
+      "Spelling",
+      "Synonyms & Antonyms",
+      "Degrees of comparison",
+      "Active and passive voice",
+      " Direct and indirect speech",
+      "Subject - verb agreement",
+      "Question tags",
+      " Comprehension passages",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 8th",
-    Level1: [
-      "Rational numbers",
-      "Linear equations in one variable",
-      "Square roots and cube roots",
-      "Basics on geometry",
-      " Exponents and  powers",
+    English: [
+        "Tenses",                      
+        "Verb forms",                     
+        "Synonyms & Antonyms",                      
+        "Degrees of comparison",                      
+        "Active and passive voice",                     
+        "Direct and indirect speech",                     
+        "Subject - verb agreement",                     
+        "Question tags",                      
+        "Idioms and phrasal verbs",                     
+        "Comprehension passages",                      
+        "Spelling",                      
+
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 9th",
-    Level1: [
-      "Basic concepts on geometry",
-      " Polynomials and factorization",
-      "Linear equations in one variable",
-      "Real numbers",
-      "Lines and angles",
+    English: [
+        "Tenses", 
+        "Synonyms & Antonyms",                      
+        "Degrees of comparison",                      
+        "Active and passive voice",                     
+        "Direct and indirect speech",                     
+        "Subject - verb agreement", 
+        "Idioms and phrasal verbs", 
+        "If - clause conditions",
+        "Cloze test", 
+        "Comprehension passages",                      
+        "Spelling",                   
+
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "English (ETSO)",
     class: "Class 10th",
-    Level1: [
-      "Real numbers ",
-      "Polynomials",
-      " Analytical geometry",
-      "Geometry",
-      "Quadratic equations",
-      "Trigonometry",
+    English: [
+        "Tenses", 
+        "Synonyms & Antonyms",                      
+        "Degrees of comparison",                      
+        "Active and passive voice",  
+        "Linkers",
+        "Subject - verb agreement", 
+        "Idioms and phrasal verbs", 
+        "If - clause conditions",
+        "Cloze test", 
+        "Comprehension passages",                      
+        "Spelling",  
     ],
   },
 ];
@@ -162,10 +198,10 @@ const ETSOClasses = () => {
                       <p className=" mb-4 text-[#ED1450] font-semibold">
                         {item.heading}
                       </p>
-                      {item.Level1 && item.Level1.length > 0 ? (
+                      {item.English && item.English.length > 0 ? (
                         <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                          {item.English.map((EnglishItem, i) => (
+                            <li className="list-disc" key={i}>{EnglishItem}</li>
                           ))}
                         </ol>
                       ) : (
@@ -176,10 +212,10 @@ const ETSOClasses = () => {
                   <div className="">
                     <p className="text-[#ED1450] font-bold">Level 2</p>
                     <div className="border border-gray-200 p-10 rounded-xl">
-                      {item.Level1 && item.Level1.length > 0 ? (
+                      {item.English && item.English.length > 0 ? (
                         <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                          {item.English.map((EnglishItem, i) => (
+                            <li className="list-disc" key={i}>{EnglishItem}</li>
                           ))}
                         </ol>
                       ) : (
