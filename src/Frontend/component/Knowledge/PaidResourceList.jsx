@@ -5,7 +5,7 @@ import VideosCard from "./VideosCard";
 import { API_KEY, IP_ADDRESS, PORT } from "../utils/constants";
 import Spinner1 from "../common files/Spinner1";
 
-const fetchResources = async (searchInput, selectedOption, triggerSearch) => {
+const fetchResources = async (searchInput, selectedOption) => {
   // try {
   const response = await fetch(
     `http://${IP_ADDRESS}:${PORT}/api/v1/resource/get-all-resources?searchTerm=${searchInput}&resource_class=${selectedOption}&is_paid=true`,
@@ -18,17 +18,9 @@ const fetchResources = async (searchInput, selectedOption, triggerSearch) => {
     }
   );
 
-  // http: if (!response.ok) {
-  //   throw new Error(`HTTP error! Status: ${response.status}`);
-  // }
-
   const data = await response.json();
 
   return data.resourceData;
-  // } catch (error) {
-  //   console.error("Error fetching resources:", error);
-  //   throw error;
-  // }
 };
 
 const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
@@ -50,13 +42,13 @@ const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
     try {
       const data = await fetchResources(searchInput, selectedOption);
 
-      if (!data || typeof data !== "object") {
-        throw new Error("Unexpected data structure");
-      }
+      // if (!data || typeof data !== "object") {
+      //   throw new Error("Unexpected data structure");
+      // }
 
-      const paidImageArray = data.imageArray || [];
-      const paidPdfArray = data.pdfArray || [];
-      const paidVideoArray = data.videoArray || [];
+      const paidImageArray = data.imageArray;
+      const paidPdfArray = data.pdfArray;
+      const paidVideoArray = data.videoArray;
 
       setResources({
         imageArray: paidImageArray,
@@ -87,21 +79,33 @@ const PaidResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
   return (
     <div>
       {resources.imageArray.length > 0 ? (
-        <ImagesCard resources={resources.imageArray} />
+        <ImagesCard
+          resources={resources.imageArray}
+          searchInput={searchInput}
+          selectedOption={selectedOption}
+        />
       ) : (
         <p className="text-red-500 my-4 text-center text-2xl font-bold">
           {noDataMessage.image}
         </p>
       )}
       {resources.pdfArray.length > 0 ? (
-        <PdfCard resources={resources.pdfArray} />
+        <PdfCard
+          resources={resources.pdfArray}
+          searchInput={searchInput}
+          selectedOption={selectedOption}
+        />
       ) : (
         <p className="text-red-500  my-4 text-center text-2xl font-bold">
           {noDataMessage.pdf}
         </p>
       )}
       {resources.videoArray.length > 0 ? (
-        <VideosCard resources={resources.videoArray} />
+        <VideosCard
+          resources={resources.videoArray}
+          searchInput={searchInput}
+          selectedOption={selectedOption}
+        />
       ) : (
         <p className="text-red-500  my-4 text-center text-2xl font-bold">
           {noDataMessage.video}

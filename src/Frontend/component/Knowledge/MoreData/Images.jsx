@@ -11,7 +11,12 @@ import useFetchImages from "../../utils/hooks/useFetchImages";
 const Images = () => {
   const [page, setPage] = useState(1);
   const limit = 2;
-  const { data, loading } = useFetchImages(page, limit);
+  const { data, loading } = useFetchImages({
+    page,
+    limit,
+    resourceType: "image",
+    isPaid: false,
+  });
   console.log("data", data);
   const location = useLocation();
   const [downloadingId, setDownloadingId] = useState(null);

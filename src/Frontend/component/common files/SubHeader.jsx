@@ -230,7 +230,7 @@ const SubHeader = () => {
                                     <ClickAwayListener
                                       onClickAway={handleSubMenuClose}>
                                       <MenuList>
-                                        <Link to="/mtso_about">
+                                        <Link to="/mtsoabout">
                                           <MenuItem
                                             onClick={() => {
                                               handleSubMenuClose();
@@ -240,9 +240,12 @@ const SubHeader = () => {
                                             (MTSO)About
                                           </MenuItem>
                                         </Link>
-                                        <MenuItem onClick={handleSubMenuClose}>
-                                          (MTSO)Syllabus&Pattern
-                                        </MenuItem>
+                                        <Link to="/mtsosyllabus">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (MTSO)Syllabus&Pattern
+                                          </MenuItem>
+                                        </Link>
                                       </MenuList>
                                     </ClickAwayListener>
                                   </Paper>
@@ -280,12 +283,18 @@ const SubHeader = () => {
                                     <ClickAwayListener
                                       onClickAway={handleSubMenuClose}>
                                       <MenuList>
-                                        <MenuItem onClick={handleSubMenuClose}>
-                                          (ATSO)About
-                                        </MenuItem>
-                                        <MenuItem onClick={handleSubMenuClose}>
-                                          (ATSO)Syllabus&Pattern
-                                        </MenuItem>
+                                        <Link to="/atsoabout">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (ATSO)About
+                                          </MenuItem>
+                                        </Link>
+                                        <Link to="/atsosyllabus">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (ATSO)Syllabus&Pattern
+                                          </MenuItem>
+                                        </Link>
                                       </MenuList>
                                     </ClickAwayListener>
                                   </Paper>
@@ -323,12 +332,114 @@ const SubHeader = () => {
                                     <ClickAwayListener
                                       onClickAway={handleSubMenuClose}>
                                       <MenuList>
-                                        <MenuItem onClick={handleSubMenuClose}>
-                                          (ETSO)About
-                                        </MenuItem>
-                                        <MenuItem onClick={handleSubMenuClose}>
-                                          (ETSO)Syllabus&Pattern
-                                        </MenuItem>
+                                        <Link to="/">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (ETSO)About
+                                          </MenuItem>
+                                        </Link>
+                                        <Link to="/etsosyllabus">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (ETSO)Syllabus&Pattern
+                                          </MenuItem>
+                                        </Link>
+                                      </MenuList>
+                                    </ClickAwayListener>
+                                  </Paper>
+                                </Grow>
+                              )}
+                            </Popper>
+                            <MenuItem
+                              onClick={(event) =>
+                                handleSubMenuOpen(event, "stso")
+                              }>
+                              (STSO) Aptitude Talent Search Olympiad{" "}
+                              <ArrowRightIcon />
+                            </MenuItem>
+                            <Popper
+                              open={submenuType === "stso"}
+                              anchorEl={anchorEl}
+                              placement="bottom-start"
+                              transition
+                              modifiers={{
+                                flip: {
+                                  enabled: true,
+                                },
+                                preventOverflow: {
+                                  enabled: true,
+                                  boundariesElement: "viewport",
+                                },
+                              }}
+                              style={{ zIndex: 1300 }}>
+                              {({ TransitionProps }) => (
+                                <Grow
+                                  {...TransitionProps}
+                                  style={{ transformOrigin: "left top" }}>
+                                  <Paper>
+                                    <ClickAwayListener
+                                      onClickAway={handleSubMenuClose}>
+                                      <MenuList>
+                                        <Link to="/">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (STSO)About
+                                          </MenuItem>
+                                        </Link>
+                                        <Link to="/stsosyllabus">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (STSO)Syllabus&Pattern
+                                          </MenuItem>
+                                        </Link>
+                                      </MenuList>
+                                    </ClickAwayListener>
+                                  </Paper>
+                                </Grow>
+                              )}
+                            </Popper>
+                            <MenuItem
+                              onClick={(event) =>
+                                handleSubMenuOpen(event, "gtso")
+                              }>
+                              (GTSO) Aptitude Talent Search Olympiad{" "}
+                              <ArrowRightIcon />
+                            </MenuItem>
+                            <Popper
+                              open={submenuType === "gtso"}
+                              anchorEl={anchorEl}
+                              placement="bottom-start"
+                              transition
+                              modifiers={{
+                                flip: {
+                                  enabled: true,
+                                },
+                                preventOverflow: {
+                                  enabled: true,
+                                  boundariesElement: "viewport",
+                                },
+                              }}
+                              style={{ zIndex: 1300 }}>
+                              {({ TransitionProps }) => (
+                                <Grow
+                                  {...TransitionProps}
+                                  style={{ transformOrigin: "left top" }}>
+                                  <Paper>
+                                    <ClickAwayListener
+                                      onClickAway={handleSubMenuClose}>
+                                      <MenuList>
+                                        <Link to="/">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (GTSO)About
+                                          </MenuItem>
+                                        </Link>
+                                        <Link to="/gtsosyllabus">
+                                          <MenuItem
+                                            onClick={handleSubMenuClose}>
+                                            (GTSO)Syllabus&Pattern
+                                          </MenuItem>
+                                        </Link>
                                       </MenuList>
                                     </ClickAwayListener>
                                   </Paper>
@@ -411,6 +522,9 @@ const SubHeader = () => {
                     </MenuItem>
                   </Link>
                   <MenuItem onClick={handleMyContentClick}>My Content</MenuItem>
+                  <Link to="/result">
+                    <MenuItem onClick={handleMyContentClick}>Result</MenuItem>
+                  </Link>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </>

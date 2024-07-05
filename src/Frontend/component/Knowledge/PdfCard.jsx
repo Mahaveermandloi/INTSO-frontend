@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
 import { FaCheck, FaSpinner } from "react-icons/fa"; // Import icons
 
-const PdfCard = ({ resources }) => {
+const PdfCard = ({ resources, searchInput, selectedOption }) => {
   const navigate = useNavigate();
   const [downloadingId, setDownloadingId] = useState(null);
   const [showSuccessIcon, setShowSuccessIcon] = useState(null);
@@ -52,6 +52,8 @@ const PdfCard = ({ resources }) => {
   };
 
   const handleShowMore = () => {
+    localStorage.setItem("searchInput", searchInput);
+    localStorage.setItem("selectedOption", selectedOption);
     const hasPaidResources = resources.some((item) => item.is_paid);
     if (hasPaidResources) {
       navigate("/paidpdfs");

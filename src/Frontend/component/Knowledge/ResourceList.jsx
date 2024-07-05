@@ -83,14 +83,22 @@ const ResourceList = ({ searchInput, selectedOption, triggerSearch }) => {
         </p>
       )}
       {resources.pdfArray.length > 0 ? (
-        <PdfCard resources={resources.pdfArray} />
+        <PdfCard
+          resources={resources.pdfArray}
+          searchInput={searchInput}
+          selectedOption={selectedOption}
+        />
       ) : (
         <p className="text-red-500  my-4 text-center text-2xl font-bold">
           {noDataMessage.pdf}
         </p>
       )}
       {resources.videoArray.length > 0 ? (
-        <VideosCard resources={resources.videoArray} />
+        <VideosCard
+          resources={resources.videoArray}
+          searchInput={searchInput}
+          selectedOption={selectedOption}
+        />
       ) : (
         <p className="text-red-500 my-4 text-center text-2xl font-bold">
           {noDataMessage.video}
