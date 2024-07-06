@@ -55,62 +55,93 @@ const faq = [
         "Super Senses",
         "A Snake Charmer's Story",
         "From Tasting to Dig",
+        "Seeds and Seeds",
+
     ],
   },
   {
     heading: "Science (STSO)",
     class: "Class 6th",
-    Science: [
-      "Primary number system",
-      "Fundamentals on  plane Geometry",
-      " Divisibility criteria",
-      "Decimals and fractions",
-      "LCM & HCF",
+    Physics: [ 
+      "Motion and meaurement of distances",
+      "Fun with magnets",
+
     ],
+    Chemistry: [ 
+      "Materials and things",
+      "Separation methods",
+    ],
+    Biology: [
+      "Components of Food",
+      "Getting to Know Plants",
+     ],
   },
   {
     heading: "Science (STSO)",
     class: "Class 7th",
-    Science: [
-      "Fractions and Decimals",
-      "Lines and angles",
-      "Simple equations",
-      "Number system",
-      "LCM & HCF",
+    Physics: [
+      "Motion and time",
+      "Electricity",
+
+     ],
+    Chemistry: [ 
+      "Nature of substances (Acids, bases and salts)",
+
     ],
+    Biology: [
+      "Nutrition in Plants",
+      "Nutrition in Animals",
+      "Respiration in Organisms",
+     ], 
   },
   {
     heading: "Science (STSO)",
     class: "Class 8th",
-    Science: [
-      "Rational numbers",
-      "Linear equations in one variable",
-      "Square roots and cube roots",
-      "Basics on geometry",
-      " Exponents and  powers",
+    Physics: [ 
+      "Force and pressure",
+      "Friction",
+    ],
+    Chemistry: [
+      "Physical and Chemical changles",
+      "Coal and Petroleum",
+     ],
+    Biology: [ 
+      "Crop Production and Management",
+      "Microorganisms - Friend and Foe",
+      "Conservation of Plants and Animals",
+
     ],
   },
   {
     heading: "Science (STSO)",
     class: "Class 9th",
-    Science: [
-      "Basic concepts on geometry",
-      " Polynomials and factorization",
-      "Linear equations in one variable",
-      "Real numbers",
-      "Lines and angles",
+    Physics: [
+      "Motion",
+      "Laws of motion",
+     ],
+    Chemistry: [
+      "Is matter pure",
+      "Atoms and molecules",
+     ],
+    Biology: [ 
+      "The Fundamental Unit of Life", 
+      "Tissues",
     ],
   },
   {
     heading: "Science (STSO)",
     class: "Class 10th",
-    Science: [
-      "Real numbers ",
-      "Polynomials",
-      " Analytical geometry",
-      "Geometry",
-      "Quadratic equations",
-      "Trigonometry",
+    Physics: [
+      "Light reflection  and refraction",
+      "Human eye and colourful world",
+     ],
+    Chemistry: [ 
+      "Acids, bases and salts",
+      "Chemical reactions and equations",
+    ],
+    Biology: [ 
+      "Life processes (Nutrition, Respiration, Transportaion,  Excretion)",
+      "Control and coordination",
     ],
   },
 ];
@@ -155,16 +186,44 @@ const STSOClasses = () => {
               <div
                 className={`py-4 ${openIndex === index ? "block" : "hidden"}`}>
                 <div className="flex flex-col px-36 space-y-8">
-                  <div className="">
                     <p className="text-[#ED1450] font-bold">Level 1</p>
+                  <div className="md:flex justify-center gap-5">
                     <div className="border border-gray-200 p-10 rounded-xl">
                       <p className=" mb-4 text-[#ED1450] font-semibold">
-                        {item.heading}
+                      Physics
                       </p>
-                      {item.Science && item.Science.length > 0 ? (
+                      {item.Physics && item.Physics.length > 0 ? (
                         <ol>
-                          {item.Science.map((ScienceItem, i) => (
-                            <li key={i}>{ScienceItem}</li>
+                          {item.Physics.map((PhysicsItem, i) => (
+                            <li key={i}>{PhysicsItem}</li>
+                          ))}
+                        </ol>
+                      ) : (
+                        <p>No syllabus available</p>
+                      )}
+                    </div>
+                    <div className="border border-gray-200 p-10 rounded-xl">
+                      <p className=" mb-4 text-[#ED1450] font-semibold">
+                      Chemistry
+                      </p>
+                      {item.Chemistry && item.Chemistry.length > 0 ? (
+                        <ol>
+                          {item.Chemistry.map((ChemistryItem, i) => (
+                            <li key={i}>{ChemistryItem}</li>
+                          ))}
+                        </ol>
+                      ) : (
+                        <p>No syllabus available</p>
+                      )}
+                    </div>
+                    <div className="border border-gray-200 p-10 rounded-xl">
+                      <p className=" mb-4 text-[#ED1450] font-semibold">
+                      Biology
+                      </p>
+                      {item.Biology && item.Biology.length > 0 ? (
+                        <ol>
+                          {item.Biology.map((BiologyItem, i) => (
+                            <li key={i}>{BiologyItem}</li>
                           ))}
                         </ol>
                       ) : (
