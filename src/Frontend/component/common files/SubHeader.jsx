@@ -464,7 +464,7 @@ const SubHeader = () => {
                     Blogs
                   </li>
                 </Link>
-                <Link to="/gallery">
+                <Link to="/albums">
                   <li
                     className={`text-nowrap ${
                       activeButton === "Gallery"

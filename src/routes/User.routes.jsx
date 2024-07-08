@@ -59,6 +59,8 @@ import MTSO from "../Frontend/component/ExamDetails/Mtso/MTSO";
 import ATSO from "../Frontend/component/ExamDetails/Atso/ATSO";
 import ETSO from "../Frontend/component/ExamDetails/Etso/ETSO";
 import STSO from "../Frontend/component/ExamDetails/Stso/STSO";
+import Albums from "../Frontend/component/Gallery/Albums";
+import FolderImages from "../Frontend/component/Gallery/FolderImages ";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -156,10 +158,18 @@ const UserRoutes = () => {
           }
         />
         <Route
-          path="/gallery"
+          path="/albums"
           element={
             <Layout>
-              <GalleryPage />
+              <Albums />
+            </Layout>
+          }
+        />
+        <Route
+          path="/album/:album"
+          element={
+            <Layout>
+              <FolderImages />
             </Layout>
           }
         />
