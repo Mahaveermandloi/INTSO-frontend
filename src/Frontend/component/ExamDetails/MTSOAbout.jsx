@@ -6,9 +6,6 @@ import Prepration from "./Prepration";
 import { useLocation } from "react-router-dom";
 import img from "../../../../src/assets/Frontend_images/MTSO_Page.png";
 
-
-
-
 const MTSOAbout = () => {
   const location = useLocation();
 
@@ -46,7 +43,6 @@ const MTSOAbout = () => {
               MODEL QUESTION PAPERS
             </div>
           </div>
-          <Classes />
         </div>
       </div>
       <Benifits />

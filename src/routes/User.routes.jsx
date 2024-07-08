@@ -34,7 +34,6 @@ import UserDashboard from "../../src/Frontend/component/User/UserDashboard";
 import UserKnowledgeDesk from "../Frontend/component/User/UserKnowledgeDesk";
 import FreeResources from "../Frontend/component/Knowledge/Free Resources/FreeResources";
 
-import PaidImages from "../Frontend/component/Knowledge/Paid Resources/PaidImages";
 import PaidVideos from "../Frontend/component/Knowledge/Paid Resources/PaidVideos";
 import PaidPdfs from "../Frontend/component/Knowledge/Paid Resources/PaidPdfs";
 
@@ -54,6 +53,13 @@ import { SubjectTabs } from "../Frontend/component/Content/SubjectTabs";
 import { NewsAndUpdatePage } from "../Frontend/component/NewsAndUpdate/NewsAndUpdatePage";
 import UserProfile from "../Frontend/component/Profile/UserProfile";
 import Cordinator from "../Frontend/component/Register/Cordinator";
+import PaidImages from "../Frontend/component/Knowledge/Paid Resources/PaidImages";
+import Result from "../Frontend/component/Result/Result";
+import MTSO from "../Frontend/component/ExamDetails/Mtso/MTSO";
+import ATSO from "../Frontend/component/ExamDetails/Atso/ATSO";
+import ETSO from "../Frontend/component/ExamDetails/Etso/ETSO";
+import STSO from "../Frontend/component/ExamDetails/Stso/STSO";
+import GTSO from "../Frontend/component/ExamDetails/Gtso/GTSO";
 
 const UserRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -175,13 +181,62 @@ const UserRoutes = () => {
           }
         />
         <Route
-          path="/mtso_about"
+          path="/mtsoabout"
           element={
             <Layout>
               <MTSOAbout />
             </Layout>
           }
         />
+        <Route
+          path="/mtsosyllabus"
+          element={
+            <Layout>
+              <MTSO />
+            </Layout>
+          }
+        />
+        {/* <Route
+          path="/atsoabout"
+          element={
+            <Layout>
+              <ATSOAbout />
+            </Layout>
+          }
+        /> */}
+        <Route
+          path="/atsosyllabus"
+          element={
+            <Layout>
+              <ATSO />
+            </Layout>
+          }
+        />
+        <Route
+          path="/etsosyllabus"
+          element={
+            <Layout>
+              <ETSO />
+            </Layout>
+          }
+        />
+        <Route
+          path="/stsosyllabus"
+          element={
+            <Layout>
+              <STSO />
+            </Layout>
+          }
+        />
+        <Route
+          path="/gtsosyllabus"
+          element={
+            <Layout>
+              <GTSO />
+            </Layout>
+          }
+        />
+
         <Route
           path="/class1"
           element={
@@ -398,7 +453,6 @@ const UserRoutes = () => {
                 </Layout>
               }
             />
-
             <Route
               path="/paidimage"
               element={
@@ -407,6 +461,7 @@ const UserRoutes = () => {
                 </Layout>
               }
             />
+
             <Route
               path="/paidvideos"
               element={
@@ -437,6 +492,14 @@ const UserRoutes = () => {
               element={
                 <Layout>
                   <UserProfile />
+                </Layout>
+              }
+            />
+            <Route
+              path="/result"
+              element={
+                <Layout>
+                  <Result />
                 </Layout>
               }
             />

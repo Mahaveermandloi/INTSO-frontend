@@ -5,9 +5,9 @@ import VideoPlayer from "./VideoPlayer";
 import img from "../../../../src/assets/Frontend_images/Play_SVG.png";
 import { useNavigate } from "react-router-dom";
 
-const VideosCard = ({ resources }) => {
+const VideosCard = ({ resources, searchInput, selectedOption }) => {
   const navigate = useNavigate();
-   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handlePlayClick = (video) => {
     setSelectedVideo(video);
@@ -17,39 +17,14 @@ const VideosCard = ({ resources }) => {
     setSelectedVideo(null);
   };
 
-  const handleDownload = async (videoUrl) => {
-    try {
-      const response = await fetch(videoUrl, {
-        method: "GET",
-        headers: {
-          "Content-Type": "video/mp4",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", videoUrl.split("/").pop());
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Download error:", error);
-    }
-  };
-
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   const handleShowMore = () => {
+    localStorage.setItem("searchInput", searchInput);
+    localStorage.setItem("selectedOption", selectedOption);
     const hasPaidResources = resources.some((item) => item.is_paid);
     if (hasPaidResources) {
       navigate("/paidvideos");
@@ -101,8 +76,8 @@ const VideosCard = ({ resources }) => {
                         </h1>
                         <p className="text-xs text-start">{item.description}</p>
                         <p className="text-xs text-start">
-                       Class- {item.resource_class}
-                      </p>
+                          Class- {item.resource_class}
+                        </p>
                       </div>
                       <div>
                         <p className="border-b-2 border-gray-300 text-center mx-3"></p>
