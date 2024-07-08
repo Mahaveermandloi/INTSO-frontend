@@ -38,6 +38,7 @@ import UpdateCareer from "../Components/UpdateCareer";
 import CreateCareer from "../Components/CreateCareer";
 import QandAns from "../Components/Q&A";
 import BecomeCoOrdinator from "../Components/BecomeCoOrdinator";
+import ImageCatogary from "../Components/ImageCatogary";
 
 const AdminRoutes = () => {
   useTokenExpirationCheck();
@@ -84,7 +85,8 @@ const AuthenticatedApp = () => {
       <main className="p-5 ml-auto  w-full">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/gallery/:id" element={<Gallery />} />
+          <Route path="/image-catogaries" element={<ImageCatogary />} />
           <Route path="/banner" element={<Banner />} />
           <Route path="/newsandupdates" element={<NewsandUpdates />} />
           <Route path="/studentrequest" element={<StudentRequests />} />

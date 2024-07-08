@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { ToastContainer, toast, Bounce } from "react-toastify";
-import { URLPath , API_KEY } from "../URLPath";
+import { URLPath, API_KEY } from "../URLPath";
 import Loader from "./Loader";
 import img from "../assets/9214833.jpg";
+import { useParams } from "react-router-dom";
 
 const Gallery = () => {
+  const { id } = useParams();
+  console.log("Gallery" + id);
   const [gallery, setGallery] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [caption, setCaption] = useState("");
@@ -23,11 +26,11 @@ const Gallery = () => {
 
         if (accessToken) {
           const response = await axios.get(
-            `${URLPath}/api/v1/gallery/getGallery`,
+            `${URLPath}/api/v1/gallery/getGallery/${id}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
-                api_key: API_KEY, 
+                api_key: API_KEY,
               },
             }
           );
@@ -73,15 +76,15 @@ const Gallery = () => {
       const formData = new FormData();
       formData.append("gallery_img", selectedFile);
       formData.append("caption", caption);
-  
+
       setLoading(true);
       setLoadingMessage("Uploading image...");
-  
+
       try {
         const accessToken = localStorage.getItem("accessToken");
-  
+
         const response = await axios.post(
-          `${URLPath}/api/v1/gallery/postGallery`,
+          `${URLPath}/api/v1/gallery/postGallery/${id}`,
           formData,
           {
             headers: {
@@ -90,8 +93,9 @@ const Gallery = () => {
             },
           }
         );
-  
-        if (response.status === 201) { // Check for 201 status code
+
+        if (response.status === 201) {
+          // Check for 201 status code
           toast.success("Image uploaded successfully!", {
             position: "top-center",
             autoClose: 3000,
@@ -102,14 +106,14 @@ const Gallery = () => {
             progress: undefined,
             theme: "light",
           });
-  
+
           // Update the gallery state without reloading the page
           const newImage = {
             id: response.data.data.id, // Ensure this matches the ID in the response
             gallery_img: response.data.data.gallery_img, // Ensure this matches the image path in the response
-            caption: response.data.data.caption // Ensure this includes the caption if necessary
+            caption: response.data.data.caption, // Ensure this includes the caption if necessary
           };
-  
+
           setGallery((prevGallery) => [...prevGallery, newImage]);
           setSelectedFile(null); // Reset selected file
           setCaption(""); // Reset caption
@@ -141,7 +145,6 @@ const Gallery = () => {
       });
     }
   };
-  
 
   const handleDelete = async (id) => {
     let isConfirmed = false;
