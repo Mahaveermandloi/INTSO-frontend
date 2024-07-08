@@ -190,10 +190,10 @@ const GTSOClasses = () => {
               </h2>
               <div
                 className={`py-4 ${openIndex === index ? "block" : "hidden"}`}>
-                <div className="flex flex-col px-36 space-y-8">
+                <div className="flex flex-col md:px-36 px-2 gap-3 space-y-8">
                     <p className="text-[#ED1450] font-bold">Level 1</p>
                   <div className="flex justify-around">
-                    <div className="border border-gray-200 p-10 rounded-xl">
+                    <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
                           <p className=" mb-4 text-[#ED1450] font-semibold">
                             SocialScience
                           </p>
@@ -207,7 +207,7 @@ const GTSOClasses = () => {
                             <p>No syllabus available</p>
                           )}
                         </div>
-                    <div className="border border-gray-200 p-10 rounded-xl">
+                    <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
                       <p className=" mb-4 text-[#ED1450] font-semibold">
                       GK & Current Affairs
                       </p>
@@ -224,7 +224,7 @@ const GTSOClasses = () => {
                   </div>
                   <div className="">
                     <p className="text-[#ED1450] font-bold">Level 2</p>
-                    <div className="border border-gray-200 p-10 rounded-xl">
+                    <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
                       {item.SocialScience && item.SocialScience.length > 0 ? (
                         <ol>
                           {item.SocialScience.map((SocialScienceItem, i) => (
