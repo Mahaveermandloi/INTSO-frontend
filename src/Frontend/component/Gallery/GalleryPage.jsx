@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ImageModal from "../Home/ImageModal";
+import { Link, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { IP_ADDRESS, PORT } from "../utils/constants";
 import useFetchGalleryData from "../utils/hooks/useFetchGalleryData";
+import useFetchAlbumImage from "../utils/hooks/useFetchAlbumImage";
 import img from "../../../assets/Image_not_available.png";
 export const GalleryPage = () => {
   const [page, setPage] = useState(1);
-  const limit = 10; 
-  const { data, loading } = useFetchGalleryData(page, limit);
+  const limit = 10;
+  // const { data, loading } = useFetchGalleryData(page, limit);
+  const { album } = useParams();
+  const { data, loading } = useFetchAlbumImage(page, limit, album);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -47,12 +51,12 @@ export const GalleryPage = () => {
   return (
     <>
       <div className=" mb-10">
-        <div
-          className="flex flex-col py-6 justify-center items-center"
-          data-aos="fade-up">
-          <h1 className="text-[#ED1450] font-bold text-2xl">Our Gallery</h1>
-          <p className="w-16 border-b-2 border-[#ED1450]"></p>
+        <div className="py-4 text-[#ED1450] px-10">
+          <Link to="/albums">Gallery</Link> / <span>{album}</span>
         </div>
+        <h1 className="text-[#ED1450] font-bold text-2xl text-center py-10  ">
+          Images Of {album}{" "}
+        </h1>
         <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 grid-cols-1 ">
           {displayedData.map((item, index) => {
             let colSpanClass = "col-span-1";

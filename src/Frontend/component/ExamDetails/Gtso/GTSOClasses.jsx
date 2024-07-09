@@ -7,111 +7,138 @@ import { useLocation } from "react-router-dom";
 
 const faq = [
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 1st",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    SocialScience: [],
+    GKCurrentAffairs: [],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 2nd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
-    ],
+    SocialScience: [],
+    GKCurrentAffairs: [],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 3rd",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Roman numbers",
-      "Figures and Shapes",
+    SocialScience: [
+      "Basic concepts of our Universe",
+      "Basic Concepts of Indian Geography",
+      "India's Neighbouring Countries",
+    ],
+    GKCurrentAffairs: [
+      "Indian States - Capitals",
+      "World - Countries - Capitals",
+      "Superlatives of the World and India",
+      "Picture Identification of Important",
+      "Historical Structures of India and World",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 4th",
-    Level1: [
+    SocialScience: [
       "Fundamentals on numbers",
       "Multiples and factors",
       "Fundamentals on symmetry",
       "Divisibility rules",
       "Fundamentals on fractions",
     ],
+    GKCurrentAffairs: [
+      "Picture identification of temples",
+      "Seven Wonders of the world",
+      "List of Indian Presidents and Prime Ministers",
+      "Different Music, Folk and Classical",
+      "Dance forms of India",
+      "World - Countries - Capitals, Currencies",
+    ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 5th",
-    Level1: [
-      "Fundamentals on numbers",
-      "Fundamentals on symmetry",
-      "Fractions and Decimals",
-      "Measurements",
-      " Multiples and factors",
+    SocialScience: [
+      "Basic Concepts of  World Geography",
+      "Major natural regions of the World",
+      "Indian Freedom struggle - diferent Phases",
+      "United Nations Organisation",
+    ],
+    GKCurrentAffairs: [
+      "World - Countries - Parliaments",
+      "Important days in India and the World",
+      "Major Indian Festivals",
+      "Inventions and Discoveries",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 6th",
-    Level1: [
-      "Primary number system",
-      "Fundamentals on  plane Geometry",
-      " Divisibility criteria",
-      "Decimals and fractions",
-      "LCM & HCF",
+    SocialScience: [
+      "Basic Concepts of different Land forms",
+      "Globe - A Model of  the Earth",
+      "Basic Concepts on  Democracy and Local",
+      "Self - Governments",
+    ],
+    GKCurrentAffairs: [
+      "National Parks and Biosphere reserves of India",
+      "Inventions and Discoveries",
+      "Quotations of Popular Personalities",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 7th",
-    Level1: [
-      "Fractions and Decimals",
-      "Lines and angles",
-      "Simple equations",
-      "Number system",
-      "LCM & HCF",
+    SocialScience: [" The Kakatiyas", "Vijayanagara"],
+    GKCurrentAffairs: [
+      "Important cities on the banks of rivers",
+      "  Books and Authors",
+      "First in world",
+      "The Sobriquets",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 8th",
-    Level1: [
-      "Rational numbers",
-      "Linear equations in one variable",
-      "Square roots and cube roots",
-      "Basics on geometry",
-      " Exponents and  powers",
+    SocialScience: [
+      "The Indian Constitution",
+      "Parliament",
+      "Indian National Movement",
+    ],
+    GKCurrentAffairs: [
+      "Abbreviations",
+      "Countries - Capitals - Currencies",
+      "First in India",
+      "Chronology of Historical events in India",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 9th",
-    Level1: [
-      "Basic concepts on geometry",
-      " Polynomials and factorization",
-      "Linear equations in one variable",
-      "Real numbers",
-      "Lines and angles",
+    SocialScience: [
+      "India - Size - Location",
+      "Physical Features of India",
+      "French Revolution",
+    ],
+    GKCurrentAffairs: [
+      "Scientific terms",
+      "International Organisations",
+      "Awards and Honours",
+      "Computer Generations",
     ],
   },
   {
-    heading: "Maths (MTSO)",
+    heading: "Social science (GTSO)",
     class: "Class 10th",
-    Level1: [
-      "Real numbers ",
-      "Polynomials",
-      " Analytical geometry",
-      "Geometry",
-      "Quadratic equations",
-      "Trigonometry",
+    SocialScience: [
+      "India - Climate",
+      "Indian - Rivers & water resources",
+      "The world between world wars",
+      "The making of Independent India's Constitution",
+      "The Independent India first 30 years (1947 - 77)",
+    ],
+    GKCurrentAffairs: [
+      "Census of India - 2001, 2011",
+      "Latest ' Who is Who' in India",
+      "Chronology of events in Indian Freedom Movement",
     ],
   },
 ];
@@ -155,17 +182,32 @@ const GTSOClasses = () => {
               </h2>
               <div
                 className={`py-4 ${openIndex === index ? "block" : "hidden"}`}>
-                <div className="flex flex-col px-36 space-y-8">
-                  <div className="">
-                    <p className="text-[#ED1450] font-bold">Level 1</p>
-                    <div className="border border-gray-200 p-10 rounded-xl">
+                <div className="flex flex-col md:px-36 px-2 gap-3 space-y-8">
+                  <p className="text-[#ED1450] font-bold">Level 1</p>
+                  <div className="flex justify-around">
+                    <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
                       <p className=" mb-4 text-[#ED1450] font-semibold">
-                        {item.heading}
+                        SocialScience
                       </p>
-                      {item.Level1 && item.Level1.length > 0 ? (
-                        <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                      {item.GKCurrentAffairs &&
+                      item.GKCurrentAffairs.length > 0 ? (
+                        <ol className="list-disc">
+                          {item.GKCurrentAffairs.map((GKCurrentAffairs, i) => (
+                            <li key={i}>{GKCurrentAffairs}</li>
+                          ))}
+                        </ol>
+                      ) : (
+                        <p>No syllabus available</p>
+                      )}
+                    </div>
+                    <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
+                      <p className=" mb-4 text-[#ED1450] font-semibold">
+                        GK & Current Affairs
+                      </p>
+                      {item.SocialScience && item.SocialScience.length > 0 ? (
+                        <ol className="list-disc">
+                          {item.SocialScience.map((SocialScienceItem, i) => (
+                            <li key={i}>{SocialScienceItem}</li>
                           ))}
                         </ol>
                       ) : (
@@ -175,11 +217,11 @@ const GTSOClasses = () => {
                   </div>
                   <div className="">
                     <p className="text-[#ED1450] font-bold">Level 2</p>
-                    <div className="border border-gray-200 p-10 rounded-xl">
-                      {item.Level1 && item.Level1.length > 0 ? (
-                        <ol>
-                          {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                    <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
+                      {item.SocialScience && item.SocialScience.length > 0 ? (
+                        <ol className="list-disc">
+                          {item.SocialScience.map((SocialScienceItem, i) => (
+                            <li key={i}>{SocialScienceItem}</li>
                           ))}
                         </ol>
                       ) : (

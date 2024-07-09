@@ -31,7 +31,7 @@ const SubHeader = () => {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
-    if (!(token || email)) {
+    if (!(token && email)) {
       setIsLogined("Logout");
     } else {
       setIsLogined("Login");

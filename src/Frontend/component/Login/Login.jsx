@@ -160,7 +160,8 @@ const Login = () => {
                       <button
                         type="submit"
                         className="bg-[#ED1450] text-white p-2 w-full rounded-full"
-                        disabled={formik.isSubmitting}>
+                        disabled={formik.isSubmitting}
+                      >
                         {formik.isSubmitting ? "Logging in..." : "Login"}
                       </button>
                     </div>

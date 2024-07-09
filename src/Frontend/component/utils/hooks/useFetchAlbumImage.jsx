@@ -22,11 +22,12 @@ const useFetchAlbumImage = (page, limit, album) => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const jsonData = await response.json();
-        console.log("JSON data", jsonData);
-        setData(jsonData.data);
-        setData((prevData) =>
-          page === 1 ? jsonData.data : [...prevData, ...jsonData.data]
-        );
+       
+        if (page === 1) {
+          setData(jsonData.data);
+        } else {
+          setData((prevData) => [...prevData, ...jsonData.data]);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {

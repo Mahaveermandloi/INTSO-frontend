@@ -82,7 +82,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
                 Dashboard
               </li>
             </Link>
-            <Link onClick={handleItemClick} to={`${baseURL}/gallery`}>
+            <Link onClick={handleItemClick} to={`${baseURL}/image-catogaries`}>
               <li className="mb-4 flex items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded">
                 <FaImages className="mr-2" />
                 Gallery

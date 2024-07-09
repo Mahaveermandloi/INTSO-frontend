@@ -86,8 +86,7 @@ const faq = [
       " Dot situation",
       "Non verbal Series",
       "Non verbal Analogy",
-      "Non verbal ",
-      "classification",
+      "Non verbal classification ",
       "Blood Relations",
     ],
   },
@@ -202,7 +201,7 @@ const ATSOClasses = () => {
                             Arithmetic
                           </p>
                           {item.arithmatic && item.arithmatic.length > 0 ? (
-                            <ol>
+                            <ol className="list-disc m-2">
                               {item.arithmatic.map((arithmatic, i) => (
                                 <li key={i}>{arithmatic}</li>
                               ))}
@@ -218,7 +217,9 @@ const ATSOClasses = () => {
                           {item.reasoning && item.reasoning.length > 0 ? (
                             <ol>
                               {item.reasoning.map((reasoning, i) => (
-                                <li key={i}>{reasoning}</li>
+                                <li className="list-disc m-2" key={i}>
+                                  {reasoning}
+                                </li>
                               ))}
                             </ol>
                           ) : (

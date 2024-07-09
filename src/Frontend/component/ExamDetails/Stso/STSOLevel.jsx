@@ -12,8 +12,8 @@ const STSOLevel = () => {
           <p className="w-16 border-b-2 border-[#ED1450]"></p>
           <p className="text-center sm:px-12 px-6 mt-5">
             Students of class 1 to 10 can now register themselves for the
-            International Maths Olympiad Exams (IMO) individually for the
-            academic year 2023-24. Maths Olympiad IMO has TWO Rounds of
+            International Science Olympiad Exams (IMO) individually for the
+            academic year 2023-24. Science Olympiad IMO has TWO Rounds of
             Examination.
           </p>
         </div>
@@ -21,7 +21,7 @@ const STSOLevel = () => {
           <img src={img1} className="" />
           <p className="flex flex-col">
             <span className="text-[#ED1450] font-bold">Level 1 :</span>
-            IMO Maths Olympiad Round 1 follows CBSE, ICSE and other State boards
+            IMO Science Olympiad Round 1 follows CBSE, ICSE and other State boards
             respectively and is based on school curriculum which helps students
             excel in their academics.
           </p>
@@ -29,7 +29,7 @@ const STSOLevel = () => {
         <div className="grid md:grid-cols-2 grid=cols-1 mt-10 gap-y-6">
           <p className="flex flex-col">
             <span className="text-[#ED1450] font-bold">Level 2 :</span>
-            IMO Maths Olympiad Round 2 is the final round exam. Students
+            IMO Science Olympiad Round 2 is the final round exam. Students
             performing excellent in Round 2 are awarded with exciting
             scholarship prizes and recognitions.
           </p>
