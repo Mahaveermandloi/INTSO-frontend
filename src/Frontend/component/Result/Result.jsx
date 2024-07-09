@@ -164,7 +164,7 @@ const Result = () => {
             {message}
           </div>
         )}
-        {resultData.length > 0 && studentStatus === "Pass" && (
+        {resultData.length > 0 && studentStatus === "Pass" && level === "2" && (
           <table className="w-full bg-white border border-gray-200 mt-5">
             <thead>
               <tr className="bg-gray-100">
