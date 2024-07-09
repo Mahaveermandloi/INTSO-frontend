@@ -39,6 +39,8 @@ import CreateCareer from "../Components/CreateCareer";
 import QandAns from "../Components/Q&A";
 import BecomeCoOrdinator from "../Components/BecomeCoOrdinator";
 import ImageCatogary from "../Components/ImageCatogary";
+import UploadResult from "../Components/studentResult/uploadResult";
+import ResultList from "../Components/studentResult/ResultList";
 
 const AdminRoutes = () => {
   useTokenExpirationCheck();
@@ -108,6 +110,8 @@ const AuthenticatedApp = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/updateprofile" element={<UpdateProfile />} />
           <Route path="/updatepassword" element={<UpdatePassword />} />
+          <Route path="/uploadresult" element={<UploadResult />} />
+          <Route path="/resultlist" element={<ResultList />} />
           <Route
             path="/reward-recognition"
             element={<RewardAndRecognition />}

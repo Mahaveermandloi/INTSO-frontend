@@ -173,6 +173,34 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
             </ul>
             <li
               className={`${
+                isDropdownOpen4 ? "" : "mb-4"
+              } flex justify-between items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded`}
+              onClick={toggleDropdown4}
+            >
+              <div className="flex items-center">
+                <BiBookContent className="mr-2" />
+                Student Result
+              </div>
+              <FaChevronDown size={20} />
+            </li>
+            <ul
+              className={`ml-6 space-y-2 transition-all duration-500 ${
+                isDropdownOpen4 ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+              } overflow-hidden`}
+            >
+              <Link onClick={handleItemClick} to={`${baseURL}/resultlist`}>
+                <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
+                  Student List
+                </li>
+              </Link>
+              <Link onClick={handleItemClick} to={`${baseURL}/uploadresult`}>
+                <li className="flex items-center cursor-pointer text-xl hover:bg-gray-700 p-2 rounded">
+                  Upload Result
+                </li>
+              </Link>
+            </ul>
+            <li
+              className={`${
                 isDropdownOpen3 ? "" : "mb-4"
               } flex justify-between items-center cursor-pointer lg:text-xl text-lg hover:bg-gray-700 p-2 rounded`}
               onClick={toggleDropdown3}
