@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { API_KEY, IP_ADDRESS, PORT } from "../constants";
 
-const useFetchAlbumImage = (page, limit, album) => {
+const useFetchAlbumImage = (page, limit, id) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -9,7 +9,7 @@ const useFetchAlbumImage = (page, limit, album) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://${IP_ADDRESS}:${PORT}/api/v1/gallery/getGalleryData-By-page?page=${page}&limit=${limit}&album=${album}`,
+          `http://${IP_ADDRESS}:${PORT}/api/v1/gallery/getGalleryData-By-page?page=${page}&limit=${limit}&album_id=${id}`,
           {
             method: "GET",
             headers: {
@@ -22,7 +22,7 @@ const useFetchAlbumImage = (page, limit, album) => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const jsonData = await response.json();
-       
+
         if (page === 1) {
           setData(jsonData.data);
         } else {
@@ -36,7 +36,7 @@ const useFetchAlbumImage = (page, limit, album) => {
     };
 
     fetchData();
-  }, [page, limit, album]);
+  }, [page, limit, id]);
 
   return { data, loading };
 };

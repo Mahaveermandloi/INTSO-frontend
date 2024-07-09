@@ -48,7 +48,7 @@ const UploadResult = () => {
 
     // Ask for confirmation before proceeding using a toast message
     const confirmationToastId = toast.info(
-      "ARE YOU SURE YOU WANT TO UPLOAD STUDENT DATA ? ( THIS CHANGE IS IRREVERSIBLE ) ",
+      "ARE YOU SURE YOU WANT TO UPLOAD RESULT DATA ? ( THIS CHANGE IS IRREVERSIBLE ) ",
       {
         autoClose: false, // Disable auto close for confirmation toast
         closeOnClick: false,
@@ -117,7 +117,7 @@ const UploadResult = () => {
         <div>
           <div className="flex justify-between w-full items-center">
             <h1 className="text-2xl lg:text-4xl my-5 font-bold">
-              Upload Students
+              Upload Result
             </h1>
 
             <div>

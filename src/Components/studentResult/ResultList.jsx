@@ -46,7 +46,8 @@ const ResultList = () => {
       if (selectedClass && selectedStatus) {
         filteredData = filteredData.filter(
           (item) =>
-            item.level === selectedClass && item.status === selectedStatus
+            item.level === selectedClass &&
+            item.student_status === selectedStatus
         );
       } else if (selectedClass) {
         filteredData = filteredData.filter(
@@ -54,7 +55,7 @@ const ResultList = () => {
         );
       } else if (selectedStatus) {
         filteredData = filteredData.filter(
-          (item) => item.status === selectedStatus
+          (item) => item.student_status === selectedStatus
         );
       }
 
@@ -237,7 +238,7 @@ const ResultList = () => {
                     <td className="px-4 py-2 ">{school.exam}</td>
                     <td className="px-4 py-2">{school.prize}</td>
 
-                    <td className="px-4 py-2 ">{school.status}</td>
+                    <td className="px-4 py-2 ">{school.student_status}</td>
 
                     <td className="px-4 py-2 ">{school.level}</td>
                     <td className="px-4 py-2 ">{school.student_class}</td>
@@ -390,7 +391,7 @@ const ResultList = () => {
                         Status
                       </td>
                       <td className="text-md lg:text-base px-4 py-2 whitespace-nowrap">
-                        {selectedResult.status}
+                        {selectedResult.student_status}
                       </td>
                     </tr>
                     <tr>

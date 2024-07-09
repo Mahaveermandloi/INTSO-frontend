@@ -10,8 +10,9 @@ export const GalleryPage = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
   // const { data, loading } = useFetchGalleryData(page, limit);
-  const { album } = useParams();
-  const { data, loading } = useFetchAlbumImage(page, limit, album);
+  const { id } = useParams();
+  const { data, loading } = useFetchAlbumImage(page, limit, id);
+  console.log("nedbfv ", data);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,10 +53,10 @@ export const GalleryPage = () => {
     <>
       <div className=" mb-10">
         <div className="py-4 text-[#ED1450] px-10">
-          <Link to="/albums">Gallery</Link> / <span>{album}</span>
+          <Link to="/albums">Gallery</Link> / <span>{}</span>
         </div>
         <h1 className="text-[#ED1450] font-bold text-2xl text-center py-10  ">
-          Images Of {album}{" "}
+          Images Of {}{" "}
         </h1>
         <div className="grid lg:grid-cols-4 gap-2 md:grid-cols-2 grid-cols-1 ">
           {displayedData.map((item, index) => {
@@ -87,7 +88,8 @@ export const GalleryPage = () => {
             <button
               className="bg-[#ED1450] text-white p-3 rounded-full w-40"
               onClick={handleLoadMore}
-              disabled={loading}>
+              disabled={loading}
+            >
               {loading ? "Loading..." : "Load More"}
             </button>
           </div>

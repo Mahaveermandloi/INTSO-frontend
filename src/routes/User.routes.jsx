@@ -70,14 +70,10 @@ const UserRoutes = () => {
   useTokenExpirationCheck();
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
-
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const token = localStorage.getItem("token");
     return !!token;
   });
-
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -181,7 +177,7 @@ const UserRoutes = () => {
           }
         />
         <Route
-          path="/album/:album"
+          path="/album/:id"
           element={
             <Layout>
               {/* <FolderImages /> */}
