@@ -9,7 +9,7 @@ const faq = [
   {
     heading: "English (ETSO)",
     class: "Class 1st",
-    English: [ ],
+    English: [],
   },
   {
     heading: "English (ETSO)",
@@ -19,7 +19,7 @@ const faq = [
   {
     heading: "English (ETSO)",
     class: "Class 3rd",
-    English: [ 
+    English: [
       "Kinds of sentences",
       "Nouns",
       "Pronouns",
@@ -30,7 +30,7 @@ const faq = [
       "Articles",
       "Spelling",
       "Singular – plural",
-       ],
+    ],
   },
   {
     heading: "English (ETSO)",
@@ -46,7 +46,6 @@ const faq = [
       "Singular – plural",
       "Articles",
       "Opposites",
-      
     ],
   },
   {
@@ -62,7 +61,7 @@ const faq = [
       "Synonyms & Antonyms",
       "Degrees of comparison",
       "Active and passive voice",
-     " Comprehension passages",
+      " Comprehension passages",
     ],
   },
   {
@@ -77,8 +76,8 @@ const faq = [
       "Synonyms & Antonyms",
       "Degrees of comparison",
       "Active and passive voice",
-     " Direct and indirect speech",
-     " Comprehension passages",
+      " Direct and indirect speech",
+      " Comprehension passages",
     ],
   },
   {
@@ -101,53 +100,51 @@ const faq = [
     heading: "English (ETSO)",
     class: "Class 8th",
     English: [
-        "Tenses",                      
-        "Verb forms",                     
-        "Synonyms & Antonyms",                      
-        "Degrees of comparison",                      
-        "Active and passive voice",                     
-        "Direct and indirect speech",                     
-        "Subject - verb agreement",                     
-        "Question tags",                      
-        "Idioms and phrasal verbs",                     
-        "Comprehension passages",                      
-        "Spelling",                      
-
+      "Tenses",
+      "Verb forms",
+      "Synonyms & Antonyms",
+      "Degrees of comparison",
+      "Active and passive voice",
+      "Direct and indirect speech",
+      "Subject - verb agreement",
+      "Question tags",
+      "Idioms and phrasal verbs",
+      "Comprehension passages",
+      "Spelling",
     ],
   },
   {
     heading: "English (ETSO)",
     class: "Class 9th",
     English: [
-        "Tenses", 
-        "Synonyms & Antonyms",                      
-        "Degrees of comparison",                      
-        "Active and passive voice",                     
-        "Direct and indirect speech",                     
-        "Subject - verb agreement", 
-        "Idioms and phrasal verbs", 
-        "If - clause conditions",
-        "Cloze test", 
-        "Comprehension passages",                      
-        "Spelling",                   
-
+      "Tenses",
+      "Synonyms & Antonyms",
+      "Degrees of comparison",
+      "Active and passive voice",
+      "Direct and indirect speech",
+      "Subject - verb agreement",
+      "Idioms and phrasal verbs",
+      "If - clause conditions",
+      "Cloze test",
+      "Comprehension passages",
+      "Spelling",
     ],
   },
   {
     heading: "English (ETSO)",
     class: "Class 10th",
     English: [
-        "Tenses", 
-        "Synonyms & Antonyms",                      
-        "Degrees of comparison",                      
-        "Active and passive voice",  
-        "Linkers",
-        "Subject - verb agreement", 
-        "Idioms and phrasal verbs", 
-        "If - clause conditions",
-        "Cloze test", 
-        "Comprehension passages",                      
-        "Spelling",  
+      "Tenses",
+      "Synonyms & Antonyms",
+      "Degrees of comparison",
+      "Active and passive voice",
+      "Linkers",
+      "Subject - verb agreement",
+      "Idioms and phrasal verbs",
+      "If - clause conditions",
+      "Cloze test",
+      "Comprehension passages",
+      "Spelling",
     ],
   },
 ];
@@ -199,9 +196,9 @@ const ETSOClasses = () => {
                         {item.heading}
                       </p>
                       {item.English && item.English.length > 0 ? (
-                        <ol>
+                        <ol className="list-disc">
                           {item.English.map((EnglishItem, i) => (
-                            <li className="list-disc" key={i}>{EnglishItem}</li>
+                            <li key={i}>{EnglishItem}</li>
                           ))}
                         </ol>
                       ) : (
@@ -213,9 +210,9 @@ const ETSOClasses = () => {
                     <p className="text-[#ED1450] font-bold">Level 2</p>
                     <div className="border border-gray-200 md:p-10 p-2 rounded-xl">
                       {item.English && item.English.length > 0 ? (
-                        <ol>
+                        <ol className="list-disc">
                           {item.English.map((EnglishItem, i) => (
-                            <li className="list-disc" key={i}>{EnglishItem}</li>
+                            <li key={i}>{EnglishItem}</li>
                           ))}
                         </ol>
                       ) : (

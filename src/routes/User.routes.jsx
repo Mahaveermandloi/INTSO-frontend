@@ -59,13 +59,29 @@ import MTSO from "../Frontend/component/ExamDetails/Mtso/MTSO";
 import ATSO from "../Frontend/component/ExamDetails/Atso/ATSO";
 import ETSO from "../Frontend/component/ExamDetails/Etso/ETSO";
 import STSO from "../Frontend/component/ExamDetails/Stso/STSO";
+
+import Albums from "../Frontend/component/Gallery/Albums";
+import FolderImages from "../Frontend/component/Gallery/FolderImages ";
+
 import GTSO from "../Frontend/component/ExamDetails/Gtso/GTSO";
+import useTokenExpirationCheck from "../Frontend/component/utils/hooks/useTokenExpirationCheck";
 
 const UserRoutes = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useTokenExpirationCheck();
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const token = localStorage.getItem("token");
+    return !!token;
+  });
+
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (token) {
       setIsAuthenticated(true);
     }
@@ -157,9 +173,18 @@ const UserRoutes = () => {
           }
         />
         <Route
-          path="/gallery"
+          path="/albums"
           element={
             <Layout>
+              <Albums />
+            </Layout>
+          }
+        />
+        <Route
+          path="/album/:album"
+          element={
+            <Layout>
+              {/* <FolderImages /> */}
               <GalleryPage />
             </Layout>
           }

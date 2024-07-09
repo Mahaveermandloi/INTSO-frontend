@@ -193,7 +193,7 @@ const STSOClasses = () => {
                       Physics
                       </p>
                       {item.Physics && item.Physics.length > 0 ? (
-                        <ol>
+                        <ol className="list-disc">
                           {item.Physics.map((PhysicsItem, i) => (
                             <li key={i}>{PhysicsItem}</li>
                           ))}
@@ -207,7 +207,7 @@ const STSOClasses = () => {
                       Chemistry
                       </p>
                       {item.Chemistry && item.Chemistry.length > 0 ? (
-                        <ol>
+                        <ol className="list-disc">
                           {item.Chemistry.map((ChemistryItem, i) => (
                             <li key={i}>{ChemistryItem}</li>
                           ))}
@@ -221,7 +221,7 @@ const STSOClasses = () => {
                       Biology
                       </p>
                       {item.Biology && item.Biology.length > 0 ? (
-                        <ol>
+                        <ol className="list-disc">
                           {item.Biology.map((BiologyItem, i) => (
                             <li key={i}>{BiologyItem}</li>
                           ))}

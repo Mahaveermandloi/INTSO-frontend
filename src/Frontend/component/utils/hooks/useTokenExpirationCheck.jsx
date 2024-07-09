@@ -7,7 +7,7 @@ const useTokenExpirationCheck = () => {
 
   useEffect(() => {
     const checkTokenExpiration = () => {
-      const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("token");
 
       if (token) {
         try {
@@ -15,12 +15,14 @@ const useTokenExpirationCheck = () => {
           const currentTimestamp = Math.floor(Date.now() / 1000);
 
           if (decodedToken.exp < currentTimestamp) {
-            localStorage.removeItem("accessToken");
-            navigate("/admin/login"); // Redirect to login if token expired
-            window.location.reload(); // Problematic reloading here
+            localStorage.removeItem("token");
+
+            navigate("/login");
+            window.location.reload(); // Redirect to login if token expired
+            // Problematic reloading here
           } else {
             const remainingSeconds = decodedToken.exp - currentTimestamp;
-            // console.log(remainingSeconds);
+            console.log(remainingSeconds);
           }
         } catch (error) {
           console.error("Error decoding token:", error);

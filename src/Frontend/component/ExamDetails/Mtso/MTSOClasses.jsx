@@ -165,7 +165,9 @@ const MTSOClasses = () => {
                       {item.Level1 && item.Level1.length > 0 ? (
                         <ol>
                           {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                            <li className="list-disc" key={i}>
+                              {Level1Item}
+                            </li>
                           ))}
                         </ol>
                       ) : (
@@ -179,7 +181,9 @@ const MTSOClasses = () => {
                       {item.Level1 && item.Level1.length > 0 ? (
                         <ol>
                           {item.Level1.map((Level1Item, i) => (
-                            <li key={i}>{Level1Item}</li>
+                            <li className="list-disc" key={i}>
+                              {Level1Item}
+                            </li>
                           ))}
                         </ol>
                       ) : (
