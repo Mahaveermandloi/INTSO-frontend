@@ -1,6 +1,6 @@
 # React + Vite
 
-![image1](path/to/image1.png)
+![image1](/image1.png)
 ![image2](path/to/image2.png)
 ![image3](path/to/image3.png)
 ![image4](path/to/image4.png)
